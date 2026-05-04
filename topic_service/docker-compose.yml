@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-thesisdb}
+      POSTGRES_USER: ${POSTGRES_USER:-thesis_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-thesis_pass}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SERVER_PORT: 8081
+      APP_DATABASE_ENABLED: "true"
+      APP_DATABASE_HOST: db
+      APP_DATABASE_PORT: 5432
+      APP_DATABASE_NAME: ${POSTGRES_DB:-thesisdb}
+      APP_DATABASE_USERNAME: ${POSTGRES_USER:-thesis_user}
+      APP_DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-thesis_pass}
+      APP_DATABASE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-thesisdb}
+      APP_CORS_ALLOWED_ORIGINS: ${APP_CORS_ALLOWED_ORIGINS:-http://localhost:5173,http://localhost:3000}
+      APP_MESSAGING_RABBIT_ENABLED: ${APP_MESSAGING_RABBIT_ENABLED:-false}
+      APP_AUTH_DEFAULT_PASSWORD: ${APP_AUTH_DEFAULT_PASSWORD:-123456}
+    ports:
+      - "${APP_PORT:-8081}:8081"
+
+volumes:
+  postgres-data:

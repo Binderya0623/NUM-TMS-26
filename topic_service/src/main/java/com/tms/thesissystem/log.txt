@@ -1,0 +1,560 @@
+2026-04-14 00:23:17.625 |
+2026-04-14 00:23:17.625 |   .   ____          _            __ _ _
+2026-04-14 00:23:17.625 |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-04-14 00:23:17.625 | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-04-14 00:23:17.625 |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-04-14 00:23:17.625 |   '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-04-14 00:23:17.625 |  =========|_|==============|___/=/_/_/_/
+2026-04-14 00:23:17.625 |
+2026-04-14 00:23:17.625 |  :: Spring Boot ::                (v4.0.3)
+2026-04-14 00:23:17.625 |
+2026-04-14 00:23:17.686 | 2026-04-13T16:23:17.682Z  INFO 1 --- [thesis-system] [           main] c.t.t.ThesisSystemApplication            : Starting ThesisSystemApplication v0.0.1-SNAPSHOT using Java 17.0.18 with PID 1 (/app/app.jar started by root in /app)
+2026-04-14 00:23:17.686 | 2026-04-13T16:23:17.686Z  INFO 1 --- [thesis-system] [           main] c.t.t.ThesisSystemApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-04-14 00:23:18.281 | 2026-04-13T16:23:18.281Z  INFO 1 --- [thesis-system] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-04-14 00:23:18.287 | 2026-04-13T16:23:18.287Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-14 00:23:18.287 | 2026-04-13T16:23:18.287Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-04-14 00:23:18.300 | 2026-04-13T16:23:18.299Z  INFO 1 --- [thesis-system] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 576 ms
+2026-04-14 00:23:18.440 | 2026-04-13T16:23:18.439Z  WARN 1 --- [thesis-system] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/api/AuthController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:18.441 | 2026-04-13T16:23:18.441Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-04-14 00:23:18.445 | 2026-04-13T16:23:18.445Z  INFO 1 --- [thesis-system] [           main] .s.b.a.l.ConditionEvaluationReportLogger :
+2026-04-14 00:23:18.445 |
+2026-04-14 00:23:18.445 | Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-14 00:23:18.455 | 2026-04-13T16:23:18.452Z ERROR 1 --- [thesis-system] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-04-14 00:23:18.455 |
+2026-04-14 00:23:18.455 | org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/api/AuthController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:18.455 | 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:18.455 | 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:18.455 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:18.455 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:18.455 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:18.455 | 	at com.tms.thesissystem.ThesisSystemApplication.main(ThesisSystemApplication.java:10) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:18.455 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+2026-04-14 00:23:18.455 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:18.455 | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:18.455 | 	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:18.455 | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:18.455 | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:18.455 | 	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:18.455 | Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1225) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1704) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	... 28 common frames omitted
+2026-04-14 00:23:18.455 | Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:229) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1762) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	... 42 common frames omitted
+2026-04-14 00:23:18.455 | Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:321) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:309) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:229) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1762) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	... 56 common frames omitted
+2026-04-14 00:23:18.455 | Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:220) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:129) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:318) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	... 70 common frames omitted
+2026-04-14 00:23:18.455 | Caused by: java.lang.IllegalStateException: Database seed failed
+2026-04-14 00:23:18.455 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.seedIfEmpty(InMemoryWorkflowRepository.java:135) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:18.455 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.<init>(InMemoryWorkflowRepository.java:64) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:18.455 | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
+2026-04-14 00:23:18.455 | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:18.455 | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:18.455 | 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Unknown Source) ~[na:na]
+2026-04-14 00:23:18.455 | 	at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:18.455 | 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:207) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:18.455 | 	... 72 common frames omitted
+2026-04-14 00:23:18.455 | Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+2026-04-14 00:23:18.455 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:385) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:18.455 | 	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:57) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:18.455 | 	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:290) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:18.455 | 	at org.postgresql.Driver.makeConnection(Driver.java:448) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:18.455 | 	at org.postgresql.Driver.connect(Driver.java:298) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:18.455 | 	at java.sql/java.sql.DriverManager.getConnection(Unknown Source) ~[java.sql:na]
+2026-04-14 00:23:18.455 | 	at java.sql/java.sql.DriverManager.getConnection(Unknown Source) ~[java.sql:na]
+2026-04-14 00:23:18.455 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.getConnection(InMemoryWorkflowRepository.java:815) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:18.455 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.seedIfEmpty(InMemoryWorkflowRepository.java:69) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:18.455 | 	... 79 common frames omitted
+2026-04-14 00:23:18.455 | Caused by: java.net.UnknownHostException: db
+2026-04-14 00:23:18.455 | 	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:18.455 | 	at java.base/java.net.SocksSocketImpl.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:18.455 | 	at java.base/java.net.Socket.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:18.455 | 	at org.postgresql.core.PGStream.createSocket(PGStream.java:261) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:18.455 | 	at org.postgresql.core.PGStream.<init>(PGStream.java:122) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:18.455 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:146) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:18.455 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:289) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:18.455 | 	... 87 common frames omitted
+2026-04-14 00:23:18.455 |
+2026-04-14 00:23:19.081 |
+2026-04-14 00:23:19.082 |   .   ____          _            __ _ _
+2026-04-14 00:23:19.082 |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-04-14 00:23:19.082 | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-04-14 00:23:19.082 |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-04-14 00:23:19.082 |   '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-04-14 00:23:19.082 |  =========|_|==============|___/=/_/_/_/
+2026-04-14 00:23:19.082 |
+2026-04-14 00:23:19.082 |  :: Spring Boot ::                (v4.0.3)
+2026-04-14 00:23:19.082 |
+2026-04-14 00:23:19.145 | 2026-04-13T16:23:19.138Z  INFO 1 --- [thesis-system] [           main] c.t.t.ThesisSystemApplication            : Starting ThesisSystemApplication v0.0.1-SNAPSHOT using Java 17.0.18 with PID 1 (/app/app.jar started by root in /app)
+2026-04-14 00:23:19.145 | 2026-04-13T16:23:19.145Z  INFO 1 --- [thesis-system] [           main] c.t.t.ThesisSystemApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-04-14 00:23:19.712 | 2026-04-13T16:23:19.712Z  INFO 1 --- [thesis-system] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-04-14 00:23:19.718 | 2026-04-13T16:23:19.718Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-14 00:23:19.718 | 2026-04-13T16:23:19.718Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-04-14 00:23:19.732 | 2026-04-13T16:23:19.732Z  INFO 1 --- [thesis-system] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 545 ms
+2026-04-14 00:23:19.864 | 2026-04-13T16:23:19.864Z  WARN 1 --- [thesis-system] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/api/AuthController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:19.865 | 2026-04-13T16:23:19.865Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-04-14 00:23:19.869 | 2026-04-13T16:23:19.869Z  INFO 1 --- [thesis-system] [           main] .s.b.a.l.ConditionEvaluationReportLogger :
+2026-04-14 00:23:19.869 |
+2026-04-14 00:23:19.869 | Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-14 00:23:19.878 | 2026-04-13T16:23:19.875Z ERROR 1 --- [thesis-system] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-04-14 00:23:19.878 |
+2026-04-14 00:23:19.878 | org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/api/AuthController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:19.878 | 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:19.878 | 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:19.878 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:19.878 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:19.878 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:19.878 | 	at com.tms.thesissystem.ThesisSystemApplication.main(ThesisSystemApplication.java:10) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:19.878 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+2026-04-14 00:23:19.878 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:19.878 | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:19.878 | 	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:19.878 | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:19.878 | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:19.878 | 	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:19.878 | Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1225) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1704) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	... 28 common frames omitted
+2026-04-14 00:23:19.878 | Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:229) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1762) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	... 42 common frames omitted
+2026-04-14 00:23:19.878 | Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:321) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:309) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:229) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1762) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	... 56 common frames omitted
+2026-04-14 00:23:19.878 | Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:220) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:129) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:318) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	... 70 common frames omitted
+2026-04-14 00:23:19.878 | Caused by: java.lang.IllegalStateException: Database seed failed
+2026-04-14 00:23:19.878 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.seedIfEmpty(InMemoryWorkflowRepository.java:135) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:19.878 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.<init>(InMemoryWorkflowRepository.java:64) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:19.878 | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
+2026-04-14 00:23:19.878 | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:19.878 | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:19.878 | 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Unknown Source) ~[na:na]
+2026-04-14 00:23:19.878 | 	at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:19.878 | 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:207) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:19.878 | 	... 72 common frames omitted
+2026-04-14 00:23:19.878 | Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+2026-04-14 00:23:19.878 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:385) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:19.878 | 	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:57) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:19.878 | 	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:290) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:19.878 | 	at org.postgresql.Driver.makeConnection(Driver.java:448) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:19.878 | 	at org.postgresql.Driver.connect(Driver.java:298) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:19.878 | 	at java.sql/java.sql.DriverManager.getConnection(Unknown Source) ~[java.sql:na]
+2026-04-14 00:23:19.878 | 	at java.sql/java.sql.DriverManager.getConnection(Unknown Source) ~[java.sql:na]
+2026-04-14 00:23:19.878 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.getConnection(InMemoryWorkflowRepository.java:815) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:19.878 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.seedIfEmpty(InMemoryWorkflowRepository.java:69) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:19.878 | 	... 79 common frames omitted
+2026-04-14 00:23:19.878 | Caused by: java.net.UnknownHostException: db
+2026-04-14 00:23:19.878 | 	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:19.878 | 	at java.base/java.net.SocksSocketImpl.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:19.878 | 	at java.base/java.net.Socket.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:19.878 | 	at org.postgresql.core.PGStream.createSocket(PGStream.java:261) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:19.878 | 	at org.postgresql.core.PGStream.<init>(PGStream.java:122) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:19.878 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:146) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:19.878 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:289) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:19.878 | 	... 87 common frames omitted
+2026-04-14 00:23:19.878 |
+2026-04-14 00:23:20.664 |
+2026-04-14 00:23:20.664 |   .   ____          _            __ _ _
+2026-04-14 00:23:20.664 |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-04-14 00:23:20.664 | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-04-14 00:23:20.664 |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-04-14 00:23:20.664 |   '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-04-14 00:23:20.664 |  =========|_|==============|___/=/_/_/_/
+2026-04-14 00:23:20.664 |
+2026-04-14 00:23:20.664 |  :: Spring Boot ::                (v4.0.3)
+2026-04-14 00:23:20.664 |
+2026-04-14 00:23:20.725 | 2026-04-13T16:23:20.719Z  INFO 1 --- [thesis-system] [           main] c.t.t.ThesisSystemApplication            : Starting ThesisSystemApplication v0.0.1-SNAPSHOT using Java 17.0.18 with PID 1 (/app/app.jar started by root in /app)
+2026-04-14 00:23:20.727 | 2026-04-13T16:23:20.727Z  INFO 1 --- [thesis-system] [           main] c.t.t.ThesisSystemApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-04-14 00:23:21.318 | 2026-04-13T16:23:21.317Z  INFO 1 --- [thesis-system] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-04-14 00:23:21.323 | 2026-04-13T16:23:21.323Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-14 00:23:21.323 | 2026-04-13T16:23:21.323Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-04-14 00:23:21.335 | 2026-04-13T16:23:21.335Z  INFO 1 --- [thesis-system] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 569 ms
+2026-04-14 00:23:21.469 | 2026-04-13T16:23:21.469Z  WARN 1 --- [thesis-system] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/api/AuthController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:21.470 | 2026-04-13T16:23:21.470Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-04-14 00:23:21.475 | 2026-04-13T16:23:21.475Z  INFO 1 --- [thesis-system] [           main] .s.b.a.l.ConditionEvaluationReportLogger :
+2026-04-14 00:23:21.475 |
+2026-04-14 00:23:21.475 | Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-14 00:23:21.484 | 2026-04-13T16:23:21.481Z ERROR 1 --- [thesis-system] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-04-14 00:23:21.484 |
+2026-04-14 00:23:21.484 | org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/api/AuthController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:21.484 | 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:21.484 | 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:21.484 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:21.484 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:21.484 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:21.484 | 	at com.tms.thesissystem.ThesisSystemApplication.main(ThesisSystemApplication.java:10) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:21.484 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+2026-04-14 00:23:21.484 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:21.484 | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:21.484 | 	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:21.484 | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:21.484 | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:21.484 | 	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:21.484 | Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1225) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1704) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	... 28 common frames omitted
+2026-04-14 00:23:21.484 | Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:229) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1762) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	... 42 common frames omitted
+2026-04-14 00:23:21.484 | Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:321) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:309) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:229) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1762) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	... 56 common frames omitted
+2026-04-14 00:23:21.484 | Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:220) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:129) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:318) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	... 70 common frames omitted
+2026-04-14 00:23:21.484 | Caused by: java.lang.IllegalStateException: Database seed failed
+2026-04-14 00:23:21.484 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.seedIfEmpty(InMemoryWorkflowRepository.java:135) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:21.484 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.<init>(InMemoryWorkflowRepository.java:64) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:21.484 | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
+2026-04-14 00:23:21.484 | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:21.484 | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:21.484 | 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Unknown Source) ~[na:na]
+2026-04-14 00:23:21.484 | 	at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:21.484 | 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:207) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:21.484 | 	... 72 common frames omitted
+2026-04-14 00:23:21.484 | Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+2026-04-14 00:23:21.484 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:385) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:21.484 | 	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:57) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:21.484 | 	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:290) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:21.484 | 	at org.postgresql.Driver.makeConnection(Driver.java:448) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:21.484 | 	at org.postgresql.Driver.connect(Driver.java:298) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:21.484 | 	at java.sql/java.sql.DriverManager.getConnection(Unknown Source) ~[java.sql:na]
+2026-04-14 00:23:21.484 | 	at java.sql/java.sql.DriverManager.getConnection(Unknown Source) ~[java.sql:na]
+2026-04-14 00:23:21.484 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.getConnection(InMemoryWorkflowRepository.java:815) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:21.484 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.seedIfEmpty(InMemoryWorkflowRepository.java:69) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:21.484 | 	... 79 common frames omitted
+2026-04-14 00:23:21.485 | Caused by: java.net.UnknownHostException: db
+2026-04-14 00:23:21.485 | 	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:21.485 | 	at java.base/java.net.SocksSocketImpl.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:21.485 | 	at java.base/java.net.Socket.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:21.485 | 	at org.postgresql.core.PGStream.createSocket(PGStream.java:261) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:21.485 | 	at org.postgresql.core.PGStream.<init>(PGStream.java:122) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:21.485 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:146) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:21.485 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:289) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:21.485 | 	... 87 common frames omitted
+2026-04-14 00:23:21.485 |
+2026-04-14 00:23:22.442 |
+2026-04-14 00:23:22.442 |   .   ____          _            __ _ _
+2026-04-14 00:23:22.442 |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2026-04-14 00:23:22.442 | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2026-04-14 00:23:22.442 |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2026-04-14 00:23:22.442 |   '  |____| .__|_| |_|_| |_\__, | / / / /
+2026-04-14 00:23:22.442 |  =========|_|==============|___/=/_/_/_/
+2026-04-14 00:23:22.442 |
+2026-04-14 00:23:22.442 |  :: Spring Boot ::                (v4.0.3)
+2026-04-14 00:23:22.442 |
+2026-04-14 00:23:22.504 | 2026-04-13T16:23:22.500Z  INFO 1 --- [thesis-system] [           main] c.t.t.ThesisSystemApplication            : Starting ThesisSystemApplication v0.0.1-SNAPSHOT using Java 17.0.18 with PID 1 (/app/app.jar started by root in /app)
+2026-04-14 00:23:22.505 | 2026-04-13T16:23:22.505Z  INFO 1 --- [thesis-system] [           main] c.t.t.ThesisSystemApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-04-14 00:23:23.088 | 2026-04-13T16:23:23.087Z  INFO 1 --- [thesis-system] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-04-14 00:23:23.093 | 2026-04-13T16:23:23.093Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-14 00:23:23.093 | 2026-04-13T16:23:23.093Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-04-14 00:23:23.104 | 2026-04-13T16:23:23.104Z  INFO 1 --- [thesis-system] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 554 ms
+2026-04-14 00:23:23.273 | 2026-04-13T16:23:23.272Z  WARN 1 --- [thesis-system] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/api/AuthController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:23.274 | 2026-04-13T16:23:23.274Z  INFO 1 --- [thesis-system] [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-04-14 00:23:23.278 | 2026-04-13T16:23:23.278Z  INFO 1 --- [thesis-system] [           main] .s.b.a.l.ConditionEvaluationReportLogger :
+2026-04-14 00:23:23.279 |
+2026-04-14 00:23:23.279 | Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-14 00:23:23.290 | 2026-04-13T16:23:23.287Z ERROR 1 --- [thesis-system] [           main] o.s.boot.SpringApplication               : Application run failed
+2026-04-14 00:23:23.290 |
+2026-04-14 00:23:23.290 | org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authController' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/api/AuthController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:23.290 | 	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:23.290 | 	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:23.290 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:23.290 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:23.290 | 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.3.jar!/:4.0.3]
+2026-04-14 00:23:23.290 | 	at com.tms.thesissystem.ThesisSystemApplication.main(ThesisSystemApplication.java:10) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:23.290 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+2026-04-14 00:23:23.290 | 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:23.290 | 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:23.290 | 	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+2026-04-14 00:23:23.290 | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:23.290 | 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:23.290 | 	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[app.jar:0.0.1-SNAPSHOT]
+2026-04-14 00:23:23.290 | Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/AuthService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1225) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1704) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	... 28 common frames omitted
+2026-04-14 00:23:23.290 | Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'workflowQueryService' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/application/service/WorkflowQueryService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:229) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1762) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	... 42 common frames omitted
+2026-04-14 00:23:23.290 | Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'inMemoryWorkflowRepository' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/com/tms/thesissystem/infrastructure/repository/InMemoryWorkflowRepository.class]: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:321) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:309) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:229) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1762) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	... 56 common frames omitted
+2026-04-14 00:23:23.290 | Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository]: Constructor threw exception
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:220) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:129) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:318) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	... 70 common frames omitted
+2026-04-14 00:23:23.290 | Caused by: java.lang.IllegalStateException: Database seed failed
+2026-04-14 00:23:23.290 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.seedIfEmpty(InMemoryWorkflowRepository.java:135) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:23.290 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.<init>(InMemoryWorkflowRepository.java:64) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:23.290 | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:na]
+2026-04-14 00:23:23.290 | 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:23.290 | 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:23.290 | 	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Unknown Source) ~[na:na]
+2026-04-14 00:23:23.290 | 	at java.base/java.lang.reflect.Constructor.newInstance(Unknown Source) ~[na:na]
+2026-04-14 00:23:23.290 | 	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:207) ~[spring-beans-7.0.5.jar!/:7.0.5]
+2026-04-14 00:23:23.290 | 	... 72 common frames omitted
+2026-04-14 00:23:23.290 | Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+2026-04-14 00:23:23.290 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:385) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:23.290 | 	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:57) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:23.290 | 	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:290) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:23.290 | 	at org.postgresql.Driver.makeConnection(Driver.java:448) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:23.290 | 	at org.postgresql.Driver.connect(Driver.java:298) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:23.290 | 	at java.sql/java.sql.DriverManager.getConnection(Unknown Source) ~[java.sql:na]
+2026-04-14 00:23:23.290 | 	at java.sql/java.sql.DriverManager.getConnection(Unknown Source) ~[java.sql:na]
+2026-04-14 00:23:23.290 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.getConnection(InMemoryWorkflowRepository.java:815) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:23.290 | 	at com.tms.thesissystem.infrastructure.repository.InMemoryWorkflowRepository.seedIfEmpty(InMemoryWorkflowRepository.java:69) ~[!/:0.0.1-SNAPSHOT]
+2026-04-14 00:23:23.290 | 	... 79 common frames omitted
+2026-04-14 00:23:23.290 | Caused by: java.net.UnknownHostException: db
+2026-04-14 00:23:23.290 | 	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:23.290 | 	at java.base/java.net.SocksSocketImpl.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:23.290 | 	at java.base/java.net.Socket.connect(Unknown Source) ~[na:na]
+2026-04-14 00:23:23.290 | 	at org.postgresql.core.PGStream.createSocket(PGStream.java:261) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:23.290 | 	at org.postgresql.core.PGStream.<init>(PGStream.java:122) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:23.290 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:146) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:23.290 | 	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:289) ~[postgresql-42.7.10.jar!/:42.7.10]
+2026-04-14 00:23:23.290 | 	... 87 common frames omitted
+2026-04-14 00:23:23.290 |

@@ -1,0 +1,7 @@
+0:0:0:0:0:0:0:1 - - [20/Mar/2026:04:35:24 +0800] "GET / HTTP/1.1" 200 5868 http-bio-8080-exec-1 106
+0:0:0:0:0:0:0:1 - - [20/Mar/2026:04:35:24 +0800] "GET /javax.faces.resource/css/host.css.xhtml HTTP/1.1" 304 - http-bio-8080-exec-3 4
+0:0:0:0:0:0:0:1 - - [20/Mar/2026:04:35:27 +0800] "GET /thesis-topic.xhtml HTTP/1.1" 200 3105 http-bio-8080-exec-4 22
+0:0:0:0:0:0:0:1 - - [20/Mar/2026:04:35:27 +0800] "GET /javax.faces.resource/css/host.css.xhtml HTTP/1.1" 304 - http-bio-8080-exec-5 3
+0:0:0:0:0:0:0:1 - - [20/Mar/2026:04:35:27 +0800] "GET /microfrontends/module3/dist/main.js HTTP/1.1" 200 2600 http-bio-8080-exec-2 2
+0:0:0:0:0:0:0:1 - - [20/Mar/2026:04:35:27 +0800] "GET /microfrontends/module3/dist/376.main.js HTTP/1.1" 200 37851 http-bio-8080-exec-6 2
+0:0:0:0:0:0:0:1 - - [20/Mar/2026:04:35:27 +0800] "GET /microfrontends/module3/dist/685.main.js HTTP/1.1" 200 227833 http-bio-8080-exec-7 2

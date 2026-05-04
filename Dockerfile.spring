@@ -1,0 +1,38 @@
+# =============================================================
+# Dockerfile.spring — Generic multi-stage build for any Spring
+# Boot 3 / Java 17 service in this monorepo.
+#
+# Usage in docker-compose.yml:
+#   build:
+#     context: ./<service-dir>          # e.g. ./user_service
+#     dockerfile: ../Dockerfile.spring
+# =============================================================
+
+# ── Stage 1: build with Maven wrapper ────────────────────────
+FROM eclipse-temurin:17-jdk-alpine AS build
+WORKDIR /workspace
+
+# Copy mvn wrapper + pom first to leverage layer caching: deps
+# only re-download when pom.xml changes.
+COPY mvnw pom.xml ./
+COPY .mvn .mvn
+RUN chmod +x mvnw && ./mvnw -B -q dependency:go-offline || true
+
+COPY src src
+RUN ./mvnw -B -q -DskipTests package && \
+    cp target/*.jar /workspace/app.jar
+
+# ── Stage 2: runtime ─────────────────────────────────────────
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+
+# Add a non-root user.
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+
+COPY --from=build /workspace/app.jar /app/app.jar
+
+# Default JVM tuning for small dev containers.
+ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
+
+ENTRYPOINT ["sh","-c","exec java $JAVA_OPTS -jar /app/app.jar"]

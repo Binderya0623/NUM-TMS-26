@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>JSF Microfrontend Host - <ui:insert name="pageTitle">Нүүр</ui:insert></title>
+    <h:outputStylesheet name="css/host.css"/>
+</h:head>
+<h:body>
+    <!-- Header / Navigation -->
+    <header class="host-header">
+        <div class="host-logo">
+            <span class="logo-icon">🎓</span>
+            <span class="logo-text">МУИС - Дипломын ажлын систем</span>
+        </div>
+        <nav class="host-nav">
+            <!-- Прототипийн анхны модулиуд -->
+            <h:link value="Нүүр хуудас"   outcome="/index"   styleClass="nav-link"/>
+            <h:link value="Оюутны жагсаалт" outcome="/students" styleClass="nav-link"/>
+            <h:link value="Сэдвийн сан"   outcome="/topics"  styleClass="nav-link"/>
+            <!-- Монолит frontend-аас задасан шинэ модулиуд -->
+            <span class="nav-separator">|</span>
+            <h:link value="🏛️ Админ"  outcome="/admin"   styleClass="nav-link nav-role"/>
+            <h:link value="👨‍🏫 Багш"   outcome="/teacher" styleClass="nav-link nav-role"/>
+            <h:link value="🎓 Оюутан" outcome="/student" styleClass="nav-link nav-role"/>
+        </nav>
+        <div class="host-badge">
+            <span class="badge jsf-badge">JSF 2.2 Host</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="host-main">
+        <ui:insert name="content">
+            <!-- Page-specific content inserted here -->
+        </ui:insert>
+    </main>
+
+    <!-- Footer -->
+    <footer class="host-footer">
+        <p>JSF Host + React Микрофронтэнд Архитектур | Дипломын ажлын загвар</p>
+    </footer>
+</h:body>
+</html>

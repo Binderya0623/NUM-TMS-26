@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>МУИС — Дипломын ажлын систем — Нэвтрэх</title>
+    <meta name="description" content="МУИС Дипломын ажлын системд нэвтрэх"/>
+    <!-- Google Fonts: Nunito Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&amp;display=swap"
+          rel="stylesheet"/>
+    <!--
+        module-auth CSS — plain link тагаар дуудна
+        h:outputStylesheet нь /resources/ хавтастай л ажилладаг тул
+        /microfrontends/ замд #{request.contextPath} ашиглана
+    -->
+    <link rel="stylesheet"
+          href="#{request.contextPath}/microfrontends/module-auth/dist/bootstrap.css"/>
+</h:head>
+<h:body>
+    <!--
+        module-auth — Нэвтрэх/Бүртгэлийн React микрофронтэнд
+        Энд JSF header/footer байхгүй — бүрэн дэлгэцийн login UI
+
+        Архитектурын тэмдэглэл:
+        - React нь #auth-root дотор рэндэрлэгдэнэ
+        - Амжилттай нэвтэрсний дараа window.location.href-ээр
+          дүрд тохирох JSF хуудас руу (admin/teacher/student.xhtml) шилжинэ
+        - AuthContext localStorage-д { username, role } хадгалдаг тул
+          бусад JSF хуудсууд шаардлагатай бол уншиж болно
+    -->
+
+    <!-- React mount цэг — loading fallback дотор харагдана -->
+    <div id="auth-root">
+        <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f5f5f5;">
+            <div style="text-align:center;color:#666465;font-family:'Nunito Sans',sans-serif;">
+                <div style="width:40px;height:40px;border:4px solid #e2e8f0;border-top-color:#1455bd;
+                            border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1rem;">
+                </div>
+                <p>Систем ачааллаж байна...</p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+        body { margin: 0; padding: 0; }
+    </style>
+
+    <!--
+        module-auth скрипт — DOM бүрэн ачаалсны дараа React эхэлнэ
+        defer шинж чанар: HTML parse дуустал хүлээгээд дараа ажиллана
+    -->
+    <script src="#{request.contextPath}/microfrontends/module-auth/dist/main.js"
+            type="text/javascript" defer="true">
+    </script>
+</h:body>
+</html>

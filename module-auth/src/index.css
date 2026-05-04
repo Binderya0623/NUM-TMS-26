@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --auth-primary: #1455bd;
+    --auth-primary-dark: #0f4399;
+    --auth-text: #1a1a1a;
+    --auth-muted: #666465;
+    --auth-border: #c4c4c4;
+    --auth-bg: #f5f5f5;
+  }
+
+  /* module-auth-ийн scope — JSF-ийн body загваруудыг дарж бичих */
+  #auth-root {
+    font-family: 'Nunito Sans', 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  #auth-root * {
+    box-sizing: border-box;
+  }
+}

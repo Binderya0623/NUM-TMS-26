@@ -1,0 +1,267 @@
+⏺ Доор системд байгаа багш, оюутан, гадны мэргэжилтэн, комисс болон холбогдох бүх мэдээллийг цэвэрлэх алхам алхмаар зааварчилгаа бичлээ. Админ 
+  хэрэглэгч, department мэдээлэл, схемийг үлдээнэ.
+                                                                                                                                               
+  ⚠️  Анхаарах зүйл                                                                                                                             
+                                                                                                                                               
+  - Энэ үйлдэл нь өгөгдлийг эргэлт буцалтгүй устгана. Өмнө нь pg_dump хийж backup авахыг зөвлөе.                                               
+  - Эхлээд бүх backend сервисийг зогсоох нь чухал — ажиллаж байх үед устгавал Kafka event-үүд буруу төлөвт үлдэж, table рүү шинэ орфан бичлэг  
+  нэмж болзошгүй.                                                                                                                              
+                                                            
+  1. Бүх backend сервисийг зогсоох                                                                                                             
+                                                            
+  # Ажиллаж байгаа Spring Boot процессуудыг хэдхэн хоромд зогсоох                                                                              
+  pkill -f 'spring-boot:run' || true                                                                                                           
+  pkill -f 'user_service'    || true
+  pkill -f 'auth-service'    || true                                                                                                           
+  pkill -f 'committee_service'   || true                    
+  pkill -f 'thesis_service'      || true                                                                                                       
+  pkill -f 'workflow_service'    || true                    
+  pkill -f 'evaluation_service'  || true                                                                                                       
+  pkill -f 'notification_service' || true                                                                                                      
+  pkill -f 'report_service'      || true
+  pkill -f 'grading_service'     || true                                                                                                       
+  pkill -f 'analytic_service'    || true                                                                                                       
+  pkill -f 'topic_service'       || true
+                                                                                                                                               
+  2. DB-үүдийг зэрэг цэвэрлэх SQL                                                                                                              
+  
+  psql ашиглан тухайн сервер дээрх бүх DB-д дараагаар нь ажиллуулна. Microservice бүр тусдаа DB-тэй учир FK хамгаалалт хоорондоо нөлөөлөхгүй — 
+  гэхдээ дарааллаа барих нь чухал: эвентэд автсан notification, evaluation, thesis-ийг эхлээд, committee/user-ийг сүүлд нь устгана.
+                                                                                                                                               
+  2.1 evaluation_service (бүх дүн, комиссын submission)                                                                                        
+  
+  psql -U bindertsetseg -d evaluation_service <<'SQL'                                                                                          
+  TRUNCATE TABLE                                                                                                                               
+      grade_notification,
+      final_grade_confirmation,                                                                                                                
+      review_document,                                      
+      secretary_submission,                                                                                                                    
+      defense_grade,                                        
+      criterion_assessments,                                                                                                                   
+      evaluations                                                                                                                              
+  RESTART IDENTITY CASCADE;
+  SQL                                                                                                                                          
+                                                            
+  2.2 grading_service                                                                                                                          
+  
+  psql -U bindertsetseg -d grading_service <<'SQL'                                                                                             
+  TRUNCATE TABLE grades, resolutions RESTART IDENTITY CASCADE;
+  SQL                                                                                                                                          
+  
+  2.3 report_service                                                                                                                           
+                                                            
+  psql -U bindertsetseg -d report_service <<'SQL'                                                                                              
+  TRUNCATE TABLE academic_reports RESTART IDENTITY CASCADE; 
+  SQL                                                                                                                                          
+  
+  2.4 analytic_service                                                                                                                         
+                                                            
+  psql -U bindertsetseg -d analytic_service <<'SQL'
+  TRUNCATE TABLE analytics_counters RESTART IDENTITY CASCADE;
+  SQL                                                                                                                                          
+  
+  2.5 notification_service                                                                                                                     
+                                                            
+  psql -U bindertsetseg -d notification_service <<'SQL'
+  TRUNCATE TABLE notifications RESTART IDENTITY CASCADE;                                                                                       
+  SQL
+                                                                                                                                               
+  2.6 thesis_service (диплом, тайлан, чат)                                                                                                     
+  
+  psql -U bindertsetseg -d thesis_service <<'SQL'                                                                                              
+  TRUNCATE TABLE                                            
+      thesis_notification,                                                                                                                     
+      chat_message,
+      report_file,                                                                                                                             
+      thesis_report,                                        
+      theses
+  RESTART IDENTITY CASCADE;
+  SQL                                                                                                                                          
+  
+  2.7 workflow_service (хамгаалалт/гүйцэтгэл session)                                                                                          
+                                                            
+  psql -U bindertsetseg -d workflow_service <<'SQL'                                                                                            
+  TRUNCATE TABLE                                                                                                                               
+      defense_session,
+      thesis_execution_session,                                                                                                                
+      workflow_stages,                                      
+      workflows                                                                                                                                
+  RESTART IDENTITY CASCADE;
+  SQL                                                                                                                                          
+                                                            
+  2.8 committee_service (комисс, гишүүд, шүүмжлэгч)                                                                                            
+  
+  psql -U bindertsetseg -d committee_service <<'SQL'                                                                                           
+  TRUNCATE TABLE                                            
+      reviewer_assignment,
+      committee_students,                                                                                                                      
+      committee_teachers,
+      committees,                                                                                                                              
+      student_snapshots,                                    
+      teacher_snapshots                                                                                                                        
+  RESTART IDENTITY CASCADE;
+  SQL                                                                                                                                          
+                                                            
+  2.9 topic_service (сэдэв, request, төлөвлөгөө)                                                                                               
+  
+  psql -U bindertsetseg -d topic_service <<'SQL'                                                                                               
+  TRUNCATE TABLE                                            
+      plan_response,
+      plan_week,
+      plan,                                                                                                                                    
+      topic_request,
+      topic,                                                                                                                                   
+      student,                                              
+      teacher
+  RESTART IDENTITY CASCADE;                                                                                                                    
+  -- department-ийг хадгална; хэрэв бүгдийг цэвэрлэхийг хүсвэл нэмж:
+  -- TRUNCATE TABLE department RESTART IDENTITY CASCADE;                                                                                       
+  SQL                                                       
+                                                                                                                                               
+  2.10 user_service (багш, оюутан, гадны мэргэжилтэн)       
+                                                                                                                                               
+  Admin (system_role='ADMIN') болон department бичлэгийг үлдээнэ.                                                                              
+  
+  psql -U bindertsetseg -d user_service <<'SQL'                                                                                                
+  -- Зөвхөн багш, оюутан, гадны мэргэжилтэн, DEPARTMENT_HEAD-ыг устгана.
+  -- users-ийн ON DELETE CASCADE-ийн ачаар students/teachers/external_experts                                                                  
+  -- хүснэгтийн мөрүүд автоматаар устана.                                                                                                      
+  DELETE FROM users                                                                                                                            
+   WHERE system_role IN ('STUDENT','TEACHER','EXTERNAL_EXPERT','DEPARTMENT_HEAD');                                                             
+  SQL                                                                                                                                          
+                                                            
+  Хэрэв бүх хэрэглэгчийг (admin-ыг хамт) устгахыг хүсвэл:                                                                                      
+                                                            
+  TRUNCATE TABLE external_experts, teachers, students, departments, users                                                                      
+  RESTART IDENTITY CASCADE;                                                                                                                    
+  
+  2.11 auth_service (нэвтрэх эрх)                                                                                                              
+                                                            
+  Admin-ын login-г үлдээнэ. sisi_id нь ихэнх тохиолдолд email эсвэл student_id. Admin-ын sisi_id-г мэдэхгүй бол дараах байдлаар email-ээр      
+  ялгана:                                                   
+                                                                                                                                               
+  psql -U bindertsetseg -d auth_service_db <<'SQL'          
+  -- Эхлээд аль user-үүд ADMIN ролтой байгааг харах
+  SELECT u.id, u.sisi_id                                                                                                                       
+    FROM users u                                                                                                                               
+    JOIN user_roles r ON r.user_id = u.id                                                                                                      
+   WHERE r.role = 'ROLE_ADMIN';                                                                                                                
+                                                                                                                                               
+  -- ADMIN биш бүх хэрэглэгчийг (багш, оюутан, expert) устгах                                                                                  
+  DELETE FROM user_roles                                                                                                                       
+   WHERE user_id IN (                                                                                                                          
+     SELECT u.id FROM users u                               
+     WHERE u.id NOT IN (
+       SELECT user_id FROM user_roles WHERE role_name = 'ROLE_ADMIN'                                                                                
+     )
+   );                                                                                                                                          
+                                                            
+  DELETE FROM users                                                                                                                            
+   WHERE id NOT IN (                                        
+     SELECT user_id FROM user_roles WHERE role_name = 'ROLE_ADMIN'
+   );                                                                                                                                          
+  SQL
+                                                                                                                                               
+  Бүгдийг устгахыг хүсвэл:                                                                                                                     
+  
+  TRUNCATE TABLE user_roles, users RESTART IDENTITY CASCADE;                                                                                   
+                                                                                                                                               
+  3. Аpload хийгдсэн файлуудыг цэвэрлэх                                                                                                        
+                                                                                                                                               
+  DB-д path-ууд л үлдэж байгаа. Бодит файлуудыг устгах:                                                                                        
+                                                            
+  rm -rf /Users/bindertsetseg/diploma/prototype/thesis_service/uploads/*                                                                       
+  rm -rf /Users/bindertsetseg/diploma/prototype/report_service/uploads/*                                                                       
+  # Хэрэв evaluation_service-д review_document upload хийдэг бол:                                                                              
+  rm -rf /Users/bindertsetseg/diploma/prototype/evaluation_service/uploads/* 2>/dev/null || true                                               
+                                                                                                                                               
+  4. (Заавал биш) Kafka topic-уудыг reset хийх                                                                                                 
+                                                                                                                                               
+  Хэрэв user-created-events, committee-*, thesis-approved, workflow.*, evaluation-* гэх мэт event-үүд Kafka-д хуримтлагдсан байвал шинэ сервис 
+  start хийхэд дахин хэрэглэгдэх магадлалтай. Dev орчинд хамгийн хялбар нь Kafka-г reset хийх:
+                                                                                                                                               
+  # Kafka зогсоосны дараа (docker-compose down), volume-ийг цэвэрлэх
+  docker volume ls | grep kafka                                                                                                                
+  docker volume rm <kafka_volume_name>
+  # Эсвэл зөвхөн тодорхой topic-ийг устгах:                                                                                                    
+  kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic user-created-events                                                       
+  kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic committee-created                                                         
+  # ... бусад topic-ууд                                                                                                                        
+                                                                                                                                               
+  5. Сервисүүдийг дахин асаах                                                                                                                  
+                                                            
+  Схем нь spring.sql.init.mode=always болон CREATE TABLE IF NOT EXISTS учир схем аяндаа хэвээр үлдэнэ — бичлэг л цэвэрлэгдсэн.                 
+                                                            
+  cd /Users/bindertsetseg/diploma/prototype/auth-service          && sh mvnw spring-boot:run &                                                 
+  cd /Users/bindertsetseg/diploma/prototype/user_service          && sh mvnw spring-boot:run &                                                 
+  cd /Users/bindertsetseg/diploma/prototype/topic_service         && sh mvnw spring-boot:run &                                                 
+  cd /Users/bindertsetseg/diploma/prototype/committee_service     && sh mvnw spring-boot:run &                                                 
+  cd /Users/bindertsetseg/diploma/prototype/thesis_service        && sh mvnw spring-boot:run &                                                 
+  cd /Users/bindertsetseg/diploma/prototype/workflow_service      && sh mvnw spring-boot:run &                                                 
+  cd /Users/bindertsetseg/diploma/prototype/evaluation_service    && sh mvnw spring-boot:run &                                                 
+  cd /Users/bindertsetseg/diploma/prototype/notification_service  && sh mvnw spring-boot:run &                                                 
+  cd /Users/bindertsetseg/diploma/prototype/report_service        && sh mvnw spring-boot:run &                                                 
+  cd /Users/bindertsetseg/diploma/prototype/grading_service       && sh mvnw spring-boot:run &                                                 
+  cd /Users/bindertsetseg/diploma/prototype/analytic_service      && sh mvnw spring-boot:run &                                                 
+                                                                                                                                               
+  6. Шалгах query-үүд                                                                                                                          
+                                                                                                                                               
+  Цэвэрлэлт зөв болсныг баталгаажуулах:                                                                                                        
+                                                            
+  -- user_service                                                                                                                              
+  \c user_service                                           
+  SELECT system_role, COUNT(*) FROM users GROUP BY system_role;
+  -- Зөвхөн ADMIN үлдсэн байх ёстой                                                                                                            
+                                                                                                                                               
+  -- committee_service                                                                                                                         
+  \c committee_service                                                                                                                         
+  SELECT COUNT(*) FROM committees;          -- 0            
+  SELECT COUNT(*) FROM committee_teachers;  -- 0                                                                                               
+  SELECT COUNT(*) FROM committee_students;  -- 0
+                                                                                                                                               
+  -- thesis_service                                         
+  \c thesis_service                                                                                                                            
+  SELECT COUNT(*) FROM theses;              -- 0            
+                                                                                                                                               
+  -- workflow_service
+  \c workflow_service                                                                                                                          
+  SELECT COUNT(*) FROM defense_session;     -- 0            
+  SELECT COUNT(*) FROM thesis_execution_session;  -- 0
+                                                                                                                                               
+  -- evaluation_service
+  \c evaluation_service                                                                                                                        
+  SELECT COUNT(*) FROM defense_grade;       -- 0            
+  SELECT COUNT(*) FROM secretary_submission;-- 0                                                                                               
+  
+  Нэг командаар ажиллуулах shell script (нэмэлт)                                                                                               
+                                                            
+  Дээрх бүгдийг нэг script-эд хийвэл:                                                                                                          
+                                                            
+  #!/bin/bash                                                                                                                                  
+  # cleanup_all.sh                                          
+  set -e                                                                                                                                       
+  PSQL="psql -U bindertsetseg -v ON_ERROR_STOP=1"
+                                                                                                                                               
+  $PSQL -d evaluation_service   -c "TRUNCATE grade_notification, final_grade_confirmation, review_document, secretary_submission,              
+  defense_grade, criterion_assessments, evaluations RESTART IDENTITY CASCADE;"                                                                 
+  $PSQL -d grading_service      -c "TRUNCATE grades, resolutions RESTART IDENTITY CASCADE;"                                                    
+  $PSQL -d report_service       -c "TRUNCATE academic_reports RESTART IDENTITY CASCADE;"                                                       
+  $PSQL -d analytic_service     -c "TRUNCATE analytics_counters RESTART IDENTITY CASCADE;"
+  $PSQL -d notification_service -c "TRUNCATE notifications RESTART IDENTITY CASCADE;"                                                          
+  $PSQL -d thesis_service       -c "TRUNCATE thesis_notification, chat_message, report_file, thesis_report, theses RESTART IDENTITY CASCADE;"  
+  $PSQL -d workflow_service     -c "TRUNCATE defense_session, thesis_execution_session, workflow_stages, workflows RESTART IDENTITY CASCADE;"  
+  $PSQL -d committee_service    -c "TRUNCATE reviewer_assignment, committee_students, committee_teachers, committees, student_snapshots,       
+  teacher_snapshots RESTART IDENTITY CASCADE;"                                                                                                 
+  $PSQL -d topic_service        -c "TRUNCATE plan_response, plan_week, plan, topic_request, topic, student, teacher RESTART IDENTITY CASCADE;" 
+  $PSQL -d user_service         -c "DELETE FROM users WHERE system_role IN ('STUDENT','TEACHER','EXTERNAL_EXPERT','DEPARTMENT_HEAD');"         
+  $PSQL -d auth_service_db      -c "DELETE FROM user_roles WHERE user_id IN (SELECT u.id FROM users u WHERE u.id NOT IN (SELECT user_id FROM   
+  user_roles WHERE role = 'ROLE_ADMIN'));"                                                                                                     
+  $PSQL -d auth_service_db      -c "DELETE FROM users WHERE id NOT IN (SELECT user_id FROM user_roles WHERE role = 'ROLE_ADMIN');"             
+                                                                                                                                               
+  rm -rf /Users/bindertsetseg/diploma/prototype/thesis_service/uploads/*                                                                       
+  rm -rf /Users/bindertsetseg/diploma/prototype/report_service/uploads/*                                                                       
+                                                                                                                                               
+  echo "✅ Cleanup complete"                                
+                                                                                                                                               
+  Энэ зааврыг дагаж ажиллуулсны дараа систем шинэ оюутан, багш, мэргэжилтэн, комисс үүсгэхэд бэлэн цэвэр төлөвт орно. Админ хэрэглэгч болон    
+  department тохиргоо хэвээр үлдэнэ.

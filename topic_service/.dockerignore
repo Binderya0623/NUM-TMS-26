@@ -1,0 +1,5 @@
+.idea
+target
+Dockerfile*
+docker-compose*.yml
+.DS_Store

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUIS Diploma System</title>
+    <style>
+        :root {
+            --blue: #2f57b8;
+            --blue-soft: #dce7ff;
+            --blue-line: #8aa8f4;
+            --page: #f4f5f7;
+            --ink: #202124;
+            --muted: #8a8f98;
+            --line: #e5e7eb;
+            --white: #ffffff;
+            --danger: #ff6f61;
+            --success: #19a464;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            color: var(--ink);
+            background: var(--page);
+        }
+
+        .app-shell {
+            display: grid;
+            grid-template-columns: 214px 1fr;
+            min-height: 100vh;
+            border-top: 4px solid var(--blue-line);
+        }
+
+        .sidebar {
+            background: var(--white);
+            border-right: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-block {
+            padding: 18px 20px 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-mark {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--blue);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: var(--blue);
+            font-weight: 800;
+        }
+
+        .logo-copy strong {
+            display: block;
+            font-size: 14px;
+            color: var(--blue);
+        }
+
+        .logo-copy span {
+            font-size: 11px;
+            color: var(--blue);
+            font-weight: 700;
+        }
+
+        .sidebar-section {
+            padding: 10px 20px 8px;
+            color: #b1b5bc;
+            font-size: 13px;
+        }
+
+        .menu {
+            display: grid;
+            gap: 2px;
+        }
+
+        .menu button {
+            border: none;
+            background: transparent;
+            text-align: left;
+            padding: 14px 24px;
+            font: inherit;
+            font-weight: 600;
+            color: #4e5561;
+            border-left: 4px solid transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .menu button.active {
+            background: var(--blue-soft);
+            color: var(--blue);
+            border-left-color: var(--blue);
+        }
+
+        .menu .icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            border: 2px solid currentColor;
+            opacity: .8;
+        }
+
+        .logout {
+            margin-top: auto;
+            padding: 22px 24px;
+            color: #ff6f3d;
+            font-weight: 600;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            height: 66px;
+            background: var(--white);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 26px;
+            gap: 18px;
+        }
+
+        .search {
+            max-width: 540px;
+            width: 100%;
+            height: 34px;
+            border: 1px solid #d8dbe1;
+            border-radius: 8px;
+            padding: 0 14px;
+            color: #68707b;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .bubble {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #444;
+            border-radius: 50%;
+            opacity: .7;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #28479d;
+        }
+
+        .profile-meta strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .profile-meta span {
+            color: #b0b5bd;
+            font-size: 13px;
+        }
+
+        .page {
+            padding: 26px 28px 30px;
+        }
+
+        .page h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .page-sub {
+            margin: 6px 0 18px;
+            color: #8e949b;
+            font-size: 13px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid #dadde3;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .card + .card {
+            margin-top: 18px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 14px 16px;
+            border-top: 1px solid var(--line);
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        .table th {
+            color: #9097a1;
+            text-align: left;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        .action-btn,
+        .outline-btn,
+        .soft-btn {
+            border: none;
+            border-radius: 7px;
+            padding: 8px 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .action-btn { background: var(--blue); color: white; }
+        .outline-btn { background: white; color: var(--danger); border: 1px solid #f2a2a2; }
+        .soft-btn { background: #edf3ff; color: var(--blue); }
+
+        .tabs {
+            display: flex;
+            gap: 22px;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 10px;
+        }
+
+        .tabs button {
+            border: none;
+            background: transparent;
+            padding: 10px 0;
+            font: inherit;
+            color: #6c7280;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tabs button.active {
+            color: var(--blue);
+            border-bottom-color: var(--blue);
+            font-weight: 700;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 22px;
+            padding: 6px 0 18px;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 18px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #2a2d33;
+        }
+
+        .step-num {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 4px solid var(--blue);
+            color: var(--blue);
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+        }
+
+        .step.pending .step-num {
+            border-color: #666;
+            color: #666;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 28px;
+        }
+
+        .field-list,
+        .essay-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .field label,
+        .essay label {
+            display: block;
+            font-size: 12px;
+            color: #8a8f98;
+            margin-bottom: 6px;
+        }
+
+        .field input,
+        .essay textarea,
+        .panel select,
+        .panel input {
+            width: 100%;
+            border: 1px solid #d9dce3;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font: inherit;
+            background: white;
+        }
+
+        .essay textarea {
+            min-height: 102px;
+            resize: vertical;
+        }
+
+        .footer-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 16px;
+        }
+
+        .info-panel h3,
+        .panel h3 {
+            margin: 0 0 14px;
+            font-size: 16px;
+        }
+
+        .topic-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin: 4px 0 8px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin: 12px 0 16px;
+        }
+
+        .mini {
+            font-size: 12px;
+            color: #8a8f98;
+        }
+
+        .teacher-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0 14px;
+        }
+
+        .teacher-pill .dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #d9d9d9;
+        }
+
+        .accordion {
+            display: grid;
+            gap: 10px;
+        }
+
+        .accordion-item {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-head {
+            padding: 12px 14px;
+            background: #fff;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .accordion-body {
+            padding: 14px;
+            border-top: 1px solid var(--line);
+            background: #fff;
+        }
+
+        .task-table td,
+        .task-table th {
+            padding: 10px 12px;
+            font-size: 13px;
+        }
+
+        .status {
+            color: var(--blue);
+            font-weight: 700;
+        }
+
+        .split-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .message {
+            margin-bottom: 14px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .message.show { display: block; }
+        .message.error { background: #fff1f1; color: #bf3f3f; }
+        .message.success { background: #edf9f1; color: #19764a; }
+
+        .profile-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .profile-controls select {
+            width: 150px;
+            border: 1px solid #d8dbe1;
+            border-radius: 8px;
+            height: 34px;
+            padding: 0 8px;
+        }
+
+        @media (max-width: 1180px) {
+            .app-shell,
+            .form-grid,
+            .two-col,
+            .split-panels,
+            .detail-grid { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+            .topbar { padding: 12px 16px; height: auto; flex-wrap: wrap; }
+            .page { padding: 18px; }
+        }
+    </style>
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="logo-block">
+            <div class="logo-mark">M</div>
+            <div class="logo-copy">
+                <strong>МУИС</strong>
+                <span>ДИПЛОМЫН АЖЛЫГ УДИРДАХ СИСТЕМ</span>
+            </div>
+        </div>
+        <div class="sidebar-section">Үндсэн цэс</div>
+        <nav class="menu">
+            <button data-page="dashboard" class="active"><span class="icon"></span>Хянах самбар</button>
+            <button data-page="topics"><span class="icon"></span>Сэдэв сонголт</button>
+            <button data-page="research"><span class="icon"></span>Миний судалгааны ажил</button>
+            <button data-page="settings"><span class="icon"></span>Тохиргоо</button>
+        </nav>
+        <div class="logout">Гарах</div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <input class="search" id="searchInput" placeholder="Хайх">
+            <div class="top-actions">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="profile-controls">
+                    <select id="roleSelect"></select>
+                    <select id="userSelect"></select>
+                </div>
+                <div class="profile">
+                    <div class="avatar"></div>
+                    <div class="profile-meta">
+                        <strong id="profileName">-</strong>
+                        <span id="profileRole">-</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="page">
+            <div id="message" class="message"></div>
+            <div id="pageRoot"></div>
+        </section>
+    </main>
+</div>
+
+<script src="/app.js?v=20260321-2"></script>
+</body>
+</html>

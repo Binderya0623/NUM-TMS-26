@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="pageTitle">Нүүр хуудас</ui:define>
+
+    <ui:define name="content">
+        <div class="page-hero">
+            <h1>JSF + React Микрофронтэнд Загвар</h1>
+            <p class="hero-desc">
+                Энэхүү загвар нь JSF 2.3-ийг үндсэн бүрхүүл болгон ашиглаж,
+                бие даасан React микрофронтэнд модулиудыг нэгтгэх архитектурыг харуулна.
+            </p>
+        </div>
+
+        <div class="card-grid">
+            <!-- Module 1 card -->
+            <div class="module-card">
+                <div class="module-card-icon">👨‍🎓</div>
+                <h2>Модуль 1: Оюутны жагсаалт</h2>
+                <p>React APP — Дипломын ажил хамгаалж буй оюутнуудын мэдээлэл</p>
+                <div class="tech-tags">
+                    <span class="tag tag-react">React 18</span>
+                    <span class="tag tag-webpack">Webpack 5</span>
+                    <span class="tag tag-css">CSS Modules</span>
+                </div>
+                <h:link outcome="/students" styleClass="btn-primary">Нээх →</h:link>
+            </div>
+
+            <!-- Module 2 card -->
+            <div class="module-card">
+                <div class="module-card-icon">📚</div>
+                <h2>Модуль 2: Сэдвийн сан</h2>
+                <p>React APP — Дипломын ажлын сэдвүүд болон удирдагч багш нарын жагсаалт</p>
+                <div class="tech-tags">
+                    <span class="tag tag-react">React 18</span>
+                    <span class="tag tag-webpack">Webpack 5</span>
+                    <span class="tag tag-css">CSS Modules</span>
+                </div>
+                <h:link outcome="/topics" styleClass="btn-primary">Нээх →</h:link>
+            </div>
+
+            <!-- Module 3 card -->
+            <div class="module-card">
+                <div class="module-card-icon">🎓</div>
+                <h2>Модуль 3: Сэдэв сонголт</h2>
+                <p>React APP — Хянах самбар, нээлттэй сэдвүүдийн жагсаалт, сэдэв дэлгэрэнгүй, хүсэлт илгээх</p>
+                <div class="tech-tags">
+                    <span class="tag tag-react">React 18</span>
+                    <span class="tag tag-webpack">Webpack 5</span>
+                    <span class="tag tag-css">React Router</span>
+                </div>
+                <h:link outcome="/thesis-topic" styleClass="btn-primary">Нээх →</h:link>
+            </div>
+
+            <!-- Module 4 card -->
+            <div class="module-card">
+                <div class="module-card-icon">📋</div>
+                <h2>Модуль 4: Судалгааны ажил</h2>
+                <p>React APP — Судалгааны ажлын мэдээлэл, үечилсэн төлөвлөгөө, баримт бичиг, шүүмж</p>
+                <div class="tech-tags">
+                    <span class="tag tag-react">React 18</span>
+                    <span class="tag tag-webpack">Webpack 5</span>
+                    <span class="tag tag-css">React Router</span>
+                </div>
+                <h:link outcome="/my-research" styleClass="btn-primary">Нээх →</h:link>
+            </div>
+        </div>
+
+        <!-- Architecture diagram -->
+        <div class="arch-section">
+            <h2>Архитектурын зураглал</h2>
+            <div class="arch-diagram">
+                <div class="arch-box arch-jsf">
+                    <strong>JSF 2.3 Host</strong>
+                    <small>index / students / topics / thesis-topic / my-research</small>
+                </div>
+                <div class="arch-arrow">⟶ &lt;script&gt; tag</div>
+                <div class="arch-modules">
+                    <div class="arch-box arch-react">
+                        <strong>Module 1</strong>
+                        <small>Оюутны жагсаалт</small>
+                    </div>
+                    <div class="arch-box arch-react">
+                        <strong>Module 2</strong>
+                        <small>Сэдвийн сан</small>
+                    </div>
+                    <div class="arch-box arch-react">
+                        <strong>Module 3</strong>
+                        <small>Сэдэв сонголт</small>
+                    </div>
+                    <div class="arch-box arch-react">
+                        <strong>Module 4</strong>
+                        <small>Судалгааны ажил</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>
+</html>

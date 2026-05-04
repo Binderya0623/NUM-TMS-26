@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="pageTitle">Миний судалгааны ажил</ui:define>
+
+    <ui:define name="content">
+        <div class="microfrontend-page">
+            <div class="mf-header">
+                <h1>Миний судалгааны ажил</h1>
+                <div class="mf-info-badge">
+                    <span class="badge react-badge">React Микрофронтэнд — Модуль 4</span>
+                </div>
+            </div>
+            <p class="mf-desc">
+                Доорх хэсэг нь JSF хуудсанд дөрөв дэх React аппликэйшн ачаалагдаж буйг харуулна.
+                Судалгааны ажлын мэдээлэл, үечилсэн төлөвлөгөө, баримт бичиг болон шүүмжийг агуулна.
+            </p>
+
+            <!-- React microfrontend mount point -->
+            <div id="microfrontend-root" class="mf-container">
+                <div class="mf-loading">
+                    <div class="spinner"></div>
+                    <p>React модуль ачааллаж байна...</p>
+                </div>
+            </div>
+        </div>
+
+        <!--
+            Модуль 4: Судалгааны ажлын управление
+            MyResearch page — accordion upload/view interface
+        -->
+        <script src="${pageContext.request.contextPath}/microfrontends/module4/dist/main.js"
+                type="text/javascript">
+        </script>
+    </ui:define>
+
+</ui:composition>
+</html>

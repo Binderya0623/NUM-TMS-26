@@ -1,0 +1,40 @@
+# Keep build contexts small for the Spring services.
+
+# Maven build artifacts
+**/target/
+**/.mvn/wrapper/maven-wrapper.jar.lck
+
+# Node / frontend (not part of any Spring build context)
+**/node_modules/
+**/dist/
+**/.vite/
+**/.next/
+
+# IDE / OS
+**/.idea/
+**/.vscode/
+**/.DS_Store
+**/*.iml
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Frontend modules and host (built separately)
+module-admin/
+module-auth/
+module-student/
+module-teacher/
+module-thesis/
+shared-ui-module/
+jsf-host/
+
+# Misc
+**/*.log
+**/*.tmp
+**/result.tex
+**/conclusion.tex
+**/diagrams.txt
+**/cleanup.txt
+num_auth-main/
