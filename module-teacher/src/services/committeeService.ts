@@ -6,6 +6,7 @@ export interface Committee {
   departmentId?: string;
   stageType?: string;
   status: string;
+  closingNote?: string;
   createdAt?: string;
   closedAt?: string;
 }
@@ -41,8 +42,8 @@ export const committeeService = {
   getById: (id: string) =>
     committeeApi.get<Committee>(`/api/committees/${id}`),
 
-  closeCommittee: (id: string) =>
-    committeeApi.patch<Committee>(`/api/committees/${id}/close`),
+  closeCommittee: (id: string, closingNote?: string) =>
+    committeeApi.patch<Committee>(`/api/committees/${id}/close`, { closingNote: closingNote ?? null }),
 
   getAll: () =>
     committeeApi.get<Committee[]>('/api/committees'),

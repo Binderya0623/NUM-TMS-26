@@ -11809,6 +11809,18 @@ const workflowService = {
   closeExecutionSession: (id, actorId) => workflowApi.patch(`/api/execution-sessions/${id}/close`, { actorId })
 };
 
+const committeeService = {
+  getMyAssignments: (teacherId) => committeeApi.get("/api/committee-teachers", { params: { teacherId } }),
+  getById: (id) => committeeApi.get(`/api/committees/${id}`),
+  closeCommittee: (id, closingNote) => committeeApi.patch(`/api/committees/${id}/close`, { closingNote: closingNote ?? null }),
+  getAll: () => committeeApi.get("/api/committees"),
+  getStudents: (committeeId) => committeeApi.get(`/api/committees/${committeeId}/students`),
+  getMembers: (committeeId) => committeeApi.get("/api/committee-teachers", { params: { committeeId } }),
+  getReviewerAssignments: (params) => committeeApi.get("/api/reviewer-assignments", { params }),
+  assignReviewer: (body) => committeeApi.post("/api/reviewer-assignments", body),
+  deleteReviewerAssignment: (id) => committeeApi.delete(`/api/reviewer-assignments/${id}`)
+};
+
 function normalize(raw) {
   const firstName = raw.firstName || "";
   const lastName = raw.lastName || "";
@@ -11834,7 +11846,10 @@ const userService = {
 const {useState: useState$a,useEffect: useEffect$b} = await importShared('react');
 const toneDot$6 = {
   positive: "bg-[var(--color-dot-positive)]",
-  warning: "bg-[var(--color-dot-warning)]"};
+  warning: "bg-[var(--color-dot-warning)]",
+  negative: "bg-[var(--color-dot-negative)]",
+  neutral: "bg-[var(--color-dot-neutral)]"
+};
 const STAGE_DEFS = [
   { key: "PROGRESS_1", title: "Явц 1" },
   { key: "PROGRESS_2", title: "Явц 2" },
@@ -11850,7 +11865,16 @@ const stageLabel$2 = (stageType) => {
   };
   return map[stageType] || stageType;
 };
-function TermTimeline({ activeIndex }) {
+function TermTimeline({ stageState }) {
+  const activeIndex = (() => {
+    const i = STAGE_DEFS.findIndex((s) => stageState[s.key]?.state === "active");
+    if (i >= 0) return i;
+    let lastDone = -1;
+    STAGE_DEFS.forEach((s, idx) => {
+      if (stageState[s.key]?.state === "done") lastDone = idx;
+    });
+    return lastDone + 1;
+  })();
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-[18px] left-[10%] w-[80%] h-px bg-border-strong" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -11860,18 +11884,20 @@ function TermTimeline({ activeIndex }) {
         style: { width: `${Math.min(activeIndex / (STAGE_DEFS.length - 1) * 80, 80)}%` }
       }
     ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-between relative", children: STAGE_DEFS.map((stage, idx) => {
-      const done = idx < activeIndex;
-      const active = idx === activeIndex;
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-between relative", children: STAGE_DEFS.map((stage) => {
+      const info = stageState[stage.key] || { state: "upcoming" };
+      const done = info.state === "done";
+      const active = info.state === "active";
       return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center w-1/4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "div",
           {
             className: `w-9 h-9 rounded-full flex items-center justify-center transition-colors ${done ? "bg-accent text-white border border-accent" : active ? "bg-surface text-accent border border-accent" : "bg-surface text-ink-400 border border-border-strong"}`,
-            children: done ? /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { className: "w-4 h-4", strokeWidth: 1.8 }) : active ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-2 h-2 bg-accent rounded-full" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-semibold tabular-nums", children: idx + 1 })
+            children: done ? /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { className: "w-4 h-4", strokeWidth: 1.8 }) : active ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-2 h-2 bg-accent rounded-full" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-semibold tabular-nums", children: STAGE_DEFS.indexOf(stage) + 1 })
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: `mt-3 text-[11px] text-center tracking-tight ${active ? "text-accent font-semibold" : "text-ink-600"}`, children: stage.title })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: `mt-3 text-[11px] text-center tracking-tight ${active ? "text-accent font-semibold" : "text-ink-600"}`, children: stage.title }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] text-ink-500 tabular-nums mt-0.5", children: info.date ? info.date.split("T")[0] : "—" })
       ] }, stage.key);
     }) })
   ] });
@@ -11881,8 +11907,8 @@ function TeacherDashboard() {
   const [studentCount, setStudentCount] = useState$a(0);
   const [pendingReports, setPendingReports] = useState$a([]);
   const [reviewedCount, setReviewedCount] = useState$a(0);
-  const [upcomingSessions, setUpcomingSessions] = useState$a([]);
-  const [allSessions, setAllSessions] = useState$a([]);
+  const [mySessions, setMySessions] = useState$a([]);
+  const [myCommittees, setMyCommittees] = useState$a([]);
   const [studentMap, setStudentMap] = useState$a({});
   const [loading, setLoading] = useState$a(true);
   useEffect$b(() => {
@@ -11894,12 +11920,12 @@ function TeacherDashboard() {
     }
     const load = async () => {
       try {
-        const [plansRes, reportsRes, sessionsRes, reqRes, usersRes] = await Promise.all([
+        const [plansRes, reportsRes, reqRes, usersRes, assignmentsRes] = await Promise.all([
           planService.getPlans({ supervisorId: teacherId }),
           thesisService.getReports({}),
-          workflowService.getDefenseSessions({ status: "OPEN" }).catch(() => ({ data: [] })),
           topicService.getTopicRequests({ status: "APPROVED" }).catch(() => ({ data: [] })),
-          userService.getStudents().catch(() => ({ data: [] }))
+          userService.getStudents().catch(() => ({ data: [] })),
+          committeeService.getMyAssignments(teacherId).catch(() => ({ data: [] }))
         ]);
         const map = {};
         (usersRes.data || []).forEach((u) => {
@@ -11917,8 +11943,24 @@ function TeacherDashboard() {
         const myReports = reportsRes.data.filter((r) => myStudentIds.has(r.studentId));
         setPendingReports(myReports.filter((r) => r.status === "SUBMITTED"));
         setReviewedCount(myReports.filter((r) => r.status === "REVIEWED" || r.status === "APPROVED").length);
-        setUpcomingSessions(sessionsRes.data.slice(0, 3));
-        setAllSessions(sessionsRes.data);
+        const assignments = assignmentsRes.data || [];
+        const committeeIds = [...new Set(assignments.map((a) => a.committeeId))];
+        const committees = await Promise.all(
+          committeeIds.map((id) => committeeService.getById(id).then((r) => r.data).catch(() => null))
+        );
+        const withRole = committees.filter((c) => c !== null).map((c) => ({
+          ...c,
+          role: assignments.find((a) => a.committeeId === c.id)?.role || "MEMBER"
+        }));
+        setMyCommittees(withRole);
+        if (committeeIds.length > 0) {
+          const sessionsResults = await Promise.all(
+            committeeIds.map(
+              (id) => workflowService.getDefenseSessions({ committeeId: id }).catch(() => ({ data: [] }))
+            )
+          );
+          setMySessions(sessionsResults.flatMap((r) => r.data));
+        }
       } catch {
       } finally {
         setLoading(false);
@@ -11927,15 +11969,79 @@ function TeacherDashboard() {
     load();
   }, []);
   const reviewedRatio = reviewedCount + pendingReports.length > 0 ? Math.round(reviewedCount / (reviewedCount + pendingReports.length) * 100) : 0;
-  const stageOrder = ["PROGRESS_1", "PROGRESS_2", "PRE_DEFENSE", "FINAL_DEFENSE"];
-  const knownStages = new Set(allSessions.map((s) => s.stageType).filter(Boolean));
-  const activeIndex = (() => {
-    let idx = 0;
-    for (let i = 0; i < stageOrder.length; i++) {
-      if (knownStages.has(stageOrder[i])) idx = i;
+  const activeCommitteeIds = new Set(
+    myCommittees.filter((c) => c.status === "ACTIVE" || c.status === "Идэвхтэй").map((c) => c.id)
+  );
+  const liveSessions = mySessions.filter((s) => !s.committeeId || activeCommitteeIds.has(s.committeeId));
+  const committeeMap = new Map(myCommittees.map((c) => [c.id, c]));
+  const sessionDate = (s) => s.scheduledDate || s.startedAt || "";
+  const sortedSessions = [...liveSessions].sort((a, b) => sessionDate(a).localeCompare(sessionDate(b)));
+  const todayMs = (/* @__PURE__ */ new Date()).setHours(0, 0, 0, 0);
+  const isPast = (s) => {
+    const st = (s.status || "").toUpperCase();
+    if (st === "CLOSED" || st === "COMPLETED") return true;
+    const d = sessionDate(s);
+    return !!d && new Date(d).getTime() < todayMs;
+  };
+  const upcomingSchedule = sortedSessions.filter((s) => !isPast(s));
+  const pastSchedule = sortedSessions.filter(isPast);
+  const sessionStatusTone = (status) => {
+    const s = (status || "").toUpperCase();
+    if (s === "OPEN" || s === "SCHEDULED") return "warning";
+    if (s === "CLOSED" || s === "COMPLETED") return "positive";
+    return "neutral";
+  };
+  const stageState = {};
+  STAGE_DEFS.forEach((stage) => {
+    const matches = mySessions.filter((s) => s.stageType === stage.key);
+    if (matches.length === 0) {
+      stageState[stage.key] = { state: "upcoming" };
+      return;
     }
-    return idx;
-  })();
+    matches.sort((a, b) => sessionDate(b).localeCompare(sessionDate(a)));
+    const latest = matches[0];
+    const st = (latest.status || "").toUpperCase();
+    let state = "upcoming";
+    if (st === "CLOSED" || st === "COMPLETED") state = "done";
+    else if (st === "OPEN") state = "active";
+    stageState[stage.key] = { state, date: sessionDate(latest) };
+  });
+  const renderScheduleRow = (session) => {
+    const committee = session.committeeId ? committeeMap.get(session.committeeId) : void 0;
+    const dateStr = sessionDate(session);
+    const [datePart, timePart] = dateStr.split("T");
+    const month = datePart?.split("-")[1] || "—";
+    const day = datePart?.split("-")[2] || "—";
+    const time = timePart?.substring(0, 5);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:bg-surface-muted transition-colors", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3 min-w-0 flex-1", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-11 h-11 rounded-md border border-border-strong bg-surface-muted flex flex-col items-center justify-center shrink-0 tabular-nums", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-[10px] font-medium text-ink-500 leading-none", children: [
+          month,
+          "/"
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-base font-semibold text-ink-900 leading-none mt-0.5", children: day })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-semibold text-ink-900 tracking-tight truncate", children: stageLabel$2(session.stageType) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-600 mt-0.5 truncate", children: committee ? `${committee.name} · ${committee.role}` : "—" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mt-1 text-xs text-ink-500 flex-wrap", children: [
+          time && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1 tabular-nums", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3", strokeWidth: 1.6 }),
+            time
+          ] }),
+          session.location && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-3 h-3", strokeWidth: 1.6 }),
+            session.location
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-ink-700", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$6[sessionStatusTone(session.status)]}` }),
+            session.status
+          ] })
+        ] })
+      ] })
+    ] }) }, session.id);
+  };
+  const heroStageEntry = STAGE_DEFS.find((s) => stageState[s.key]?.state === "active") || STAGE_DEFS.slice().reverse().find((s) => stageState[s.key]?.state === "done") || STAGE_DEFS[0];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6 max-w-7xl mx-auto pb-10", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { onClick: () => navigate("/teacher/students"), children: [
@@ -11968,7 +12074,7 @@ function TeacherDashboard() {
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-500 inline-flex items-center gap-1", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3", strokeWidth: 1.6 }),
-                  stageLabel$2(STAGE_DEFS[activeIndex]?.key || "PROGRESS_1")
+                  stageLabel$2(heroStageEntry.key)
                 ] })
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-semibold text-ink-900 tracking-tight leading-tight", children: "Энэ улирлын удирдсан оюутнуудын явц" }),
@@ -11988,7 +12094,29 @@ function TeacherDashboard() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(TrendingUp, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
             "Улирлын хуваарь"
           ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(TermTimeline, { activeIndex }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(TermTimeline, { stageState }) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
+            "Хамгаалалтын хуваарь"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0", children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6 text-center text-ink-400 text-sm", children: "Ачааллаж байна..." }) : liveSessions.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6 text-center text-ink-400 text-sm", children: "Идэвхтэй комиссын хамгаалалт алга." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 pt-3 pb-1 text-[11px] uppercase tracking-wider font-medium text-ink-500", children: [
+              "Удахгүй болох (",
+              upcomingSchedule.length,
+              ")"
+            ] }),
+            upcomingSchedule.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 py-3 text-xs text-ink-400", children: "Удахгүй болох хамгаалалт алга." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divide-y divide-border", children: upcomingSchedule.map(renderScheduleRow) }),
+            pastSchedule.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 pt-3 pb-1 text-[11px] uppercase tracking-wider font-medium text-ink-500 border-t border-border", children: [
+                "Өнгөрсөн (",
+                pastSchedule.length,
+                ")"
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divide-y divide-border", children: pastSchedule.map(renderScheduleRow) })
+            ] })
+          ] }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
@@ -11998,7 +12126,7 @@ function TeacherDashboard() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-5", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-3", children: [
             { label: "Удирдаж буй оюутан", value: studentCount },
             { label: "Хүлээгдэж буй тайлан", value: pendingReports.length },
-            { label: "Удахгүй болох үнэлгээ", value: upcomingSessions.length },
+            { label: "Удахгүй болох үнэлгээ", value: upcomingSchedule.length },
             { label: "Дууссан хяналт", value: reviewedCount }
           ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border rounded-md p-3 bg-surface-muted", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1", children: item.label }),
@@ -12029,41 +12157,20 @@ function TeacherDashboard() {
           ] }, report.id)) }) })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
-            "Удахгүй болох үнэлгээ"
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-4", children: [
-            loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-400 text-center py-4", children: "Ачааллаж байна..." }) : upcomingSessions.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-400 text-center py-4", children: "Удахгүй болох үнэлгээ байхгүй." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: upcomingSessions.map((session) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-3 rounded-md border border-border bg-surface hover:border-accent transition-colors group cursor-pointer", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-start mb-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-xs text-ink-700 font-medium tracking-tight", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3", strokeWidth: 1.6 }),
-                  session.startedAt?.split("T")[0] || "—"
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-accent", strokeWidth: 1.6 })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-sm font-semibold text-ink-900 tracking-tight leading-snug", children: stageLabel$2(session.stageType) })
-            ] }, session.id)) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "outline", size: "sm", className: "w-full mt-3", onClick: () => navigate("/teacher/committee"), children: "Бүх хуваарийг харах" })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquare, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
-            "Хурдан харагдац"
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-4 space-y-2", children: [
-            { label: "Удирдаж буй", value: studentCount },
-            { label: "Хүлээгдэж буй", value: pendingReports.length },
-            { label: "Хянагдсан", value: reviewedCount }
-          ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between py-1.5 border-b border-border last:border-0", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-500", children: item.label }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-semibold text-ink-900 tracking-tight tabular-nums", children: loading ? "—" : item.value })
-          ] }, item.label)) })
-        ] })
-      ] })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquare, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
+          "Хурдан харагдац"
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-4 space-y-2", children: [
+          { label: "Удирдаж буй", value: studentCount },
+          { label: "Хүлээгдэж буй", value: pendingReports.length },
+          { label: "Хянагдсан", value: reviewedCount }
+        ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between py-1.5 border-b border-border last:border-0", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-500", children: item.label }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-semibold text-ink-900 tracking-tight tabular-nums", children: loading ? "—" : item.value })
+        ] }, item.label)) })
+      ] }) })
     ] })
   ] });
 }
@@ -12768,18 +12875,6 @@ const TabsContent = React$3.forwardRef(({ className, ...props }, ref) => /* @__P
 ));
 TabsContent.displayName = Content.displayName;
 
-const committeeService = {
-  getMyAssignments: (teacherId) => committeeApi.get("/api/committee-teachers", { params: { teacherId } }),
-  getById: (id) => committeeApi.get(`/api/committees/${id}`),
-  closeCommittee: (id) => committeeApi.patch(`/api/committees/${id}/close`),
-  getAll: () => committeeApi.get("/api/committees"),
-  getStudents: (committeeId) => committeeApi.get(`/api/committees/${committeeId}/students`),
-  getMembers: (committeeId) => committeeApi.get("/api/committee-teachers", { params: { committeeId } }),
-  getReviewerAssignments: (params) => committeeApi.get("/api/reviewer-assignments", { params }),
-  assignReviewer: (body) => committeeApi.post("/api/reviewer-assignments", body),
-  deleteReviewerAssignment: (id) => committeeApi.delete(`/api/reviewer-assignments/${id}`)
-};
-
 const evaluationService = {
   // ── Defense grades ────────────────────────────────────────────────────
   getDefenseGrades: (params) => evaluationApi.get("/api/defense-grades", { params }).catch(() => ({ data: [] })),
@@ -13006,6 +13101,7 @@ function TeacherStudents() {
   const [secretarySubmitting, setSecretarySubmitting] = useState$9(false);
   const [secretaryDone, setSecretaryDone] = useState$9(false);
   const [secretaryError, setSecretaryError] = useState$9(null);
+  const [closingNote, setClosingNote] = useState$9("");
   const [committeeMembers, setCommitteeMembers] = useState$9([]);
   const [reviewerAssignments, setReviewerAssignments] = useState$9([]);
   const [assigningReviewer, setAssigningReviewer] = useState$9({});
@@ -13072,7 +13168,11 @@ function TeacherStudents() {
     const isReviewer = reviewerAssignments.some(
       (a) => a.studentId === studentId && a.reviewerId === teacherId
     );
-    if (isReviewer) return gradingScheme;
+    if (isReviewer) {
+      const criteria2 = gradingScheme.criteria.filter((c) => c.name.startsWith("Шүүмж"));
+      const total2 = criteria2.reduce((sum, c) => sum + c.max, 0);
+      return { ...gradingScheme, criteria: criteria2, total: total2 };
+    }
     const criteria = gradingScheme.criteria.filter((c) => !c.name.startsWith("Шүүмж"));
     const total = criteria.reduce((sum, c) => sum + c.max, 0);
     return { ...gradingScheme, criteria, total };
@@ -13302,13 +13402,16 @@ function TeacherStudents() {
     }
     setEvalStatus("loading");
     setEvalError(null);
+    const isReviewerForStudent = stageType === "FINAL_DEFENSE" && reviewerAssignments.some(
+      (a) => a.studentId === evalStudentId && a.reviewerId === teacherId
+    );
     try {
       const saveRes = await evaluationService.saveGrade({
         defenseSessionId,
         thesisId,
         studentId: evalStudentId,
         evaluatorId: teacherId,
-        evaluatorRole: teacherRole,
+        evaluatorRole: isReviewerForStudent ? "REVIEWER" : teacherRole,
         points: totalScore,
         maxPoints: scheme.total
       });
@@ -13337,6 +13440,10 @@ function TeacherStudents() {
   };
   const handleCloseCommittee = async () => {
     if (!committeeId) return;
+    if (!closingNote.trim()) {
+      setSecretaryError("Тайлбараа бичнэ үү.");
+      return;
+    }
     setSecretarySubmitting(true);
     setSecretaryError(null);
     try {
@@ -13369,7 +13476,7 @@ function TeacherStudents() {
           });
         }
       }
-      await committeeService.closeCommittee(committeeId);
+      await committeeService.closeCommittee(committeeId, closingNote.trim());
       setSecretaryDone(true);
     } catch (err) {
       const msg = err?.response?.data?.message || err?.response?.data || "";
@@ -13531,12 +13638,13 @@ function TeacherStudents() {
     if (matching.length === 0) return void 0;
     return matching.reduce((sum, g) => sum + g.points, 0) / matching.length;
   };
-  const suggestGrade = (total) => {
-    if (total >= 90) return "A";
-    if (total >= 80) return "B";
-    if (total >= 70) return "C";
-    if (total >= 60) return "D";
-    return "F";
+  const getReviewerScore = (studentId) => {
+    const grades = studentGrades[studentId] || [];
+    const finalSessionIds = allSessions.filter((s) => canonicalStage(s.stageType) === "FINAL").map((s) => s.id);
+    const reviewerGrade = grades.find(
+      (g) => finalSessionIds.includes(g.defenseSessionId) && g.isSubmitted && g.evaluatorRole === "REVIEWER"
+    );
+    return reviewerGrade?.points;
   };
   const handleConfirmGrade = async (student) => {
     const sid = student.studentId;
@@ -13545,8 +13653,9 @@ function TeacherStudents() {
     const p2 = getStageScore(sid, "PROGRESS_2");
     const pre = getStageScore(sid, "PRE_DEFENSE");
     const fin = getStageScore(sid, "FINAL_DEFENSE");
-    const total = (p1 ?? 0) + (p2 ?? 0) + (pre ?? 0) + (fin ?? 0);
-    const state = confirmState[sid] || { gradeLetter: suggestGrade(total), headNotes: "", submitting: false, done: false, error: null };
+    const rev = getReviewerScore(sid);
+    const total = (p1 ?? 0) + (p2 ?? 0) + (pre ?? 0) + (fin ?? 0) + (rev ?? 0);
+    const state = confirmState[sid] || { headNotes: "", submitting: false, done: false, error: null };
     setConfirmState((prev) => ({ ...prev, [sid]: { ...state, submitting: true, error: null } }));
     try {
       await evaluationService.confirmFinalGrade({
@@ -13558,7 +13667,7 @@ function TeacherStudents() {
         progress2Score: p2,
         preliminaryScore: pre,
         finalCommitteeScore: fin,
-        gradeLetter: state.gradeLetter || suggestGrade(total),
+        reviewerScore: rev,
         passFail: total >= 50 ? "PASS" : "FAIL",
         headNotes: state.headNotes || void 0
       });
@@ -14068,6 +14177,20 @@ function TeacherStudents() {
               }) })
             ] }) });
           })(),
+          !secretaryDone && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-sm font-medium text-ink-900 tracking-tight", children: "Комиссын дүгнэлт / тайлбар" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "textarea",
+              {
+                className: "w-full min-h-[140px] rounded-md border border-border bg-surface p-3 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none focus:border-ink-900 focus:ring-1 focus:ring-ink-900 resize-y",
+                placeholder: "Комиссын ерөнхий дүгнэлт, шийдвэр, цаашдын зөвлөмжөө бичнэ үү...",
+                value: closingNote,
+                onChange: (e) => setClosingNote(e.target.value),
+                disabled: secretarySubmitting
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500", children: 'Хадгалсаны дараа уг тайлбар "Дууссан үнэлгээнүүд" хэсэгт харагдана.' })
+          ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-end gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs(
               Button,
@@ -14087,7 +14210,7 @@ function TeacherStudents() {
             ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
               Button,
               {
-                disabled: !committeeId || secretarySubmitting,
+                disabled: !committeeId || secretarySubmitting || !closingNote.trim(),
                 onClick: handleCloseCommittee,
                 children: secretarySubmitting ? /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-2", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" }),
@@ -14303,10 +14426,10 @@ function TeacherStudents() {
           const p2 = getStageScore(sid, "PROGRESS_2");
           const pre = getStageScore(sid, "PRE_DEFENSE");
           const fin = getStageScore(sid, "FINAL_DEFENSE");
-          const total = (p1 ?? 0) + (p2 ?? 0) + (pre ?? 0) + (fin ?? 0);
-          const suggested = suggestGrade(total);
-          const cs = confirmState[sid] || { gradeLetter: suggested, headNotes: "", submitting: false, done: false, error: null };
-          const allScoresReady = p1 !== void 0 && p2 !== void 0 && pre !== void 0 && fin !== void 0;
+          const rev = getReviewerScore(sid);
+          const total = (p1 ?? 0) + (p2 ?? 0) + (pre ?? 0) + (fin ?? 0) + (rev ?? 0);
+          const cs = confirmState[sid] || { headNotes: "", submitting: false, done: false, error: null };
+          const allScoresReady = p1 !== void 0 && p2 !== void 0 && pre !== void 0 && fin !== void 0 && rev !== void 0;
           return /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: cs.done ? "bg-surface-muted" : "", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5 space-y-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between flex-wrap gap-3", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
@@ -14321,11 +14444,12 @@ function TeacherStudents() {
                 "Баталгаажсан"
               ] })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 md:grid-cols-5 gap-2", children: [
               { label: "Явц 1", score: p1, max: 15 },
               { label: "Явц 2", score: p2, max: 20 },
               { label: "Урьдч.", score: pre, max: 25 },
-              { label: "Эцсийн", score: fin, max: 40 }
+              { label: "Эцсийн", score: fin, max: 35 },
+              { label: "Шүүмж", score: rev, max: 5 }
             ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `rounded-md p-3 text-center tabular-nums ${item.score !== void 0 ? "bg-surface border border-border" : "bg-surface-muted border border-dashed border-border-strong"}`, children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] font-medium uppercase tracking-wider text-ink-500 mb-1", children: item.label }),
               item.score !== void 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xl font-semibold text-ink-900", children: [
@@ -14340,46 +14464,28 @@ function TeacherStudents() {
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-500", children: "Нийт оноо" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-2xl font-semibold ${total >= 80 ? "text-[var(--color-dot-positive)]" : total >= 60 ? "text-[var(--color-dot-warning)]" : "text-[var(--color-dot-negative)]"}`, children: total.toFixed(1) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-ink-400 text-sm", children: "/100" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `inline-flex items-center justify-center min-w-[32px] h-7 px-2 rounded-md text-base font-semibold border ${total >= 80 ? "border-border bg-accent-softer text-accent" : total >= 60 ? "border-border bg-surface text-[var(--color-dot-warning)]" : "border-border bg-surface text-[var(--color-dot-negative)]"}`, children: suggested })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-ink-400 text-sm", children: "/100" })
               ] })
             ] }),
             !allScoresReady && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-700 bg-surface-muted border border-border rounded-md px-3 py-2 inline-flex items-center gap-2", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.warning}` }),
               "Зарим шатны нарийн бичгийн оноо ирээгүй байна. Бүх оноо ирсний дараа баталгаажуулна уу."
             ] }),
-            !cs.done && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-3 gap-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-500 block mb-1.5", children: "Дүнгийн үсэг" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "select",
-                  {
-                    className: "w-full border border-border rounded-md px-3 py-2 text-[13px] focus:outline-none focus:border-accent bg-surface font-semibold",
-                    value: cs.gradeLetter,
-                    onChange: (e) => setConfirmState((prev) => ({
-                      ...prev,
-                      [sid]: { ...cs, gradeLetter: e.target.value }
-                    })),
-                    children: ["A", "B", "C", "D", "F"].map((g) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: g, children: g }, g))
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "md:col-span-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-500 block mb-1.5", children: "Даргын тэмдэглэл (заавал биш)" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "input",
-                  {
-                    type: "text",
-                    className: "w-full border border-border rounded-md px-3 py-2 text-[13px] focus:outline-none focus:border-accent bg-surface",
-                    placeholder: "Нэмэлт тэмдэглэл...",
-                    value: cs.headNotes,
-                    onChange: (e) => setConfirmState((prev) => ({
-                      ...prev,
-                      [sid]: { ...cs, headNotes: e.target.value }
-                    }))
-                  }
-                )
-              ] })
+            !cs.done && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-500 block mb-1.5", children: "Даргын тэмдэглэл (заавал биш)" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  type: "text",
+                  className: "w-full border border-border rounded-md px-3 py-2 text-[13px] focus:outline-none focus:border-accent bg-surface",
+                  placeholder: "Нэмэлт тэмдэглэл...",
+                  value: cs.headNotes,
+                  onChange: (e) => setConfirmState((prev) => ({
+                    ...prev,
+                    [sid]: { ...cs, headNotes: e.target.value }
+                  }))
+                }
+              )
             ] }),
             cs.error && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-3 rounded-md text-sm inline-flex items-center gap-2", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.negative}` }),
@@ -16177,7 +16283,6 @@ const stageLabel = (stageType) => {
 function TeacherCommittee() {
   const [activeTab, setActiveTab] = useState$1("students");
   const [myCommittees, setMyCommittees] = useState$1([]);
-  const [defenseSessions, setDefenseSessions] = useState$1([]);
   const [loading, setLoading] = useState$1(true);
   const navigate = useNavigate();
   const user = getStoredUser();
@@ -16196,10 +16301,6 @@ function TeacherCommittee() {
           role: assignments.find((a) => a.committeeId === c.id)?.role || "MEMBER"
         }));
         setMyCommittees(withRole);
-        if (committeeIds.length > 0) {
-          const sessionsRes = await workflowService.getDefenseSessions({ committeeId: committeeIds[0] }).catch(() => ({ data: [] }));
-          setDefenseSessions(sessionsRes.data);
-        }
       } catch {
       } finally {
         setLoading(false);
@@ -16240,7 +16341,6 @@ function TeacherCommittee() {
     /* @__PURE__ */ jsxRuntimeExports.jsxs(Tabs, { value: activeTab, onValueChange: setActiveTab, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(TabsList, { className: "w-full", children: [
         { value: "students", label: "Хуваарилагдсан комиссууд" },
-        { value: "schedule", label: "Хуваарь" },
         { value: "completed", label: "Дууссан үнэлгээнүүд" }
       ].map((tab) => /* @__PURE__ */ jsxRuntimeExports.jsx(
         TabsTrigger,
@@ -16311,37 +16411,6 @@ function TeacherCommittee() {
           ] })
         ] }, c.id)) }) }) })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "schedule", className: "mt-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border border-border", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border pb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "text-sm font-semibold flex items-center gap-2 text-ink-900 tracking-tight", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-ink-500", strokeWidth: 1.6 }),
-          " Комиссийн хуваарь"
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0", children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6 text-center text-ink-400 text-sm", children: "Ачааллаж байна..." }) : defenseSessions.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6 text-center text-ink-400 text-sm", children: "Хуваарилагдсан хамгаалалт байхгүй байна." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divide-y divide-border", children: defenseSessions.map((session) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-surface-muted transition-colors", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-12 h-12 rounded-md border border-border-strong bg-surface-muted flex flex-col items-center justify-center shrink-0 tabular-nums", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-[10px] font-medium text-ink-500 leading-none", children: [
-                session.startedAt?.split("T")[0]?.split("-")[1] || "—",
-                "/"
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-lg font-semibold text-ink-900 leading-none mt-0.5", children: session.startedAt?.split("T")[0]?.split("-")[2] || "—" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-semibold text-ink-900 tracking-tight", children: stageLabel(session.stageType) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mt-1 text-xs text-ink-500", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1 tabular-nums", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3", strokeWidth: 1.6 }),
-                  session.startedAt?.split("T")[1]?.substring(0, 5) || "—"
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-                  "Статус: ",
-                  session.status
-                ] })
-              ] })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "outline", size: "sm", onClick: () => window.open(`/api/defense-sessions/${session.id}`, "_blank"), children: "Дэлгэрэнгүй харах" })
-        ] }, session.id)) }) })
-      ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "completed", className: "mt-6 space-y-4", children: completed.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center py-12 text-ink-400 text-sm bg-surface-muted border border-border rounded-md", children: "Дууссан үнэлгээ байхгүй байна." }) : completed.map((c) => /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "border border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
@@ -16362,7 +16431,7 @@ function TeacherCommittee() {
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-2", children: "Тайлбарын түүх" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-400 italic", children: "Тайлбар бичигдээгүй байна." })
+          c.closingNote && c.closingNote.trim() ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-700 whitespace-pre-wrap leading-relaxed", children: c.closingNote }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-400 italic", children: "Тайлбар бичигдээгүй байна." })
         ] })
       ] }) }, c.id)) })
     ] })

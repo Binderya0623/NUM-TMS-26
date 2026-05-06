@@ -36,6 +36,10 @@ public class Committee implements Persistable<String> {
     private final String status;
 
     @Getter
+    @Column("closing_note")
+    private final String closingNote;
+
+    @Getter
     @Column("created_at")
     private final LocalDateTime createdAt;
 
@@ -48,6 +52,7 @@ public class Committee implements Persistable<String> {
             String departmentId,
             String defenseType,
             String status,
+            String closingNote,
             LocalDateTime createdAt
     ) {
         this.id = id;
@@ -55,6 +60,7 @@ public class Committee implements Persistable<String> {
         this.departmentId = departmentId;
         this.defenseType = defenseType;
         this.status = status;
+        this.closingNote = closingNote;
         this.createdAt = createdAt;
         this.isNew = false;
     }
@@ -66,6 +72,7 @@ public class Committee implements Persistable<String> {
                 departmentId,
                 defenseType,
                 "ACTIVE",
+                null,
                 LocalDateTime.now()
         );
         committee.isNew = true;
@@ -78,7 +85,13 @@ public class Committee implements Persistable<String> {
     }
 
     public Committee withStatus(String newStatus) {
-        Committee updated = new Committee(this.id, this.name, this.departmentId, this.defenseType, newStatus, this.createdAt);
+        Committee updated = new Committee(this.id, this.name, this.departmentId, this.defenseType, newStatus, this.closingNote, this.createdAt);
+        updated.isNew = false;
+        return updated;
+    }
+
+    public Committee withClosingNote(String note) {
+        Committee updated = new Committee(this.id, this.name, this.departmentId, this.defenseType, this.status, note, this.createdAt);
         updated.isNew = false;
         return updated;
     }

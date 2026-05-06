@@ -80,11 +80,20 @@ public class CommitteeController {
         return getCommittees();
     }
 
+    public record CloseCommitteeRequest(String closingNote) {}
+
     @PatchMapping("/{id}/close")
-    public Mono<ResponseEntity<Committee>> closeCommittee(@PathVariable String id) {
-        log.info("Closing committee id={}", id);
+    public Mono<ResponseEntity<Committee>> closeCommittee(
+            @PathVariable String id,
+            @RequestBody(required = false) CloseCommitteeRequest body
+    ) {
+        String note = body == null ? null : body.closingNote();
+        log.info("Closing committee id={} hasNote={}", id, note != null && !note.isBlank());
         return committeeRepo.findById(id)
-                .map(c -> c.withStatus("CLOSED"))
+                .map(c -> {
+                    Committee withNote = (note != null && !note.isBlank()) ? c.withClosingNote(note) : c;
+                    return withNote.withStatus("CLOSED");
+                })
                 .flatMap(committeeRepo::save)
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());

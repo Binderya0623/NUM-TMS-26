@@ -14,6 +14,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
@@ -58,11 +59,28 @@ public class ReviewDocumentController {
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<ResponseEntity<ReviewDocumentEntity>> upload(
             @RequestPart("file") FilePart filePart,
-            @RequestParam String defenseSessionId,
-            @RequestParam String thesisId,
-            @RequestParam String studentId,
-            @RequestParam String reviewerId
+            @RequestPart("defenseSessionId") String defenseSessionId,
+            @RequestPart("thesisId") String thesisId,
+            @RequestPart("studentId") String studentId,
+            @RequestPart("reviewerId") String reviewerId,
+            @RequestPart("reviewerScore") String reviewerScoreRaw
     ) {
+        if (defenseSessionId == null || defenseSessionId.isBlank()
+                || thesisId == null || thesisId.isBlank()
+                || studentId == null || studentId.isBlank()
+                || reviewerId == null || reviewerId.isBlank()
+                || reviewerScoreRaw == null || reviewerScoreRaw.isBlank()) {
+            return Mono.just(ResponseEntity.badRequest().build());
+        }
+        final BigDecimal reviewerScore;
+        try {
+            reviewerScore = new BigDecimal(reviewerScoreRaw.trim());
+        } catch (NumberFormatException nfe) {
+            return Mono.just(ResponseEntity.badRequest().build());
+        }
+        if (reviewerScore.signum() < 0 || reviewerScore.compareTo(BigDecimal.valueOf(5)) > 0) {
+            return Mono.just(ResponseEntity.badRequest().build());
+        }
         // Check for duplicate upload — one per (session, student, reviewer)
         return repository.findByDefenseSessionIdAndStudentIdAndReviewerId(defenseSessionId, studentId, reviewerId)
                 .flatMap(existing -> Mono.<ResponseEntity<ReviewDocumentEntity>>error(
@@ -82,7 +100,8 @@ public class ReviewDocumentController {
                                 defenseSessionId, thesisId, studentId, reviewerId,
                                 filePart.filename(), path.toString(), null,
                                 filePart.headers().getContentType() != null
-                                        ? filePart.headers().getContentType().toString() : null
+                                        ? filePart.headers().getContentType().toString() : null,
+                                reviewerScore
                         );
                         return repository.save(entity);
                     })

@@ -24,6 +24,7 @@ export interface ReviewDocument {
   storedPath?: string;
   fileSize?: number;
   mimeType?: string;
+  reviewerScore?: number;
   uploadedAt?: string;
 }
 

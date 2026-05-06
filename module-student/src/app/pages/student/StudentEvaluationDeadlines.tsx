@@ -4,10 +4,9 @@ import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
 import { Avatar, AvatarFallback } from "../../components/ui/avatar";
 import {
-  Calendar, Clock, MapPin, Users, Award, ChevronDown, ChevronUp,
+  Calendar, Clock, MapPin, Users, ChevronDown, ChevronUp,
   Upload, FileText, FileDown, Lock, AlertCircle, X,
 } from "lucide-react";
-import { evaluationService, type SecretarySubmission, type DefenseGrade } from "../../../services/evaluationService";
 import { workflowService, type DefenseSession } from "../../../services/workflowService";
 import { committeeService, type CommitteeTeacher } from "../../../services/committeeService";
 import { planService } from "../../../services/planService";
@@ -18,10 +17,10 @@ import { resolveName, initialsFromName } from "../../../lib/utils";
 import FilePreviewModal from "../../components/FilePreviewModal";
 
 const STAGES = [
-  { stageType: "PROGRESS_1",    label: "Явцын тайлан 1",         maxPoints: 15, reportType: "PROGRESS_1" },
-  { stageType: "PROGRESS_2",    label: "Явцын тайлан 2",         maxPoints: 20, reportType: "PROGRESS_2" },
-  { stageType: "PRE_DEFENSE",   label: "Урьдчилсан хамгаалалт",  maxPoints: 25, reportType: "PRE_DEFENSE" },
-  { stageType: "FINAL_DEFENSE", label: "Эцсийн хамгаалалт",      maxPoints: 40, reportType: "FINAL_DEFENSE" },
+  { stageType: "PROGRESS_1",    label: "Явцын тайлан 1",         reportType: "PROGRESS_1" },
+  { stageType: "PROGRESS_2",    label: "Явцын тайлан 2",         reportType: "PROGRESS_2" },
+  { stageType: "PRE_DEFENSE",   label: "Урьдчилсан хамгаалалт",  reportType: "PRE_DEFENSE" },
+  { stageType: "FINAL_DEFENSE", label: "Эцсийн хамгаалалт",      reportType: "FINAL_DEFENSE" },
 ] as const;
 
 type Tone = "positive" | "warning" | "negative" | "neutral" | "accent";
@@ -58,8 +57,6 @@ export default function StudentEvaluationDeadlines() {
   const [thesisId, setThesisId] = useState("");
   const [sessionByStage, setSessionByStage] = useState<Record<string, DefenseSession>>({});
   const [membersByCommittee, setMembersByCommittee] = useState<Record<string, CommitteeTeacher[]>>({});
-  const [submissions, setSubmissions] = useState<SecretarySubmission[]>([]);
-  const [defenseGrades, setDefenseGrades] = useState<DefenseGrade[]>([]);
   const [userMap, setUserMap] = useState<Record<string, string>>({});
   const [reportsBySession, setReportsBySession] = useState<Record<string, ThesisReport[]>>({});
   const [filesByReport, setFilesByReport] = useState<Record<string, ReportFile[]>>({});
@@ -88,11 +85,9 @@ export default function StudentEvaluationDeadlines() {
         const cmtRes = await committeeService.getMyCommittees(studentId);
         const cmtIds = (cmtRes.data || []).map(c => c.committeeId).filter(Boolean);
 
-        const [p1Res, cmtSessLists, subsRes, gradesRes, teachersRes, expertsRes] = await Promise.all([
+        const [p1Res, cmtSessLists, teachersRes, expertsRes] = await Promise.all([
           supId ? workflowService.getDefenseSessions({ supervisorId: supId }) : Promise.resolve({ data: [] as DefenseSession[] }),
           Promise.all(cmtIds.map(id => workflowService.getDefenseSessions({ committeeId: id }))),
-          evaluationService.getSecretarySubmissions(studentId),
-          evaluationService.getMyDefenseGrades(studentId),
           userService.getTeachers().catch(() => ({ data: [] as any[] })),
           userService.getExternalExperts().catch(() => ({ data: [] as any[] })),
         ]);
@@ -118,8 +113,6 @@ export default function StudentEvaluationDeadlines() {
           if (key !== "PROGRESS_1") map[key] = s;
         }
         setSessionByStage(map);
-        setSubmissions(subsRes.data);
-        setDefenseGrades(gradesRes.data);
 
         cmtIds.forEach(id => {
           committeeService.getMembers(id)
@@ -149,20 +142,6 @@ export default function StudentEvaluationDeadlines() {
     };
     load();
   }, [studentId]);
-
-  const sessionSummary = new Map<string, { avg: number; count: number; submittedAt?: string }>(
-    Object.values(sessionByStage).map(s => {
-      const sub = submissions.find(x => x.defenseSessionId === s.id);
-      if (sub) return [s.id, { avg: sub.averageScore, count: sub.gradedCount, submittedAt: sub.submittedAt }] as const;
-      const grades = defenseGrades.filter(g =>
-        g.defenseSessionId === s.id && g.isSubmitted && g.evaluatorRole !== "REVIEWER"
-      );
-      if (grades.length === 0) return [s.id, { avg: NaN, count: 0 }] as const;
-      const avg = grades.reduce((sum, g) => sum + g.points, 0) / grades.length;
-      const latest = grades.map(g => g.submittedAt).filter(Boolean).sort().pop();
-      return [s.id, { avg, count: grades.length, submittedAt: latest }] as const;
-    }),
-  );
 
   const upcomingSession = (() => {
     const candidates = STAGES
@@ -226,10 +205,7 @@ export default function StudentEvaluationDeadlines() {
         <div className="flex-1 space-y-4">
           {STAGES.map((stage, idx) => {
             const session = sessionByStage[stage.stageType];
-            const summary = session ? sessionSummary.get(session.id) : undefined;
-            const avgScore = summary?.avg;
             const isClosed = session?.status === "CLOSED";
-            const isGraded = avgScore !== undefined && !isNaN(avgScore);
             const isOpen = session?.status === "OPEN" || session?.status === "ACTIVE";
             const isScheduled = !!session?.scheduledDate && !isOpen && !isClosed;
             const hasSession = !!session;
@@ -240,14 +216,12 @@ export default function StudentEvaluationDeadlines() {
 
             const reports = session ? (reportsBySession[session.id] || []) : [];
 
-            const tone: Tone = isGraded ? "positive"
-              : isOpen ? "warning"
+            const tone: Tone = isOpen ? "warning"
               : isScheduled ? "accent"
-              : isClosed ? "neutral"
+              : isClosed ? "positive"
               : "neutral";
 
-            const statusLabel = isGraded ? "Үнэлгээ гарсан"
-              : isOpen ? "Явцад байна"
+            const statusLabel = isOpen ? "Явцад байна"
               : isClosed ? "Хаагдсан"
               : isScheduled ? "Хуваарьт"
               : "Хүлээгдэж байна";
@@ -261,7 +235,7 @@ export default function StudentEvaluationDeadlines() {
                   )}
                 </div>
 
-                <Card className={`flex-1 mb-2 ${isOpen || isGraded ? "border-ink-900" : ""}`}>
+                <Card className={`flex-1 mb-2 ${isOpen ? "border-ink-900" : ""}`}>
                   <CardHeader
                     className="p-4 pb-3 cursor-pointer select-none"
                     onClick={() => setExpanded(p => ({ ...p, [stage.stageType]: !p[stage.stageType] }))}
@@ -270,7 +244,6 @@ export default function StudentEvaluationDeadlines() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap mb-1">
                           <span className="text-sm font-semibold text-ink-900 tracking-tight">{stage.label}</span>
-                          <span className="text-xs text-ink-400 tabular-nums">/ {stage.maxPoints} оноо</span>
                           <span className="inline-flex items-center gap-1.5 text-[11px] text-ink-600">
                             <span className={`w-1.5 h-1.5 rounded-full ${toneDot[tone]}`} />
                             {statusLabel}
@@ -308,15 +281,6 @@ export default function StudentEvaluationDeadlines() {
                       </div>
 
                       <div className="flex items-center gap-3 shrink-0">
-                        {isGraded && (
-                          <div className="text-right">
-                            <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500">Оноо</p>
-                            <p className="text-lg font-semibold text-ink-900 tabular-nums tracking-tight leading-tight">
-                              {avgScore!.toFixed(1)}
-                              <span className="text-xs text-ink-400 font-normal">/{stage.maxPoints}</span>
-                            </p>
-                          </div>
-                        )}
                         <button className="text-ink-400 hover:text-ink-900 p-1 transition-colors" aria-label="Дэлгэрэнгүй">
                           {isExp ? <ChevronUp className="w-4 h-4" strokeWidth={1.6} /> : <ChevronDown className="w-4 h-4" strokeWidth={1.6} />}
                         </button>
@@ -333,9 +297,6 @@ export default function StudentEvaluationDeadlines() {
                           )}
                           {session.location && (
                             <InfoTile icon={<MapPin className="w-4 h-4 text-ink-700" strokeWidth={1.6} />} label="Байршил / Өрөө" value={session.location} />
-                          )}
-                          {session.maxPoints && (
-                            <InfoTile icon={<Award className="w-4 h-4 text-ink-700" strokeWidth={1.6} />} label="Дээд оноо" value={`${session.maxPoints} оноо`} />
                           )}
                           {session.closedAt && (
                             <InfoTile
@@ -356,26 +317,6 @@ export default function StudentEvaluationDeadlines() {
                         <div className="p-3 bg-surface-muted border border-border rounded-md text-sm text-ink-700 flex gap-2">
                           <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-[var(--color-dot-warning)]" strokeWidth={1.6} />
                           <span>{session.notes}</span>
-                        </div>
-                      )}
-
-                      {isGraded && summary && (
-                        <div className="flex items-center gap-4 p-4 bg-surface-muted rounded-md border border-border">
-                          <div className="w-10 h-10 rounded-full border border-ink-900 flex items-center justify-center shrink-0">
-                            <Award className="w-5 h-5 text-ink-900" strokeWidth={1.6} />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-ink-900 tracking-tight">Комиссын дундаж үнэлгээ</p>
-                            <p className="text-xs text-ink-500 mt-0.5">
-                              {summary.count} гишүүний дундаж{summary.submittedAt ? ` · ${summary.submittedAt.split("T")[0]}` : ""}
-                            </p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-2xl font-semibold text-ink-900 tabular-nums tracking-tight leading-none">
-                              {summary.avg.toFixed(1)}
-                            </p>
-                            <p className="text-xs text-ink-400 tabular-nums">/{stage.maxPoints}</p>
-                          </div>
                         </div>
                       )}
 

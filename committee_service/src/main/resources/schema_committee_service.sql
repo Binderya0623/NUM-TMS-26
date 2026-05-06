@@ -18,10 +18,14 @@ CREATE TABLE IF NOT EXISTS committees (
     -- defense_type kept for legacy; use defense_session.stage_type at runtime
     defense_type  VARCHAR(50)  DEFAULT 'ALL_STAGES',
     status        VARCHAR(30)  NOT NULL DEFAULT 'ACTIVE',
+    closing_note  TEXT,
     created_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT chk_committee_status
         CHECK (status IN ('ACTIVE','CLOSED'))
 );
+
+-- Idempotent migration for existing databases that pre-date closing_note.
+ALTER TABLE committees ADD COLUMN IF NOT EXISTS closing_note TEXT;
 
 -- ─────────────────────────────────────────────────────────────────
 -- COMMITTEE TEACHERS — member roster with roles

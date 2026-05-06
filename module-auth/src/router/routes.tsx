@@ -1,6 +1,5 @@
 import { createHashRouter, Navigate } from 'react-router';
 import LoginPage from '@/pages/LoginPage';
-import RegisterPage from '@/pages/RegisterPage';
 
 /**
  * module-auth Router
@@ -20,10 +19,6 @@ export const router = createHashRouter(
     {
       path: '/login',
       element: <LoginPage />,
-    },
-    {
-      path: '/register',
-      element: <RegisterPage />,
     },
     {
       path: '*',

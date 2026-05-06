@@ -156,6 +156,7 @@ export default function TeacherStudents() {
   const [secretarySubmitting, setSecretarySubmitting] = useState(false);
   const [secretaryDone, setSecretaryDone] = useState(false);
   const [secretaryError, setSecretaryError] = useState<string | null>(null);
+  const [closingNote, setClosingNote] = useState("");
 
   // HEAD reviewer assignment state
   const [committeeMembers, setCommitteeMembers] = useState<Array<{ id: string; teacherId: string; role: string }>>([]);
@@ -574,6 +575,10 @@ export default function TeacherStudents() {
   // graded but not yet submitted — otherwise students see no grades on their side.
   const handleCloseCommittee = async () => {
     if (!committeeId) return;
+    if (!closingNote.trim()) {
+      setSecretaryError("Тайлбараа бичнэ үү.");
+      return;
+    }
     setSecretarySubmitting(true);
     setSecretaryError(null);
     try {
@@ -602,7 +607,7 @@ export default function TeacherStudents() {
           });
         }
       }
-      await committeeService.closeCommittee(committeeId);
+      await committeeService.closeCommittee(committeeId, closingNote.trim());
       setSecretaryDone(true);
     } catch (err: any) {
       const msg = err?.response?.data?.message || err?.response?.data || '';
@@ -1464,6 +1469,23 @@ export default function TeacherStudents() {
                     );
                   })()}
 
+                  {!secretaryDone && (
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-ink-900 tracking-tight">
+                        Комиссын дүгнэлт / тайлбар
+                      </label>
+                      <textarea
+                        className="w-full min-h-[140px] rounded-md border border-border bg-surface p-3 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none focus:border-ink-900 focus:ring-1 focus:ring-ink-900 resize-y"
+                        placeholder="Комиссын ерөнхий дүгнэлт, шийдвэр, цаашдын зөвлөмжөө бичнэ үү..."
+                        value={closingNote}
+                        onChange={(e) => setClosingNote(e.target.value)}
+                        disabled={secretarySubmitting}
+                      />
+                      <p className="text-xs text-ink-500">
+                        Хадгалсаны дараа уг тайлбар "Дууссан үнэлгээнүүд" хэсэгт харагдана.
+                      </p>
+                    </div>
+                  )}
                   <div className="flex justify-end gap-2">
                     <Button
                       variant="outline"
@@ -1479,7 +1501,7 @@ export default function TeacherStudents() {
                       </span>
                     ) : (
                       <Button
-                        disabled={!committeeId || secretarySubmitting}
+                        disabled={!committeeId || secretarySubmitting || !closingNote.trim()}
                         onClick={handleCloseCommittee}
                       >
                         {secretarySubmitting ? (

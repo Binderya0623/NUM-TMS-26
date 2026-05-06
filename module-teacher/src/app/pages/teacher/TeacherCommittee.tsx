@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import { Card, CardContent } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import { Avatar, AvatarFallback } from "../../components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
-import { Calendar, Clock, ChevronRight, Star } from "lucide-react";
+import { ChevronRight, Star } from "lucide-react";
 import { committeeService, type Committee, type CommitteeAssignment } from "../../../services/committeeService";
-import { workflowService, type DefenseSession } from "../../../services/workflowService";
 import { getStoredUser } from "../../../lib/authGuard";
 import { useNavigate } from "react-router";
 
@@ -35,7 +34,6 @@ const stageLabel = (stageType: string) => {
 export default function TeacherCommittee() {
   const [activeTab, setActiveTab] = useState("students");
   const [myCommittees, setMyCommittees] = useState<CommitteeWithRole[]>([]);
-  const [defenseSessions, setDefenseSessions] = useState<DefenseSession[]>([]);
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
@@ -60,12 +58,6 @@ export default function TeacherCommittee() {
             role: assignments.find(a => a.committeeId === c.id)?.role || 'MEMBER',
           }));
         setMyCommittees(withRole);
-
-        if (committeeIds.length > 0) {
-          const sessionsRes = await workflowService.getDefenseSessions({ committeeId: committeeIds[0] })
-            .catch(() => ({ data: [] as DefenseSession[] }));
-          setDefenseSessions(sessionsRes.data);
-        }
       } catch {
         // ignore
       } finally {
@@ -117,7 +109,6 @@ export default function TeacherCommittee() {
         <TabsList className="w-full">
           {[
             { value: "students", label: "Хуваарилагдсан комиссууд" },
-            { value: "schedule", label: "Хуваарь" },
             { value: "completed", label: "Дууссан үнэлгээнүүд" },
           ].map(tab => (
             <TabsTrigger
@@ -221,51 +212,6 @@ export default function TeacherCommittee() {
           )}
         </TabsContent>
 
-        <TabsContent value="schedule" className="mt-6">
-          <Card className="border border-border">
-            <CardHeader className="border-b border-border pb-4">
-              <CardTitle className="text-sm font-semibold flex items-center gap-2 text-ink-900 tracking-tight">
-                <Calendar className="w-4 h-4 text-ink-500" strokeWidth={1.6} /> Комиссийн хуваарь
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              {loading ? (
-                <div className="p-6 text-center text-ink-400 text-sm">Ачааллаж байна...</div>
-              ) : defenseSessions.length === 0 ? (
-                <div className="p-6 text-center text-ink-400 text-sm">Хуваарилагдсан хамгаалалт байхгүй байна.</div>
-              ) : (
-                <div className="divide-y divide-border">
-                  {defenseSessions.map(session => (
-                    <div key={session.id} className="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-surface-muted transition-colors">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-md border border-border-strong bg-surface-muted flex flex-col items-center justify-center shrink-0 tabular-nums">
-                          <span className="text-[10px] font-medium text-ink-500 leading-none">
-                            {session.startedAt?.split('T')[0]?.split('-')[1] || '—'}/
-                          </span>
-                          <span className="text-lg font-semibold text-ink-900 leading-none mt-0.5">
-                            {session.startedAt?.split('T')[0]?.split('-')[2] || '—'}
-                          </span>
-                        </div>
-                        <div>
-                          <h3 className="text-sm font-semibold text-ink-900 tracking-tight">{stageLabel(session.stageType)}</h3>
-                          <div className="flex items-center gap-3 mt-1 text-xs text-ink-500">
-                            <span className="flex items-center gap-1 tabular-nums">
-                              <Clock className="w-3 h-3" strokeWidth={1.6} />
-                              {session.startedAt?.split('T')[1]?.substring(0, 5) || '—'}
-                            </span>
-                            <span>Статус: {session.status}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <Button variant="outline" size="sm" onClick={() => window.open(`/api/defense-sessions/${session.id}`, '_blank')}>Дэлгэрэнгүй харах</Button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
         <TabsContent value="completed" className="mt-6 space-y-4">
           {completed.length === 0 ? (
             <div className="text-center py-12 text-ink-400 text-sm bg-surface-muted border border-border rounded-md">Дууссан үнэлгээ байхгүй байна.</div>
@@ -292,7 +238,11 @@ export default function TeacherCommittee() {
                   </div>
                   <div>
                     <h4 className="text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-2">Тайлбарын түүх</h4>
-                    <p className="text-sm text-ink-400 italic">Тайлбар бичигдээгүй байна.</p>
+                    {c.closingNote && c.closingNote.trim() ? (
+                      <p className="text-sm text-ink-700 whitespace-pre-wrap leading-relaxed">{c.closingNote}</p>
+                    ) : (
+                      <p className="text-sm text-ink-400 italic">Тайлбар бичигдээгүй байна.</p>
+                    )}
                   </div>
                 </CardContent>
               </Card>

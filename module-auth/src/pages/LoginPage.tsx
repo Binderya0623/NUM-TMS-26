@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import imgLogo from '@/assets/logo.png';
 import imgStudent from '@/assets/student.png';
@@ -293,23 +292,6 @@ export default function LoginPage() {
               {loading ? 'Нэвтэрч байна...' : 'Нэвтрэх'}
             </button>
           </form>
-
-          {/* Register link */}
-          <div className="flex items-center gap-2 mt-6">
-            <span
-              className="text-[#666465] text-base"
-              style={{ fontFamily: "'Nunito Sans', sans-serif" }}
-            >
-              Гишүүн болж амжаагүй байна уу?
-            </span>
-            <Link
-              to="/register"
-              className="font-bold text-[#1455bd] text-base hover:underline"
-              style={{ fontFamily: "'Nunito Sans', sans-serif" }}
-            >
-              Бүртгүүлэх
-            </Link>
-          </div>
         </div>
       </div>
     </div>

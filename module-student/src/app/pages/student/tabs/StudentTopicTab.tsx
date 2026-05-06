@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../../../components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
 import { Textarea } from "../../../components/ui/textarea";
 import { Dialog, DialogHeader, DialogBody, DialogFooter } from "../../../components/ui/dialog";
+import { Avatar, AvatarFallback } from "../../../components/ui/avatar";
 import {
-  Search, BookOpen, X, Send, Edit2, Trash2, Tag, Plus, AlertCircle,
+  Search, BookOpen, X, Send, Edit2, Trash2, Tag, Plus, AlertCircle, Mail,
 } from "lucide-react";
 import { topicService } from "../../../../services/topicService";
 import type { Topic, TopicRequest } from "../../../../services/topicService";
 import { getStoredUser } from "../../../../lib/authGuard";
 import { userService } from "../../../../services/userService";
 import type { UserRecord } from "../../../../services/userService";
-import { isUuid } from "../../../../lib/utils";
+import { initialsFromName } from "../../../../lib/utils";
 
 type Tone = "positive" | "warning" | "negative" | "neutral" | "accent";
 const toneDot: Record<Tone, string> = {
@@ -68,6 +69,7 @@ export default function StudentTopicTab() {
   const [submitting, setSubmitting] = useState(false);
 
   const [teachers, setTeachers] = useState<UserRecord[]>([]);
+  const [departmentMap, setDepartmentMap] = useState<Record<string, string>>({});
 
   const user = getStoredUser();
   const studentId = user?.userId || user?.username || "";
@@ -104,6 +106,13 @@ export default function StudentTopicTab() {
   useEffect(() => {
     userService.getTeachers()
       .then(res => setTeachers(res.data))
+      .catch(() => {});
+    userService.getDepartments()
+      .then(res => {
+        const m: Record<string, string> = {};
+        (res.data || []).forEach(d => { if (d.id) m[d.id] = d.departmentName || d.id; });
+        setDepartmentMap(m);
+      })
       .catch(() => {});
   }, []);
 
@@ -242,14 +251,39 @@ export default function StudentTopicTab() {
                       <CardTitle className="text-base font-semibold leading-tight text-ink-900 tracking-tight line-clamp-2">
                         {topic.title}
                       </CardTitle>
-                      {topic.supervisorId && (() => {
-                        const t = teachers.find(x => x.id === topic.supervisorId);
-                        const name = t?.displayName || (isUuid(topic.supervisorId) ? null : topic.supervisorId);
-                        return name ? (
-                          <CardDescription className="text-xs text-ink-600 mt-2">
-                            Удирдагч: {name}
-                          </CardDescription>
-                        ) : null;
+                      {(() => {
+                        const creator = topic.createdByType === 'TEACHER' && topic.createdById
+                          ? teachers.find(x => x.id === topic.createdById)
+                          : null;
+                        const supervisor = topic.supervisorId
+                          ? teachers.find(x => x.id === topic.supervisorId)
+                          : null;
+                        const primary = creator || supervisor;
+                        if (!primary) return null;
+                        const dept = primary.departmentId ? departmentMap[primary.departmentId] : '';
+                        const showSupervisor = creator && supervisor && supervisor.id !== creator.id;
+                        return (
+                          <div className="mt-3 flex items-start gap-2.5">
+                            <Avatar className="h-7 w-7 shrink-0">
+                              <AvatarFallback className="text-[10px]">{initialsFromName(primary.displayName)}</AvatarFallback>
+                            </Avatar>
+                            <div className="min-w-0 flex-1 text-xs">
+                              <p className="text-ink-900 font-semibold tracking-tight truncate">{primary.displayName}</p>
+                              <p className="text-ink-500 truncate">
+                                {creator ? 'Үүсгэсэн багш' : 'Удирдагч багш'}
+                                {dept ? ` · ${dept}` : ''}
+                              </p>
+                              {primary.email && (
+                                <p className="text-ink-500 truncate flex items-center gap-1 mt-0.5">
+                                  <Mail className="w-3 h-3" strokeWidth={1.6} />{primary.email}
+                                </p>
+                              )}
+                              {showSupervisor && (
+                                <p className="text-ink-500 truncate mt-0.5">Удирдагч: {supervisor.displayName}</p>
+                              )}
+                            </div>
+                          </div>
+                        );
                       })()}
                     </CardHeader>
                     <CardContent className="pt-4 flex-1 flex flex-col justify-between">
@@ -292,6 +326,32 @@ export default function StudentTopicTab() {
               <p className="text-sm text-ink-700 leading-relaxed mb-4">
                 Та <span className="font-semibold text-ink-900">{selectedTopic?.title}</span> сэдвийг сонгох хүсэлт илгээхдээ итгэлтэй байна уу?
               </p>
+              {selectedTopic && (() => {
+                const creatorId = selectedTopic.createdByType === 'TEACHER' ? selectedTopic.createdById : null;
+                const teacherForRequest = (creatorId && teachers.find(x => x.id === creatorId))
+                  || (selectedTopic.supervisorId && teachers.find(x => x.id === selectedTopic.supervisorId))
+                  || null;
+                if (!teacherForRequest) return null;
+                const dept = teacherForRequest.departmentId ? departmentMap[teacherForRequest.departmentId] : '';
+                return (
+                  <div className="flex items-start gap-3 bg-surface-muted border border-border rounded-md p-3 mb-4">
+                    <Avatar className="h-9 w-9 shrink-0">
+                      <AvatarFallback className="text-xs">{initialsFromName(teacherForRequest.displayName)}</AvatarFallback>
+                    </Avatar>
+                    <div className="min-w-0 flex-1 text-sm">
+                      <p className="text-ink-900 font-semibold tracking-tight truncate">{teacherForRequest.displayName}</p>
+                      <p className="text-xs text-ink-500 truncate">
+                        Хүсэлтийг хянах багш{dept ? ` · ${dept}` : ''}
+                      </p>
+                      {teacherForRequest.email && (
+                        <p className="text-xs text-ink-500 truncate flex items-center gap-1 mt-0.5">
+                          <Mail className="w-3 h-3" strokeWidth={1.6} />{teacherForRequest.email}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })()}
               <div>
                 <label className="text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-2 block">Сэдэв сонгох шалтгаан (заавал биш)</label>
                 <Textarea

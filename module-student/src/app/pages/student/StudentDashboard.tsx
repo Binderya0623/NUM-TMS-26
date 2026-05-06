@@ -7,27 +7,20 @@ import { thesisService, type ThesisInfo, type ThesisReport } from "../../../serv
 import { topicService } from "../../../services/topicService";
 import { planService, type Plan } from "../../../services/planService";
 import { userService } from "../../../services/userService";
+import { workflowService, type DefenseSession } from "../../../services/workflowService";
 import { getStoredUser } from "../../../lib/authGuard";
 import { isUuid, initialsFromName } from "../../../lib/utils";
 import { useNavigate } from "react-router";
 
-const STAGE_LABELS = [
-  { key: "topic", label: "Сэдвийн санал" },
-  { key: "prog1", label: "Явцын тайлан 1" },
-  { key: "prog2", label: "Явцын тайлан 2" },
-  { key: "pre",   label: "Урьдчилсан хамгаалалт" },
-  { key: "final", label: "Эцсийн хамгаалалт" },
-];
+type StageState = "done" | "active" | "upcoming";
 
-function getStageIndex(status?: string): number {
-  if (!status) return 0;
-  const s = status.toUpperCase();
-  if (s.includes("FINAL")) return 4;
-  if (s.includes("PRE")) return 3;
-  if (s.includes("PROG") && s.includes("2")) return 2;
-  if (s.includes("PROG")) return 1;
-  return 0;
-}
+const STAGE_LABELS: { key: string; label: string; sessionType?: string }[] = [
+  { key: "topic", label: "Сэдвийн санал" },
+  { key: "prog1", label: "Явцын тайлан 1",      sessionType: "PROGRESS_1" },
+  { key: "prog2", label: "Явцын тайлан 2",      sessionType: "PROGRESS_2" },
+  { key: "pre",   label: "Урьдчилсан хамгаалалт", sessionType: "PRE_DEFENSE" },
+  { key: "final", label: "Эцсийн хамгаалалт",     sessionType: "FINAL_DEFENSE" },
+];
 
 const planStatusLabel: Record<string, string> = {
   DRAFT: 'Ноорог',
@@ -37,8 +30,15 @@ const planStatusLabel: Record<string, string> = {
   DEPT_APPROVED: 'Тэнхим баталсан',
 };
 
-function StageTimeline({ stageIndex }: { stageIndex: number }) {
-  const pct = Math.min((stageIndex / (STAGE_LABELS.length - 1)) * 80, 80);
+function StageTimeline({ stageState }: { stageState: Record<string, { state: StageState; date?: string }> }) {
+  const activeIndex = (() => {
+    const i = STAGE_LABELS.findIndex(s => stageState[s.key]?.state === "active");
+    if (i >= 0) return i;
+    let lastDone = -1;
+    STAGE_LABELS.forEach((s, idx) => { if (stageState[s.key]?.state === "done") lastDone = idx; });
+    return lastDone + 1;
+  })();
+  const pct = Math.min((activeIndex / (STAGE_LABELS.length - 1)) * 80, 80);
   return (
     <div className="relative">
       <div className="absolute top-[18px] left-[10%] w-[80%] h-px bg-border-strong" />
@@ -48,8 +48,9 @@ function StageTimeline({ stageIndex }: { stageIndex: number }) {
       />
       <div className="flex justify-between relative">
         {STAGE_LABELS.map((stage, idx) => {
-          const done = idx < stageIndex;
-          const active = idx === stageIndex;
+          const info = stageState[stage.key] || { state: "upcoming" as StageState };
+          const done = info.state === "done";
+          const active = info.state === "active";
           return (
             <div key={stage.key} className="flex flex-col items-center w-1/5">
               <div
@@ -72,12 +73,58 @@ function StageTimeline({ stageIndex }: { stageIndex: number }) {
               <p className={`mt-3 text-[11px] text-center tracking-tight ${active ? 'text-accent font-semibold' : 'text-ink-600'}`}>
                 {stage.label}
               </p>
+              <p className="text-[10px] text-ink-500 tabular-nums mt-0.5">
+                {info.date ? info.date.split('T')[0] : '—'}
+              </p>
             </div>
           );
         })}
       </div>
     </div>
   );
+}
+
+function buildStageState(opts: {
+  hasTopic: boolean;
+  thesisStatus?: string;
+  sessions: DefenseSession[];
+}): Record<string, { state: StageState; date?: string }> {
+  const out: Record<string, { state: StageState; date?: string }> = {};
+  out.topic = { state: opts.hasTopic ? "done" : "active" };
+
+  STAGE_LABELS.filter(s => s.sessionType).forEach(stage => {
+    const matches = opts.sessions.filter(s => s.stageType === stage.sessionType);
+    if (matches.length === 0) {
+      out[stage.key] = { state: "upcoming" };
+      return;
+    }
+    matches.sort((a, b) =>
+      (b.scheduledDate || b.startedAt || '').localeCompare(a.scheduledDate || a.startedAt || '')
+    );
+    const latest = matches[0];
+    const st = (latest.status || '').toUpperCase();
+    let state: StageState = "upcoming";
+    if (st === "CLOSED" || st === "COMPLETED") state = "done";
+    else if (st === "OPEN") state = "active";
+    out[stage.key] = { state, date: latest.scheduledDate || latest.startedAt };
+  });
+
+  // Fall back to thesis.status when no sessions are wired yet — keeps the
+  // student's current stage visible even if the workflow hasn't created
+  // defense sessions for them.
+  if (opts.thesisStatus) {
+    const s = opts.thesisStatus.toUpperCase();
+    const fallbackKey =
+      s.includes("FINAL")                       ? "final" :
+      s.includes("PRE")                         ? "pre"   :
+      (s.includes("PROG") && s.includes("2"))   ? "prog2" :
+      s.includes("PROG")                        ? "prog1" :
+      null;
+    if (fallbackKey && out[fallbackKey].state === "upcoming") {
+      out[fallbackKey] = { ...out[fallbackKey], state: "active" };
+    }
+  }
+  return out;
 }
 
 function NoThesisState() {
@@ -98,8 +145,18 @@ function NoThesisState() {
   );
 }
 
-function ApprovedTopicState({ topicTitle, supervisorName, plan }: { topicTitle?: string; supervisorName?: string; plan?: Plan | null }) {
+function ApprovedTopicState({ topicTitle, supervisorName, plan, stageState }: {
+  topicTitle?: string;
+  supervisorName?: string;
+  plan?: Plan | null;
+  stageState: Record<string, { state: StageState; date?: string }>;
+}) {
   const navigate = useNavigate();
+  const doneCount = STAGE_LABELS.filter(s => stageState[s.key]?.state === "done").length;
+  const progressPct = Math.round((doneCount / STAGE_LABELS.length) * 100);
+  const currentStage = STAGE_LABELS.find(s => stageState[s.key]?.state === "active")
+    || STAGE_LABELS.slice().reverse().find(s => stageState[s.key]?.state === "done")
+    || STAGE_LABELS[0];
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-10">
@@ -132,7 +189,7 @@ function ApprovedTopicState({ topicTitle, supervisorName, plan }: { topicTitle?:
                   </h2>
                 </div>
                 <div className="text-right shrink-0 border border-border rounded-md p-3">
-                  <div className="text-2xl font-semibold text-ink-900 tabular-nums tracking-tight">10%</div>
+                  <div className="text-2xl font-semibold text-ink-900 tabular-nums tracking-tight">{progressPct}%</div>
                   <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mt-1">Дууссан</p>
                 </div>
               </div>
@@ -156,7 +213,7 @@ function ApprovedTopicState({ topicTitle, supervisorName, plan }: { topicTitle?:
               </CardTitle>
             </CardHeader>
             <CardContent className="p-6">
-              <StageTimeline stageIndex={0} />
+              <StageTimeline stageState={stageState} />
             </CardContent>
           </Card>
         </div>
@@ -203,8 +260,8 @@ function ApprovedTopicState({ topicTitle, supervisorName, plan }: { topicTitle?:
             </CardHeader>
             <CardContent className="p-4 space-y-2">
               {[
-                { label: 'Явц',           value: '10%' },
-                { label: 'Одоогийн шат',  value: 'Сэдвийн санал' },
+                { label: 'Явц',           value: `${progressPct}%` },
+                { label: 'Одоогийн шат',  value: currentStage.label },
                 { label: 'Удирдагч',      value: supervisorName || 'Хуваарилагдаагүй' },
               ].map(item => (
                 <div key={item.label} className="flex items-center justify-between py-1.5 border-b border-border last:border-0">
@@ -221,6 +278,7 @@ function ApprovedTopicState({ topicTitle, supervisorName, plan }: { topicTitle?:
 }
 
 export default function StudentDashboard() {
+  const navigate = useNavigate();
   const user = getStoredUser();
   const studentId = user?.userId || user?.username || '';
 
@@ -231,6 +289,7 @@ export default function StudentDashboard() {
   const [myPlan, setMyPlan] = useState<Plan | null>(null);
   const [hasApprovedRequest, setHasApprovedRequest] = useState(false);
   const [reports, setReports] = useState<ThesisReport[]>([]);
+  const [defenseSessions, setDefenseSessions] = useState<DefenseSession[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -276,6 +335,14 @@ export default function StudentDashboard() {
       }
       const plans = planRes.data || [];
       setMyPlan(plans.length > 0 ? plans[0] : null);
+
+      // Defense sessions feed the timeline. Department-level scope is the
+      // closest-fit query the student has — there is no committee link on the
+      // thesis record itself in this prototype.
+      if (dept) {
+        const sessRes = await workflowService.getDefenseSessions({ departmentId: dept }).catch(() => ({ data: [] as DefenseSession[] }));
+        setDefenseSessions(sessRes.data || []);
+      }
     }).finally(() => setLoading(false));
   }, [studentId]);
 
@@ -283,29 +350,37 @@ export default function StudentDashboard() {
     return <div className="text-center py-24 text-sm text-ink-400">Ачааллаж байна...</div>;
   }
 
+  const stageState = buildStageState({
+    hasTopic: hasApprovedRequest || !!thesis,
+    thesisStatus: thesis?.status,
+    sessions: defenseSessions,
+  });
+
   if (!thesis) {
     if (hasApprovedRequest || myPlan) {
-      return <ApprovedTopicState topicTitle={approvedTopicTitle} supervisorName={supervisorName} plan={myPlan} />;
+      return <ApprovedTopicState topicTitle={approvedTopicTitle} supervisorName={supervisorName} plan={myPlan} stageState={stageState} />;
     }
     return <NoThesisState />;
   }
 
   const progress = thesis.progress ?? 0;
-  const stageIndex = getStageIndex(thesis.status);
+  const currentStage = STAGE_LABELS.find(s => stageState[s.key]?.state === "active")
+    || STAGE_LABELS.slice().reverse().find(s => stageState[s.key]?.state === "done")
+    || STAGE_LABELS[0];
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-10">
       <div className="flex flex-wrap gap-2">
-        <Button>
+        <Button onClick={() => navigate('/student/thesis')}>
           <Eye className="h-4 w-4" strokeWidth={1.6} /> Дипломоо харах
         </Button>
-        <Button variant="outline">
+        <Button variant="outline" onClick={() => navigate('/student/thesis?tab=reports')}>
           <Upload className="h-4 w-4" strokeWidth={1.6} /> Тайлан оруулах
         </Button>
-        <Button variant="outline">
+        <Button variant="outline" onClick={() => navigate('/student/feedback')}>
           <MessageSquare className="h-4 w-4" strokeWidth={1.6} /> Санал хүсэлт харах
         </Button>
-        <Button variant="outline">
+        <Button variant="outline" onClick={() => navigate('/student/evaluation')}>
           <Calendar className="h-4 w-4" strokeWidth={1.6} /> Эцсийн хугацааг шалгах
         </Button>
       </div>
@@ -326,7 +401,7 @@ export default function StudentDashboard() {
                     </span>
                     <span className="text-[11px] uppercase tracking-wider font-medium text-ink-500 inline-flex items-center gap-1">
                       <Clock className="w-3 h-3" strokeWidth={1.6} />
-                      {STAGE_LABELS[stageIndex]?.label || "Явцалдаа"}
+                      {currentStage.label}
                     </span>
                   </div>
                   <h2 className="text-lg font-semibold text-ink-900 tracking-tight leading-tight">
@@ -359,7 +434,7 @@ export default function StudentDashboard() {
               </CardTitle>
             </CardHeader>
             <CardContent className="p-6">
-              <StageTimeline stageIndex={stageIndex} />
+              <StageTimeline stageState={stageState} />
             </CardContent>
           </Card>
 
@@ -442,7 +517,7 @@ export default function StudentDashboard() {
               ) : (
                 <p className="text-sm text-ink-400 text-center py-4">Хугацаа тохируулагдаагүй</p>
               )}
-              <Button variant="outline" size="sm" className="w-full mt-3">
+              <Button variant="outline" size="sm" className="w-full mt-3" onClick={() => navigate('/student/evaluation')}>
                 Хуваарь нээх
               </Button>
             </CardContent>
@@ -458,7 +533,7 @@ export default function StudentDashboard() {
             <CardContent className="p-4 space-y-2">
               {[
                 { label: "Явц",           value: `${progress}%` },
-                { label: "Одоогийн шат",  value: STAGE_LABELS[stageIndex]?.label || "Эхлээгүй" },
+                { label: "Одоогийн шат",  value: currentStage.label },
                 { label: "Удирдагч",      value: supervisorName || "Хуваарилагдаагүй" },
               ].map(item => (
                 <div key={item.label} className="flex items-center justify-between py-1.5 border-b border-border last:border-0">

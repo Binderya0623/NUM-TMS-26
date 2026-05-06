@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ public class ReviewDocumentEntity implements Persistable<UUID> {
     private String storedPath;
     private Long fileSize;
     private String mimeType;
+    private BigDecimal reviewerScore;
     private LocalDateTime uploadedAt;
 
     @Transient
@@ -30,7 +32,8 @@ public class ReviewDocumentEntity implements Persistable<UUID> {
 
     public static ReviewDocumentEntity create(String defenseSessionId, String thesisId, String studentId,
                                                String reviewerId, String originalFilename,
-                                               String storedPath, Long fileSize, String mimeType) {
+                                               String storedPath, Long fileSize, String mimeType,
+                                               BigDecimal reviewerScore) {
         ReviewDocumentEntity e = new ReviewDocumentEntity();
         e.id = UUID.randomUUID();
         e.defenseSessionId = defenseSessionId;
@@ -41,6 +44,7 @@ public class ReviewDocumentEntity implements Persistable<UUID> {
         e.storedPath = storedPath;
         e.fileSize = fileSize;
         e.mimeType = mimeType;
+        e.reviewerScore = reviewerScore;
         e.uploadedAt = LocalDateTime.now();
         e.isNew = true;
         return e;
@@ -57,5 +61,6 @@ public class ReviewDocumentEntity implements Persistable<UUID> {
     public String getStoredPath() { return storedPath; }
     public Long getFileSize() { return fileSize; }
     public String getMimeType() { return mimeType; }
+    public BigDecimal getReviewerScore() { return reviewerScore; }
     public LocalDateTime getUploadedAt() { return uploadedAt; }
 }
