@@ -3,6 +3,7 @@ import { topicApi } from '../lib/apiClient';
 export interface Topic {
   id: number;
   title: string;
+  titleEn?: string;
   description?: string;
   researchGoal?: string;
   createdById: string;

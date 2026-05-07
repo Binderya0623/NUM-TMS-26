@@ -18,7 +18,11 @@ public interface DefenseGradeR2dbcRepository extends ReactiveCrudRepository<Defe
 
     Mono<DefenseGradeEntity> findByDefenseSessionIdAndThesisIdAndEvaluatorId(String sessionId, String thesisId, String evaluatorId);
 
+    Mono<DefenseGradeEntity> findByDefenseSessionIdAndStudentIdAndEvaluatorId(String sessionId, String studentId, String evaluatorId);
+
     Flux<DefenseGradeEntity> findByEvaluatorId(String evaluatorId);
+
+    Flux<DefenseGradeEntity> findByDefenseSessionIdAndEvaluatorId(String defenseSessionId, String evaluatorId);
 
     Flux<DefenseGradeEntity> findByStudentId(String studentId);
 

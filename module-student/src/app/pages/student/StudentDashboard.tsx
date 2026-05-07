@@ -8,6 +8,7 @@ import { topicService } from "../../../services/topicService";
 import { planService, type Plan } from "../../../services/planService";
 import { userService } from "../../../services/userService";
 import { workflowService, type DefenseSession } from "../../../services/workflowService";
+import { committeeService } from "../../../services/committeeService";
 import { getStoredUser } from "../../../lib/authGuard";
 import { isUuid, initialsFromName } from "../../../lib/utils";
 import { useNavigate } from "react-router";
@@ -84,6 +85,16 @@ function StageTimeline({ stageState }: { stageState: Record<string, { state: Sta
   );
 }
 
+// Backend canonicalizes PRE_DEFENSE→PRELIMINARY and FINAL_DEFENSE→FINAL when
+// storing the defense_session row. Sessions returned via the API therefore
+// carry the canonical names, but the frontend timeline keys use PRE_DEFENSE
+// and FINAL_DEFENSE. Without this normalization those two stages never match
+// any session and stay "upcoming" even after the committee closes.
+const canonicalStage = (s?: string) =>
+  s === 'PRE_DEFENSE' ? 'PRELIMINARY'
+  : s === 'FINAL_DEFENSE' ? 'FINAL'
+  : (s ?? '');
+
 function buildStageState(opts: {
   hasTopic: boolean;
   thesisStatus?: string;
@@ -93,7 +104,8 @@ function buildStageState(opts: {
   out.topic = { state: opts.hasTopic ? "done" : "active" };
 
   STAGE_LABELS.filter(s => s.sessionType).forEach(stage => {
-    const matches = opts.sessions.filter(s => s.stageType === stage.sessionType);
+    const target = canonicalStage(stage.sessionType);
+    const matches = opts.sessions.filter(s => canonicalStage(s.stageType) === target);
     if (matches.length === 0) {
       out[stage.key] = { state: "upcoming" };
       return;
@@ -105,7 +117,7 @@ function buildStageState(opts: {
     const st = (latest.status || '').toUpperCase();
     let state: StageState = "upcoming";
     if (st === "CLOSED" || st === "COMPLETED") state = "done";
-    else if (st === "OPEN") state = "active";
+    else if (st === "OPEN" || st === "ACTIVE") state = "active";
     out[stage.key] = { state, date: latest.scheduledDate || latest.startedAt };
   });
 
@@ -145,8 +157,9 @@ function NoThesisState() {
   );
 }
 
-function ApprovedTopicState({ topicTitle, supervisorName, plan, stageState }: {
+function ApprovedTopicState({ topicTitle, topicTitleEn, supervisorName, plan, stageState }: {
   topicTitle?: string;
+  topicTitleEn?: string;
   supervisorName?: string;
   plan?: Plan | null;
   stageState: Record<string, { state: StageState; date?: string }>;
@@ -187,6 +200,9 @@ function ApprovedTopicState({ topicTitle, supervisorName, plan, stageState }: {
                   <h2 className="text-lg font-semibold text-ink-900 tracking-tight leading-tight">
                     {topicTitle || 'Дипломын ажил'}
                   </h2>
+                  {topicTitleEn && (
+                    <p className="text-sm italic text-ink-500 mt-0.5">{topicTitleEn}</p>
+                  )}
                 </div>
                 <div className="text-right shrink-0 border border-border rounded-md p-3">
                   <div className="text-2xl font-semibold text-ink-900 tabular-nums tracking-tight">{progressPct}%</div>
@@ -284,6 +300,7 @@ export default function StudentDashboard() {
 
   const [thesis, setThesis] = useState<ThesisInfo | null>(null);
   const [approvedTopicTitle, setApprovedTopicTitle] = useState<string | undefined>();
+  const [approvedTopicTitleEn, setApprovedTopicTitleEn] = useState<string | undefined>();
   const [supervisorName, setSupervisorName] = useState<string>('');
   const [departmentLabel, setDepartmentLabel] = useState<string>('');
   const [myPlan, setMyPlan] = useState<Plan | null>(null);
@@ -319,7 +336,10 @@ export default function StudentDashboard() {
         try {
           const tr = await topicService.getPublicTopics();
           const t = (tr.data || []).find((tp: any) => tp.id === approved.topicId);
-          if (t) setApprovedTopicTitle(t.title);
+          if (t) {
+            setApprovedTopicTitle(t.title);
+            setApprovedTopicTitleEn(t.titleEn);
+          }
         } catch {}
       }
       supervisorId = thesisData?.supervisorId || supervisorId;
@@ -336,13 +356,32 @@ export default function StudentDashboard() {
       const plans = planRes.data || [];
       setMyPlan(plans.length > 0 ? plans[0] : null);
 
-      // Defense sessions feed the timeline. Department-level scope is the
-      // closest-fit query the student has — there is no committee link on the
-      // thesis record itself in this prototype.
-      if (dept) {
-        const sessRes = await workflowService.getDefenseSessions({ departmentId: dept }).catch(() => ({ data: [] as DefenseSession[] }));
-        setDefenseSessions(sessRes.data || []);
-      }
+      // Defense sessions feed the timeline. Use the same scoping the teacher
+      // dashboard uses: per-committee for stages 2–4 (since the student and
+      // teacher are members of the same committee for each stage) plus a
+      // per-supervisor query for PROGRESS_1 (committeeId is the supervisor for
+      // that stage). Department-scope querying missed GLOBAL sessions admin
+      // creates and produced the wrong "current stage" on the timeline.
+      const cmtRes = await committeeService.getMyCommittees(studentId).catch(() => ({ data: [] as any[] }));
+      const cmtIds = (cmtRes.data || []).map((c: any) => c.committeeId).filter(Boolean);
+      const [p1Res, cmtSessLists] = await Promise.all([
+        supervisorId
+          ? workflowService.getDefenseSessions({ supervisorId }).catch(() => ({ data: [] as DefenseSession[] }))
+          : Promise.resolve({ data: [] as DefenseSession[] }),
+        Promise.all(
+          cmtIds.map((id: string) =>
+            workflowService.getDefenseSessions({ committeeId: id }).catch(() => ({ data: [] as DefenseSession[] }))
+          )
+        ),
+      ]);
+      const allSessions: DefenseSession[] = [
+        ...(p1Res.data || []),
+        ...cmtSessLists.flatMap(r => r.data),
+      ];
+      // Dedupe by id in case the same session shows up under multiple queries.
+      const byId = new Map<string, DefenseSession>();
+      allSessions.forEach(s => { if (s.id) byId.set(s.id, s); });
+      setDefenseSessions(Array.from(byId.values()));
     }).finally(() => setLoading(false));
   }, [studentId]);
 
@@ -358,7 +397,7 @@ export default function StudentDashboard() {
 
   if (!thesis) {
     if (hasApprovedRequest || myPlan) {
-      return <ApprovedTopicState topicTitle={approvedTopicTitle} supervisorName={supervisorName} plan={myPlan} stageState={stageState} />;
+      return <ApprovedTopicState topicTitle={approvedTopicTitle} topicTitleEn={approvedTopicTitleEn} supervisorName={supervisorName} plan={myPlan} stageState={stageState} />;
     }
     return <NoThesisState />;
   }

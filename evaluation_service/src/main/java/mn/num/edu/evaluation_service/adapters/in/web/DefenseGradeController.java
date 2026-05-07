@@ -36,12 +36,20 @@ public class DefenseGradeController {
             @RequestParam(required = false) String studentId,
             @RequestParam(required = false) String evaluatorId
     ) {
+        // Caller asked specifically for their own grades in a session — honor it.
+        // Without this branch the (session, evaluator) query would fall through to
+        // findByDefenseSessionId and return *every* evaluator's grades, which made
+        // the external-expert page show "X/X graded" before they had graded anyone.
+        if (defenseSessionId != null && evaluatorId != null && studentId == null) {
+            return gradeRepo.findByDefenseSessionIdAndEvaluatorId(defenseSessionId, evaluatorId);
+        }
         if (defenseSessionId != null && studentId != null && evaluatorId != null) {
-            // Check if secretary submitted — if not, return only caller's own grade
+            // Blind rule: until the secretary submits the average, only the caller's
+            // own grade is returned. After submission, all grades for this student
+            // become visible.
             return submissionRepo.findByDefenseSessionIdAndStudentId(defenseSessionId, studentId)
                     .flatMapMany(sub -> gradeRepo.findByDefenseSessionIdAndStudentId(defenseSessionId, studentId))
-                    .switchIfEmpty(gradeRepo.findByDefenseSessionIdAndThesisIdAndEvaluatorId(
-                            defenseSessionId, "", evaluatorId).flux());
+                    .switchIfEmpty(gradeRepo.findByDefenseSessionIdAndEvaluatorId(defenseSessionId, evaluatorId));
         }
         if (defenseSessionId != null && studentId != null) {
             return submissionRepo.findByDefenseSessionIdAndStudentId(defenseSessionId, studentId)
@@ -75,8 +83,13 @@ public class DefenseGradeController {
      */
     @PostMapping
     public Mono<ResponseEntity<DefenseGradeEntity>> saveGrade(@RequestBody SaveGradeRequest req) {
-        return gradeRepo.findByDefenseSessionIdAndThesisIdAndEvaluatorId(
-                req.defenseSessionId(), req.thesisId(), req.evaluatorId())
+        // Upsert key is (session, student, evaluator). Earlier we keyed by
+        // (session, thesis, evaluator) — when an evaluator graded several students
+        // whose thesis_id was blank/identical, those rows collided on the
+        // (session, thesis, evaluator, role) unique constraint and the second
+        // save silently overwrote the first.
+        return gradeRepo.findByDefenseSessionIdAndStudentIdAndEvaluatorId(
+                req.defenseSessionId(), req.studentId(), req.evaluatorId())
                 .flatMap(existing -> {
                     existing.setPoints(req.points());
                     existing.setComment(req.comment());
@@ -90,6 +103,11 @@ public class DefenseGradeController {
                             req.defenseSessionId(), req.thesisId(), req.studentId(),
                             req.evaluatorId(), req.evaluatorRole(), req.points(), req.maxPoints(), req.comment()
                     );
+                    // Mark as submitted on save: the caller always pairs save with a
+                    // /submit follow-up, but if that second call drops the grade was
+                    // stranded as draft and invisible to the secretary.
+                    e.setIsSubmitted(true);
+                    e.setSubmittedAt(LocalDateTime.now());
                     return gradeRepo.save(e);
                 }))
                 .map(ResponseEntity::ok);

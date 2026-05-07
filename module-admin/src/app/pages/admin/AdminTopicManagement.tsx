@@ -7,6 +7,8 @@ import { topicService, type Topic } from "../../../services/topicService";
 import { userService } from "../../../services/userService";
 import { getStoredUser } from "../../../lib/authGuard";
 import { resolveName, isUuid } from "../../../lib/utils";
+import { RichText } from "../../components/RichText";
+import { RichTextEditor } from "../../components/RichTextEditor";
 
 type StatusFilter = "ALL" | "DEPT_PENDING" | "APPROVED" | "REJECTED" | "TEACHER_PENDING";
 
@@ -236,6 +238,9 @@ export default function AdminTopicManagement() {
                   <tr key={topic.id} className="border-b border-border last:border-b-0 hover:bg-surface-muted transition-colors">
                     <td className="px-6 py-4">
                       <p className="font-medium text-ink-900 line-clamp-2 max-w-xs tracking-tight">{topic.title}</p>
+                      {topic.titleEn && (
+                        <p className="text-[11px] italic text-ink-500 line-clamp-1 max-w-xs">{topic.titleEn}</p>
+                      )}
                       <p className="text-[11px] text-ink-400 mt-0.5 tabular-nums">#{topic.id}</p>
                     </td>
                     <td className="px-6 py-4">
@@ -291,6 +296,9 @@ export default function AdminTopicManagement() {
           />
           <div className="flex-1 overflow-y-auto">
             <DialogBody className="space-y-6">
+              {selectedTopic.titleEn && (
+                <p className="text-sm italic text-ink-600 -mt-2">{selectedTopic.titleEn}</p>
+              )}
               <div className="flex items-center gap-3 flex-wrap">
                 <span className="text-[11px] text-ink-400 tabular-nums">#{selectedTopic.id}</span>
                 <StatusBadge status={selectedTopic.status} />
@@ -313,14 +321,20 @@ export default function AdminTopicManagement() {
               {selectedTopic.researchGoal && (
                 <div>
                   <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-2">Судалгааны зорилго</p>
-                  <p className="text-sm text-ink-700 leading-relaxed">{selectedTopic.researchGoal}</p>
+                  <RichText
+                    html={selectedTopic.researchGoal}
+                    className="text-sm text-ink-700 leading-relaxed"
+                  />
                 </div>
               )}
 
               {selectedTopic.description && (
                 <div>
                   <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-2">Дэлгэрэнгүй тайлбар</p>
-                  <p className="text-sm text-ink-700 leading-relaxed">{selectedTopic.description}</p>
+                  <RichText
+                    html={selectedTopic.description}
+                    className="text-sm text-ink-700 leading-relaxed"
+                  />
                 </div>
               )}
 
@@ -342,9 +356,10 @@ export default function AdminTopicManagement() {
                   <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-2 flex items-center gap-1.5">
                     <MessageSquare className="w-3 h-3" strokeWidth={1.8} /> Татгалзсан шалтгаан
                   </p>
-                  <p className="text-sm text-ink-700 border-l-2 border-[var(--color-dot-negative)] pl-3 py-1">
-                    {selectedTopic.rejectionReason}
-                  </p>
+                  <RichText
+                    html={selectedTopic.rejectionReason}
+                    className="text-sm text-ink-700 border-l-2 border-[var(--color-dot-negative)] pl-3 py-1"
+                  />
                 </div>
               )}
 
@@ -363,12 +378,12 @@ export default function AdminTopicManagement() {
                     Татгалзах шалтгаан <span className="text-[var(--color-dot-negative)] normal-case">*</span>
                     <span className="text-[10px] text-ink-400 font-normal ml-1 normal-case">(зөвхөн татгалзах тохиолдолд шаардагдана)</span>
                   </label>
-                  <textarea
-                    placeholder="Татгалзах шалтгаанаа энд бичнэ үү..."
+                  <RichTextEditor
                     value={rejectionReason}
-                    onChange={e => setRejectionReason(e.target.value)}
-                    rows={3}
-                    className="w-full px-3 py-2 text-sm border border-border-strong rounded-md text-ink-900 bg-surface focus:outline-none focus:border-ink-900 resize-none"
+                    onChange={setRejectionReason}
+                    placeholder="Татгалзах шалтгаанаа энд бичнэ үү..."
+                    minHeight={110}
+                    ariaLabel="Татгалзах шалтгаан"
                   />
                 </div>
               )}

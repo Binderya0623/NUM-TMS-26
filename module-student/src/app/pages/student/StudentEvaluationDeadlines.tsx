@@ -15,6 +15,7 @@ import { userService } from "../../../services/userService";
 import { getStoredUser } from "../../../lib/authGuard";
 import { resolveName, initialsFromName } from "../../../lib/utils";
 import FilePreviewModal from "../../components/FilePreviewModal";
+import { RichText } from "../../components/RichText";
 
 const STAGES = [
   { stageType: "PROGRESS_1",    label: "Явцын тайлан 1",         reportType: "PROGRESS_1" },
@@ -316,7 +317,7 @@ export default function StudentEvaluationDeadlines() {
                       {session?.notes && (
                         <div className="p-3 bg-surface-muted border border-border rounded-md text-sm text-ink-700 flex gap-2">
                           <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-[var(--color-dot-warning)]" strokeWidth={1.6} />
-                          <span>{session.notes}</span>
+                          <RichText html={session.notes} />
                         </div>
                       )}
 

@@ -206,17 +206,27 @@ export default function TeacherDashboard() {
     return "neutral";
   };
 
+  // Backend canonicalizes PRE_DEFENSE→PRELIMINARY and FINAL_DEFENSE→FINAL when
+  // it stores the row. Sessions returned via the API carry the canonical name,
+  // so comparing raw STAGE_DEFS keys would never match those two stages and
+  // they'd stay "upcoming" even after every committee closes.
+  const canonicalStage = (s?: string) =>
+    s === 'PRE_DEFENSE' ? 'PRELIMINARY'
+    : s === 'FINAL_DEFENSE' ? 'FINAL'
+    : (s ?? '');
+
   // Real timeline: latest session per stage type drives done/active/upcoming + date.
   const stageState: Record<string, { state: StageState; date?: string }> = {};
   STAGE_DEFS.forEach(stage => {
-    const matches = mySessions.filter(s => s.stageType === stage.key);
+    const target = canonicalStage(stage.key);
+    const matches = mySessions.filter(s => canonicalStage(s.stageType) === target);
     if (matches.length === 0) { stageState[stage.key] = { state: "upcoming" }; return; }
     matches.sort((a, b) => sessionDate(b).localeCompare(sessionDate(a)));
     const latest = matches[0];
     const st = (latest.status || "").toUpperCase();
     let state: StageState = "upcoming";
     if (st === "CLOSED" || st === "COMPLETED") state = "done";
-    else if (st === "OPEN") state = "active";
+    else if (st === "OPEN" || st === "ACTIVE") state = "active";
     stageState[stage.key] = { state, date: sessionDate(latest) };
   });
 

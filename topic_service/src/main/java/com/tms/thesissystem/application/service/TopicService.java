@@ -54,7 +54,7 @@ public class TopicService {
     @Transactional
     public Map<String, Object> createTopic(String createdById, String createdByType, String proposedToTeacherId,
                                             String program, Object fields, String keywords,
-                                            String title, String description, String researchGoal,
+                                            String title, String titleEn, String description, String researchGoal,
                                             String requestedStatus, String requestedVisibility) {
         // Build fields JSON from either nested object or top-level title/description/researchGoal
         Map<String, Object> fieldsMap = new LinkedHashMap<>();
@@ -68,8 +68,20 @@ public class TopicService {
         }
         // Top-level convenience fields override nested
         if (title != null)        fieldsMap.put("title", title);
+        if (titleEn != null)      fieldsMap.put("titleEn", titleEn);
         if (description != null)  fieldsMap.put("description", description);
         if (researchGoal != null) fieldsMap.put("researchGoal", researchGoal);
+
+        // English title is mandatory at NUM (TMS requirement) — block topics that
+        // don't carry a non-blank Mongolian + English pair.
+        Object mnTitle = fieldsMap.get("title");
+        Object enTitle = fieldsMap.get("titleEn");
+        if (mnTitle == null || mnTitle.toString().isBlank()) {
+            throw new IllegalArgumentException("Сэдвийн нэр заавал шаардлагатай.");
+        }
+        if (enTitle == null || enTitle.toString().isBlank()) {
+            throw new IllegalArgumentException("Сэдвийн англи нэр заавал шаардлагатай. (English title is required.)");
+        }
 
         String fieldsJson = toJson(fieldsMap);
 
@@ -97,7 +109,7 @@ public class TopicService {
 
     @Transactional
     public Map<String, Object> updateTopic(Long topicId, String actorId, Object fields, String keywords,
-                                            String title, String description, String researchGoal,
+                                            String title, String titleEn, String description, String researchGoal,
                                             String requestedStatus) {
         Map<String, Object> topic = findById(topicId)
                 .orElseThrow(() -> new IllegalArgumentException("Topic not found: " + topicId));
@@ -110,8 +122,16 @@ public class TopicService {
         Map<String, Object> existing = getRawFields(topicId);
         if (fields instanceof Map<?, ?> m) m.forEach((k, v) -> existing.put(String.valueOf(k), v));
         if (title != null)        existing.put("title", title);
+        if (titleEn != null)      existing.put("titleEn", titleEn);
         if (description != null)  existing.put("description", description);
         if (researchGoal != null) existing.put("researchGoal", researchGoal);
+
+        // Same English-title requirement on edit: don't let an edit silently drop it.
+        Object enTitle = existing.get("titleEn");
+        if (enTitle == null || enTitle.toString().isBlank()) {
+            throw new IllegalArgumentException("Сэдвийн англи нэр заавал шаардлагатай. (English title is required.)");
+        }
+
         String fieldsJson = toJson(existing);
 
         String newStatus = (requestedStatus != null && List.of("DRAFT", "PENDING_TEACHER_APPROVAL").contains(requestedStatus))
@@ -235,23 +255,26 @@ public class TopicService {
         Object ts = row.get("created_at_ts");
         result.put("createdAt", ts != null ? ts.toString() : (row.get("created_at") != null ? row.get("created_at").toString() : null));
 
-        // Parse fields JSON → flatten title, description, researchGoal
+        // Parse fields JSON → flatten title, titleEn, description, researchGoal
         Object fieldsRaw = row.get("fields");
         if (fieldsRaw != null) {
             try {
                 Map<String, Object> f = (Map<String, Object>) objectMapper.readValue(fieldsRaw.toString(), Map.class);
                 result.put("title", f.get("title"));
+                result.put("titleEn", f.get("titleEn"));
                 result.put("description", f.get("description"));
                 result.put("researchGoal", f.get("researchGoal"));
                 // carry through any other fields
                 f.forEach((k, v) -> result.putIfAbsent(k, v));
             } catch (Exception ignored) {
                 result.put("title", null);
+                result.put("titleEn", null);
                 result.put("description", null);
                 result.put("researchGoal", null);
             }
         } else {
             result.put("title", null);
+            result.put("titleEn", null);
             result.put("description", null);
             result.put("researchGoal", null);
         }

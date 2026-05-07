@@ -21,6 +21,7 @@ import { getStoredUser } from "../../../lib/authGuard";
 import { resolveName } from "../../../lib/utils";
 import { useNavigate, useSearchParams } from "react-router";
 import FilePreviewModal from "../../components/FilePreviewModal";
+import { RichTextEditor } from "../../components/RichTextEditor";
 
 type Tone = "positive" | "warning" | "negative" | "neutral" | "info";
 
@@ -65,13 +66,12 @@ const GRADING_SCHEMES: Record<string, { label: string; total: number; criteria: 
   },
   FINAL_DEFENSE: {
     label: "Эцсийн хамгаалалтын үнэлгээ",
-    total: 40,
+    total: 35,
     criteria: [
       { name: "Судалгаа", max: 6 },
       { name: "Хэрэгжүүлэлт", max: 9 },
       { name: "Танилцуулга", max: 5 },
       { name: "Гар бичмэл", max: 5 },
-      { name: "Шүүмж (Reviewer)", max: 5 },
       { name: "Нэмэлт үнэлгээ", max: 10 },
     ],
   },
@@ -167,7 +167,9 @@ export default function TeacherStudents() {
   // Reviewer upload state
   const [reviewUploadStudentId, setReviewUploadStudentId] = useState<string | null>(null);
   const [reviewFile, setReviewFile] = useState<File | null>(null);
+  const [reviewScore, setReviewScore] = useState<string>("");
   const [reviewUploadStatus, setReviewUploadStatus] = useState<"idle" | "uploading" | "success" | "error">("idle");
+  const [reviewUploadError, setReviewUploadError] = useState<string | null>(null);
   const [uploadedReviews, setUploadedReviews] = useState<ReviewDocument[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -238,23 +240,10 @@ export default function TeacherStudents() {
   const totalScore = Object.values(scores).reduce((a, b) => a + (b || 0), 0);
   const gradingScheme = stageType ? (GRADING_SCHEMES[stageType] || null) : null;
 
-  // At FINAL_DEFENSE the assigned reviewer ONLY grades the "Шүүмж" criterion (5 of 100).
-  // Other committee members grade the remaining criteria (35 of the 40-point final block).
-  const getEffectiveScheme = (studentId: string | null) => {
-    if (!gradingScheme) return null;
-    if (stageType !== 'FINAL_DEFENSE' || !studentId) return gradingScheme;
-    const isReviewer = reviewerAssignments.some(
-      a => a.studentId === studentId && a.reviewerId === teacherId,
-    );
-    if (isReviewer) {
-      const criteria = gradingScheme.criteria.filter(c => c.name.startsWith('Шүүмж'));
-      const total = criteria.reduce((sum, c) => sum + c.max, 0);
-      return { ...gradingScheme, criteria, total };
-    }
-    const criteria = gradingScheme.criteria.filter(c => !c.name.startsWith('Шүүмж'));
-    const total = criteria.reduce((sum, c) => sum + c.max, 0);
-    return { ...gradingScheme, criteria, total };
-  };
+  // Reviewer's 5pt "Шүүмж" score is captured upfront with the review document
+  // upload during PRE_DEFENSE, so blind grading at FINAL_DEFENSE is the same
+  // 35pt scheme for every committee member (reviewer included).
+  const getEffectiveScheme = (_studentId: string | null) => gradingScheme;
 
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || '';
@@ -477,6 +466,23 @@ export default function TeacherStudents() {
       setStudentGrades(map);
     });
 
+    // Reviewer scores were captured upfront on PRE_DEFENSE upload; load them
+    // by student so HEAD's final-grade confirmation has a value to read.
+    Promise.all(
+      committeeStudents.map(s =>
+        evaluationService.getReviewDocuments({ studentId: s.studentId })
+          .then(r => r.data)
+          .catch(() => [] as ReviewDocument[])
+      )
+    ).then(lists => {
+      const flat = lists.flat();
+      setUploadedReviews(prev => {
+        const byId = new Map(prev.map(d => [d.id, d]));
+        flat.forEach(d => byId.set(d.id, d));
+        return Array.from(byId.values());
+      });
+    });
+
     // HEAD needs sessions across all 4 stages to map submissions → stageType.
     // The session-loader above only fetches the current stageType.
     Promise.all([
@@ -525,17 +531,13 @@ export default function TeacherStudents() {
     setEvalStatus("loading");
     setEvalError(null);
 
-    const isReviewerForStudent = stageType === 'FINAL_DEFENSE' && reviewerAssignments.some(
-      a => a.studentId === evalStudentId && a.reviewerId === teacherId,
-    );
-
     try {
       const saveRes = await evaluationService.saveGrade({
         defenseSessionId,
         thesisId,
         studentId: evalStudentId,
         evaluatorId: teacherId,
-        evaluatorRole: isReviewerForStudent ? 'REVIEWER' : teacherRole,
+        evaluatorRole: teacherRole,
         points: totalScore,
         maxPoints: scheme.total,
       });
@@ -684,10 +686,17 @@ export default function TeacherStudents() {
 
   const handleReviewUpload = async () => {
     if (!reviewUploadStudentId || !reviewFile || !defenseSessionId) return;
+    const score = Number(reviewScore);
+    if (!Number.isFinite(score) || score < 0 || score > 5) {
+      setReviewUploadError("Шүүмжийн оноо 0–5 хооронд байх ёстой.");
+      setReviewUploadStatus("error");
+      return;
+    }
     const student = rosterStudents.find(s => s.id === reviewUploadStudentId);
     const thesisId = student?.thesisId || '';
 
     setReviewUploadStatus("uploading");
+    setReviewUploadError(null);
     try {
       const formData = new FormData();
       formData.append('file', reviewFile);
@@ -695,6 +704,7 @@ export default function TeacherStudents() {
       formData.append('thesisId', thesisId);
       formData.append('studentId', reviewUploadStudentId);
       formData.append('reviewerId', teacherId);
+      formData.append('reviewerScore', String(score));
       await evaluationService.uploadReviewDocument(formData);
       // Refresh uploaded list so the row flips to "sent" immediately
       const refreshed = await evaluationService.getReviewDocuments({ defenseSessionId });
@@ -704,8 +714,11 @@ export default function TeacherStudents() {
         setReviewUploadStatus("idle");
         setReviewUploadStudentId(null);
         setReviewFile(null);
+        setReviewScore("");
       }, 2000);
     } catch (err: any) {
+      const msg = err?.response?.data?.message || err?.response?.data?.error || '';
+      setReviewUploadError(typeof msg === 'string' && msg ? msg : 'Байршуулахад алдаа гарлаа.');
       setReviewUploadStatus("error");
       setTimeout(() => setReviewUploadStatus("idle"), 3000);
     }
@@ -755,7 +768,9 @@ export default function TeacherStudents() {
 
   const isSecretary = teacherRole === 'SECRETARY';
   const isHead = teacherRole === 'HEAD';
-  const canUploadReview = stageType === 'PRE_DEFENSE' || stageType === 'FINAL_DEFENSE';
+  // Reviewer's job (document + 5pt grade) must finish during PRE_DEFENSE,
+  // before the FINAL_DEFENSE session opens.
+  const canUploadReview = stageType === 'PRE_DEFENSE';
   const canAssignReviewer = isHead && stageType === 'PRE_DEFENSE';
   const canConfirmGrade = isHead && stageType === 'FINAL_DEFENSE';
 
@@ -782,14 +797,26 @@ export default function TeacherStudents() {
   };
 
   const getReviewerScore = (studentId: string): number | undefined => {
+    // Reviewer score now lives on the uploaded review_document (captured at
+    // upload time during PRE_DEFENSE). Fallback to legacy REVIEWER-role grade
+    // for older sessions that pre-date this flow.
+    const doc = uploadedReviews.find(r => r.studentId === studentId && r.reviewerScore != null);
+    if (doc && doc.reviewerScore != null) return Number(doc.reviewerScore);
     const grades = studentGrades[studentId] || [];
-    const finalSessionIds = allSessions
-      .filter(s => canonicalStage(s.stageType) === 'FINAL')
-      .map(s => s.id);
-    const reviewerGrade = grades.find(g =>
-      finalSessionIds.includes(g.defenseSessionId) && g.isSubmitted && g.evaluatorRole === "REVIEWER"
-    );
-    return reviewerGrade?.points;
+    const legacy = grades.find(g => g.isSubmitted && g.evaluatorRole === "REVIEWER");
+    return legacy?.points;
+  };
+
+  // NUM grading scale: A+, A, B+, B, C+, C, D, F.
+  const letterFromScore = (total: number): string => {
+    if (total >= 95) return 'A+';
+    if (total >= 90) return 'A';
+    if (total >= 85) return 'B+';
+    if (total >= 80) return 'B';
+    if (total >= 75) return 'C+';
+    if (total >= 70) return 'C';
+    if (total >= 60) return 'D';
+    return 'F';
   };
 
   const handleConfirmGrade = async (student: DisplayStudent) => {
@@ -815,6 +842,7 @@ export default function TeacherStudents() {
         preliminaryScore: pre,
         finalCommitteeScore: fin,
         reviewerScore: rev,
+        gradeLetter: letterFromScore(total),
         passFail: total >= 50 ? 'PASS' : 'FAIL',
         headNotes: state.headNotes || undefined,
       });
@@ -1137,11 +1165,12 @@ export default function TeacherStudents() {
                     )}
                   </div>
                   <div className="p-4 border-t border-border space-y-3">
-                    <textarea
-                      className="w-full text-[13px] border border-border rounded-md p-3 outline-none focus:border-accent resize-none h-24 bg-surface"
-                      placeholder="Санал хүсэлтээ бичнэ үү..."
+                    <RichTextEditor
                       value={commentInput}
-                      onChange={(e) => setCommentInput(e.target.value)}
+                      onChange={setCommentInput}
+                      placeholder="Санал хүсэлтээ бичнэ үү..."
+                      minHeight={96}
+                      ariaLabel="Тайлангийн санал хүсэлт"
                     />
                     <div className="grid grid-cols-2 gap-2">
                       <Button variant="outline" size="sm" onClick={() => handleReviewAction("revision")} disabled={reviewStatus !== "idle"}>
@@ -1474,12 +1503,13 @@ export default function TeacherStudents() {
                       <label className="block text-sm font-medium text-ink-900 tracking-tight">
                         Комиссын дүгнэлт / тайлбар
                       </label>
-                      <textarea
-                        className="w-full min-h-[140px] rounded-md border border-border bg-surface p-3 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none focus:border-ink-900 focus:ring-1 focus:ring-ink-900 resize-y"
-                        placeholder="Комиссын ерөнхий дүгнэлт, шийдвэр, цаашдын зөвлөмжөө бичнэ үү..."
+                      <RichTextEditor
                         value={closingNote}
-                        onChange={(e) => setClosingNote(e.target.value)}
+                        onChange={setClosingNote}
+                        placeholder="Комиссын ерөнхий дүгнэлт, шийдвэр, цаашдын зөвлөмжөө бичнэ үү..."
+                        minHeight={160}
                         disabled={secretarySubmitting}
+                        ariaLabel="Комиссын дүгнэлт"
                       />
                       <p className="text-xs text-ink-500">
                         Хадгалсаны дараа уг тайлбар "Дууссан үнэлгээнүүд" хэсэгт харагдана.
@@ -1537,7 +1567,7 @@ export default function TeacherStudents() {
                     <FileText className="w-4 h-4 text-accent" strokeWidth={1.6} /> Шүүмжлэгчийн үүрэг
                   </h3>
                   <p className="text-sm text-ink-700">
-                    Танд шүүмжлэгчээр томилогдсон оюутны дипломын ажлыг уншиж шүүмжилсэн баримт бичиг байршуулна уу. Байршуулсны дараа оюутан өөрийн "Санал хүсэлт" хуудсаас харах боломжтой.
+                    Танд шүүмжлэгчээр томилогдсон оюутны дипломын ажлыг уншиж шүүмжилсэн баримт бичиг байршуулна уу. Үүний хамт 0–5 онооны шүүмжийн оноо (эцсийн дүнгийн 5%) өгнө. Энэ үйл явц <strong>Эцсийн хамгаалалт эхлэхээс өмнө</strong> дуусгах ёстой.
                   </p>
                   {!defenseSessionId && (
                     <p className="text-xs text-ink-700 mt-2 inline-flex items-center gap-1.5">
@@ -1571,9 +1601,16 @@ export default function TeacherStudents() {
                           </div>
                         </div>
                         {sent ? (
-                          <span className="inline-flex items-center gap-1.5 text-xs text-ink-700">
-                            <span className={`w-1.5 h-1.5 rounded-full ${toneDot.positive}`} />
-                            Илгээсэн: <span className="text-ink-500 truncate max-w-[160px]">{sent.originalFilename}</span>
+                          <span className="inline-flex items-center gap-2 text-xs text-ink-700 flex-wrap">
+                            <span className="inline-flex items-center gap-1.5">
+                              <span className={`w-1.5 h-1.5 rounded-full ${toneDot.positive}`} />
+                              Илгээсэн: <span className="text-ink-500 truncate max-w-[160px]">{sent.originalFilename}</span>
+                            </span>
+                            {sent.reviewerScore != null && (
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-sm border border-border bg-surface-muted tabular-nums">
+                                Шүүмж: <strong className="text-ink-900">{Number(sent.reviewerScore).toFixed(1)} / 5</strong>
+                              </span>
+                            )}
                           </span>
                         ) : (
                           <Button
@@ -1583,6 +1620,8 @@ export default function TeacherStudents() {
                             onClick={() => {
                               setReviewUploadStudentId(student.studentId);
                               setReviewFile(null);
+                              setReviewScore("");
+                              setReviewUploadError(null);
                               setReviewUploadStatus("idle");
                             }}
                           >
@@ -1616,29 +1655,54 @@ export default function TeacherStudents() {
                               </span>
                             )}
                           </div>
+                          <div className="flex flex-col gap-1.5">
+                            <label className="text-xs font-medium text-ink-900 tracking-tight">
+                              Шүүмжийн оноо <span className="text-ink-500 font-normal">(0–5, эцсийн дүнгийн 5%)</span>
+                            </label>
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="number"
+                                inputMode="decimal"
+                                min={0}
+                                max={5}
+                                step={0.5}
+                                placeholder="0.0 – 5.0"
+                                value={reviewScore}
+                                onChange={e => setReviewScore(e.target.value)}
+                                className="w-32 rounded-md border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink-900 focus:outline-none focus:border-ink-900 focus:ring-1 focus:ring-ink-900"
+                                disabled={reviewUploadStatus === "uploading"}
+                              />
+                              <span className="text-xs text-ink-500">/ 5</span>
+                            </div>
+                          </div>
                           {reviewUploadStatus === "success" && (
                             <div className="border border-border bg-surface text-ink-900 p-3 rounded-md text-sm flex items-center gap-2">
                               <span className={`w-1.5 h-1.5 rounded-full ${toneDot.positive}`} />
-                              Шүүмж амжилттай байршлаа!
+                              Шүүмж болон оноо амжилттай хадгалагдлаа.
                             </div>
                           )}
                           {reviewUploadStatus === "error" && (
                             <div className="border border-border bg-surface text-ink-900 p-3 rounded-md text-sm flex items-center gap-2">
                               <span className={`w-1.5 h-1.5 rounded-full ${toneDot.negative}`} />
-                              Байршуулахад алдаа гарлаа. Дахин оролдоно уу.
+                              {reviewUploadError || "Байршуулахад алдаа гарлаа. Дахин оролдоно уу."}
                             </div>
                           )}
                           <div className="flex gap-2 justify-end">
                             <Button
                               size="sm"
                               variant="outline"
-                              onClick={() => { setReviewUploadStudentId(null); setReviewFile(null); }}
+                              onClick={() => { setReviewUploadStudentId(null); setReviewFile(null); setReviewScore(""); setReviewUploadError(null); }}
                             >
                               Цуцлах
                             </Button>
                             <Button
                               size="sm"
-                              disabled={!reviewFile || !defenseSessionId || reviewUploadStatus === "uploading"}
+                              disabled={
+                                !reviewFile || !defenseSessionId || reviewUploadStatus === "uploading" ||
+                                reviewScore.trim() === "" ||
+                                !Number.isFinite(Number(reviewScore)) ||
+                                Number(reviewScore) < 0 || Number(reviewScore) > 5
+                              }
                               onClick={handleReviewUpload}
                             >
                               {reviewUploadStatus === "uploading" ? "Илгээж байна..." : "Оюутанд илгээх"}
@@ -1729,10 +1793,14 @@ export default function TeacherStudents() {
                             >
                               <option value="">— Шүүмжлэгч сонгох —</option>
                               {committeeMembers
-                                .filter(m => m.teacherId !== teacherId && m.role !== 'HEAD')
+                                // External experts cannot be reviewers; everyone else
+                                // (HEAD/SECRETARY/MEMBER) is eligible — HEAD may even
+                                // self-assign for a student.
+                                .filter(m => m.role !== 'EXTERNAL_EXPERT')
                                 .map(m => (
                                   <option key={m.teacherId} value={m.teacherId}>
                                     {teacherNameMap[m.teacherId] || m.teacherId} ({roleLabel(m.role)})
+                                    {m.teacherId === teacherId ? ' (та)' : ''}
                                   </option>
                                 ))}
                             </select>
@@ -1783,7 +1851,13 @@ export default function TeacherStudents() {
                   const rev = getReviewerScore(sid);
                   const total = (p1 ?? 0) + (p2 ?? 0) + (pre ?? 0) + (fin ?? 0) + (rev ?? 0);
                   const cs = confirmState[sid] || { headNotes: '', submitting: false, done: false, error: null };
-                  const allScoresReady = p1 !== undefined && p2 !== undefined && pre !== undefined && fin !== undefined && rev !== undefined;
+                  const missingStages: string[] = [];
+                  if (p1 === undefined) missingStages.push("Явц 1");
+                  if (p2 === undefined) missingStages.push("Явц 2");
+                  if (pre === undefined) missingStages.push("Урьдчилсан");
+                  if (fin === undefined) missingStages.push("Эцсийн");
+                  if (rev === undefined) missingStages.push("Шүүмж");
+                  const allScoresReady = missingStages.length === 0;
 
                   return (
                     <Card key={sid} className={cs.done ? 'bg-surface-muted' : ''}>
@@ -1840,7 +1914,7 @@ export default function TeacherStudents() {
                         {!allScoresReady && (
                           <p className="text-xs text-ink-700 bg-surface-muted border border-border rounded-md px-3 py-2 inline-flex items-center gap-2">
                             <span className={`w-1.5 h-1.5 rounded-full ${toneDot.warning}`} />
-                            Зарим шатны нарийн бичгийн оноо ирээгүй байна. Бүх оноо ирсний дараа баталгаажуулна уу.
+                            Дутуу шат: {missingStages.join(", ")}. Боломжтой бол ирээгүй оноог 0-ээр тоолж баталгаажуулж болно.
                           </p>
                         )}
 
@@ -1870,7 +1944,7 @@ export default function TeacherStudents() {
                         {!cs.done && (
                           <Button
                             className="w-full"
-                            disabled={cs.submitting || !defenseSessionId}
+                            disabled={cs.submitting}
                             onClick={() => handleConfirmGrade(student)}
                           >
                             {cs.submitting ? (
@@ -1926,12 +2000,12 @@ export default function TeacherStudents() {
                   </div>
                   <div>
                     <label className="block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5">Нэмэлт тэмдэглэл</label>
-                    <textarea
-                      rows={3}
-                      placeholder="Оюутнуудад мэдэгдэх мэдээлэл..."
-                      className="w-full border border-border rounded-md px-3 py-2 text-[13px] focus:outline-none focus:border-accent resize-none bg-surface"
+                    <RichTextEditor
                       value={scheduleForm.notes}
-                      onChange={e => setScheduleForm(f => ({ ...f, notes: e.target.value }))}
+                      onChange={(html) => setScheduleForm(f => ({ ...f, notes: html }))}
+                      placeholder="Оюутнуудад мэдэгдэх мэдээлэл..."
+                      minHeight={110}
+                      ariaLabel="Хуваарийн нэмэлт тэмдэглэл"
                     />
                   </div>
                   {scheduleStatus === 'success' && (

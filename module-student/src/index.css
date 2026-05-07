@@ -118,3 +118,26 @@
   }
   *::-webkit-scrollbar-track { background: transparent; }
 }
+
+/* ── Rich text editor (TipTap) ─────────────────────────────────────── */
+.rte-shell .ProseMirror { outline: none; }
+.rte-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--color-ink-400);
+  pointer-events: none;
+  height: 0;
+  float: left;
+}
+
+/* ── Rich text content (rendered HTML from teacher's RTE) ──────────── */
+.rte-content p { margin: 0 0 0.5em 0; }
+.rte-content p:last-child { margin-bottom: 0; }
+.rte-content ul,
+.rte-content ol { margin: 0 0 0.5em 1.25em; padding: 0; }
+.rte-content ul { list-style: disc; }
+.rte-content ol { list-style: decimal; }
+.rte-content li { margin: 0.15em 0; }
+.rte-content strong { font-weight: 600; }
+.rte-content em { font-style: italic; }
+.rte-content u { text-decoration: underline; }
+.rte-content s { text-decoration: line-through; }

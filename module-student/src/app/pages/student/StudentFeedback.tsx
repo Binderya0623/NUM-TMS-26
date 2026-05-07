@@ -10,6 +10,7 @@ import { evaluationService, type ReviewDocument } from "../../../services/evalua
 import { userService } from "../../../services/userService";
 import { getStoredUser } from "../../../lib/authGuard";
 import { resolveName, isUuid, initialsFromName } from "../../../lib/utils";
+import { RichText } from "../../components/RichText";
 
 const reportTypeLabel = (t: string) => {
   const map: Record<string, string> = {
@@ -192,7 +193,10 @@ export default function StudentFeedback() {
                       {isExpanded && (
                         <div className="px-5 pb-5 pt-0 border-t border-border">
                           <div className="bg-surface-muted rounded-md p-4 my-4 text-sm text-ink-700 leading-relaxed border border-border">
-                            {comment || "Тайлбар байхгүй."}
+                            <RichText
+                              html={comment}
+                              fallback={<span>Тайлбар байхгүй.</span>}
+                            />
                           </div>
 
                           {isRevision && (

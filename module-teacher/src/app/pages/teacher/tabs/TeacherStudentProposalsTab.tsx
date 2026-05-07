@@ -8,6 +8,7 @@ import { topicService, type Topic } from "../../../../services/topicService";
 import { userService } from "../../../../services/userService";
 import { getStoredUser } from "../../../../lib/authGuard";
 import { resolveName, initialsFromName } from "../../../../lib/utils";
+import { RichTextEditor, RichText } from "../../../components/RichTextEditor";
 
 export default function TeacherStudentProposalsTab() {
   const user = getStoredUser();
@@ -170,7 +171,10 @@ export default function TeacherStudentProposalsTab() {
               <CardContent className="p-6 space-y-5">
                 <div className="border border-border rounded-md p-5 bg-surface-muted">
                   <p className="text-[11px] font-medium uppercase tracking-wider text-ink-500 mb-2">Сэдвийн нэр</p>
-                  <h4 className="text-lg font-semibold text-ink-900 tracking-tight mb-2">{selectedProp.title}</h4>
+                  <h4 className="text-lg font-semibold text-ink-900 tracking-tight">{selectedProp.title}</h4>
+                  {selectedProp.titleEn && (
+                    <p className="text-sm italic text-ink-600 mt-1 mb-2">{selectedProp.titleEn}</p>
+                  )}
                   {selectedProp.keywords && (
                     <div className="flex gap-2 flex-wrap mt-3">
                       {selectedProp.keywords.split(",").map(kw => (
@@ -182,16 +186,19 @@ export default function TeacherStudentProposalsTab() {
 
                 <div>
                   <h5 className="text-[11px] font-medium uppercase tracking-wider text-ink-500 mb-2">Судалгааны зорилго</h5>
-                  <p className="text-sm text-ink-700 leading-relaxed p-4 rounded-md border border-border bg-surface">
-                    {selectedProp.researchGoal || "Тодорхойлоогүй"}
-                  </p>
+                  <RichText
+                    html={selectedProp.researchGoal}
+                    className="text-sm text-ink-700 leading-relaxed p-4 rounded-md border border-border bg-surface"
+                    fallback={<p className="text-sm text-ink-700 leading-relaxed p-4 rounded-md border border-border bg-surface">Тодорхойлоогүй</p>}
+                  />
                 </div>
 
                 <div>
                   <h5 className="text-[11px] font-medium uppercase tracking-wider text-ink-500 mb-2">Сэдвийн дэлгэрэнгүй тайлбар</h5>
-                  <p className="text-sm text-ink-700 leading-relaxed p-4 rounded-md border border-border bg-surface">
-                    {selectedProp.description}
-                  </p>
+                  <RichText
+                    html={selectedProp.description}
+                    className="text-sm text-ink-700 leading-relaxed p-4 rounded-md border border-border bg-surface"
+                  />
                 </div>
               </CardContent>
             </Card>
@@ -219,12 +226,12 @@ export default function TeacherStudentProposalsTab() {
                 <label className="block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5">
                   Татгалзах шалтгаан <span className="text-[var(--color-dot-negative)]">*</span>
                 </label>
-                <textarea
-                  className="w-full border border-border rounded-md px-3 py-2 text-sm resize-none focus:outline-none focus:border-ink-900 bg-surface"
-                  rows={3}
-                  placeholder="Шалтгаанаа товч бичнэ үү..."
+                <RichTextEditor
                   value={rejectionReason}
-                  onChange={e => setRejectionReason(e.target.value)}
+                  onChange={setRejectionReason}
+                  placeholder="Шалтгаанаа товч бичнэ үү..."
+                  minHeight={110}
+                  ariaLabel="Татгалзах шалтгаан"
                 />
               </div>
             </div>

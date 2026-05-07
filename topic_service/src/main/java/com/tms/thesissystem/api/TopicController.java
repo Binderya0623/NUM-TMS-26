@@ -67,7 +67,7 @@ public class TopicController {
                 req.createdById(), req.createdByType(),
                 req.supervisorId() != null ? req.supervisorId() : req.proposedToTeacherId(),
                 req.program(), req.fields(), req.keywords(),
-                req.title(), req.description(), req.researchGoal(),
+                req.title(), req.titleEn(), req.description(), req.researchGoal(),
                 req.status(), req.visibility()
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
@@ -83,7 +83,7 @@ public class TopicController {
         String actorId = req.createdById();
         Map<String, Object> updated = topicService.updateTopic(
                 id, actorId, req.fields(), req.keywords(),
-                req.title(), req.description(), req.researchGoal(),
+                req.title(), req.titleEn(), req.description(), req.researchGoal(),
                 req.status()
         );
         return ResponseEntity.ok(updated);
@@ -142,6 +142,8 @@ public class TopicController {
             // Content – either nested or flat
             Object fields,
             String title,
+            // English title (NUM TMS requires bilingual topic naming)
+            String titleEn,
             String description,
             String researchGoal,
             // Metadata

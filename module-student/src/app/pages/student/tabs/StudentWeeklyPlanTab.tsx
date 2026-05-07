@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../../../components/ui/card";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
-import { Textarea } from "../../../components/ui/textarea";
 import { Dialog, DialogHeader, DialogBody, DialogFooter } from "../../../components/ui/dialog";
 import {
   Send, Plus, Edit2, Trash2, Save, CalendarDays, Lock, ChevronDown, ChevronUp, AlertCircle,
@@ -11,6 +10,8 @@ import { planService } from "../../../../services/planService";
 import type { Plan, PlanWeek, PlanReview } from "../../../../services/planService";
 import { topicService } from "../../../../services/topicService";
 import { getStoredUser } from "../../../../lib/authGuard";
+import { RichText } from "../../../components/RichText";
+import { RichTextEditor } from "../../../components/RichTextEditor";
 
 type Tone = "positive" | "warning" | "negative" | "neutral" | "accent";
 const toneDot: Record<Tone, string> = {
@@ -267,7 +268,11 @@ export default function StudentWeeklyPlanTab() {
               <AlertCircle className="w-4 h-4 text-[var(--color-dot-warning)] shrink-0 mt-0.5" strokeWidth={1.6} />
               <div>
                 <h4 className="text-sm font-semibold text-ink-900 tracking-tight mb-0.5">Засвар шаардлагатай</h4>
-                <p className="text-sm text-ink-700">{latestReview.comment || statusCfg.alert}</p>
+                <RichText
+                  html={latestReview.comment}
+                  className="text-sm text-ink-700"
+                  fallback={<p className="text-sm text-ink-700">{statusCfg.alert}</p>}
+                />
               </div>
             </div>
           )}
@@ -359,12 +364,12 @@ export default function StudentWeeklyPlanTab() {
                             </div>
                             <div>
                               <label className="text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-2 block">Тайлбар ба үр дүн</label>
-                              <Textarea
+                              <RichTextEditor
                                 value={formData.description}
-                                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                onChange={(html) => setFormData({ ...formData, description: html })}
                                 placeholder="Тухайн ажилд хийгдэх алхмууд болон хүлээгдэж буй үр дүн..."
-                                rows={3}
-                                className="resize-none"
+                                minHeight={110}
+                                ariaLabel="Тайлбар ба үр дүн"
                               />
                             </div>
                             <div className="flex gap-2 justify-end pt-2">
@@ -391,9 +396,10 @@ export default function StudentWeeklyPlanTab() {
                                 {weekEntry.plannedTasks}
                               </h5>
                               {weekEntry.description && (
-                                <p className="text-sm text-ink-600 leading-relaxed bg-surface-muted p-3 rounded-md border border-border">
-                                  {weekEntry.description}
-                                </p>
+                                <RichText
+                                  html={weekEntry.description}
+                                  className="text-sm text-ink-600 leading-relaxed bg-surface-muted p-3 rounded-md border border-border"
+                                />
                               )}
                               {weekEntry.completedTasks && (
                                 <div className="mt-2 text-sm text-ink-700 bg-surface-muted p-3 rounded-md border border-border flex items-start gap-2">

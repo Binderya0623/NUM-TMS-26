@@ -11,6 +11,7 @@ import { planService, type Plan, type PlanWeek } from "../../../../services/plan
 import { userService } from "../../../../services/userService";
 import { getStoredUser } from "../../../../lib/authGuard";
 import { resolveName, initialsFromName } from "../../../../lib/utils";
+import { RichTextEditor } from "../../../components/RichTextEditor";
 
 type Tone = "positive" | "warning" | "negative" | "neutral";
 
@@ -306,12 +307,12 @@ export default function TeacherPlanReviewTab() {
                 <label className="block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5">
                   Засварт буцаах шалтгаан <span className="text-[var(--color-dot-negative)]">*</span>
                 </label>
-                <textarea
-                  className="w-full border border-border rounded-md px-3 py-2 text-sm text-ink-900 resize-none focus:outline-none focus:border-ink-900 bg-surface"
-                  rows={3}
-                  placeholder="Засварт буцаах шалтгаан, зөвлөмжөө бичнэ үү..."
+                <RichTextEditor
                   value={rejectionReason}
-                  onChange={e => setRejectionReason(e.target.value)}
+                  onChange={setRejectionReason}
+                  placeholder="Засварт буцаах шалтгаан, зөвлөмжөө бичнэ үү..."
+                  minHeight={120}
+                  ariaLabel="Засварт буцаах шалтгаан"
                 />
                 {!rejectionReason.trim() && (
                   <p className="text-xs text-ink-500 mt-1">Шалтгаан заавал бичих шаардлагатай.</p>

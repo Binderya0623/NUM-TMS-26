@@ -13,6 +13,8 @@ import type { Committee, CommitteeTeacher, CommitteeStudent } from "../../../ser
 import { userService } from "../../../services/userService";
 import type { UserRecord } from "../../../services/userService";
 import { workflowService, type DefenseSession } from "../../../services/workflowService";
+import { RichTextEditor } from "../../components/RichTextEditor";
+import { RichText } from "../../components/RichText";
 import { evaluationService } from "../../../services/evaluationService";
 import { resolveName, isUuid, initialsFromName } from "../../../lib/utils";
 
@@ -603,12 +605,12 @@ export default function AdminCommittees() {
                     Нэмэлт тэмдэглэл
                     <span className="normal-case tracking-normal text-[10px] font-normal text-ink-500 border border-border rounded-sm px-1.5 py-0.5">Заавал биш</span>
                   </label>
-                  <textarea
-                    rows={2}
-                    placeholder="Оюутнуудад мэдэгдэх мэдээлэл..."
-                    className="w-full border border-border-strong rounded-md px-3 py-2 text-sm text-ink-900 bg-surface focus:outline-none focus:border-ink-900 resize-none"
+                  <RichTextEditor
                     value={form.notes}
-                    onChange={e => setForm(p => ({ ...p, notes: e.target.value }))}
+                    onChange={(html) => setForm(p => ({ ...p, notes: html }))}
+                    placeholder="Оюутнуудад мэдэгдэх мэдээлэл..."
+                    minHeight={88}
+                    ariaLabel="Нэмэлт тэмдэглэл"
                   />
                 </div>
 
@@ -920,7 +922,10 @@ export default function AdminCommittees() {
                           </div>
                         )}
                         {sess.notes && (
-                          <p className="text-sm text-ink-700 leading-relaxed pt-1 border-t border-border">{sess.notes}</p>
+                          <RichText
+                            html={sess.notes}
+                            className="text-sm text-ink-700 leading-relaxed pt-1 border-t border-border"
+                          />
                         )}
                       </div>
                     );

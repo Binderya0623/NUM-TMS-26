@@ -7,6 +7,7 @@ import { ChevronRight, Star } from "lucide-react";
 import { committeeService, type Committee, type CommitteeAssignment } from "../../../services/committeeService";
 import { getStoredUser } from "../../../lib/authGuard";
 import { useNavigate } from "react-router";
+import { RichText } from "../../components/RichTextEditor";
 
 interface CommitteeWithRole extends Committee {
   role: string;
@@ -238,11 +239,11 @@ export default function TeacherCommittee() {
                   </div>
                   <div>
                     <h4 className="text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-2">Тайлбарын түүх</h4>
-                    {c.closingNote && c.closingNote.trim() ? (
-                      <p className="text-sm text-ink-700 whitespace-pre-wrap leading-relaxed">{c.closingNote}</p>
-                    ) : (
-                      <p className="text-sm text-ink-400 italic">Тайлбар бичигдээгүй байна.</p>
-                    )}
+                    <RichText
+                      html={c.closingNote}
+                      className="text-sm text-ink-700 leading-relaxed"
+                      fallback={<p className="text-sm text-ink-400 italic">Тайлбар бичигдээгүй байна.</p>}
+                    />
                   </div>
                 </CardContent>
               </Card>

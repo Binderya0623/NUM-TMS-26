@@ -3,6 +3,7 @@ import { topicApi } from '../lib/apiClient';
 export interface Topic {
   id: number;
   title: string;
+  titleEn?: string;
   description?: string;
   researchGoal?: string;
   createdById: string;
@@ -38,7 +39,7 @@ export const topicService = {
     topicApi.post<TopicRequest>('/api/v2/topic-requests', { topicId, requestedById, sessionId, motivation }),
 
   submitProposal: (body: {
-    title: string; description: string; researchGoal: string;
+    title: string; titleEn: string; description: string; researchGoal: string;
     keywords?: string; createdById: string; supervisorId?: string;
   }) =>
     topicApi.post<Topic>('/api/v2/topics', { ...body, createdByType: 'STUDENT' }),

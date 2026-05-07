@@ -8,6 +8,7 @@ import { topicService, type TopicRequest } from "../../../../services/topicServi
 import { userService } from "../../../../services/userService";
 import { getStoredUser } from "../../../../lib/authGuard";
 import { resolveName, initialsFromName } from "../../../../lib/utils";
+import { RichTextEditor, RichText } from "../../../components/RichTextEditor";
 
 export default function TeacherTopicRequestsTab() {
   const [activeRequests, setActiveRequests] = useState<TopicRequest[]>([]);
@@ -16,7 +17,7 @@ export default function TeacherTopicRequestsTab() {
   const [loading, setLoading] = useState(true);
   const [rejectionReason, setRejectionReason] = useState("");
   const [userMap, setUserMap] = useState<Record<string, string>>({});
-  const [topicMap, setTopicMap] = useState<Record<string | number, string>>({});
+  const [topicMap, setTopicMap] = useState<Record<string | number, { title: string; titleEn?: string }>>({});
 
   useEffect(() => {
     Promise.all([
@@ -31,16 +32,17 @@ export default function TeacherTopicRequestsTab() {
         if (u.username) map[u.username] = u.displayName || u.name || u.username;
       });
       setUserMap(map);
-      const tmap: Record<string | number, string> = {};
+      const tmap: Record<string | number, { title: string; titleEn?: string }> = {};
       (topicRes.data || []).forEach((t: any) => {
-        if (t.id != null) tmap[t.id] = t.title || `Сэдэв #${t.id}`;
+        if (t.id != null) tmap[t.id] = { title: t.title || `Сэдэв #${t.id}`, titleEn: t.titleEn };
       });
       setTopicMap(tmap);
     }).finally(() => setLoading(false));
   }, []);
 
   const studentName = (id?: string) => resolveName(id, userMap, "Тодорхойгүй оюутан");
-  const topicTitle = (id?: string | number) => (id != null && topicMap[id]) || `Сэдэв #${id}`;
+  const topicTitle = (id?: string | number) => (id != null && topicMap[id]?.title) || `Сэдэв #${id}`;
+  const topicTitleEn = (id?: string | number) => (id != null && topicMap[id]?.titleEn) || undefined;
 
   const handleAction = () => {
     if (!selectedRequest || !showConfirmModal) return;
@@ -105,6 +107,9 @@ export default function TeacherTopicRequestsTab() {
                           {studentName(r.requestedById)}
                         </p>
                         <p className="text-xs text-ink-500 truncate mt-0.5">{topicTitle(r.topicId)}</p>
+                        {topicTitleEn(r.topicId) && (
+                          <p className="text-[11px] italic text-ink-400 truncate">{topicTitleEn(r.topicId)}</p>
+                        )}
                       </div>
                     </div>
                     <div className="mt-2.5 flex justify-between items-center text-[11px] text-ink-500">
@@ -154,7 +159,10 @@ export default function TeacherTopicRequestsTab() {
               <CardContent className="p-6 space-y-5">
                 <div className="border border-border rounded-md p-5 bg-surface-muted">
                   <p className="text-[11px] font-medium uppercase tracking-wider text-ink-500 mb-2">Хүсэлт гаргасан сэдэв</p>
-                  <h4 className="text-base font-semibold text-ink-900 tracking-tight mb-2">{topicTitle(selectedRequest.topicId)}</h4>
+                  <h4 className="text-base font-semibold text-ink-900 tracking-tight">{topicTitle(selectedRequest.topicId)}</h4>
+                  {topicTitleEn(selectedRequest.topicId) && (
+                    <p className="text-sm italic text-ink-600 mb-2">{topicTitleEn(selectedRequest.topicId)}</p>
+                  )}
                   <span className="inline-flex items-center gap-1.5 text-xs text-ink-700">
                     <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-warning)]" />
                     {selectedRequest.status}
@@ -164,9 +172,10 @@ export default function TeacherTopicRequestsTab() {
                 {selectedRequest.motivation && (
                   <div>
                     <h5 className="text-[11px] font-medium uppercase tracking-wider text-ink-500 mb-2">Сэдвийг сонгох шалтгаан</h5>
-                    <p className="text-sm text-ink-700 leading-relaxed p-4 rounded-md border border-border bg-surface italic">
-                      “{selectedRequest.motivation}”
-                    </p>
+                    <RichText
+                      html={selectedRequest.motivation}
+                      className="text-sm text-ink-700 leading-relaxed p-4 rounded-md border border-border bg-surface italic"
+                    />
                   </div>
                 )}
 
@@ -206,12 +215,12 @@ export default function TeacherTopicRequestsTab() {
                 <label className="block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5">
                   Татгалзах шалтгаан <span className="text-[var(--color-dot-negative)]">*</span>
                 </label>
-                <textarea
-                  className="w-full border border-border rounded-md px-3 py-2 text-sm text-ink-900 resize-none focus:outline-none focus:border-ink-900 bg-surface"
-                  rows={3}
-                  placeholder="Татгалзах шалтгааныг тайлбарлана уу..."
+                <RichTextEditor
                   value={rejectionReason}
-                  onChange={e => setRejectionReason(e.target.value)}
+                  onChange={setRejectionReason}
+                  placeholder="Татгалзах шалтгааныг тайлбарлана уу..."
+                  minHeight={110}
+                  ariaLabel="Татгалзах шалтгаан"
                 />
                 {rejectionReason.trim() === "" && (
                   <p className="text-xs text-ink-500 mt-1">Шалтгаан заавал бичих шаардлагатай.</p>

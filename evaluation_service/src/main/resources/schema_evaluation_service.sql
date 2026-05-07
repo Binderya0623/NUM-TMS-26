@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS final_grade_confirmation (
     total_score           NUMERIC(5,2),  -- sum; max = 100
 
     -- HEAD's final determination
-    grade_letter          VARCHAR(5),    -- 'A','B+','B','C+','C','D','F'
+    grade_letter          VARCHAR(5),    -- 'A+','A','B+','B','C+','C','D','F'
     pass_fail             VARCHAR(10),   -- 'PASS' | 'FAIL'
     head_notes            TEXT,
 
@@ -227,5 +227,11 @@ CREATE INDEX IF NOT EXISTS idx_gn_created          ON grade_notification(created
 -- their committee role grade (out of 35) and their REVIEWER grade (out of 5).
 ALTER TABLE defense_grade DROP CONSTRAINT IF EXISTS uq_grade_per_evaluator;
 ALTER TABLE defense_grade DROP CONSTRAINT IF EXISTS uq_grade_per_evaluator_role;
-ALTER TABLE defense_grade ADD CONSTRAINT uq_grade_per_evaluator_role
-    UNIQUE (defense_session_id, thesis_id, evaluator_id, evaluator_role);
+
+-- ── Migration: include student_id in the uniqueness key. With only thesis_id
+-- two students whose plan/thesis_id was missing or shared collapsed onto a
+-- single row, so an external expert grading multiple students saw their
+-- earlier grades silently overwritten.
+ALTER TABLE defense_grade DROP CONSTRAINT IF EXISTS uq_grade_per_student_evaluator_role;
+ALTER TABLE defense_grade ADD CONSTRAINT uq_grade_per_student_evaluator_role
+    UNIQUE (defense_session_id, student_id, evaluator_id, evaluator_role);

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
-import { Textarea } from '../../../components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Plus, X, BookOpen, Tag, Send } from 'lucide-react';
 import { topicService } from '../../../../services/topicService';
 import type { Topic } from '../../../../services/topicService';
 import { getStoredUser } from '../../../../lib/authGuard';
+import { RichTextEditor, RichText } from '../../../components/RichTextEditor';
 
 type Tone = "positive" | "warning" | "negative" | "neutral";
 
@@ -20,8 +20,8 @@ const toneDot: Record<Tone, string> = {
 const statusMap: Record<string, { label: string; tone: Tone }> = {
   ACTIVE: { label: 'Нийтэд нээлттэй', tone: 'positive' },
   DRAFT: { label: 'Ноорог', tone: 'neutral' },
-  DEPT_PENDING: { label: 'Тэнхим хяналтанд', tone: 'warning' },
-  PENDING_DEPT_APPROVAL: { label: 'Тэнхим хяналтанд', tone: 'warning' },
+  DEPT_PENDING: { label: 'Тэнхимийн хяналтанд', tone: 'warning' },
+  PENDING_DEPT_APPROVAL: { label: 'Тэнхимийн хяналтанд', tone: 'warning' },
   APPROVED: { label: 'Батлагдсан', tone: 'positive' },
   REJECTED: { label: 'Татгалзсан', tone: 'negative' },
 };
@@ -34,7 +34,7 @@ export default function TeacherTopicManagementTab() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({ title: '', description: '', goal: '', keywords: '', visibility: 'PUBLIC' });
+  const [form, setForm] = useState({ title: '', titleEn: '', description: '', goal: '', keywords: '', visibility: 'PUBLIC' });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -48,6 +48,7 @@ export default function TeacherTopicManagementTab() {
   const validate = () => {
     const e: Record<string, string> = {};
     if (!form.title.trim()) e.title = 'Сэдвийн нэр заавал оруулна уу';
+    if (!form.titleEn.trim()) e.titleEn = 'English title is required';
     if (!form.description.trim()) e.description = 'Тайлбар заавал оруулна уу';
     if (!form.goal.trim()) e.goal = 'Судалгааны зорилго заавал оруулна уу';
     setErrors(e);
@@ -55,7 +56,7 @@ export default function TeacherTopicManagementTab() {
   };
 
   const resetForm = () => {
-    setForm({ title: '', description: '', goal: '', keywords: '', visibility: 'PUBLIC' });
+    setForm({ title: '', titleEn: '', description: '', goal: '', keywords: '', visibility: 'PUBLIC' });
     setErrors({});
     setShowForm(false);
   };
@@ -65,6 +66,7 @@ export default function TeacherTopicManagementTab() {
     setSubmitting(true);
     topicService.createTopic({
       title: form.title,
+      titleEn: form.titleEn,
       description: form.description,
       researchGoal: form.goal,
       keywords: form.keywords || undefined,
@@ -121,21 +123,32 @@ export default function TeacherTopicManagementTab() {
                 className={errors.title ? 'border-[var(--color-dot-negative)]' : ''}
               />
             </FormField>
+            <FormField label="Сэдвийн нэр (English)" required hint="NUM TMS bilingual requirement" error={errors.titleEn}>
+              <Input
+                value={form.titleEn}
+                onChange={e => setForm({ ...form, titleEn: e.target.value })}
+                placeholder="e.g. Mongolian-language NLP system…"
+                className={errors.titleEn ? 'border-[var(--color-dot-negative)]' : ''}
+              />
+            </FormField>
             <FormField label="Сэдвийн тайлбар" required error={errors.description}>
-              <Textarea
+              <RichTextEditor
                 value={form.description}
-                onChange={e => setForm({ ...form, description: e.target.value })}
+                onChange={(html) => setForm({ ...form, description: html })}
                 placeholder="Сэдвийн тухай дэлгэрэнгүй тайлбар..."
-                rows={3}
-                className={`resize-none ${errors.description ? 'border-[var(--color-dot-negative)]' : ''}`}
+                minHeight={120}
+                disabled={submitting}
+                ariaLabel="Сэдвийн тайлбар"
               />
             </FormField>
             <FormField label="Судалгааны зорилго" required error={errors.goal}>
-              <Input
+              <RichTextEditor
                 value={form.goal}
-                onChange={e => setForm({ ...form, goal: e.target.value })}
+                onChange={(html) => setForm({ ...form, goal: html })}
                 placeholder="Энэхүү судалгаагаар ямар үр дүнд хүрэх вэ?"
-                className={errors.goal ? 'border-[var(--color-dot-negative)]' : ''}
+                minHeight={110}
+                disabled={submitting}
+                ariaLabel="Судалгааны зорилго"
               />
             </FormField>
             <FormField label="Түлхүүр үгс" hint="(таслалаар)">
@@ -204,11 +217,18 @@ export default function TeacherTopicManagementTab() {
                         )}
                       </div>
                       <h4 className="text-sm font-semibold text-ink-900 leading-tight tracking-tight">{t.title}</h4>
-                      {t.description && <p className="text-xs text-ink-500 mt-1 line-clamp-2">{t.description}</p>}
+                      {t.titleEn && (
+                        <p className="text-xs italic text-ink-500 mt-0.5 leading-tight">{t.titleEn}</p>
+                      )}
+                      <RichText
+                        html={t.description}
+                        className="text-xs text-ink-500 mt-1 line-clamp-2"
+                      />
                       {t.rejectionReason && (
-                        <p className="text-xs text-ink-700 mt-2 bg-surface-muted border border-border rounded-md px-2 py-1.5">
-                          <span className="font-medium">Шалтгаан:</span> {t.rejectionReason}
-                        </p>
+                        <div className="text-xs text-ink-700 mt-2 bg-surface-muted border border-border rounded-md px-2 py-1.5">
+                          <span className="font-medium">Шалтгаан:</span>{' '}
+                          <RichText html={t.rejectionReason} className="inline" />
+                        </div>
                       )}
                       {t.keywords && (
                         <div className="flex flex-wrap gap-1.5 mt-2">

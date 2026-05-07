@@ -2,14 +2,17 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import { Avatar, AvatarFallback } from "../../components/ui/avatar";
-import { Award, CheckCircle2, Calendar, MapPin, Users, ChevronDown, ChevronUp, Send } from "lucide-react";
+import { Award, CheckCircle2, Calendar, MapPin, Users, ChevronDown, ChevronUp, Send, FileText } from "lucide-react";
 import { committeeService } from "../../../services/committeeService";
+import { RichTextEditor } from "../../components/RichTextEditor";
 import { workflowService, type DefenseSession } from "../../../services/workflowService";
 import { evaluationService, type DefenseGrade } from "../../../services/evaluationService";
 import { userService } from "../../../services/userService";
 import { planService } from "../../../services/planService";
+import { thesisService, type ReportFile } from "../../../services/thesisService";
 import { getStoredUser } from "../../../lib/authGuard";
 import { resolveName } from "../../../lib/utils";
+import FilePreviewModal from "../../components/FilePreviewModal";
 
 type Tone = "positive" | "warning" | "negative" | "neutral";
 
@@ -69,6 +72,39 @@ export default function ExternalExpertGrading() {
   const [gradeStatus, setGradeStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [gradeError, setGradeError] = useState<string | null>(null);
 
+  // Thesis manuscript viewer state — expert clicks "View manuscript" on a row.
+  const [manuscriptFiles, setManuscriptFiles] = useState<ReportFile[]>([]);
+  const [manuscriptActiveId, setManuscriptActiveId] = useState<string | null>(null);
+  const [manuscriptLoadingFor, setManuscriptLoadingFor] = useState<string | null>(null);
+  const [manuscriptError, setManuscriptError] = useState<string | null>(null);
+
+  const openManuscript = async (studentId: string) => {
+    setManuscriptLoadingFor(studentId);
+    setManuscriptError(null);
+    try {
+      const reportsRes = await thesisService.getReports({ studentId });
+      const reports = reportsRes.data || [];
+      if (reports.length === 0) {
+        setManuscriptError("Энэ оюутан тайлан илгээгээгүй байна.");
+        return;
+      }
+      const fileLists = await Promise.all(
+        reports.map(r => thesisService.getReportFiles(r.id).then(r2 => r2.data).catch(() => []))
+      );
+      const files = fileLists.flat();
+      if (files.length === 0) {
+        setManuscriptError("Тайланд файл хавсаргагдаагүй байна.");
+        return;
+      }
+      setManuscriptFiles(files);
+      setManuscriptActiveId(files[0].id);
+    } catch {
+      setManuscriptError("Тайланг ачаалж чадсангүй.");
+    } finally {
+      setManuscriptLoadingFor(null);
+    }
+  };
+
   useEffect(() => {
     if (!teacherId) { setLoading(false); return; }
     const load = async () => {
@@ -100,15 +136,20 @@ export default function ExternalExpertGrading() {
               committeeService.getStudents(assignment.committeeId),
             ]);
             const committee = committeeRes.data;
+            // External expert behaves like a regular committee member: once the
+            // committee is closed (secretary submitted), nothing is gradable, so
+            // drop it from the active grading view entirely.
+            if (committee.status !== 'ACTIVE' && committee.status !== 'Идэвхтэй') return;
+
             const stageType = committee.stageType || '';
             // Admin creates a single GLOBAL defense session per stage (committeeId='GLOBAL'),
             // so querying by committeeId misses it. Query by stageType, prefer per-committee
             // session, else fall back to the global one.
             const sessionsRes = await workflowService.getDefenseSessions({ stageType })
               .catch(() => ({ data: [] as DefenseSession[] }));
-            const openSessions = sessionsRes.data.filter(s => s.status === 'OPEN' || s.status === 'ACTIVE' || s.status === 'CLOSED');
-            const session = openSessions.find(s => s.committeeId === assignment.committeeId)
-              || openSessions.find(s => s.stageType === stageType)
+            const liveSessions = sessionsRes.data.filter(s => s.status === 'OPEN' || s.status === 'ACTIVE');
+            const session = liveSessions.find(s => s.committeeId === assignment.committeeId)
+              || liveSessions.find(s => s.stageType === stageType)
               || null;
 
             const students: StudentInfo[] = studentsRes.data.map(cs => ({
@@ -310,6 +351,16 @@ export default function ExternalExpertGrading() {
                         </div>
                       </div>
                       <div className="flex items-center gap-2 shrink-0 ml-3">
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); openManuscript(student.studentId); }}
+                          className="inline-flex items-center gap-1 text-xs text-ink-700 hover:text-ink-900 border border-border-strong hover:border-ink-900 rounded-sm px-2 h-6 transition-colors"
+                          disabled={manuscriptLoadingFor === student.studentId}
+                          title="Дипломын ажил үзэх"
+                        >
+                          <FileText className="w-3 h-3" strokeWidth={1.6} />
+                          {manuscriptLoadingFor === student.studentId ? "Нээж байна..." : "Дипломын ажил"}
+                        </button>
                         {existing?.isSubmitted ? (
                           <span className="inline-flex items-center gap-1.5 text-xs text-ink-700 tabular-nums">
                             <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-dot-positive)]" strokeWidth={1.6} />
@@ -356,12 +407,12 @@ export default function ExternalExpertGrading() {
                           </span>
                         </div>
 
-                        <textarea
-                          placeholder="Тайлбар (заавал биш)..."
-                          className="w-full border border-border rounded-md px-3 py-2 text-sm resize-none bg-surface focus:outline-none focus:border-ink-900"
-                          rows={2}
+                        <RichTextEditor
                           value={comment}
-                          onChange={e => setComment(e.target.value)}
+                          onChange={setComment}
+                          placeholder="Тайлбар (заавал биш)..."
+                          minHeight={88}
+                          ariaLabel="Үнэлгээний тайлбар"
                         />
 
                         {gradeError && (
@@ -402,6 +453,30 @@ export default function ExternalExpertGrading() {
           </Card>
         );
       })}
+
+      {manuscriptError && !manuscriptActiveId && (
+        <div className="fixed bottom-4 right-4 z-50 max-w-sm bg-surface border border-border rounded-md p-3 shadow-lg flex items-start gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)] mt-1.5 shrink-0" />
+          <div className="flex-1 text-sm text-ink-900">{manuscriptError}</div>
+          <button
+            type="button"
+            onClick={() => setManuscriptError(null)}
+            className="text-ink-400 hover:text-ink-900 text-xs px-1"
+            aria-label="Хаах"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
+      {manuscriptActiveId && manuscriptFiles.length > 0 && (
+        <FilePreviewModal
+          files={manuscriptFiles}
+          activeId={manuscriptActiveId}
+          onClose={() => { setManuscriptFiles([]); setManuscriptActiveId(null); }}
+          onSelect={setManuscriptActiveId}
+        />
+      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { topicApi } from '../lib/apiClient';
 export interface Topic {
   id: number;
   title: string;
+  titleEn?: string;
   description?: string;
   researchGoal?: string;
   createdById: string;
@@ -31,7 +32,7 @@ export interface TopicRequest {
 
 export const topicService = {
   createTopic: (body: {
-    title: string; description: string; researchGoal: string;
+    title: string; titleEn: string; description: string; researchGoal: string;
     keywords?: string; createdById: string; departmentId?: string;
     visibility?: string; status?: string;
   }) =>

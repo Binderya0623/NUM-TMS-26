@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui
 import { Button } from "../../../components/ui/button";
 import { Badge } from "../../../components/ui/badge";
 import { Input } from "../../../components/ui/input";
-import { Textarea } from "../../../components/ui/textarea";
 import { Dialog, DialogHeader, DialogBody, DialogFooter } from "../../../components/ui/dialog";
 import { Avatar, AvatarFallback } from "../../../components/ui/avatar";
 import {
@@ -15,6 +14,8 @@ import { getStoredUser } from "../../../../lib/authGuard";
 import { userService } from "../../../../services/userService";
 import type { UserRecord } from "../../../../services/userService";
 import { initialsFromName } from "../../../../lib/utils";
+import { RichText } from "../../../components/RichText";
+import { RichTextEditor } from "../../../components/RichTextEditor";
 
 type Tone = "positive" | "warning" | "negative" | "neutral" | "accent";
 const toneDot: Record<Tone, string> = {
@@ -64,7 +65,7 @@ export default function StudentTopicTab() {
   const [loadingProposals, setLoadingProposals] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
-  const [formData, setFormData] = useState({ title: "", description: "", goal: "", keywords: "", supervisorId: "" });
+  const [formData, setFormData] = useState({ title: "", titleEn: "", description: "", goal: "", keywords: "", supervisorId: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
 
@@ -147,6 +148,7 @@ export default function StudentTopicTab() {
   const validate = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.title.trim()) newErrors.title = "Сэдвийн нэр заавал оруулна уу";
+    if (!formData.titleEn.trim()) newErrors.titleEn = "English title is required";
     if (!formData.description.trim()) newErrors.description = "Тайлбар заавал оруулна уу";
     if (!formData.goal.trim()) newErrors.goal = "Судалгааны зорилго заавал оруулна уу";
     setErrors(newErrors);
@@ -154,7 +156,7 @@ export default function StudentTopicTab() {
   };
 
   const resetForm = () => {
-    setFormData({ title: "", description: "", goal: "", keywords: "", supervisorId: "" });
+    setFormData({ title: "", titleEn: "", description: "", goal: "", keywords: "", supervisorId: "" });
     setErrors({});
     setShowForm(false);
     setEditingId(null);
@@ -169,6 +171,7 @@ export default function StudentTopicTab() {
     setSubmitting(true);
     const body = {
       title: formData.title,
+      titleEn: formData.titleEn,
       description: formData.description,
       researchGoal: formData.goal,
       keywords: formData.keywords || undefined,
@@ -251,6 +254,9 @@ export default function StudentTopicTab() {
                       <CardTitle className="text-base font-semibold leading-tight text-ink-900 tracking-tight line-clamp-2">
                         {topic.title}
                       </CardTitle>
+                      {topic.titleEn && (
+                        <p className="text-xs italic text-ink-500 mt-1 leading-snug line-clamp-2">{topic.titleEn}</p>
+                      )}
                       {(() => {
                         const creator = topic.createdByType === 'TEACHER' && topic.createdById
                           ? teachers.find(x => x.id === topic.createdById)
@@ -288,7 +294,11 @@ export default function StudentTopicTab() {
                     </CardHeader>
                     <CardContent className="pt-4 flex-1 flex flex-col justify-between">
                       <div>
-                        <p className="text-sm text-ink-700 line-clamp-3 mb-4 leading-relaxed">{topic.description}</p>
+                        <RichText
+                          html={topic.description}
+                          className="text-sm text-ink-700 line-clamp-3 mb-4 leading-relaxed"
+                        />
+
                         {topic.keywords && (
                           <div className="flex flex-wrap gap-1.5 mb-4">
                             {topic.keywords.split(",").map(kw => (
@@ -354,12 +364,12 @@ export default function StudentTopicTab() {
               })()}
               <div>
                 <label className="text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-2 block">Сэдэв сонгох шалтгаан (заавал биш)</label>
-                <Textarea
-                  placeholder="Энэ сэдвийг яагаад сонирхож байна вэ?"
-                  rows={3}
-                  className="resize-none"
+                <RichTextEditor
                   value={motivation}
-                  onChange={e => setMotivation(e.target.value)}
+                  onChange={setMotivation}
+                  placeholder="Энэ сэдвийг яагаад сонирхож байна вэ?"
+                  minHeight={110}
+                  ariaLabel="Сэдэв сонгох шалтгаан"
                 />
               </div>
               <div className="bg-surface-muted rounded-md p-3 mt-4 border border-border">
@@ -414,20 +424,26 @@ export default function StudentTopicTab() {
                           {info.label}
                         </span>
                       </div>
-                      <h3 className="text-base font-semibold text-ink-900 mb-1.5 tracking-tight">
+                      <h3 className="text-base font-semibold text-ink-900 mb-1 tracking-tight">
                         {topic?.title || `Сэдэв #${req.topicId}`}
                       </h3>
-                      {topic?.description && (
-                        <p className="text-sm text-ink-600 mb-3 leading-relaxed">{topic.description}</p>
+                      {topic?.titleEn && (
+                        <p className="text-xs italic text-ink-500 mb-1.5">{topic.titleEn}</p>
                       )}
+                      <RichText
+                        html={topic?.description}
+                        className="text-sm text-ink-600 mb-3 leading-relaxed"
+                      />
                       {req.motivation && (
                         <div className="bg-surface-muted rounded-md p-3 border border-border text-sm text-ink-700">
-                          <span className="font-semibold">Шалтгаан:</span> {req.motivation}
+                          <span className="font-semibold">Шалтгаан:</span>{' '}
+                          <RichText html={req.motivation} inline />
                         </div>
                       )}
                       {req.rejectionReason && (info.tone === "negative") && (
                         <div className="mt-3 bg-surface-muted rounded-md p-3 border border-border text-sm text-ink-700">
-                          <span className="font-semibold">Татгалзсан шалтгаан:</span> {req.rejectionReason}
+                          <span className="font-semibold">Татгалзсан шалтгаан:</span>{' '}
+                          <RichText html={req.rejectionReason} inline />
                         </div>
                       )}
                     </CardContent>
@@ -465,11 +481,26 @@ export default function StudentTopicTab() {
                 <FormField label="Сэдвийн нэр" required error={errors.title}>
                   <Input value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} placeholder="Жишээ: Монгол хэлний дуу таних систем..." />
                 </FormField>
+                <FormField label="Сэдвийн нэр (English)" required hint="NUM TMS bilingual requirement" error={errors.titleEn}>
+                  <Input value={formData.titleEn} onChange={(e) => setFormData({ ...formData, titleEn: e.target.value })} placeholder="e.g. Mongolian speech recognition system…" />
+                </FormField>
                 <FormField label="Сэдвийн тайлбар" required error={errors.description}>
-                  <Textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} placeholder="Сэдвийн тухай дэлгэрэнгүй тайлбар..." rows={4} className="resize-none" />
+                  <RichTextEditor
+                    value={formData.description}
+                    onChange={(html) => setFormData({ ...formData, description: html })}
+                    placeholder="Сэдвийн тухай дэлгэрэнгүй тайлбар..."
+                    minHeight={140}
+                    ariaLabel="Сэдвийн тайлбар"
+                  />
                 </FormField>
                 <FormField label="Судалгааны зорилго" required error={errors.goal}>
-                  <Input value={formData.goal} onChange={(e) => setFormData({ ...formData, goal: e.target.value })} placeholder="Энэ судалгаагаар ямар үр дүнд хүрэх вэ?" />
+                  <RichTextEditor
+                    value={formData.goal}
+                    onChange={(html) => setFormData({ ...formData, goal: html })}
+                    placeholder="Энэ судалгаагаар ямар үр дүнд хүрэх вэ?"
+                    minHeight={110}
+                    ariaLabel="Судалгааны зорилго"
+                  />
                 </FormField>
                 <FormField label="Түлхүүр үгс" hint="Таслалаар тусгаарлах">
                   <div className="relative">
@@ -524,22 +555,30 @@ export default function StudentTopicTab() {
                         </span>
                         <div className="text-xs text-ink-500 tabular-nums">{p.createdAt ? `Илгээсэн: ${p.createdAt.split("T")[0]}` : "Ноорог"}</div>
                       </div>
-                      <h3 className="text-base font-semibold text-ink-900 mb-2 tracking-tight">{p.title}</h3>
-                      <p className="text-sm text-ink-600 mb-3 leading-relaxed">{p.description}</p>
+                      <h3 className="text-base font-semibold text-ink-900 tracking-tight">{p.title}</h3>
+                      {p.titleEn && (
+                        <p className="text-xs italic text-ink-500 mb-2">{p.titleEn}</p>
+                      )}
+                      <RichText
+                        html={p.description}
+                        className="text-sm text-ink-600 mb-3 leading-relaxed"
+                      />
                       {p.researchGoal && (
-                        <div className="bg-surface-muted rounded-md p-3 text-sm border border-border">
-                          <span className="font-semibold text-ink-900">Зорилго:</span> <span className="text-ink-700">{p.researchGoal}</span>
+                        <div className="bg-surface-muted rounded-md p-3 text-sm border border-border text-ink-700">
+                          <span className="font-semibold text-ink-900">Зорилго:</span>{' '}
+                          <RichText html={p.researchGoal} inline />
                         </div>
                       )}
                       {p.rejectionReason && (
                         <div className="mt-3 bg-surface-muted rounded-md p-3 text-sm border border-border text-ink-700">
-                          <span className="font-semibold">Татгалзсан шалтгаан:</span> {p.rejectionReason}
+                          <span className="font-semibold">Татгалзсан шалтгаан:</span>{' '}
+                          <RichText html={p.rejectionReason} inline />
                         </div>
                       )}
                       {(p.status === "DRAFT" || p.status === "REJECTED") && (
                         <div className="mt-4 pt-4 border-t border-border flex gap-2 justify-end">
                           <Button variant="outline" size="sm" onClick={() => {
-                            setFormData({ title: p.title, description: p.description || "", goal: p.researchGoal || "", keywords: p.keywords || "", supervisorId: p.supervisorId || "" });
+                            setFormData({ title: p.title, titleEn: p.titleEn || "", description: p.description || "", goal: p.researchGoal || "", keywords: p.keywords || "", supervisorId: p.supervisorId || "" });
                             setEditingId(p.id);
                             setShowForm(true);
                           }}>

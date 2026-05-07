@@ -18,29 +18,55 @@ interface DisplayGrade {
   progress2: number | null;
   preDefense: number | null;
   finalDefense: number | null;
-  weightedFinal: number | null;
+  reviewer: number | null;
+  total: number | null;
   letterGrade: string;
   status: string;
   publishedBy: string | null;
   publishedOn: string | null;
 }
 
-const toDisplayGrade = (g: FinalGrade, studentName: string): DisplayGrade => ({
-  id: g.id,
-  student: studentName,
-  studentId: g.studentId,
-  progress1: g.progress1Score ?? null,
-  progress2: g.progress2Score ?? null,
-  preDefense: g.preliminaryScore ?? null,
-  finalDefense: g.finalScore ?? null,
-  weightedFinal: g.averageScore ?? null,
-  letterGrade: g.gradeLetter || '—',
-  status: g.isPublished ? 'Нийтлэгдсэн' : g.averageScore != null ? 'Ноорог' : 'Хүлээгдэж буй',
-  publishedBy: g.confirmedBy || null,
-  publishedOn: g.publishedAt?.split('T')[0] || null,
-});
+// Backend (FinalGradeConfirmation) fields are: progress1Score (15), progress2Score (20),
+// preliminaryScore (25), finalCommitteeScore (35), reviewerScore (5), totalScore (100).
+const num = (v: unknown): number | null =>
+  v === null || v === undefined || v === '' ? null : Number(v);
 
-const stageWeights = { progress1: 10, progress2: 15, preDefense: 20, finalDefense: 40 };
+// NUM grading scale: A+, A, B+, B, C+, C, D, F.
+function letterFromScore(total: number | null): string {
+  if (total == null || Number.isNaN(total)) return '—';
+  if (total >= 95) return 'A+';
+  if (total >= 90) return 'A';
+  if (total >= 85) return 'B+';
+  if (total >= 80) return 'B';
+  if (total >= 75) return 'C+';
+  if (total >= 70) return 'C';
+  if (total >= 60) return 'D';
+  return 'F';
+}
+
+const toDisplayGrade = (g: FinalGrade, studentName: string): DisplayGrade => {
+  const total = num(g.totalScore);
+  return {
+    id: g.id,
+    student: studentName,
+    studentId: g.studentId,
+    progress1: num(g.progress1Score),
+    progress2: num(g.progress2Score),
+    preDefense: num(g.preliminaryScore),
+    finalDefense: num(g.finalCommitteeScore),
+    reviewer: num(g.reviewerScore),
+    total,
+    // Prefer the persisted letter; fall back to deriving it from the total
+    // so older records (and the HEAD's first-pass confirms that didn't send a
+    // letter) still display a grade instead of "—".
+    letterGrade: g.gradeLetter || letterFromScore(total),
+    status: g.isPublished ? 'Нийтлэгдсэн' : total != null ? 'Ноорог' : 'Хүлээгдэж буй',
+    publishedBy: g.confirmedBy || null,
+    publishedOn: g.publishedAt?.split('T')[0] || null,
+  };
+};
+
+const stageWeights = { progress1: 15, progress2: 20, preDefense: 25, finalDefense: 35, reviewer: 5 };
 
 type StatusTone = "positive" | "warning" | "neutral";
 
@@ -198,10 +224,10 @@ export default function AdminGrades() {
           ) : filtered.length === 0 ? (
             <div className="p-12 text-center text-ink-400 text-sm">Дүн олдсонгүй.</div>
           ) : (
-            <table className="w-full min-w-[900px]">
+            <table className="w-full min-w-[1000px]">
               <thead>
                 <tr className="border-b border-border">
-                  {["Оюутан", "Явц 1", "Явц 2", "Урьдч.", "Эцсийн", "Жигнэсэн", "Дүн", "Байдал", ""].map(h => (
+                  {["Оюутан", "Явц 1", "Явц 2", "Урьдч.", "Эцсийн", "Шүүмж", "Нийт", "Дүн", "Байдал", ""].map(h => (
                     <th key={h} className="px-4 py-3 text-[11px] font-medium text-ink-500 uppercase tracking-wider text-left">{h}</th>
                   ))}
                 </tr>
@@ -212,13 +238,13 @@ export default function AdminGrades() {
                     <td className="px-4 py-4">
                       <p className="font-medium text-sm text-ink-900 tracking-tight">{g.student}</p>
                     </td>
-                    {[g.progress1, g.progress2, g.preDefense, g.finalDefense].map((score, i) => (
+                    {[g.progress1, g.progress2, g.preDefense, g.finalDefense, g.reviewer].map((score, i) => (
                       <td key={i} className="px-4 py-4 text-center tabular-nums">
                         {score !== null ? <span className="text-sm font-medium text-ink-900">{score}</span> : <span className="text-ink-300 text-sm">—</span>}
                       </td>
                     ))}
                     <td className="px-4 py-4 text-center">
-                      {g.weightedFinal !== null ? <span className="text-base font-semibold text-ink-900 tabular-nums">{g.weightedFinal}</span> : <span className="text-ink-300">—</span>}
+                      {g.total !== null ? <span className="text-base font-semibold text-ink-900 tabular-nums">{g.total}</span> : <span className="text-ink-300">—</span>}
                     </td>
                     <td className="px-4 py-4 text-center">
                       <span className={`inline-flex items-center justify-center min-w-[28px] h-6 px-2 text-xs font-medium rounded-sm border ${
@@ -238,7 +264,7 @@ export default function AdminGrades() {
                         <Button variant="ghost" size="sm" onClick={() => setSelectedGrade(g)}>
                           <Eye className="w-3.5 h-3.5 mr-1" strokeWidth={1.8} /> Харах
                         </Button>
-                        {g.status !== "Нийтлэгдсэн" && g.weightedFinal !== null && (
+                        {g.status !== "Нийтлэгдсэн" && g.total !== null && (
                           <Button size="sm" onClick={() => { setPublishModal(g); setPublishConfirmed(false); }}>
                             <CheckCircle2 className="w-3.5 h-3.5 mr-1" strokeWidth={1.8} /> Нийтлэх
                           </Button>
@@ -270,9 +296,9 @@ export default function AdminGrades() {
           </div>
           <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
             <div>
-              <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-2">Жигнэсэн нийт оноо</p>
+              <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-2">Нийт оноо</p>
               <div className="flex items-baseline gap-2">
-                <span className="text-5xl font-semibold text-ink-900 tabular-nums tracking-tight">{selectedGrade.weightedFinal ?? "—"}</span>
+                <span className="text-5xl font-semibold text-ink-900 tabular-nums tracking-tight">{selectedGrade.total ?? "—"}</span>
                 <span className="text-sm text-ink-500 tabular-nums">/ 100</span>
                 <span className="ml-auto text-sm font-medium text-ink-900 border border-border-strong rounded-sm px-2 py-0.5">{selectedGrade.letterGrade}</span>
               </div>
@@ -285,6 +311,7 @@ export default function AdminGrades() {
                   { label: "Явц 2", score: selectedGrade.progress2, weight: stageWeights.progress2 },
                   { label: "Урьдчилсан хамгаалалт", score: selectedGrade.preDefense, weight: stageWeights.preDefense },
                   { label: "Эцсийн хамгаалалт", score: selectedGrade.finalDefense, weight: stageWeights.finalDefense },
+                  { label: "Шүүмжийн оноо", score: selectedGrade.reviewer, weight: stageWeights.reviewer },
                 ].map(item => (
                   <div key={item.label} className="flex items-center justify-between py-3 border-b border-border last:border-b-0">
                     <div>
@@ -336,7 +363,7 @@ export default function AdminGrades() {
                 <div className="border border-border rounded-md p-4">
                   <p className="text-sm font-medium text-ink-900 tracking-tight">{publishModal.student}</p>
                   <div className="flex items-baseline gap-2 mt-2">
-                    <span className="text-3xl font-semibold text-ink-900 tabular-nums tracking-tight">{publishModal.weightedFinal}</span>
+                    <span className="text-3xl font-semibold text-ink-900 tabular-nums tracking-tight">{publishModal.total ?? "—"}</span>
                     <span className="text-sm text-ink-500 tabular-nums">/ 100</span>
                     <span className="ml-auto text-sm font-medium text-ink-900 border border-border-strong rounded-sm px-2 py-0.5">{publishModal.letterGrade}</span>
                   </div>
