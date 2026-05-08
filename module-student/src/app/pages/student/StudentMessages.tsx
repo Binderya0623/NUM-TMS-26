@@ -1,75 +1,170 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Card, CardContent } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/button";
 import { Avatar, AvatarFallback } from "../../components/ui/avatar";
-import { Send, Paperclip, MoreVertical } from "lucide-react";
+import { Send, MessageSquare } from "lucide-react";
 import { chatService, type ChatMessage } from "../../../services/chatService";
 import { planService } from "../../../services/planService";
+import { topicService } from "../../../services/topicService";
 import { userService } from "../../../services/userService";
 import { getStoredUser } from "../../../lib/authGuard";
-import { resolveName, initialsFromName } from "../../../lib/utils";
+import { initialsFromName } from "../../../lib/utils";
+
+interface SupervisorRef {
+  id: string;
+  name: string;
+}
 
 export default function StudentMessages() {
   const user = getStoredUser();
   const studentId = user?.userId || user?.username || "";
 
+  const [supervisor, setSupervisor] = useState<SupervisorRef | null>(null);
   const [thesisId, setThesisId] = useState<string | null>(null);
-  const [supervisorName, setSupervisorName] = useState<string>("Удирдагч багш");
-  const [userMap, setUserMap] = useState<Record<string, string>>({});
+  const [resolveStatus, setResolveStatus] = useState<"loading" | "ready" | "no-supervisor">("loading");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [messageText, setMessageText] = useState("");
-  const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 
+  // Resolve the conversation peer (supervisor) using the same chain the rest
+  // of the student app uses: plan.supervisorId, then any APPROVED topic
+  // request's responder, in that order. If neither is available the student
+  // simply has no peer to chat with yet.
   useEffect(() => {
-    if (!studentId) { setLoading(false); return; }
-    planService.getMyPlan(studentId)
-      .then(async res => {
-        const plan = res.data[0];
-        setThesisId(plan?.thesisId ?? studentId);
-        if (plan?.supervisorId) {
-          const sup = await userService.getById(plan.supervisorId).catch(() => ({ data: null as any }));
-          if (sup.data?.displayName) {
-            setSupervisorName(sup.data.displayName);
-            setUserMap(prev => ({ ...prev, [plan.supervisorId!]: sup.data.displayName }));
-          }
+    if (!studentId) { setResolveStatus("no-supervisor"); return; }
+    let cancelled = false;
+    (async () => {
+      try {
+        const planRes = await planService.getMyPlan(studentId).catch(() => ({ data: [] as any[] }));
+        const plan = planRes.data?.[0] ?? null;
+        let supId: string | undefined = plan?.supervisorId;
+        const tId: string | null = plan?.thesisId ?? null;
+
+        if (!supId) {
+          const reqRes = await topicService.getMyRequests(studentId).catch(() => ({ data: [] as any[] }));
+          const approved = (reqRes.data || []).find((r: any) => r.status === "APPROVED");
+          supId = approved?.respondedById;
         }
-      })
-      .catch(() => setThesisId(studentId));
+        if (cancelled) return;
+        if (!supId) { setResolveStatus("no-supervisor"); return; }
+
+        const supRes = await userService.getById(supId).catch(() => ({ data: null as any }));
+        if (cancelled) return;
+        setSupervisor({ id: supId, name: supRes.data?.displayName || supId });
+        setThesisId(tId);
+        setResolveStatus("ready");
+      } catch {
+        if (!cancelled) setResolveStatus("no-supervisor");
+      }
+    })();
+    return () => { cancelled = true; };
   }, [studentId]);
 
-  useEffect(() => {
-    if (!thesisId) return;
-    chatService.getMessages(thesisId)
-      .then(res => setMessages(res.data))
-      .catch(() => {})
-      .finally(() => setLoading(false));
+  const conversationId = useMemo(() => {
+    if (!supervisor) return null;
+    return chatService.conversationId(studentId, supervisor.id, thesisId);
+  }, [studentId, supervisor, thesisId]);
 
-    const interval = setInterval(() => {
-      chatService.getMessages(thesisId)
-        .then(res => setMessages(res.data))
-        .catch(() => {});
-    }, 10000);
-    return () => clearInterval(interval);
-  }, [thesisId]);
+  // Live conversation feed: fetch the backlog once, then subscribe to SSE for
+  // new messages and read receipts. Falls back to polling only if SSE fails
+  // to open (proxy strips text/event-stream, network blocked, etc.).
+  useEffect(() => {
+    if (!conversationId || !studentId) return;
+    let cancelled = false;
+    let pollInterval: ReturnType<typeof setInterval> | null = null;
+    let stop: (() => void) | null = null;
+
+    const reconcileSeen = (msgs: ChatMessage[]) => {
+      if (msgs.some(m => m.receiverId === studentId && m.status !== "SEEN")) {
+        chatService.markRead(conversationId, studentId);
+      }
+    };
+    const loadBacklog = async () => {
+      const res = await chatService.getMessages(conversationId);
+      if (cancelled) return;
+      setMessages(res.data);
+      reconcileSeen(res.data);
+    };
+
+    loadBacklog();
+    stop = chatService.openStream(conversationId, {
+      onMessage: (m) => {
+        if (cancelled) return;
+        setMessages(prev => prev.some(x => x.id === m.id) ? prev : [...prev, m]);
+        if (m.receiverId === studentId && m.status !== "SEEN") {
+          chatService.markRead(conversationId, studentId);
+        }
+      },
+      onSeen: (e) => {
+        if (cancelled || e.viewerId === studentId) return;
+        // Counterpart read our outbound messages — flip their status locally
+        // so the "Уншсан" indicator updates without a refetch.
+        setMessages(prev => prev.map(m =>
+          m.senderId === studentId && m.receiverId === e.viewerId
+            ? { ...m, status: "SEEN", seenAt: e.at }
+            : m,
+        ));
+      },
+      onError: () => {
+        // SSE failed; degrade to a 10s poll so chat keeps working.
+        if (pollInterval || cancelled) return;
+        pollInterval = setInterval(loadBacklog, 10000);
+      },
+    });
+
+    return () => {
+      cancelled = true;
+      if (stop) stop();
+      if (pollInterval) clearInterval(pollInterval);
+    };
+  }, [conversationId, studentId]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSendMessage = () => {
-    if (!messageText.trim() || !thesisId) return;
+  const handleSendMessage = async () => {
+    if (!messageText.trim() || !conversationId || !supervisor) return;
     setSending(true);
-    chatService.sendMessage(thesisId, studentId, "STUDENT", messageText.trim())
-      .then(res => {
-        setMessages(prev => [...prev, res.data]);
-        setMessageText("");
-      })
-      .catch(() => {})
-      .finally(() => setSending(false));
+    setSendError(null);
+    try {
+      const res = await chatService.sendMessage({
+        conversationId,
+        senderId: studentId,
+        receiverId: supervisor.id,
+        content: messageText.trim(),
+      });
+      // The same message will also arrive via the SSE stream — dedupe by id
+      // so we don't render it twice when the broadcast wins the race.
+      setMessages(prev => prev.some(x => x.id === res.data.id) ? prev : [...prev, res.data]);
+      setMessageText("");
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || err?.response?.data || err?.message || "";
+      setSendError(typeof msg === "string" && msg ? msg : "Илгээж чадсангүй.");
+    } finally {
+      setSending(false);
+    }
   };
+
+  if (resolveStatus === "loading") {
+    return <div className="text-center py-24 text-sm text-ink-400">Ачааллаж байна...</div>;
+  }
+  if (resolveStatus === "no-supervisor" || !supervisor) {
+    return (
+      <div className="flex flex-col items-center justify-center py-24 text-center">
+        <div className="w-14 h-14 border border-border-strong rounded-full flex items-center justify-center mb-5">
+          <MessageSquare className="w-6 h-6 text-ink-400" strokeWidth={1.4} />
+        </div>
+        <h2 className="text-lg font-semibold text-ink-900 tracking-tight mb-2">Удирдагч багш хуваарилагдаагүй байна</h2>
+        <p className="text-ink-500 max-w-sm text-sm leading-relaxed">
+          Сэдвийн хүсэлт батлагдсаны дараа удирдагч багштайгаа энд харилцах боломжтой болно.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="h-[calc(100vh-200px)]">
@@ -79,59 +174,50 @@ export default function StudentMessages() {
             <div className="flex items-center gap-3">
               <Avatar className="h-10 w-10 border border-border-strong">
                 <AvatarFallback className="text-sm font-medium">
-                  {initialsFromName(supervisorName)}
+                  {initialsFromName(supervisor.name)}
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-sm font-semibold text-ink-900 tracking-tight">{supervisorName}</p>
+                <p className="text-sm font-semibold text-ink-900 tracking-tight">{supervisor.name}</p>
                 <p className="text-xs text-ink-500">Дипломын удирдагч багш</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon" aria-label="Дэлгэрэнгүй">
-              <MoreVertical className="h-4 w-4" strokeWidth={1.6} />
-            </Button>
           </div>
 
           <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-surface-sunken">
-            {loading ? (
-              <div className="text-center text-ink-400 text-sm pt-8">Ачааллаж байна...</div>
-            ) : messages.length === 0 ? (
+            {messages.length === 0 ? (
               <div className="text-center text-ink-500 pt-8">
                 <p className="text-sm">Одоогоор мессеж байхгүй.</p>
                 <p className="text-xs mt-1 text-ink-400">Багштайгаа харилцаагаа эхлүүлнэ үү.</p>
               </div>
             ) : (
               messages.map((msg) => {
-                const isStudent = msg.senderType === "STUDENT" || msg.senderId === studentId;
+                const mine = msg.senderId === studentId;
                 return (
-                  <div key={msg.id} className={`flex ${isStudent ? "justify-end" : "justify-start"}`}>
+                  <div key={msg.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
                     <div className="flex items-end gap-2 max-w-[70%]">
-                      {!isStudent && (
+                      {!mine && (
                         <Avatar className="h-7 w-7 border border-border-strong">
                           <AvatarFallback className="text-[10px] font-medium">
-                            {initialsFromName(resolveName(msg.senderId, userMap, supervisorName))}
+                            {initialsFromName(supervisor.name)}
                           </AvatarFallback>
                         </Avatar>
                       )}
                       <div>
                         <div className={`rounded-md px-3 py-2 ${
-                          isStudent
+                          mine
                             ? "bg-ink-900 text-white"
                             : "bg-surface text-ink-900 border border-border"
                         }`}>
-                          <p className="text-sm leading-relaxed">{msg.content}</p>
+                          <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
                         </div>
-                        <p className={`text-[10px] mt-1 text-ink-400 tabular-nums ${isStudent ? "text-right" : ""}`}>
-                          {msg.sentAt ? new Date(msg.sentAt).toLocaleTimeString("mn-MN", { hour: "2-digit", minute: "2-digit" }) : ""}
+                        <p className={`text-[10px] mt-1 text-ink-400 tabular-nums ${mine ? "text-right" : ""}`}>
+                          {msg.sentAt
+                            ? new Date(msg.sentAt).toLocaleTimeString("mn-MN", { hour: "2-digit", minute: "2-digit" })
+                            : ""}
+                          {mine && msg.status === "SEEN" ? " · Уншсан" : ""}
                         </p>
                       </div>
-                      {isStudent && (
-                        <Avatar className="h-7 w-7 border border-border-strong">
-                          <AvatarFallback className="text-[10px] font-medium">
-                            {studentId.substring(0, 2).toUpperCase()}
-                          </AvatarFallback>
-                        </Avatar>
-                      )}
                     </div>
                   </div>
                 );
@@ -140,24 +226,27 @@ export default function StudentMessages() {
             <div ref={bottomRef} />
           </div>
 
-          <div className="p-4 border-t border-border bg-surface">
+          <div className="p-4 border-t border-border bg-surface space-y-2">
             <div className="flex gap-2">
-              <Button variant="ghost" size="icon" className="flex-shrink-0" aria-label="Файл хавсаргах">
-                <Paperclip className="h-4 w-4" strokeWidth={1.6} />
-              </Button>
               <Input
                 placeholder="Мессежээ бичнэ үү..."
                 value={messageText}
                 onChange={(e) => setMessageText(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSendMessage()}
                 className="flex-1"
+                disabled={sending}
               />
               <Button className="flex-shrink-0" disabled={sending || !messageText.trim()} onClick={handleSendMessage}>
                 <Send className="h-4 w-4 mr-2" strokeWidth={1.6} />
                 Илгээх
               </Button>
             </div>
-            <p className="text-xs text-ink-400 mt-2">Enter — илгээх, Shift+Enter — шинэ мөр</p>
+            {sendError && (
+              <p className="text-xs text-[var(--color-dot-negative)] inline-flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)]" /> {sendError}
+              </p>
+            )}
+            <p className="text-xs text-ink-400">Enter — илгээх</p>
           </div>
         </CardContent>
       </Card>

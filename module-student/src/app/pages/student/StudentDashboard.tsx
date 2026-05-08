@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import { Avatar, AvatarFallback } from "../../components/ui/avatar";
-import { FileText, MessageSquare, Calendar, TrendingUp, Upload, Eye, BookOpen, CheckCircle2, Clock, ArrowRight } from "lucide-react";
+import { FileText, MessageSquare, Calendar, TrendingUp, Upload, Eye, BookOpen, CheckCircle2, Clock, MapPin, Users } from "lucide-react";
 import { thesisService, type ThesisInfo, type ThesisReport } from "../../../services/thesisService";
 import { topicService } from "../../../services/topicService";
 import { planService, type Plan } from "../../../services/planService";
 import { userService } from "../../../services/userService";
 import { workflowService, type DefenseSession } from "../../../services/workflowService";
 import { committeeService } from "../../../services/committeeService";
+import { evaluationService } from "../../../services/evaluationService";
 import { getStoredUser } from "../../../lib/authGuard";
-import { isUuid, initialsFromName } from "../../../lib/utils";
+import { isUuid, initialsFromName, resolveName } from "../../../lib/utils";
 import { useNavigate } from "react-router";
 
 type StageState = "done" | "active" | "upcoming";
@@ -22,6 +23,30 @@ const STAGE_LABELS: { key: string; label: string; sessionType?: string }[] = [
   { key: "pre",   label: "Урьдчилсан хамгаалалт", sessionType: "PRE_DEFENSE" },
   { key: "final", label: "Эцсийн хамгаалалт",     sessionType: "FINAL_DEFENSE" },
 ];
+
+// Helpers for the "Дараагийн хамгаалалт" card. Same shape as the deadlines page.
+function fmtDateTime(iso?: string): string | null {
+  if (!iso) return null;
+  return new Date(iso).toLocaleString("mn-MN", {
+    year: "numeric", month: "short", day: "numeric",
+    hour: "2-digit", minute: "2-digit",
+  });
+}
+function daysFrom(iso?: string): number | null {
+  if (!iso) return null;
+  return Math.ceil((new Date(iso).getTime() - Date.now()) / 86400000);
+}
+const stageLabel = (s?: string) => {
+  const m: Record<string, string> = {
+    PROGRESS_1: "Явцын тайлан 1",
+    PROGRESS_2: "Явцын тайлан 2",
+    PRELIMINARY: "Урьдчилсан хамгаалалт",
+    PRE_DEFENSE: "Урьдчилсан хамгаалалт",
+    FINAL: "Эцсийн хамгаалалт",
+    FINAL_DEFENSE: "Эцсийн хамгаалалт",
+  };
+  return (s && m[s]) || s || "";
+};
 
 const planStatusLabel: Record<string, string> = {
   DRAFT: 'Ноорог',
@@ -307,6 +332,10 @@ export default function StudentDashboard() {
   const [hasApprovedRequest, setHasApprovedRequest] = useState(false);
   const [reports, setReports] = useState<ThesisReport[]>([]);
   const [defenseSessions, setDefenseSessions] = useState<DefenseSession[]>([]);
+  const [hasFinalGrade, setHasFinalGrade] = useState(false);
+  const [committeeMembers, setCommitteeMembers] = useState<Record<string, { id: string; teacherId: string; role: string }[]>>({});
+  const [teacherNameMap, setTeacherNameMap] = useState<Record<string, string>>({});
+  const [resolvedSupervisorId, setResolvedSupervisorId] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -322,7 +351,9 @@ export default function StudentDashboard() {
       userService.getDepartments().catch(() => ({ data: [] as any[] })),
       userService.getById(studentId).catch(() => ({ data: null as any })),
       thesisService.getMyReports(studentId).catch(() => ({ data: [] as ThesisReport[] })),
-    ]).then(async ([thesisData, reqRes1, reqRes2, planRes, deptRes, profileRes, reportsRes]) => {
+      evaluationService.getMyFinalGrade(studentId).catch(() => ({ data: null as any })),
+    ]).then(async ([thesisData, reqRes1, reqRes2, planRes, deptRes, profileRes, reportsRes, finalGradeRes]) => {
+      setHasFinalGrade(!!finalGradeRes.data?.id);
       setReports(reportsRes.data || []);
       setThesis(thesisData);
       const deptMap: Record<string, string> = {};
@@ -382,8 +413,50 @@ export default function StudentDashboard() {
       const byId = new Map<string, DefenseSession>();
       allSessions.forEach(s => { if (s.id) byId.set(s.id, s); });
       setDefenseSessions(Array.from(byId.values()));
+      if (supervisorId) setResolvedSupervisorId(supervisorId);
+
+      // Committee membership + teacher name lookup feed the
+      // "Дараагийн хамгаалалт" card on this dashboard. Same source as the
+      // dedicated /student/deadlines page.
+      Promise.all(
+        cmtIds.map((id: string) =>
+          committeeService.getMembers(id)
+            .then(r => [id, r.data] as const)
+            .catch(() => [id, [] as any[]] as const),
+        ),
+      ).then(pairs => {
+        const map: Record<string, { id: string; teacherId: string; role: string }[]> = {};
+        pairs.forEach(([id, members]) => { map[id] = members as any; });
+        setCommitteeMembers(map);
+      });
+      Promise.all([
+        userService.getTeachers().catch(() => ({ data: [] as any[] })),
+        userService.getExternalExperts().catch(() => ({ data: [] as any[] })),
+      ]).then(([tRes, eRes]) => {
+        const m: Record<string, string> = {};
+        [...(tRes.data || []), ...(eRes.data || [])].forEach((u: any) => {
+          if (u.id) m[u.id] = u.displayName || u.name || u.id;
+          if (u.username) m[u.username] = u.displayName || u.name || u.username;
+        });
+        setTeacherNameMap(m);
+      });
     }).finally(() => setLoading(false));
   }, [studentId]);
+
+  // Pick the next defense session for the upcoming-card.
+  // Logic mirrors StudentEvaluationDeadlines.upcomingSession.
+  const upcomingSession = (() => {
+    const candidates = defenseSessions.filter(
+      s => s.status !== "CLOSED" && s.scheduledDate,
+    );
+    if (candidates.length === 0) return undefined;
+    const now = Date.now();
+    const ts = (s: DefenseSession) =>
+      s.scheduledDate ? new Date(s.scheduledDate).getTime() : NaN;
+    const future = candidates.filter(s => !isNaN(ts(s)) && ts(s) >= now);
+    if (future.length > 0) return future.sort((a, b) => ts(a) - ts(b))[0];
+    return candidates.sort((a, b) => ts(b) - ts(a))[0];
+  })();
 
   if (loading) {
     return <div className="text-center py-24 text-sm text-ink-400">Ачааллаж байна...</div>;
@@ -402,7 +475,13 @@ export default function StudentDashboard() {
     return <NoThesisState />;
   }
 
-  const progress = thesis.progress ?? 0;
+  // Progress is derived from real stage state (same source as the timeline),
+  // not the legacy thesis.progress field which the backend rarely keeps fresh.
+  // When a final grade exists the workflow is over — force 100% even if a
+  // session row never landed in defense_session (real life: admins close
+  // committees without creating per-stage sessions for every committee).
+  const doneStages = STAGE_LABELS.filter(s => stageState[s.key]?.state === "done").length;
+  const progress = hasFinalGrade ? 100 : Math.round((doneStages / STAGE_LABELS.length) * 100);
   const currentStage = STAGE_LABELS.find(s => stageState[s.key]?.state === "active")
     || STAGE_LABELS.slice().reverse().find(s => stageState[s.key]?.state === "done")
     || STAGE_LABELS[0];
@@ -533,31 +612,102 @@ export default function StudentDashboard() {
             <CardHeader className="border-b border-border">
               <CardTitle className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-ink-700" strokeWidth={1.6} />
-                Удахгүй болох эцсийн хугацаа
+                Удахгүй болох хамгаалалт
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-4">
-              {thesis.submissionDate ? (
-                <div className="p-4 rounded-md border border-border hover:border-ink-900 transition-colors cursor-pointer group">
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="inline-flex items-center gap-1.5 text-xs text-ink-700 font-medium tracking-tight">
-                      <Clock className="w-3 h-3" strokeWidth={1.6} />
-                      Хүлээлгэх огноо
-                    </span>
-                    <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-ink-900" strokeWidth={1.6} />
+            <CardContent className="p-4 space-y-3">
+              {upcomingSession ? (
+                <>
+                  <div>
+                    <p className="text-[11px] uppercase tracking-wider font-medium text-accent">Дараагийн хамгаалалт</p>
+                    <h3 className="text-base font-semibold text-ink-900 tracking-tight mt-0.5">
+                      {stageLabel(upcomingSession.stageType)}
+                    </h3>
                   </div>
-                  <h4 className="font-semibold text-sm text-ink-900 tracking-tight leading-snug mb-1.5">
-                    Эцсийн дипломын ажил хүлээлгэх
-                  </h4>
-                  <p className="text-xs text-ink-500 tabular-nums">
-                    {new Date(thesis.submissionDate).toLocaleDateString('mn-MN', { year: 'numeric', month: 'long', day: 'numeric' })}
-                  </p>
-                </div>
+                  {upcomingSession.scheduledDate && (
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md border border-border-strong flex items-center justify-center shrink-0">
+                        <Calendar className="w-4 h-4 text-ink-700" strokeWidth={1.6} />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500">Огноо</p>
+                        <p className="text-sm font-medium text-ink-900">{fmtDateTime(upcomingSession.scheduledDate)}</p>
+                        {(() => {
+                          const d = daysFrom(upcomingSession.scheduledDate);
+                          if (d === null) return null;
+                          if (d === 0) return <p className="text-xs text-ink-700 flex items-center gap-1.5 mt-0.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)]" />Өнөөдөр</p>;
+                          if (d > 0)  return <p className="text-xs text-ink-500 mt-0.5 tabular-nums">{d} хоногийн дараа</p>;
+                          return <p className="text-xs text-ink-400 mt-0.5 tabular-nums">{Math.abs(d)} хоногийн өмнө</p>;
+                        })()}
+                      </div>
+                    </div>
+                  )}
+                  {upcomingSession.location && (
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md border border-border-strong flex items-center justify-center shrink-0">
+                        <MapPin className="w-4 h-4 text-ink-700" strokeWidth={1.6} />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500">Байршил</p>
+                        <p className="text-sm font-medium text-ink-900">{upcomingSession.location}</p>
+                      </div>
+                    </div>
+                  )}
+                  {upcomingSession.stageType !== "PROGRESS_1" && upcomingSession.committeeId && (() => {
+                    const upMembers = committeeMembers[upcomingSession.committeeId] || [];
+                    if (upMembers.length === 0) return null;
+                    return (
+                      <div className="pt-2 border-t border-border">
+                        <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-2 flex items-center gap-1">
+                          <Users className="w-3 h-3" strokeWidth={1.6} /> Комисс ({upMembers.length} гишүүн)
+                        </p>
+                        <div className="space-y-1.5">
+                          {upMembers.slice(0, 4).map(m => {
+                            const name = resolveName(m.teacherId, teacherNameMap, "Тодорхойгүй");
+                            return (
+                              <div key={m.id} className="flex items-center gap-2">
+                                <Avatar className="h-6 w-6 border border-border-strong">
+                                  <AvatarFallback className="text-[10px] font-medium">
+                                    {initialsFromName(name)}
+                                  </AvatarFallback>
+                                </Avatar>
+                                <span className="text-xs text-ink-700 truncate flex-1">{name}</span>
+                              </div>
+                            );
+                          })}
+                          {upMembers.length > 4 && (
+                            <p className="text-xs text-ink-400 tabular-nums">+{upMembers.length - 4} гишүүн</p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })()}
+                  {upcomingSession.stageType === "PROGRESS_1" && resolvedSupervisorId && (() => {
+                    const supName = resolveName(resolvedSupervisorId, teacherNameMap, supervisorName || "Удирдагч багш");
+                    return (
+                      <div className="pt-2 border-t border-border">
+                        <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-2">Удирдагч багш</p>
+                        <div className="flex items-center gap-2">
+                          <Avatar className="h-7 w-7 border border-border-strong">
+                            <AvatarFallback className="text-[10px] font-medium">
+                              {initialsFromName(supName)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <span className="text-sm font-medium text-ink-900">{supName}</span>
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </>
               ) : (
-                <p className="text-sm text-ink-400 text-center py-4">Хугацаа тохируулагдаагүй</p>
+                <div className="text-center py-6">
+                  <Calendar className="w-7 h-7 text-ink-300 mx-auto mb-2" strokeWidth={1.4} />
+                  <p className="text-sm font-medium text-ink-700">Хуваарьт хамгаалалт байхгүй</p>
+                  <p className="text-xs text-ink-500 mt-0.5">Тогтоогдох үед энд харагдана.</p>
+                </div>
               )}
-              <Button variant="outline" size="sm" className="w-full mt-3" onClick={() => navigate('/student/evaluation')}>
-                Хуваарь нээх
+              <Button variant="outline" size="sm" className="w-full mt-1" onClick={() => navigate('/student/deadlines')}>
+                Бүх хуваарь харах
               </Button>
             </CardContent>
           </Card>

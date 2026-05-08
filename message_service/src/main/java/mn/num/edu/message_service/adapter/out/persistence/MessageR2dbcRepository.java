@@ -4,6 +4,7 @@ import mn.num.edu.message_service.domain.model.MessageStatus;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface MessageR2dbcRepository
         extends ReactiveCrudRepository<MessageEntity, String> {
@@ -24,4 +25,12 @@ public interface MessageR2dbcRepository
         AND status = 'SENT'
         """)
     Flux<Void> markMessagesAsSeen(String conversationId, String receiverId);
+
+    /** Total messages addressed to a user that have not yet been seen. */
+    @Query("""
+        SELECT COUNT(*) FROM messages
+        WHERE receiver_id = :receiverId
+          AND status <> 'SEEN'
+        """)
+    Mono<Long> countUnreadByReceiverId(String receiverId);
 }

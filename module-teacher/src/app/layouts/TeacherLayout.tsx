@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import TeacherSidebar from "../components/TeacherSidebar";
 import TopHeader from "../components/TopHeader";
 import { FloatingMessageButton } from "../components/FloatingMessageButton";
+import ErrorBoundary from "../components/ErrorBoundary";
 import type { StoredUser } from "../../lib/authGuard";
 import { logout } from "../../lib/authGuard";
+import { chatService } from "../../services/chatService";
 
 const pageTitles: Record<string, { title: string; subtitle: string }> = {
   "/teacher": { title: "Хянах самбар", subtitle: "Тавтай морилно уу, Багш" },
@@ -22,6 +24,7 @@ interface TeacherLayoutProps {
 
 export default function TeacherLayout({ user }: TeacherLayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   const pageInfo = pageTitles[location.pathname] || pageTitles["/teacher"];
@@ -32,6 +35,22 @@ export default function TeacherLayout({ user }: TeacherLayoutProps) {
     .join('')
     .slice(0, 2)
     .toUpperCase();
+
+  // External experts don't participate in the supervisor↔student chat — hide
+  // the FAB entirely on their workspace so it doesn't navigate them somewhere
+  // they have nothing to do.
+  const isExpertWorkspace =
+    location.pathname.startsWith("/teacher/expert") || user.systemRole === "EXTERNAL_EXPERT";
+
+  const userId = user.userId || user.username || '';
+  useEffect(() => {
+    if (!userId || isExpertWorkspace) { setUnreadCount(0); return; }
+    let cancelled = false;
+    const tick = () => chatService.unreadCount(userId).then(n => { if (!cancelled) setUnreadCount(n); });
+    tick();
+    const interval = setInterval(tick, 20000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, [userId, isExpertWorkspace, location.pathname]);
 
   return (
     <div className="flex h-screen bg-slate-50 overflow-hidden">
@@ -47,13 +66,17 @@ export default function TeacherLayout({ user }: TeacherLayoutProps) {
           onLogout={logout}
         />
         <main className="flex-1 overflow-y-auto p-6">
-          <Outlet />
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
         </main>
       </div>
-      <FloatingMessageButton
-        unreadCount={5}
-        onMessageClick={() => navigate("/teacher/messages")}
-      />
+      {!isExpertWorkspace && (
+        <FloatingMessageButton
+          unreadCount={unreadCount}
+          onMessageClick={() => navigate("/teacher/messages")}
+        />
+      )}
     </div>
   );
 }

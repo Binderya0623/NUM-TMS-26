@@ -1,6 +1,8 @@
 package mn.num.edu.thesis_service.adapter.in.web;
 
 import mn.num.edu.thesis_service.adapter.out.persistence.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -8,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -16,25 +19,34 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/thesis-reports")
 public class ThesisReportController {
 
+    private static final Logger log = LoggerFactory.getLogger(ThesisReportController.class);
+    /** Topic name notification_service listens on for student report submissions. */
+    private static final String REPORT_SUBMITTED_TOPIC = "report-submitted";
+
     private final ThesisReportR2dbcRepository reportRepo;
     private final ReportFileR2dbcRepository fileRepo;
     private final ThesisR2dbcRepository thesisRepo;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @Value("${app.upload.dir:${java.io.tmpdir}/thesis-uploads/reports}")
     private String uploadDir;
 
     public ThesisReportController(ThesisReportR2dbcRepository reportRepo,
                                    ReportFileR2dbcRepository fileRepo,
-                                   ThesisR2dbcRepository thesisRepo) {
+                                   ThesisR2dbcRepository thesisRepo,
+                                   KafkaTemplate<String, Object> kafkaTemplate) {
         this.reportRepo = reportRepo;
         this.fileRepo = fileRepo;
         this.thesisRepo = thesisRepo;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     /** Resolve thesisId: use provided value, or look up/auto-create for studentId. */
@@ -137,7 +149,31 @@ public class ThesisReportController {
         entity.setStatus("SUBMITTED");
         entity.setSubmittedAt(LocalDateTime.now());
         return reportRepo.save(entity)
+                .doOnNext(this::publishReportSubmitted)
                 .map(saved -> ResponseEntity.status(HttpStatus.CREATED).body(saved));
+    }
+
+    /**
+     * Fire-and-forget publish to {@code report-submitted}. notification_service
+     * listens for this and emits a {@code REPORT_SUBMITTED} notification. We
+     * deliberately don't fail the HTTP response if Kafka is unhappy — the
+     * report is already persisted and the user-facing flow shouldn't break
+     * because of an event-bus hiccup.
+     */
+    private void publishReportSubmitted(ThesisReportEntity saved) {
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("reportId", saved.getId());
+        payload.put("studentId", saved.getStudentId());
+        payload.put("reportType", saved.getReportType());
+        payload.put("submittedAt", saved.getSubmittedAt() != null
+                ? saved.getSubmittedAt().toString()
+                : LocalDateTime.now().toString());
+        try {
+            kafkaTemplate.send(REPORT_SUBMITTED_TOPIC, saved.getThesisId(), payload);
+            log.info("📤 published report-submitted: reportId={} student={}", saved.getId(), saved.getStudentId());
+        } catch (Exception ex) {
+            log.warn("Failed to publish report-submitted (notification will be skipped)", ex);
+        }
     }
 
     /**

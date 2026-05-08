@@ -100,12 +100,21 @@ const stageFromStatus = (status: string) => {
   return map[status] || status;
 };
 
+// Aligned to the 5-stage timeline (topic, prog1, prog2, pre, final) so each
+// stage = 20%. The student dashboard's "Эрдэм шинжилгээний хуваарь" derives
+// its percentage the same way. Without per-student session data here we can
+// only credit "topic done" (20%) for APPROVED+; deeper stages need defense
+// session lookups that the roster card doesn't load.
 const progressFromStatus = (status: string) => {
   const map: Record<string, number> = {
-    DRAFT: 10, PENDING_TEACHER_APPROVAL: 20, DEPT_PENDING: 30,
-    APPROVED: 40, ACTIVE: 60, SUBMITTED: 80,
+    DRAFT: 0,
+    PENDING_TEACHER_APPROVAL: 5,
+    DEPT_PENDING: 10,
+    APPROVED: 20,        // topic batlagdsan = 1/5 stages done
+    ACTIVE: 20,
+    SUBMITTED: 20,
   };
-  return map[status] ?? 30;
+  return map[status] ?? 0;
 };
 
 export default function TeacherStudents() {
@@ -252,11 +261,12 @@ export default function TeacherStudents() {
   useEffect(() => {
     const load = async () => {
       try {
-        const [plansRes, usersRes, reportsRes, reqRes] = await Promise.all([
+        const [plansRes, usersRes, reportsRes, reqRes, finalGradesRes] = await Promise.all([
           planService.getPlans({ supervisorId: teacherId }),
           userService.getStudents(),
           thesisService.getReports({}),
           topicService.getTopicRequests({ status: 'APPROVED' }).catch(() => ({ data: [] })),
+          evaluationService.getFinalGrades().catch(() => ({ data: [] as any[] })),
         ]);
         const plans: Plan[] = plansRes.data;
         const users: UserRecord[] = usersRes.data;
@@ -266,6 +276,11 @@ export default function TeacherStudents() {
           userMap[u.id] = u.displayName;
         });
         setStudentNameMap(userMap);
+        // Set of studentIds with a confirmed final grade — those are 100%
+        // regardless of plan.status (which may not transition to a "done" value).
+        const gradedStudentIds = new Set(
+          (finalGradesRes.data || []).map((g: any) => g.studentId).filter(Boolean)
+        );
         const planStudentIds = new Set(plans.map(p => p.studentId));
         // Students from topic requests approved by this teacher (no plan yet).
         // The backend's mapRequestRow exposes the supervisor as `respondedById`
@@ -280,9 +295,9 @@ export default function TeacherStudents() {
           id: r.requestedById,
           name: resolveName(r.requestedById, userMap, 'Тодорхойгүй оюутан'),
           thesis: 'Гарчиггүй',
-          stage: 'Сэдэв батлагдсан',
+          stage: gradedStudentIds.has(r.requestedById) ? 'Дүн гарсан' : 'Сэдэв батлагдсан',
           status: 'APPROVED',
-          progress: 5,
+          progress: gradedStudentIds.has(r.requestedById) ? 100 : 5,
           studentId: r.requestedById,
         }));
         const students: DisplayStudent[] = [
@@ -290,9 +305,9 @@ export default function TeacherStudents() {
             id: p.studentId,
             name: resolveName(p.studentId, userMap, 'Тодорхойгүй оюутан'),
             thesis: p.title || 'Гарчиггүй',
-            stage: stageFromStatus(p.status),
+            stage: gradedStudentIds.has(p.studentId) ? 'Дүн гарсан' : stageFromStatus(p.status),
             status: p.status,
-            progress: progressFromStatus(p.status),
+            progress: gradedStudentIds.has(p.studentId) ? 100 : progressFromStatus(p.status),
             studentId: p.studentId,
           })),
           ...fromRequests,

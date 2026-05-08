@@ -24,6 +24,7 @@ export interface ReviewDocument {
   storedPath?: string;
   fileSize?: number;
   mimeType?: string;
+  reviewerScore?: number;   // 0..5, captured at upload time during PRE_DEFENSE
   uploadedAt?: string;
 }
 

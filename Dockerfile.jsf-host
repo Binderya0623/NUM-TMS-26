@@ -1,0 +1,106 @@
+# =============================================================
+# Dockerfile.jsf-host — JSF host (Tomcat) with all 6 MFE bundles
+# baked in.
+#
+# Build context MUST be the repo root because the image needs every
+# MFE source tree.
+#   docker build -f Dockerfile.jsf-host -t diploma-jsf-host .
+#
+# Build-time args (override per environment in docker-compose):
+#   VITE_API_AUTH, VITE_API_USER, VITE_API_TOPIC, ... — see the
+#   FE apiClient.ts and AuthContext.tsx for the full list.
+# =============================================================
+
+# ── Stage 1: build all MFE bundles ───────────────────────────
+FROM node:20-alpine AS mfe-build
+WORKDIR /workspace
+RUN apk add --no-cache bash git
+
+# Copy package manifests first so npm-install layers cache across
+# code changes that don't touch dependencies.
+COPY shared-ui-module/package*.json   shared-ui-module/
+COPY module-thesis/package*.json      module-thesis/
+COPY module-auth/package*.json        module-auth/
+COPY module-admin/package*.json       module-admin/
+COPY module-teacher/package*.json     module-teacher/
+COPY module-student/package*.json     module-student/
+
+RUN cd shared-ui-module   && npm install --silent --no-audit --no-fund
+RUN cd module-thesis      && npm install --silent --no-audit --no-fund
+RUN cd module-auth        && npm install --silent --no-audit --no-fund
+RUN cd module-admin       && npm install --silent --no-audit --no-fund
+RUN cd module-teacher     && npm install --silent --no-audit --no-fund
+RUN cd module-student     && npm install --silent --no-audit --no-fund
+
+# Now copy actual sources.
+COPY shared-ui-module    shared-ui-module
+COPY module-thesis       module-thesis
+COPY module-auth         module-auth
+COPY module-admin        module-admin
+COPY module-teacher      module-teacher
+COPY module-student      module-student
+
+# Build-time overrides for backend base URLs. Defaults preserve the
+# localhost dev behavior; override per environment in compose.
+ARG VITE_API_AUTH=http://localhost:8887
+ARG VITE_API_USER=http://localhost:8086
+ARG VITE_API_TOPIC=http://localhost:8081
+ARG VITE_API_WORKFLOW=http://localhost:8084
+ARG VITE_API_COMMITTEE=http://localhost:8082
+ARG VITE_API_THESIS=http://localhost:8083
+ARG VITE_API_EVALUATION=http://localhost:8085
+ARG VITE_API_NOTIFICATION=http://localhost:8087
+ARG VITE_API_REPORT=http://localhost:8088
+ARG VITE_API_MESSAGE=http://localhost:8089
+ARG VITE_API_ANALYTIC=http://localhost:8090
+ARG VITE_API_GRADING=http://localhost:8091
+
+ENV VITE_API_AUTH=$VITE_API_AUTH \
+    VITE_API_USER=$VITE_API_USER \
+    VITE_API_TOPIC=$VITE_API_TOPIC \
+    VITE_API_WORKFLOW=$VITE_API_WORKFLOW \
+    VITE_API_COMMITTEE=$VITE_API_COMMITTEE \
+    VITE_API_THESIS=$VITE_API_THESIS \
+    VITE_API_EVALUATION=$VITE_API_EVALUATION \
+    VITE_API_NOTIFICATION=$VITE_API_NOTIFICATION \
+    VITE_API_REPORT=$VITE_API_REPORT \
+    VITE_API_MESSAGE=$VITE_API_MESSAGE \
+    VITE_API_ANALYTIC=$VITE_API_ANALYTIC \
+    VITE_API_GRADING=$VITE_API_GRADING
+
+# Build order matters: design system first (federation host),
+# then the shared business module, then the role MFEs.
+RUN cd shared-ui-module   && npm run build
+RUN cd module-thesis      && npm run build
+RUN cd module-auth        && npm run build
+RUN cd module-admin       && npm run build
+RUN cd module-teacher     && npm run build
+RUN cd module-student     && npm run build
+
+# Mirror the layout build-modules.sh produces, so the WAR finds
+# each module at /microfrontends/<name>/dist/...
+RUN mkdir -p staging/microfrontends && \
+    for m in shared-ui-module module-thesis module-auth module-admin module-teacher module-student; do \
+        mkdir -p "staging/microfrontends/$m/dist" && \
+        cp -r "$m/dist/." "staging/microfrontends/$m/dist/" && \
+        if [ -f "$m/dist/assets/remoteEntry.js" ] && [ ! -f "$m/dist/remoteEntry.js" ]; then \
+            cp "$m/dist/assets/remoteEntry.js" "staging/microfrontends/$m/dist/remoteEntry.js"; \
+        fi ; \
+    done
+
+# ── Stage 2: package the JSF WAR with the MFE bundles inside ─
+FROM maven:3.9-eclipse-temurin-17 AS war-build
+WORKDIR /workspace
+COPY jsf-host /workspace/jsf-host
+COPY --from=mfe-build /workspace/staging/microfrontends /workspace/jsf-host/src/main/webapp/microfrontends
+WORKDIR /workspace/jsf-host
+RUN mvn -B -DskipTests -q clean package
+
+# ── Stage 3: Tomcat 9 + Java 17 (JSF 2.x is javax-namespace) ──
+FROM tomcat:9-jre17-temurin
+ENV CATALINA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=70.0"
+RUN rm -rf /usr/local/tomcat/webapps/*
+COPY --from=war-build /workspace/jsf-host/target/jsf-host.war /usr/local/tomcat/webapps/ROOT.war
+EXPOSE 8080
+HEALTHCHECK --interval=15s --timeout=3s --start-period=40s --retries=10 \
+    CMD wget -q --spider http://localhost:8080/ || exit 1

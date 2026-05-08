@@ -50,6 +50,10 @@ export const userService = {
   createExternalExpert: (body: { firstName: string; lastName: string; email: string; password?: string; departmentId?: string; organization?: string; expertise?: string }) =>
     userApi.post<any>('/api/users/external-experts', body).then(res => ({ ...res, data: normalize(res.data) })),
 
+  updateExternalExpertProfile: (userId: string, body: { organization?: string; expertise?: string }) =>
+    userApi.put<any>(`/api/users/external-experts/${userId}/profile`, body)
+      .then(res => ({ ...res, data: normalize(res.data) })),
+
   getDepartments: () =>
     userApi.get<{ id: string; departmentName: string }[]>('/api/users/departments'),
 };

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import StudentSidebar from "../components/StudentSidebar";
 import TopHeader from "../components/TopHeader";
 import { FloatingMessageButton } from "../components/FloatingMessageButton";
+import ErrorBoundary from "../components/ErrorBoundary";
 import type { StoredUser } from "../../lib/authGuard";
 import { logout } from "../../lib/authGuard";
+import { chatService } from "../../services/chatService";
 
 const pageTitles: Record<string, { title: string; subtitle: string }> = {
   "/student": { title: "Миний Хянах самбар", subtitle: "Судалгааны ажлын явцаа хянах" },
@@ -22,6 +24,7 @@ interface StudentLayoutProps {
 
 export default function StudentLayout({ user }: StudentLayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   const pageInfo = pageTitles[location.pathname] || pageTitles["/student"];
@@ -32,6 +35,19 @@ export default function StudentLayout({ user }: StudentLayoutProps) {
     .join('')
     .slice(0, 2)
     .toUpperCase();
+
+  // Real unread count from message_service. Refresh on route changes (covers
+  // navigating away from /messages where we just marked things as SEEN) and
+  // poll every 20s to pick up incoming messages while idle.
+  const userId = user.userId || user.username || '';
+  useEffect(() => {
+    if (!userId) { setUnreadCount(0); return; }
+    let cancelled = false;
+    const tick = () => chatService.unreadCount(userId).then(n => { if (!cancelled) setUnreadCount(n); });
+    tick();
+    const interval = setInterval(tick, 20000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, [userId, location.pathname]);
 
   return (
     <div className="flex h-screen bg-slate-50 overflow-hidden">
@@ -47,11 +63,13 @@ export default function StudentLayout({ user }: StudentLayoutProps) {
           onLogout={logout}
         />
         <main className="flex-1 overflow-y-auto p-6">
-          <Outlet />
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
         </main>
       </div>
       <FloatingMessageButton
-        unreadCount={3}
+        unreadCount={unreadCount}
         onMessageClick={() => navigate("/student/messages")}
       />
     </div>

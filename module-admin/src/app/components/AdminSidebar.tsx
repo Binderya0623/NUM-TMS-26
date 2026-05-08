@@ -1,11 +1,13 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import numLogo from "../../assets/image/num_logo.png";
+import { notificationService } from "../../services/notificationService";
+import { getStoredUser } from "../../lib/authGuard";
 
 import {
   LayoutDashboard,
   Users,
   GraduationCap,
-  BookOpen,
   BarChart3,
   Bell,
   UserCheck,
@@ -42,7 +44,6 @@ const navSections: {
   {
     label: "Хамгаалалт",
     items: [
-      { path: "/admin/thesis",              label: "Дипломын ажил",       icon: BookOpen },
       { path: "/admin/topics",              label: "Сэдвийн удирдлага",   icon: FileSearch },
       { path: "/admin/committees",          label: "Комиссууд",           icon: UserCheck },
       { path: "/admin/evaluation-process",  label: "Үнэлгээний тохиргоо", icon: Settings },
@@ -59,6 +60,18 @@ const navSections: {
 ];
 
 export default function AdminSidebar({ collapsed }: AdminSidebarProps) {
+  const [unread, setUnread] = useState(0);
+
+  useEffect(() => {
+    const userId = getStoredUser()?.userId;
+    if (!userId) return;
+    let cancelled = false;
+    const tick = () => notificationService.unreadCount(userId).then(c => { if (!cancelled) setUnread(c); });
+    tick();
+    const interval = setInterval(tick, 30000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, []);
+
   return (
     <aside
       className={`relative flex flex-col bg-ink-900 border-r border-black/20 transition-[width] duration-300 ${
@@ -139,14 +152,26 @@ export default function AdminSidebar({ collapsed }: AdminSidebarProps) {
 
       {/* Bottom section */}
       <div className="px-5 py-3 border-t border-white/10">
-        <button
-          className={`w-full flex items-center gap-3 h-9 text-white/55 hover:text-white transition-colors ${
-            collapsed ? "justify-center" : ""
-          }`}
+        <NavLink
+          to="/admin/notifications"
+          className={({ isActive }) =>
+            `relative w-full flex items-center gap-3 h-9 transition-colors rounded-sm ${
+              collapsed ? "justify-center" : ""
+            } ${isActive ? "text-white" : "text-white/55 hover:text-white"}`
+          }
         >
-          <Bell className="w-[18px] h-[18px] shrink-0" strokeWidth={1.6} />
-          {!collapsed && <span className="text-[13px] tracking-tight">Мэдэгдэл</span>}
-        </button>
+          <span className="relative inline-flex shrink-0">
+            <Bell className="w-[18px] h-[18px]" strokeWidth={1.6} />
+            {unread > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center min-w-[16px] h-4 px-1 text-[9px] font-semibold leading-none rounded-full bg-accent text-white tabular-nums">
+                {unread > 99 ? "99+" : unread}
+              </span>
+            )}
+          </span>
+          {!collapsed && (
+            <span className="text-[13px] tracking-tight">Мэдэгдэл</span>
+          )}
+        </NavLink>
       </div>
     </aside>
   );

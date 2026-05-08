@@ -35,6 +35,13 @@ export const topicService = {
   getMyRequests: (requestedById: string) =>
     topicApi.get<TopicRequest[]>('/api/v2/topic-requests', { params: { requestedById } }),
 
+  // All approved requests across the cohort — used to grey out topics that
+  // another student has already locked in. Backend also accepts status as a
+  // filter so we don't pull rejections we'd discard anyway.
+  getApprovedRequests: () =>
+    topicApi.get<TopicRequest[]>('/api/v2/topic-requests', { params: { status: 'APPROVED' } })
+      .catch(() => ({ data: [] as TopicRequest[] })),
+
   submitRequest: (topicId: number, requestedById: string, sessionId?: number, motivation?: string) =>
     topicApi.post<TopicRequest>('/api/v2/topic-requests', { topicId, requestedById, sessionId, motivation }),
 

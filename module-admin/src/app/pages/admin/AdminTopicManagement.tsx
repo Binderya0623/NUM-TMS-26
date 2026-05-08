@@ -59,6 +59,7 @@ export default function AdminTopicManagement() {
   const [rejectionReason, setRejectionReason] = useState("");
   const [actionLoading, setActionLoading] = useState(false);
   const [userMap, setUserMap] = useState<Record<string, string>>({});
+  const [userDeptMap, setUserDeptMap] = useState<Record<string, string>>({});
   const [departmentMap, setDepartmentMap] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -70,18 +71,30 @@ export default function AdminTopicManagement() {
     ]).then(([tr, sr, teacherRes, dr]) => {
       setTopics(tr.data);
       const map: Record<string, string> = {};
+      const deptByUser: Record<string, string> = {};
       [...(sr.data || []), ...(teacherRes.data || [])].forEach((u: any) => {
         if (u.id) map[u.id] = u.displayName || u.name || u.id;
         if (u.username) map[u.username] = u.displayName || u.name || u.username;
+        if (u.departmentId) {
+          if (u.id) deptByUser[u.id] = u.departmentId;
+          if (u.username) deptByUser[u.username] = u.departmentId;
+        }
       });
       setUserMap(map);
+      setUserDeptMap(deptByUser);
       const dmap: Record<string, string> = {};
       (dr.data || []).forEach((d: any) => { if (d.id) dmap[d.id] = d.departmentName || d.id; });
       setDepartmentMap(dmap);
     }).finally(() => setLoading(false));
   }, []);
 
-  const deptLabel = (id?: string) => {
+  // Topics don't carry departmentId on the wire, so resolve via creator/supervisor
+  // → user.departmentId → department.name. Falls back to a non-UUID literal id
+  // if the department row is missing.
+  const deptLabel = (topic: Topic) => {
+    const direct = topic.departmentId;
+    const viaUser = userDeptMap[topic.supervisorId || ''] || userDeptMap[topic.createdById || ''];
+    const id = direct || viaUser;
     if (!id) return "";
     return departmentMap[id] || (isUuid(id) ? "" : id);
   };
@@ -241,7 +254,6 @@ export default function AdminTopicManagement() {
                       {topic.titleEn && (
                         <p className="text-[11px] italic text-ink-500 line-clamp-1 max-w-xs">{topic.titleEn}</p>
                       )}
-                      <p className="text-[11px] text-ink-400 mt-0.5 tabular-nums">#{topic.id}</p>
                     </td>
                     <td className="px-6 py-4">
                       <span className="text-xs text-ink-700 border border-border-strong rounded-sm px-2 py-0.5">
@@ -250,8 +262,8 @@ export default function AdminTopicManagement() {
                     </td>
                     <td className="px-6 py-4">
                       <p className="text-sm text-ink-900 font-medium tracking-tight">{resolveName(topic.supervisorId || topic.createdById, userMap, "Тодорхойгүй")}</p>
-                      {deptLabel(topic.departmentId) && (
-                        <p className="text-[11px] text-ink-400 mt-0.5">{deptLabel(topic.departmentId)}</p>
+                      {deptLabel(topic) && (
+                        <p className="text-[11px] text-ink-400 mt-0.5">{deptLabel(topic)}</p>
                       )}
                     </td>
                     <td className="px-6 py-4 text-ink-500 whitespace-nowrap text-sm tabular-nums">
@@ -300,7 +312,6 @@ export default function AdminTopicManagement() {
                 <p className="text-sm italic text-ink-600 -mt-2">{selectedTopic.titleEn}</p>
               )}
               <div className="flex items-center gap-3 flex-wrap">
-                <span className="text-[11px] text-ink-400 tabular-nums">#{selectedTopic.id}</span>
                 <StatusBadge status={selectedTopic.status} />
                 <span className="text-xs text-ink-700 border border-border-strong rounded-sm px-2 py-0.5">
                   {selectedTopic.createdByType === "TEACHER" ? "Багш" : "Оюутан"} дэвшүүлсэн
@@ -314,7 +325,7 @@ export default function AdminTopicManagement() {
                 </div>
                 <div>
                   <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1">Тэнхим</p>
-                  <p className="text-sm font-medium text-ink-900 tracking-tight">{deptLabel(selectedTopic.departmentId) || "Тодорхойгүй"}</p>
+                  <p className="text-sm font-medium text-ink-900 tracking-tight">{deptLabel(selectedTopic) || "Тодорхойгүй"}</p>
                 </div>
               </div>
 

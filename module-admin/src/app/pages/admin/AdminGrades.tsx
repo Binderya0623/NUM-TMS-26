@@ -4,9 +4,11 @@ import { Button } from "../../components/ui/button";
 import { Dialog, DialogHeader, DialogBody, DialogFooter, Drawer } from "../../components/ui/dialog";
 import {
   Award, Download, CheckCircle2, Lock, AlertTriangle,
-  Search, Eye, RefreshCw, X,
+  Search, Eye, X,
 } from "lucide-react";
 import { evaluationService, type FinalGrade } from "../../../services/evaluationService";
+import { planService } from "../../../services/planService";
+import { workflowService } from "../../../services/workflowService";
 import { userService } from "../../../services/userService";
 import { resolveName } from "../../../lib/utils";
 
@@ -91,30 +93,83 @@ export default function AdminGrades() {
   const [publishModal, setPublishModal] = useState<DisplayGrade | null>(null);
   const [publishConfirmed, setPublishConfirmed] = useState(false);
   const [publishSuccess, setPublishSuccess] = useState(false);
-  const [recalculating, setRecalculating] = useState(false);
 
   const loadGrades = async () => {
     try {
-      const [gradesRes, usersRes] = await Promise.all([
+      const [gradesRes, plansRes, studentsRes, teachersRes, submissionsRes, sessionsRes] = await Promise.all([
         evaluationService.getFinalGrades(),
+        planService.getPlans(),
         userService.getStudents(),
+        userService.getTeachers().catch(() => ({ data: [] as any[] })),
+        evaluationService.getSecretarySubmissions({}),
+        workflowService.getDefenseSessions(),
       ]);
+
       const userMap: Record<string, string> = {};
-      usersRes.data.forEach(u => {
+      studentsRes.data.forEach(u => {
         userMap[u.id] = u.displayName;
         userMap[u.username] = u.displayName;
       });
-      // Resolve confirmedBy to a display name too (it's stored as a user UUID)
-      const teachersRes = await userService.getTeachers().catch(() => ({ data: [] as any[] }));
       teachersRes.data.forEach((u: any) => {
         if (u.id) userMap[u.id] = u.displayName;
         if (u.username) userMap[u.username] = u.displayName;
       });
-      setGrades(gradesRes.data.map(g => {
+
+      // Map sessionId → stageType so we can attribute secretary submissions
+      // (which only carry sessionId) to the right stage column.
+      const sessionStage: Record<string, string> = {};
+      sessionsRes.data.forEach(s => { sessionStage[s.id] = s.stageType; });
+
+      // For each student, the latest averageScore per stage type. If a stage
+      // has multiple submissions (e.g. resubmissions), the most recent wins.
+      const stageScoresByStudent: Record<string, Record<string, number>> = {};
+      [...submissionsRes.data]
+        .sort((a, b) => (a.submittedAt || '').localeCompare(b.submittedAt || ''))
+        .forEach(sub => {
+          const stage = sessionStage[sub.defenseSessionId];
+          if (!stage || !sub.studentId) return;
+          (stageScoresByStudent[sub.studentId] ||= {})[stage] = sub.averageScore;
+        });
+
+      const rows: DisplayGrade[] = [];
+      const seen = new Set<string>();
+
+      // 1. Students with a finalized grade record — full data, real id (so
+      //    the publish button targets the right backend row).
+      gradesRes.data.forEach(g => {
+        if (!g.studentId) return;
+        seen.add(g.studentId);
         const display = toDisplayGrade(g, resolveName(g.studentId, userMap, 'Тодорхойгүй оюутан'));
         if (display.publishedBy) display.publishedBy = resolveName(display.publishedBy, userMap, 'Удирдлага');
-        return display;
-      }));
+        rows.push(display);
+      });
+
+      // 2. Every other supervised student (post-approval plans) — show stage
+      //    scores if we have them, mark as "Хүлээгдэж буй". Status is gated
+      //    on the plan reaching APPROVED so we don't surface drafts.
+      const POST_APPROVAL = new Set(['APPROVED', 'ACTIVE', 'SUBMITTED']);
+      plansRes.data.forEach(p => {
+        if (!p.studentId || seen.has(p.studentId) || !POST_APPROVAL.has(p.status)) return;
+        seen.add(p.studentId);
+        const stageScores = stageScoresByStudent[p.studentId] || {};
+        rows.push({
+          id: `plan-${p.id}`,
+          student: resolveName(p.studentId, userMap, 'Тодорхойгүй оюутан'),
+          studentId: p.studentId,
+          progress1:    stageScores.PROGRESS_1     ?? null,
+          progress2:    stageScores.PROGRESS_2     ?? null,
+          preDefense:   stageScores.PRE_DEFENSE    ?? null,
+          finalDefense: stageScores.FINAL_DEFENSE  ?? null,
+          reviewer:     null,
+          total:        null,
+          letterGrade:  '—',
+          status:       'Хүлээгдэж буй',
+          publishedBy:  null,
+          publishedOn:  null,
+        });
+      });
+
+      setGrades(rows);
     } catch {
       // ignore
     } finally {
@@ -138,9 +193,46 @@ export default function AdminGrades() {
       });
   };
 
-  const handleRecalc = () => {
-    setRecalculating(true);
-    loadGrades().finally(() => setRecalculating(false));
+  /**
+   * Download the currently visible (filtered) grades as a CSV file. Excel
+   * opens this directly thanks to the UTF-8 BOM. Per-stage scores plus the
+   * letter grade and publish status are included.
+   */
+  const handleExport = () => {
+    const headers = [
+      "Оюутан", "Оюутны ID",
+      "Явц 1 (15)", "Явц 2 (20)", "Урьдчилсан (25)", "Эцсийн (35)", "Шүүмж (5)",
+      "Нийт (100)", "Үсгэн дүн", "Байдал", "Нийтлэгч", "Нийтэлсэн огноо",
+    ];
+    const rows = filtered.map(g => [
+      g.student,
+      g.studentId,
+      g.progress1 ?? "",
+      g.progress2 ?? "",
+      g.preDefense ?? "",
+      g.finalDefense ?? "",
+      g.reviewer ?? "",
+      g.total ?? "",
+      g.letterGrade,
+      g.status,
+      g.publishedBy ?? "",
+      g.publishedOn ?? "",
+    ]);
+    const escape = (v: unknown) => {
+      const s = v == null ? "" : String(v);
+      return /[",\n;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+    };
+    const csv = "﻿" + [headers, ...rows].map(r => r.map(escape).join(",")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const stamp = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = `grades-${stamp}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const filtered = grades
@@ -154,11 +246,7 @@ export default function AdminGrades() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <p className="text-sm text-ink-500">Оюутны дүнг хянах, нийтлэх болон аудит хийх.</p>
         <div className="flex gap-2">
-          <Button variant="outline" onClick={handleRecalc} disabled={recalculating}>
-            <RefreshCw className={`w-3.5 h-3.5 mr-2 ${recalculating ? 'animate-spin' : ''}`} strokeWidth={1.8} />
-            {recalculating ? "Шинэчилж байна..." : "Шинэчлэх"}
-          </Button>
-          <Button>
+          <Button onClick={handleExport} disabled={filtered.length === 0}>
             <Download className="w-3.5 h-3.5 mr-2" strokeWidth={1.8} /> Дүн гаргах
           </Button>
         </div>

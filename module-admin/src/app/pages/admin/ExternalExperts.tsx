@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Search, Plus, CheckCircle2 } from "lucide-react";
+import { Search, Plus, CheckCircle2, Pencil } from "lucide-react";
 import { userService, type UserRecord } from "../../../services/userService";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
@@ -22,6 +22,10 @@ export default function ExternalExperts() {
   const [submitting, setSubmitting] = useState(false);
   const [createSuccess, setCreateSuccess] = useState(false);
   const [createdCredentials, setCreatedCredentials] = useState<{ email: string; password: string } | null>(null);
+  const [editing, setEditing] = useState<UserRecord | null>(null);
+  const [editForm, setEditForm] = useState({ organization: '', expertise: '' });
+  const [editSubmitting, setEditSubmitting] = useState(false);
+  const [editError, setEditError] = useState<string | null>(null);
 
   useEffect(() => {
     userService.getExternalExperts()
@@ -45,6 +49,35 @@ export default function ExternalExperts() {
     setShowCreate(false);
     setCreateSuccess(false);
     resetForm();
+  };
+
+  const openEdit = (expert: UserRecord) => {
+    setEditing(expert);
+    setEditForm({
+      organization: (expert as any).organization || '',
+      expertise:    (expert as any).expertise    || '',
+    });
+    setEditError(null);
+  };
+
+  const closeEdit = () => {
+    setEditing(null);
+    setEditError(null);
+  };
+
+  const handleEditSave = async () => {
+    if (!editing) return;
+    setEditSubmitting(true);
+    setEditError(null);
+    try {
+      const res = await userService.updateExternalExpertProfile(editing.id, editForm);
+      setExperts(prev => prev.map(e => e.id === editing.id ? { ...e, ...res.data } : e));
+      closeEdit();
+    } catch (err: any) {
+      setEditError(err?.response?.data?.message || err?.message || 'Хадгалахад алдаа гарлаа.');
+    } finally {
+      setEditSubmitting(false);
+    }
   };
 
   const handleCreate = async () => {
@@ -113,13 +146,14 @@ export default function ExternalExperts() {
                 <th className="text-left px-4 py-3 text-[11px] font-medium text-ink-500 uppercase tracking-wider hidden md:table-cell">Байгууллага</th>
                 <th className="text-left px-4 py-3 text-[11px] font-medium text-ink-500 uppercase tracking-wider hidden lg:table-cell">Мэргэжил</th>
                 <th className="text-left px-4 py-3 text-[11px] font-medium text-ink-500 uppercase tracking-wider">Үүрэг</th>
+                <th className="px-4 py-3 w-12" />
               </tr>
             </thead>
             <tbody>
               {loading ? (
-                <tr><td colSpan={4} className="text-center py-10 text-sm text-ink-400">Ачааллаж байна...</td></tr>
+                <tr><td colSpan={5} className="text-center py-10 text-sm text-ink-400">Ачааллаж байна...</td></tr>
               ) : filtered.length === 0 ? (
-                <tr><td colSpan={4} className="text-center py-10 text-sm text-ink-400">Гадаад эксперт бүртгэгдээгүй байна.</td></tr>
+                <tr><td colSpan={5} className="text-center py-10 text-sm text-ink-400">Гадаад эксперт бүртгэгдээгүй байна.</td></tr>
               ) : filtered.map((expert) => (
                 <tr key={expert.id} className="border-b border-border last:border-b-0 hover:bg-surface-muted/60 transition-colors">
                   <td className="px-5 py-3.5">
@@ -144,6 +178,15 @@ export default function ExternalExperts() {
                       <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-neutral)]" />
                       Гадаад эксперт
                     </span>
+                  </td>
+                  <td className="px-4 py-3.5 text-right">
+                    <button
+                      onClick={() => openEdit(expert)}
+                      title="Засварлах"
+                      className="text-ink-400 hover:text-ink-900 hover:bg-accent-soft rounded-md p-1.5 transition-colors"
+                    >
+                      <Pencil className="w-3.5 h-3.5" strokeWidth={1.6} />
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -264,6 +307,46 @@ export default function ExternalExperts() {
             </DialogFooter>
           </>
         )}
+      </Dialog>
+
+      <Dialog open={!!editing} onClose={closeEdit}>
+        <DialogHeader title="Эксперт засварлах" onClose={closeEdit} />
+        <DialogBody>
+          {editing && (
+            <div className="space-y-4">
+              <div>
+                <p className="text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1">Эксперт</p>
+                <p className="text-sm text-ink-900 font-medium tracking-tight">{editing.displayName || editing.username}</p>
+                <p className="text-xs text-ink-400">{editing.email}</p>
+              </div>
+              <div>
+                <label className="text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1 block">Байгууллага</label>
+                <input
+                  type="text" placeholder="Microsoft Mongolia"
+                  className={inputClass()}
+                  value={editForm.organization}
+                  onChange={e => setEditForm(p => ({ ...p, organization: e.target.value }))}
+                />
+              </div>
+              <div>
+                <label className="text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1 block">Мэргэжил / Чиглэл</label>
+                <input
+                  type="text" placeholder="Хиймэл оюун ухаан, өгөгдлийн шинжилгээ"
+                  className={inputClass()}
+                  value={editForm.expertise}
+                  onChange={e => setEditForm(p => ({ ...p, expertise: e.target.value }))}
+                />
+              </div>
+              {editError && <p className="text-[var(--color-dot-negative)] text-xs">{editError}</p>}
+            </div>
+          )}
+        </DialogBody>
+        <DialogFooter>
+          <Button variant="secondary" onClick={closeEdit}>Цуцлах</Button>
+          <Button onClick={handleEditSave} disabled={editSubmitting}>
+            {editSubmitting ? 'Хадгалж байна...' : 'Хадгалах'}
+          </Button>
+        </DialogFooter>
       </Dialog>
     </div>
   );

@@ -2,14 +2,14 @@ import { useState } from "react";
 import { Outlet, useLocation } from "react-router";
 import AdminSidebar from "../components/AdminSidebar";
 import TopHeader from "../components/TopHeader";
+import ErrorBoundary from "../components/ErrorBoundary";
 import type { StoredUser } from "../../lib/authGuard";
 import { logout } from "../../lib/authGuard";
 
 const pageTitles: Record<string, { title: string; subtitle: string }> = {
   "/admin": { title: "Хянах самбар", subtitle: "Тавтай морилно уу, Тэнхимийн администратор" },
   "/admin/teachers": { title: "Багш нар", subtitle: "Тэнхимийн багш нарыг удирдах" },
-  "/admin/students": { title: "Оюутнууд", subtitle: "Тэнхимд бүртгэлтэй бүх оюутнууд" },
-  "/admin/thesis": { title: "Дипломын ажил", subtitle: "Бүх дипломын ажлыг хянах" },
+  "/admin/students": { title: "Оюутнууд", subtitle: "Оюутнууд болон тэдний дипломын ажлын явц" },
   "/admin/committees": { title: "Комиссууд", subtitle: "Үнэлгээний комиссуудыг удирдах" },
   "/admin/assignment": { title: "Оюутан хуваарилалт", subtitle: "Оюутнуудыг багш нарт хуваарилах" },
   "/admin/evaluation-process": { title: "Үнэлгээний үйл явцын тохиргоо", subtitle: "Үнэлгээний шатууд болон оноолтыг тохируулах" },
@@ -50,7 +50,9 @@ export default function AdminLayout({ user }: AdminLayoutProps) {
         />
         <main className="flex-1 overflow-y-auto bg-surface-muted">
           <div className="max-w-[1400px] mx-auto px-8 py-8">
-            <Outlet />
+            <ErrorBoundary>
+              <Outlet />
+            </ErrorBoundary>
           </div>
         </main>
       </div>

@@ -43,6 +43,7 @@ export default function TeacherPlanReviewTab() {
   const [showConfirmModal, setShowConfirmModal] = useState<"approve" | "reject" | null>(null);
   const [rejectionReason, setRejectionReason] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [reviewError, setReviewError] = useState<string | null>(null);
   const [userMap, setUserMap] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -86,6 +87,7 @@ export default function TeacherPlanReviewTab() {
     if (!selectedPlan || !showConfirmModal) return;
     if (showConfirmModal === "reject" && !rejectionReason.trim()) return;
     setSubmitting(true);
+    setReviewError(null);
     const decision = showConfirmModal === "approve" ? "APPROVED" : "REVISION_REQUIRED";
     planService.reviewPlan(selectedPlan.id, {
       reviewedBy: teacherId,
@@ -99,7 +101,12 @@ export default function TeacherPlanReviewTab() {
         setShowConfirmModal(null);
         setRejectionReason("");
       })
-      .catch(() => {})
+      .catch((err: any) => {
+        const msg = err?.response?.data?.error || err?.response?.data?.message
+                    || err?.message || 'Үйлдэл амжилтгүй боллоо. Дахин оролдоно уу.';
+        setReviewError(typeof msg === 'string' ? msg : 'Үйлдэл амжилтгүй боллоо.');
+        console.error('[reviewPlan]', err);
+      })
       .finally(() => setSubmitting(false));
   };
 
@@ -319,6 +326,11 @@ export default function TeacherPlanReviewTab() {
                 )}
               </div>
             </div>
+          )}
+          {reviewError && (
+            <p className="mt-3 text-xs text-[var(--color-dot-negative)] inline-flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)]" /> {reviewError}
+            </p>
           )}
         </DialogBody>
         <DialogFooter>

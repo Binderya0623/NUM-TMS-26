@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { planService, type Plan } from "../../../services/planService";
 import { userService, type UserRecord } from "../../../services/userService";
+import { evaluationService } from "../../../services/evaluationService";
 import { getStoredUser } from "../../../lib/authGuard";
 import { resolveName } from "../../../lib/utils";
 
@@ -44,12 +45,20 @@ const stageLabel = (status: string) => {
   return map[status] || status;
 };
 
+// 5-stage timeline (topic, prog1, prog2, pre, final) — each stage = 20%.
+// Matches /admin/thesis and /teacher/students. Without per-student defense
+// session data here we credit "topic done" (20%) for APPROVED+; the final
+// grade override below promotes confirmed students to 100%.
 const progressFromStatus = (status: string) => {
   const map: Record<string, number> = {
-    DRAFT: 5, PENDING_TEACHER_APPROVAL: 15, DEPT_PENDING: 25,
-    APPROVED: 40, ACTIVE: 60, SUBMITTED: 80, REVISION_REQUIRED: 35,
+    DRAFT: 0,
+    PENDING_TEACHER_APPROVAL: 5,
+    DEPT_PENDING: 10,
+    APPROVED: 20,
+    ACTIVE: 20,
+    SUBMITTED: 20,
   };
-  return map[status] ?? 20;
+  return map[status] ?? 0;
 };
 
 const statusMap: Record<string, { label: string; tone: Tone }> = {
@@ -81,9 +90,10 @@ export default function TeacherProgress() {
     if (!teacherId) { setLoading(false); return; }
     const load = async () => {
       try {
-        const [plansRes, usersRes] = await Promise.all([
+        const [plansRes, usersRes, finalGradesRes] = await Promise.all([
           planService.getPlans({ supervisorId: teacherId }),
           userService.getStudents(),
+          evaluationService.getFinalGrades().catch(() => ({ data: [] as any[] })),
         ]);
         const plans: Plan[] = plansRes.data;
         const users: UserRecord[] = usersRes.data;
@@ -92,13 +102,18 @@ export default function TeacherProgress() {
           if (u.username) userMap[u.username] = u.displayName;
           userMap[u.id] = u.displayName;
         });
+        // Students with a confirmed final grade are 100% regardless of plan.status
+        // (which often stays at APPROVED/SUBMITTED past the actual finish line).
+        const gradedStudentIds = new Set(
+          (finalGradesRes.data || []).map((g: any) => g.studentId).filter(Boolean)
+        );
         setStudents(plans.map(p => ({
           id: p.studentId,
           name: resolveName(p.studentId, userMap, 'Тодорхойгүй оюутан'),
           thesis: p.title || 'Гарчиггүй',
-          stage: stageLabel(p.status),
+          stage: gradedStudentIds.has(p.studentId) ? 'Дүн гарсан' : stageLabel(p.status),
           status: p.status,
-          progress: progressFromStatus(p.status),
+          progress: gradedStudentIds.has(p.studentId) ? 100 : progressFromStatus(p.status),
           submittedAt: p.submittedAt,
           revisionCount: p.revisionCount || 0,
         })));

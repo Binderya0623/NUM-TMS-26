@@ -2,32 +2,19 @@ import { useState, useRef, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
-import { Badge } from "../../components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import {
-  Upload, Calendar, CheckCircle2, AlertCircle, FileUp, FileArchive,
-  File, MonitorPlay, MapPin,
+  Upload, CheckCircle2, AlertCircle, FileUp, FileArchive,
+  File, MonitorPlay,
 } from "lucide-react";
 
 import StudentTopicTab from "./tabs/StudentTopicTab";
 import StudentWeeklyPlanTab from "./tabs/StudentWeeklyPlanTab";
 import { thesisService, type ThesisReport, type ReportFile } from "../../../services/thesisService";
-import { workflowService, type DefenseSession } from "../../../services/workflowService";
-import { planService } from "../../../services/planService";
-import { committeeService } from "../../../services/committeeService";
 import { userService } from "../../../services/userService";
 import { getStoredUser } from "../../../lib/authGuard";
 import { isUuid } from "../../../lib/utils";
 import FilePreviewModal from "../../components/FilePreviewModal";
-
-type Tone = "positive" | "warning" | "negative" | "neutral" | "accent";
-const toneDot: Record<Tone, string> = {
-  positive: "bg-[var(--color-dot-positive)]",
-  warning:  "bg-[var(--color-dot-warning)]",
-  negative: "bg-[var(--color-dot-negative)]",
-  neutral:  "bg-[var(--color-dot-neutral)]",
-  accent:   "bg-accent",
-};
 
 export default function StudentThesis() {
   const user = getStoredUser();
@@ -37,7 +24,6 @@ export default function StudentThesis() {
   const [selectedTab, setSelectedTab] = useState(searchParams.get("tab") || "topic");
   const [reports, setReports] = useState<ThesisReport[]>([]);
   const [thesisId, setThesisId] = useState<string | null>(null);
-  const [defenseSessions, setDefenseSessions] = useState<DefenseSession[]>([]);
   const [previewFiles, setPreviewFiles] = useState<ReportFile[]>([]);
   const [previewActiveId, setPreviewActiveId] = useState<string | null>(null);
 
@@ -58,23 +44,6 @@ export default function StudentThesis() {
     thesisService.getMyThesis(studentId)
       .then(res => { if (res.data) setThesisId((res.data as any).id || null); })
       .catch(() => {});
-
-    Promise.all([
-      planService.getMyPlan(studentId).catch(() => ({ data: [] as any[] })),
-      committeeService.getMyCommittees(studentId).catch(() => ({ data: [] as any[] })),
-    ]).then(async ([planRes, cmtRes]) => {
-      const supervisorId = planRes.data[0]?.supervisorId;
-      const committeeIds: string[] = (cmtRes.data || []).map((c: any) => c.committeeId).filter(Boolean);
-      const [p1Res, cmtLists] = await Promise.all([
-        supervisorId
-          ? workflowService.getDefenseSessions({ supervisorId })
-          : Promise.resolve({ data: [] as DefenseSession[] }),
-        Promise.all(committeeIds.map(id => workflowService.getDefenseSessions({ committeeId: id }))),
-      ]);
-      const all: DefenseSession[] = [...p1Res.data, ...cmtLists.flatMap(r => r.data)];
-      const unique = Array.from(new Map(all.map(s => [s.id, s])).values());
-      setDefenseSessions(unique);
-    }).catch(() => {});
 
     thesisService.getMyReports(studentId)
       .then(res => setReports(res.data))

@@ -1,26 +1,22 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import imgLogo from '@/assets/logo.png';
-import imgStudent from '@/assets/student.png';
 import svgPaths from '@/assets/svg-xfjsm8tdsh';
 
-function PhoneIcon() {
+function UserIcon() {
   return (
-    <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-      <path
-        d="M17.45 22.5C8.67 22.5 1.5 15.33 1.5 6.55A4.54 4.54 0 016.04 2h.5a1 1 0 01.92.62l2 4.8a1 1 0 01-.22 1.1L7.3 10.47a12.08 12.08 0 005.23 5.23l2-1.95a1 1 0 011.1-.22l4.8 2a1 1 0 01.62.92v.5A4.54 4.54 0 0117.45 22.5z"
-        stroke="#666465" strokeMiterlimit="10" strokeWidth="1.5"
-      />
+    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#666465" strokeWidth="1.6">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 21a8 8 0 0116 0" />
     </svg>
   );
 }
 
-function KeyIcon() {
+function LockIcon() {
   return (
-    <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-      <path d="M12.5 14.5a5 5 0 100-10 5 5 0 000 10z" stroke="#666465" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="1.5" />
-      <path d="M6.89 17.49L9.19 19.79" stroke="#666465" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" strokeWidth="1.5" />
-      <path d="M9 12l-6.5 6.5" stroke="#666465" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#666465" strokeWidth="1.6">
+      <rect x="4" y="11" width="16" height="10" rx="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8 11V8a4 4 0 118 0v3" />
     </svg>
   );
 }
@@ -48,12 +44,12 @@ function CheckIcon() {
 
 function VerifiedIcon() {
   return (
-    <svg width="24" height="24" fill="none" viewBox="0 0 33 33">
+    <svg width="22" height="22" fill="none" viewBox="0 0 33 33">
       <path
         d="M16.5 2.75L20.64 6.07L26 6.07L26 11.43L29.32 15.57L26 19.71L26 25.07L20.64 25.07L16.5 28.39L12.36 25.07L7 25.07L7 19.71L3.68 15.57L7 11.43L7 6.07L12.36 6.07L16.5 2.75Z"
-        fill="#36BA2D"
+        fill="#1455bd"
       />
-      <path d="M11.5 15.5L14.5 18.5L21.5 12.5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M11.5 15.5L14.5 18.5L21.5 12.5" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -106,7 +102,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-[#f5f5f5] flex">
       {/* Left Panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-white flex-col items-center justify-between py-12 px-8 relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-white flex-col items-center justify-center py-12 px-8 relative overflow-hidden">
         <div className="flex flex-col items-center w-full">
           <img src={imgLogo} alt="МУИС лого" className="w-40 h-auto object-contain mb-4" />
           <p
@@ -140,9 +136,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 w-[280px]">
-          <img src={imgStudent} alt="Оюутан" className="w-full h-auto object-contain" />
-        </div>
       </div>
 
       {/* Right Panel */}
@@ -200,7 +193,7 @@ export default function LoginPage() {
               </label>
               <div className="relative">
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <PhoneIcon />
+                  <UserIcon />
                 </div>
                 <input
                   type="text"
@@ -208,7 +201,7 @@ export default function LoginPage() {
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Нэвтрэх нэр"
-                  className="w-full bg-white border border-[#c4c4c4] rounded-lg h-[50px] pl-10 pr-4 text-[#666465] text-base outline-none focus:border-[#1455bd] transition-colors"
+                  className="w-full bg-white border border-[#c4c4c4] rounded-lg h-[50px] pl-10 pr-4 text-[#1f1f1f] placeholder-[#999] text-base outline-none focus:border-[#1455bd] focus:ring-2 focus:ring-[#1455bd]/15 transition-shadow transition-colors"
                   style={{ fontFamily: "'Nunito Sans', sans-serif" }}
                   autoComplete="username"
                 />
@@ -234,7 +227,7 @@ export default function LoginPage() {
               </div>
               <div className="relative">
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <KeyIcon />
+                  <LockIcon />
                 </div>
                 <input
                   type={showPassword ? 'text' : 'password'}
@@ -242,7 +235,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Нууц үг"
-                  className="w-full bg-white border border-[#c4c4c4] rounded-lg h-[50px] pl-10 pr-10 text-[#666465] text-base outline-none focus:border-[#1455bd] transition-colors"
+                  className="w-full bg-white border border-[#c4c4c4] rounded-lg h-[50px] pl-10 pr-10 text-[#1f1f1f] placeholder-[#999] text-base outline-none focus:border-[#1455bd] focus:ring-2 focus:ring-[#1455bd]/15 transition-shadow transition-colors"
                   style={{ fontFamily: "'Nunito Sans', sans-serif" }}
                   autoComplete="current-password"
                 />
@@ -250,6 +243,7 @@ export default function LoginPage() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-[#666465] hover:text-black"
+                  aria-label={showPassword ? 'Нууц үг нуух' : 'Нууц үг харах'}
                 >
                   <EyeIcon visible={showPassword} />
                 </button>
@@ -276,9 +270,18 @@ export default function LoginPage() {
 
             {/* Error */}
             {error && (
-              <p className="text-red-500 text-sm" style={{ fontFamily: "'Nunito Sans', sans-serif" }}>
-                {error}
-              </p>
+              <div
+                className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 text-sm rounded-md px-3 py-2"
+                style={{ fontFamily: "'Nunito Sans', sans-serif" }}
+                role="alert"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="mt-0.5 shrink-0" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <span>{error}</span>
+              </div>
             )}
 
             {/* Submit */}
@@ -286,9 +289,15 @@ export default function LoginPage() {
               type="submit"
               id="auth-login-btn"
               disabled={loading}
-              className="w-full bg-[#1455bd] hover:bg-[#0f4399] disabled:opacity-70 text-white rounded-lg h-14 font-bold text-base transition-colors"
+              className="w-full bg-[#1455bd] hover:bg-[#0f4399] disabled:opacity-70 disabled:cursor-not-allowed text-white rounded-lg h-14 font-bold text-base transition-colors flex items-center justify-center gap-2 shadow-sm hover:shadow"
               style={{ fontFamily: "'Nunito Sans', sans-serif" }}
             >
+              {loading && (
+                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" strokeWidth="4" />
+                  <path d="M22 12a10 10 0 00-10-10" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                </svg>
+              )}
               {loading ? 'Нэвтэрч байна...' : 'Нэвтрэх'}
             </button>
           </form>

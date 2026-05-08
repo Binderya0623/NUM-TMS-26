@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "../../components/ui/card";
-import { Button } from "../../components/ui/button";
-import { Progress } from "../../components/ui/progress";
-import { FileText, Download, Search, RefreshCw } from "lucide-react";
+import { FileText, Search } from "lucide-react";
 import { thesisReportService, type ThesisReport } from "../../../services/thesisReportService";
 import { workflowService, type DefenseSession } from "../../../services/workflowService";
 import { committeeService, type Committee } from "../../../services/committeeService";
@@ -94,11 +92,34 @@ export default function AdminReports() {
         if (u.username) userMap[u.username] = u.displayName || u.username;
       });
 
+      // Reports often don't carry defenseSessionId, so chase the student →
+      // committee assignment as a fallback. A student is typically assigned
+      // to multiple stage committees that share the same name, so picking any
+      // is fine for display.
+      const studentToCommittee = new Map<string, { id: string; name: string }>();
+      const studentLists = await Promise.all(
+        committeesRes.data.map(c =>
+          committeeService.getStudents(c.id)
+            .then(r => ({ committee: c, students: r.data }))
+            .catch(() => ({ committee: c, students: [] as any[] }))
+        )
+      );
+      studentLists.forEach(({ committee, students }) => {
+        students.forEach((s: any) => {
+          if (s.studentId && !studentToCommittee.has(s.studentId)) {
+            studentToCommittee.set(s.studentId, { id: committee.id, name: committee.name });
+          }
+        });
+      });
+
       const display: DisplayReport[] = reportsRes.data.map(r => {
         const stageType = stageFromReport(r, sessionMap);
         const sess = r.defenseSessionId ? sessionMap.get(r.defenseSessionId) : undefined;
-        const committeeId = sess?.committeeId || '';
-        const committeeName = committeeId ? (committeeMap.get(committeeId) || '') : '';
+        const committeeIdFromSession = sess?.committeeId || '';
+        const committeeNameFromSession = committeeIdFromSession ? (committeeMap.get(committeeIdFromSession) || '') : '';
+        const fallback = studentToCommittee.get(r.studentId);
+        const committeeId   = committeeIdFromSession   || fallback?.id   || '';
+        const committeeName = committeeNameFromSession || fallback?.name || '';
         return {
           id: r.id,
           studentId: r.studentId,
@@ -145,15 +166,6 @@ export default function AdminReports() {
     <div className="space-y-8 max-w-7xl mx-auto pb-10">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <p className="text-sm text-ink-500">Бүх оюутны тайлан илгээлт болон хянах байдлыг харах.</p>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={loadAll} disabled={loading}>
-            <RefreshCw className={`w-3.5 h-3.5 mr-2 ${loading ? 'animate-spin' : ''}`} strokeWidth={1.8} />
-            {loading ? 'Ачааллаж...' : 'Шинэчлэх'}
-          </Button>
-          <Button>
-            <Download className="w-3.5 h-3.5 mr-2" strokeWidth={1.8} /> Гаргах
-          </Button>
-        </div>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -179,7 +191,9 @@ export default function AdminReports() {
               <span className="text-[11px] uppercase tracking-wider font-medium text-ink-500">Илгээлтын хувь</span>
               <span className="text-sm font-semibold text-ink-900 tabular-nums">{submittedPct}%</span>
             </div>
-            <Progress value={submittedPct} className="h-1.5" />
+            <div className="h-0.5 w-full bg-border-strong">
+              <div className="h-full bg-accent transition-all" style={{ width: `${submittedPct}%` }} />
+            </div>
             <p className="text-xs text-ink-400 mt-2 tabular-nums">{submitted} / {reports.length} тайлан илгээсан</p>
           </CardContent>
         </Card>
@@ -189,7 +203,9 @@ export default function AdminReports() {
               <span className="text-[11px] uppercase tracking-wider font-medium text-ink-500">Хяналтын хувь</span>
               <span className="text-sm font-semibold text-ink-900 tabular-nums">{reviewedPct}%</span>
             </div>
-            <Progress value={reviewedPct} className="h-1.5" />
+            <div className="h-0.5 w-full bg-border-strong">
+              <div className="h-full bg-accent transition-all" style={{ width: `${reviewedPct}%` }} />
+            </div>
             <p className="text-xs text-ink-400 mt-2 tabular-nums">{reviewed} / {reports.length} тайлан хянасан</p>
           </CardContent>
         </Card>

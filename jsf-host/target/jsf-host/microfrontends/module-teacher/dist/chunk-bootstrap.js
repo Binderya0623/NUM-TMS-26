@@ -3103,45 +3103,44 @@ const Calendar = createLucideIcon("calendar", __iconNode$B);
  */
 
 
-const __iconNode$A = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$A);
-
-/**
- * @license lucide-react v0.487.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-const __iconNode$z = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
-const ChevronRight = createLucideIcon("chevron-right", __iconNode$z);
-
-/**
- * @license lucide-react v0.487.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-const __iconNode$y = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$y);
-
-/**
- * @license lucide-react v0.487.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-const __iconNode$x = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
-  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+const __iconNode$A = [
+  ["path", { d: "M18 6 7 17l-5-5", key: "116fxf" }],
+  ["path", { d: "m22 10-7.5 7.5L13 16", key: "ke71qq" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$x);
+const CheckCheck = createLucideIcon("check-check", __iconNode$A);
+
+/**
+ * @license lucide-react v0.487.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$z = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$z);
+
+/**
+ * @license lucide-react v0.487.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$y = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
+const ChevronRight = createLucideIcon("chevron-right", __iconNode$y);
+
+/**
+ * @license lucide-react v0.487.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$x = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$x);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3152,10 +3151,11 @@ const CircleAlert = createLucideIcon("circle-alert", __iconNode$x);
 
 
 const __iconNode$w = [
-  ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
-  ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
+  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
 ];
-const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$w);
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$w);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3166,10 +3166,10 @@ const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$w);
 
 
 const __iconNode$v = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+  ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
+  ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$v);
+const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$v);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3181,10 +3181,9 @@ const CircleCheck = createLucideIcon("circle-check", __iconNode$v);
 
 const __iconNode$u = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
-  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
+  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleX = createLucideIcon("circle-x", __iconNode$u);
+const CircleCheck = createLucideIcon("circle-check", __iconNode$u);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3196,9 +3195,10 @@ const CircleX = createLucideIcon("circle-x", __iconNode$u);
 
 const __iconNode$t = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
+  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
+  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
 ];
-const Clock = createLucideIcon("clock", __iconNode$t);
+const CircleX = createLucideIcon("circle-x", __iconNode$t);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3209,16 +3209,10 @@ const Clock = createLucideIcon("clock", __iconNode$t);
 
 
 const __iconNode$s = [
-  ["rect", { x: "2", y: "6", width: "20", height: "8", rx: "1", key: "1estib" }],
-  ["path", { d: "M17 14v7", key: "7m2elx" }],
-  ["path", { d: "M7 14v7", key: "1cm7wv" }],
-  ["path", { d: "M17 3v3", key: "1v4jwn" }],
-  ["path", { d: "M7 3v3", key: "7o6guu" }],
-  ["path", { d: "M10 14 2.3 6.3", key: "1023jk" }],
-  ["path", { d: "m14 6 7.7 7.7", key: "1s8pl2" }],
-  ["path", { d: "m8 6 8 8", key: "hl96qh" }]
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
 ];
-const Construction = createLucideIcon("construction", __iconNode$s);
+const Clock = createLucideIcon("clock", __iconNode$s);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3229,11 +3223,16 @@ const Construction = createLucideIcon("construction", __iconNode$s);
 
 
 const __iconNode$r = [
-  ["circle", { cx: "12", cy: "12", r: "1", key: "41hilf" }],
-  ["circle", { cx: "12", cy: "5", r: "1", key: "gxeob9" }],
-  ["circle", { cx: "12", cy: "19", r: "1", key: "lyex9k" }]
+  ["rect", { x: "2", y: "6", width: "20", height: "8", rx: "1", key: "1estib" }],
+  ["path", { d: "M17 14v7", key: "7m2elx" }],
+  ["path", { d: "M7 14v7", key: "1cm7wv" }],
+  ["path", { d: "M17 3v3", key: "1v4jwn" }],
+  ["path", { d: "M7 3v3", key: "7o6guu" }],
+  ["path", { d: "M10 14 2.3 6.3", key: "1023jk" }],
+  ["path", { d: "m14 6 7.7 7.7", key: "1s8pl2" }],
+  ["path", { d: "m8 6 8 8", key: "hl96qh" }]
 ];
-const EllipsisVertical = createLucideIcon("ellipsis-vertical", __iconNode$r);
+const Construction = createLucideIcon("construction", __iconNode$r);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3469,16 +3468,10 @@ const MessageSquare = createLucideIcon("message-square", __iconNode$e);
 
 
 const __iconNode$d = [
-  ["path", { d: "M13.234 20.252 21 12.3", key: "1cbrk9" }],
-  [
-    "path",
-    {
-      d: "m16 6-8.414 8.586a2 2 0 0 0 0 2.828 2 2 0 0 0 2.828 0l8.414-8.586a4 4 0 0 0 0-5.656 4 4 0 0 0-5.656 0l-8.415 8.585a6 6 0 1 0 8.486 8.486",
-      key: "1pkts6"
-    }
-  ]
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "M12 5v14", key: "s699le" }]
 ];
-const Paperclip = createLucideIcon("paperclip", __iconNode$d);
+const Plus = createLucideIcon("plus", __iconNode$d);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3489,10 +3482,10 @@ const Paperclip = createLucideIcon("paperclip", __iconNode$d);
 
 
 const __iconNode$c = [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "M12 5v14", key: "s699le" }]
+  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }],
+  ["path", { d: "m21 21-4.3-4.3", key: "1qie3q" }]
 ];
-const Plus = createLucideIcon("plus", __iconNode$c);
+const Search = createLucideIcon("search", __iconNode$c);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3503,10 +3496,16 @@ const Plus = createLucideIcon("plus", __iconNode$c);
 
 
 const __iconNode$b = [
-  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }],
-  ["path", { d: "m21 21-4.3-4.3", key: "1qie3q" }]
+  [
+    "path",
+    {
+      d: "M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z",
+      key: "1ffxy3"
+    }
+  ],
+  ["path", { d: "m21.854 2.147-10.94 10.939", key: "12cjpa" }]
 ];
-const Search = createLucideIcon("search", __iconNode$b);
+const Send = createLucideIcon("send", __iconNode$b);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3520,13 +3519,14 @@ const __iconNode$a = [
   [
     "path",
     {
-      d: "M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z",
-      key: "1ffxy3"
+      d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
+      key: "oel41y"
     }
   ],
-  ["path", { d: "m21.854 2.147-10.94 10.939", key: "12cjpa" }]
+  ["path", { d: "M12 8v4", key: "1got3b" }],
+  ["path", { d: "M12 16h.01", key: "1drbdi" }]
 ];
-const Send = createLucideIcon("send", __iconNode$a);
+const ShieldAlert = createLucideIcon("shield-alert", __iconNode$a);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3540,14 +3540,16 @@ const __iconNode$9 = [
   [
     "path",
     {
-      d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
-      key: "oel41y"
+      d: "M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",
+      key: "4pj2yx"
     }
   ],
-  ["path", { d: "M12 8v4", key: "1got3b" }],
-  ["path", { d: "M12 16h.01", key: "1drbdi" }]
+  ["path", { d: "M20 3v4", key: "1olli1" }],
+  ["path", { d: "M22 5h-4", key: "1gvqau" }],
+  ["path", { d: "M4 17v2", key: "vumght" }],
+  ["path", { d: "M5 18H3", key: "zchphs" }]
 ];
-const ShieldAlert = createLucideIcon("shield-alert", __iconNode$9);
+const Sparkles = createLucideIcon("sparkles", __iconNode$9);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3561,16 +3563,12 @@ const __iconNode$8 = [
   [
     "path",
     {
-      d: "M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",
-      key: "4pj2yx"
+      d: "M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z",
+      key: "r04s7s"
     }
-  ],
-  ["path", { d: "M20 3v4", key: "1olli1" }],
-  ["path", { d: "M22 5h-4", key: "1gvqau" }],
-  ["path", { d: "M4 17v2", key: "vumght" }],
-  ["path", { d: "M5 18H3", key: "zchphs" }]
+  ]
 ];
-const Sparkles = createLucideIcon("sparkles", __iconNode$8);
+const Star = createLucideIcon("star", __iconNode$8);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3581,15 +3579,11 @@ const Sparkles = createLucideIcon("sparkles", __iconNode$8);
 
 
 const __iconNode$7 = [
-  [
-    "path",
-    {
-      d: "M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z",
-      key: "r04s7s"
-    }
-  ]
+  ["path", { d: "M16 4H9a3 3 0 0 0-2.83 4", key: "43sutm" }],
+  ["path", { d: "M14 12a4 4 0 0 1 0 8H6", key: "nlfj13" }],
+  ["line", { x1: "4", x2: "20", y1: "12", y2: "12", key: "1e0a9i" }]
 ];
-const Star = createLucideIcon("star", __iconNode$7);
+const Strikethrough = createLucideIcon("strikethrough", __iconNode$7);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3600,11 +3594,16 @@ const Star = createLucideIcon("star", __iconNode$7);
 
 
 const __iconNode$6 = [
-  ["path", { d: "M16 4H9a3 3 0 0 0-2.83 4", key: "43sutm" }],
-  ["path", { d: "M14 12a4 4 0 0 1 0 8H6", key: "nlfj13" }],
-  ["line", { x1: "4", x2: "20", y1: "12", y2: "12", key: "1e0a9i" }]
+  [
+    "path",
+    {
+      d: "M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z",
+      key: "vktsd0"
+    }
+  ],
+  ["circle", { cx: "7.5", cy: "7.5", r: ".5", fill: "currentColor", key: "kqv944" }]
 ];
-const Strikethrough = createLucideIcon("strikethrough", __iconNode$6);
+const Tag = createLucideIcon("tag", __iconNode$6);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3615,16 +3614,10 @@ const Strikethrough = createLucideIcon("strikethrough", __iconNode$6);
 
 
 const __iconNode$5 = [
-  [
-    "path",
-    {
-      d: "M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z",
-      key: "vktsd0"
-    }
-  ],
-  ["circle", { cx: "7.5", cy: "7.5", r: ".5", fill: "currentColor", key: "kqv944" }]
+  ["polyline", { points: "22 7 13.5 15.5 8.5 10.5 2 17", key: "126l90" }],
+  ["polyline", { points: "16 7 22 7 22 13", key: "kwv8wd" }]
 ];
-const Tag = createLucideIcon("tag", __iconNode$5);
+const TrendingUp = createLucideIcon("trending-up", __iconNode$5);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3635,10 +3628,17 @@ const Tag = createLucideIcon("tag", __iconNode$5);
 
 
 const __iconNode$4 = [
-  ["polyline", { points: "22 7 13.5 15.5 8.5 10.5 2 17", key: "126l90" }],
-  ["polyline", { points: "16 7 22 7 22 13", key: "kwv8wd" }]
+  [
+    "path",
+    {
+      d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
+      key: "wmoenq"
+    }
+  ],
+  ["path", { d: "M12 9v4", key: "juzpu7" }],
+  ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const TrendingUp = createLucideIcon("trending-up", __iconNode$4);
+const TriangleAlert = createLucideIcon("triangle-alert", __iconNode$4);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3730,83 +3730,6 @@ function logout() {
   localStorage.removeItem(STORAGE_KEY);
   sessionStorage.removeItem(STORAGE_KEY);
   window.location.replace("/login.xhtml");
-}
-
-const BASE_MENU = [
-  { icon: House, label: "Хянах самбар", path: "/teacher", end: true },
-  { icon: FileSearch, label: "Судалгааны удирдлага", path: "/teacher/thesis" },
-  { icon: Users, label: "Оюутнууд", path: "/teacher/students" },
-  { icon: TrendingUp, label: "Явцын хяналт", path: "/teacher/progress" },
-  { icon: CircleCheckBig, label: "Комисс", path: "/teacher/committee" }
-];
-function TeacherSidebar({ collapsed }) {
-  const user = getStoredUser();
-  const isExpert = user?.systemRole === "EXTERNAL_EXPERT";
-  const menuItems = isExpert ? [{ icon: Award, label: "Гадаад эксперт үнэлгээ", path: "/teacher/expert", end: true }] : BASE_MENU;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "aside",
-    {
-      className: `relative flex flex-col bg-ink-900 border-r border-black/20 transition-[width] duration-300 ${collapsed ? "w-20" : "w-64"} shrink-0`,
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 px-5 h-16 border-b border-white/10", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "img",
-            {
-              src: numLogo,
-              alt: "МУИС",
-              width: 26,
-              height: 26,
-              className: "shrink-0 opacity-90 [filter:brightness(0)_invert(1)]"
-            }
-          ),
-          !collapsed && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[13px] font-semibold tracking-tight text-white leading-none", children: "МУИС" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-[11px] text-white/50 mt-1 leading-snug", children: [
-              "Дипломын ажлын",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-              "удирдлагын систем"
-            ] })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "flex-1 py-5 overflow-y-auto", children: [
-          !collapsed && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "px-5 mb-2 text-[10px] uppercase tracking-[0.14em] font-medium text-white/35", children: "Үндсэн цэс" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-px", children: menuItems.map((item) => {
-            const Icon = item.icon;
-            return /* @__PURE__ */ jsxRuntimeExports.jsx(
-              NavLink,
-              {
-                to: item.path,
-                end: item.end,
-                className: ({ isActive }) => `group relative flex items-center gap-3 h-9 px-5 transition-colors ${collapsed ? "justify-center px-0" : ""} ${isActive ? "text-white bg-white/[0.07]" : "text-white/55 hover:text-white hover:bg-white/[0.04]"}`,
-                children: ({ isActive }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                  isActive && !collapsed && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute left-0 top-0 bottom-0 w-[2px] bg-accent" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    Icon,
-                    {
-                      className: `w-[18px] h-[18px] shrink-0 ${isActive ? "text-white" : "text-white/45 group-hover:text-white/80"}`,
-                      strokeWidth: 1.6
-                    }
-                  ),
-                  !collapsed && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-[13px] tracking-tight ${isActive ? "font-medium" : "font-normal"}`, children: item.label })
-                ] })
-              },
-              item.path
-            );
-          }) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-5 py-3 border-t border-white/10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "button",
-          {
-            className: `w-full flex items-center gap-3 h-9 text-white/55 hover:text-white transition-colors ${collapsed ? "justify-center" : ""}`,
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Bell, { className: "w-[18px] h-[18px] shrink-0", strokeWidth: 1.6 }),
-              !collapsed && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[13px] tracking-tight", children: "Мэдэгдэл" })
-            ]
-          }
-        ) })
-      ]
-    }
-  );
 }
 
 /**
@@ -8099,33 +8022,43 @@ const {
   mergeConfig,
 } = axios;
 
+const __vite_import_meta_env__ = {};
+const env = __vite_import_meta_env__;
 const BASE_URLS = {
-  user: "http://localhost:8086",
-  topic: "http://localhost:8081",
-  workflow: "http://localhost:8084",
-  // workflow_service_v2
-  committee: "http://localhost:8082",
-  thesis: "http://localhost:8083",
-  evaluation: "http://localhost:8085",
-  // evaluation_service_v2
-  notification: "http://localhost:8087",
-  report: "http://localhost:8088",
-  // report_service_v2
-  message: "http://localhost:8089",
-  // NEW message_service
-  analytic: "http://localhost:8090",
-  grading: "http://localhost:8091"
-  // grading_service_v2 (moved from 8086)
+  user: env.VITE_API_USER ?? "http://localhost:8086",
+  topic: env.VITE_API_TOPIC ?? "http://localhost:8081",
+  workflow: env.VITE_API_WORKFLOW ?? "http://localhost:8084",
+  committee: env.VITE_API_COMMITTEE ?? "http://localhost:8082",
+  thesis: env.VITE_API_THESIS ?? "http://localhost:8083",
+  evaluation: env.VITE_API_EVALUATION ?? "http://localhost:8085",
+  notification: env.VITE_API_NOTIFICATION ?? "http://localhost:8087",
+  report: env.VITE_API_REPORT ?? "http://localhost:8088",
+  message: env.VITE_API_MESSAGE ?? "http://localhost:8089",
+  analytic: env.VITE_API_ANALYTIC ?? "http://localhost:8090",
+  grading: env.VITE_API_GRADING ?? "http://localhost:8091"
 };
+const TOKEN_STORAGE_KEY = "mauth_token";
 function makeClient(baseURL) {
   const client = axios.create({ baseURL });
   client.interceptors.request.use((config) => {
     const user = getStoredUser();
-    if (user?.userId) {
-      config.headers["X-User-Id"] = user.userId;
-    }
+    if (user?.userId) config.headers["X-User-Id"] = user.userId;
+    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+    if (token) config.headers["Authorization"] = `Bearer ${token}`;
     return config;
   });
+  client.interceptors.response.use(
+    (resp) => resp,
+    (err) => {
+      if (err?.response?.status === 401 && typeof window !== "undefined") {
+        localStorage.removeItem(TOKEN_STORAGE_KEY);
+        if (!window.location.pathname.includes("/auth")) {
+          window.location.href = "/auth.xhtml#/auth/login";
+        }
+      }
+      return Promise.reject(err);
+    }
+  );
   return client;
 }
 const userApi = makeClient(BASE_URLS.user);
@@ -8141,20 +8074,121 @@ makeClient(BASE_URLS.analytic);
 makeClient(BASE_URLS.grading);
 
 const notificationService = {
-  getByUserId: (userId) => notificationApi.get(`/api/notifications/user/${userId}`).catch(() => ({ data: [] }))
+  /** All notifications for a user, newest first. */
+  getByUserId: (userId, opts) => notificationApi.get(
+    `/api/notifications/user/${encodeURIComponent(userId)}`,
+    { params: opts?.unreadOnly ? { unreadOnly: true } : void 0 }
+  ).catch(() => ({ data: [] })),
+  /** Drives the TopHeader bell badge. */
+  unreadCount: (userId) => notificationApi.get(
+    `/api/notifications/user/${encodeURIComponent(userId)}/unread-count`
+  ).then((r) => Number(r.data?.count ?? 0)).catch(() => 0),
+  /** Mark a single notification as read. */
+  markRead: (id) => notificationApi.patch(`/api/notifications/${encodeURIComponent(id)}/read`).catch(() => void 0),
+  /** Mark every unread notification for this user as read. */
+  markAllRead: (userId) => notificationApi.patch(`/api/notifications/user/${encodeURIComponent(userId)}/read-all`).catch(() => void 0),
+  /** Used by services that emit notifications synchronously. */
+  create: (body) => notificationApi.post("/api/notifications", body)
 };
 
-const {useState: useState$d,useEffect: useEffect$e} = await importShared('react');
-function formatTime(iso) {
-  if (!iso) return "";
-  const d = new Date(iso);
-  const now = Date.now();
-  const diff = Math.floor((now - d.getTime()) / 1e3);
-  if (diff < 60) return "Дөнгөж сая";
-  if (diff < 3600) return `${Math.floor(diff / 60)} минутын өмнө`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)} цагийн өмнө`;
-  return `${Math.floor(diff / 86400)} өдрийн өмнө`;
+const {useEffect: useEffect$g,useState: useState$f} = await importShared('react');
+const BASE_MENU = [
+  { icon: House, label: "Хянах самбар", path: "/teacher", end: true },
+  { icon: FileSearch, label: "Судалгааны удирдлага", path: "/teacher/thesis" },
+  { icon: Users, label: "Оюутнууд", path: "/teacher/students" },
+  { icon: TrendingUp, label: "Явцын хяналт", path: "/teacher/progress" },
+  { icon: CircleCheckBig, label: "Комисс", path: "/teacher/committee" }
+];
+function TeacherSidebar({ collapsed }) {
+  const user = getStoredUser();
+  const isExpert = user?.systemRole === "EXTERNAL_EXPERT";
+  const menuItems = isExpert ? [{ icon: Award, label: "Гадаад эксперт үнэлгээ", path: "/teacher/expert", end: true }] : BASE_MENU;
+  const [unread, setUnread] = useState$f(0);
+  useEffect$g(() => {
+    const userId = user?.userId;
+    if (!userId) return;
+    let cancelled = false;
+    const tick = () => notificationService.unreadCount(userId).then((c) => {
+      if (!cancelled) setUnread(c);
+    });
+    tick();
+    const interval = setInterval(tick, 3e4);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [user?.userId]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "aside",
+    {
+      className: `relative flex flex-col bg-ink-900 border-r border-black/20 transition-[width] duration-300 ${collapsed ? "w-20" : "w-64"} shrink-0`,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 px-5 h-16 border-b border-white/10", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "img",
+            {
+              src: numLogo,
+              alt: "МУИС",
+              width: 26,
+              height: 26,
+              className: "shrink-0 opacity-90 [filter:brightness(0)_invert(1)]"
+            }
+          ),
+          !collapsed && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[13px] font-semibold tracking-tight text-white leading-none", children: "МУИС" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-[11px] text-white/50 mt-1 leading-snug", children: [
+              "Дипломын ажлын",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+              "удирдлагын систем"
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "flex-1 py-5 overflow-y-auto", children: [
+          !collapsed && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "px-5 mb-2 text-[10px] uppercase tracking-[0.14em] font-medium text-white/35", children: "Үндсэн цэс" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-px", children: menuItems.map((item) => {
+            const Icon = item.icon;
+            return /* @__PURE__ */ jsxRuntimeExports.jsx(
+              NavLink,
+              {
+                to: item.path,
+                end: item.end,
+                className: ({ isActive }) => `group relative flex items-center gap-3 h-9 px-5 transition-colors ${collapsed ? "justify-center px-0" : ""} ${isActive ? "text-white bg-white/[0.07]" : "text-white/55 hover:text-white hover:bg-white/[0.04]"}`,
+                children: ({ isActive }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                  isActive && !collapsed && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute left-0 top-0 bottom-0 w-[2px] bg-accent" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    Icon,
+                    {
+                      className: `w-[18px] h-[18px] shrink-0 ${isActive ? "text-white" : "text-white/45 group-hover:text-white/80"}`,
+                      strokeWidth: 1.6
+                    }
+                  ),
+                  !collapsed && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-[13px] tracking-tight ${isActive ? "font-medium" : "font-normal"}`, children: item.label })
+                ] })
+              },
+              item.path
+            );
+          }) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-5 py-3 border-t border-white/10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          NavLink,
+          {
+            to: "/teacher/notifications",
+            className: ({ isActive }) => `relative w-full flex items-center gap-3 h-9 transition-colors rounded-sm ${collapsed ? "justify-center" : ""} ${isActive ? "text-white" : "text-white/55 hover:text-white"}`,
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "relative inline-flex shrink-0", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Bell, { className: "w-[18px] h-[18px]", strokeWidth: 1.6 }),
+                unread > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -top-1.5 -right-1.5 inline-flex items-center justify-center min-w-[16px] h-4 px-1 text-[9px] font-semibold leading-none rounded-full bg-accent text-white tabular-nums", children: unread > 99 ? "99+" : unread })
+              ] }),
+              !collapsed && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[13px] tracking-tight", children: "Мэдэгдэл" })
+            ]
+          }
+        ) })
+      ]
+    }
+  );
 }
+
+const {useState: useState$e} = await importShared('react');
 function TopHeader({
   title,
   subtitle,
@@ -8163,132 +8197,47 @@ function TopHeader({
   userInitials,
   onLogout
 }) {
-  const [showNotifications, setShowNotifications] = useState$d(false);
-  const [showProfile, setShowProfile] = useState$d(false);
-  const [notifications, setNotifications] = useState$d([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get("q") ?? "";
-  useEffect$e(() => {
-    const user = getStoredUser();
-    const userId = user?.userId;
-    if (!userId) return;
-    notificationService.getByUserId(userId).then((res) => setNotifications(res.data));
-  }, []);
-  const handleSearchChange = (value) => {
-    const next = new URLSearchParams(searchParams);
-    if (value) next.set("q", value);
-    else next.delete("q");
-    setSearchParams(next, { replace: true });
-  };
-  const unreadCount = notifications.filter((n) => n.status !== "READ").length;
+  const [showProfile, setShowProfile] = useState$e(false);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "bg-surface border-b border-border px-6 flex items-center justify-between h-16 shrink-0 relative z-20", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-[15px] font-semibold text-ink-900 tracking-tight leading-none", children: title }),
       subtitle && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mt-1", children: subtitle })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hidden md:flex flex-1 max-w-xl items-center gap-2 h-9 bg-surface-muted border border-border rounded-md px-3 mx-6 focus-within:border-accent focus-within:bg-surface transition-colors", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "w-4 h-4 text-ink-400", strokeWidth: 1.6 }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-1", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "button",
         {
-          type: "text",
-          placeholder: "Судалгааны ажил, оюутан, багш хайх...",
-          value: query,
-          onChange: (e) => handleSearchChange(e.target.value),
-          className: "bg-transparent border-none outline-none text-sm text-ink-900 placeholder-ink-400 w-full"
-        }
-      )
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "button",
-          {
-            onClick: () => {
-              setShowNotifications(!showNotifications);
-              setShowProfile(false);
-            },
-            className: "relative w-9 h-9 rounded-md flex items-center justify-center text-ink-500 hover:text-ink-900 hover:bg-accent-softer transition-colors",
-            "aria-label": "Мэдэгдэл",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Bell, { className: "w-4 h-4", strokeWidth: 1.6 }),
-              unreadCount > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[var(--color-dot-negative)] rounded-full" })
-            ]
-          }
-        ),
-        showNotifications && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute right-0 top-11 w-80 bg-surface rounded-md border border-border-strong overflow-hidden shadow-sm", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between px-4 py-3 border-b border-border", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "text-sm font-semibold text-ink-900 tracking-tight flex items-center gap-2", children: [
-              "Мэдэгдэл",
-              unreadCount > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] tabular-nums text-white bg-accent rounded-sm px-1.5 py-0.5 font-medium", children: unreadCount })
+          onClick: () => setShowProfile(!showProfile),
+          className: "flex items-center gap-2 rounded-md px-2 h-9 hover:bg-accent-softer transition-colors",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-7 h-7 border border-border-strong bg-surface rounded-full flex items-center justify-center text-[11px] font-semibold text-ink-700 shrink-0", children: userInitials }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hidden md:block text-left", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-900 font-medium leading-none tracking-tight", children: userName }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mt-0.5", children: userRole })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => setShowNotifications(false), className: "text-ink-400 hover:text-ink-900", children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "w-4 h-4", strokeWidth: 1.6 }) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-h-72 overflow-y-auto", children: notifications.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "py-10 text-center text-ink-400 text-sm", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Bell, { className: "w-6 h-6 mx-auto mb-2 text-ink-300", strokeWidth: 1.4 }),
-            "Мэдэгдэл байхгүй байна"
-          ] }) : notifications.map((notif) => {
-            const isUnread = notif.status !== "READ";
-            return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "div",
-              {
-                className: `flex items-start gap-3 px-4 py-3 hover:bg-surface-muted cursor-pointer border-b border-border last:border-b-0 ${isUnread ? "bg-accent-soft/60" : ""}`,
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-7 h-7 rounded-full border flex items-center justify-center text-[11px] font-semibold shrink-0 ${isUnread ? "border-accent text-accent" : "border-border-strong text-ink-500"}`, children: (notif.type || "N").substring(0, 1).toUpperCase() }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
-                    notif.title && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold text-ink-900 tracking-tight truncate", children: notif.title }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-700 leading-tight", children: notif.message }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-400 mt-1 tabular-nums", children: formatTime(notif.createdAt) })
-                  ] }),
-                  isUnread && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-1.5 h-1.5 bg-accent rounded-full shrink-0 mt-1.5" })
-                ]
-              },
-              notif.id
-            );
-          }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 py-2 border-t border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "text-xs text-accent hover:text-accent-hover font-medium tracking-tight", children: "Бүх мэдэгдлийг харах" }) })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-px h-5 bg-border-strong mx-1.5" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "w-3.5 h-3.5 text-ink-400 hidden md:block", strokeWidth: 1.6 })
+          ]
+        }
+      ),
+      showProfile && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute right-0 top-11 w-52 bg-surface rounded-md border border-border-strong overflow-hidden shadow-sm", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 py-3 border-b border-border", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-900 font-medium tracking-tight", children: userName }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mt-0.5", children: userRole })
+        ] }),
+        ["Тохиргоо", "Сонголтууд", "Тусламж & Дэмжлэг"].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "w-full text-left px-4 py-2.5 text-sm text-ink-700 hover:bg-surface-muted transition-colors", children: item }, item)),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-t border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "button",
           {
-            onClick: () => {
-              setShowProfile(!showProfile);
-              setShowNotifications(false);
-            },
-            className: "flex items-center gap-2 rounded-md px-2 h-9 hover:bg-accent-softer transition-colors",
+            onClick: onLogout,
+            className: "w-full text-left px-4 py-2.5 text-sm text-ink-700 hover:bg-surface-muted hover:text-ink-900 transition-colors font-medium flex items-center gap-2",
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-7 h-7 border border-border-strong bg-surface rounded-full flex items-center justify-center text-[11px] font-semibold text-ink-700 shrink-0", children: userInitials }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hidden md:block text-left", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-900 font-medium leading-none tracking-tight", children: userName }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mt-0.5", children: userRole })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "w-3.5 h-3.5 text-ink-400 hidden md:block", strokeWidth: 1.6 })
+              /* @__PURE__ */ jsxRuntimeExports.jsx(LogOut, { className: "w-3.5 h-3.5", strokeWidth: 1.6 }),
+              "Гарах"
             ]
           }
-        ),
-        showProfile && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute right-0 top-11 w-52 bg-surface rounded-md border border-border-strong overflow-hidden shadow-sm", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 py-3 border-b border-border", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-900 font-medium tracking-tight", children: userName }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mt-0.5", children: userRole })
-          ] }),
-          ["Тохиргоо", "Сонголтууд", "Тусламж & Дэмжлэг"].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("button", { className: "w-full text-left px-4 py-2.5 text-sm text-ink-700 hover:bg-surface-muted transition-colors", children: item }, item)),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-t border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "button",
-            {
-              onClick: onLogout,
-              className: "w-full text-left px-4 py-2.5 text-sm text-ink-700 hover:bg-surface-muted hover:text-ink-900 transition-colors font-medium flex items-center gap-2",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(LogOut, { className: "w-3.5 h-3.5", strokeWidth: 1.6 }),
-                "Гарах"
-              ]
-            }
-          ) })
-        ] })
+        ) })
       ] })
-    ] })
+    ] }) })
   ] });
 }
 
@@ -8297,12 +8246,12 @@ function FloatingMessageButton({ unreadCount = 0, onMessageClick }) {
     "button",
     {
       onClick: onMessageClick,
-      className: "fixed bottom-6 right-6 w-12 h-12 bg-accent text-white rounded-full hover:bg-accent-hover transition-all hover:scale-105 z-50 group flex items-center justify-center",
+      className: "fixed bottom-6 right-6 w-12 h-12 bg-ink-900 text-white rounded-full hover:bg-black transition-all hover:scale-105 z-50 group flex items-center justify-center",
       "aria-label": "Мессеж",
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex items-center justify-center", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquare, { className: "w-5 h-5", strokeWidth: 1.6 }),
-          unreadCount > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -top-2 -right-2 bg-[var(--color-dot-negative)] text-white text-[10px] font-semibold tabular-nums px-1.5 py-0.5 rounded-full border border-white min-w-[18px] text-center leading-tight", children: unreadCount > 99 ? "99+" : unreadCount })
+          unreadCount > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -top-2 -right-2 bg-white text-accent text-[10px] font-semibold tabular-nums px-1.5 py-0.5 rounded-full border border-accent min-w-[18px] text-center leading-tight", children: unreadCount > 99 ? "99+" : unreadCount })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute right-full mr-3 bg-ink-900 text-white text-xs px-2.5 py-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none tracking-tight", children: "Мессеж" })
       ]
@@ -8310,7 +8259,110 @@ function FloatingMessageButton({ unreadCount = 0, onMessageClick }) {
   );
 }
 
-const {useState: useState$c} = await importShared('react');
+const {Component} = await importShared('react');
+class ErrorBoundary extends Component {
+  state = { error: null };
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+  componentDidCatch(error, info) {
+    console.error("[UI ErrorBoundary]", error, info.componentStack);
+  }
+  reset = () => {
+    this.setState({ error: null });
+    window.location.reload();
+  };
+  render() {
+    if (!this.state.error) return this.props.children;
+    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-[60vh] flex items-center justify-center p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md w-full border border-border rounded-md bg-surface p-6 space-y-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-[var(--color-dot-negative)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(TriangleAlert, { className: "w-5 h-5", strokeWidth: 1.6 }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-base font-semibold text-ink-900 tracking-tight", children: "Алдаа гарлаа" })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-700 leading-relaxed", children: "Энэ хэсэгт санаандгүй алдаа гарсан тул хуудсыг сэргээнэ үү. Алдаа давтагдвал админд хандана уу." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("pre", { className: "text-[11px] text-ink-500 bg-surface-muted border border-border rounded-md p-2 overflow-auto max-h-32 whitespace-pre-wrap", children: this.state.error.message }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          onClick: this.reset,
+          className: "px-3 py-2 rounded-md bg-ink-900 text-white text-sm hover:bg-black transition-colors",
+          children: "Хуудсыг сэргээх"
+        }
+      )
+    ] }) });
+  }
+}
+
+const fromV2 = (m) => ({
+  id: m.id,
+  conversationId: m.conversationId,
+  senderId: m.senderId,
+  receiverId: m.receiverId,
+  content: m.content,
+  status: m.status,
+  sentAt: m.createdAt,
+  seenAt: m.seenAt
+});
+const chatService = {
+  /** Conversation id used by the chat. Stable across both ends. */
+  conversationId: (studentId, supervisorId, thesisId) => thesisId && thesisId.trim() ? thesisId : `pair:${studentId}:${supervisorId}`,
+  getMessages: (conversationId) => messageApi.get(`/api/messages/${conversationId}`).then((r) => ({ data: (r.data || []).map(fromV2) })).catch(() => ({ data: [] })),
+  sendMessage: (params) => messageApi.post("/api/messages", {
+    conversationId: params.conversationId,
+    senderId: params.senderId,
+    receiverId: params.receiverId,
+    content: params.content
+  }).then((r) => ({ data: fromV2(r.data) })),
+  markRead: (conversationId, viewerId) => messageApi.post(`/api/messages/${conversationId}/seen`, null, { params: { userId: viewerId } }).catch(() => void 0),
+  /** Total unread messages addressed to this user across every conversation. */
+  unreadCount: (userId) => messageApi.get("/api/messages/unread-count", { params: { userId } }).then((r) => Number(r.data?.count ?? 0)).catch(() => 0),
+  /**
+   * Open a Server-Sent Events stream for one conversation. Events arrive in
+   * real time; consumers handle two named types:
+   *   - "message": payload is a {@link ChatMessage}
+   *   - "seen":    payload is { conversationId, viewerId, at }
+   *
+   * Returns a cleanup function. Caller is responsible for calling it on unmount.
+   */
+  openStream(conversationId, handlers) {
+    const base = (messageApi.defaults.baseURL ?? "").replace(/\/$/, "");
+    const url = `${base}/api/messages/stream/${encodeURIComponent(conversationId)}`;
+    const es = new EventSource(url);
+    if (handlers.onOpen) es.addEventListener("open", () => handlers.onOpen());
+    es.addEventListener("message", (raw) => {
+      try {
+        const data = JSON.parse(raw.data);
+        const msg = {
+          id: data.id,
+          conversationId: data.conversationId,
+          senderId: data.senderId,
+          receiverId: data.receiverId,
+          content: data.content,
+          status: data.status,
+          sentAt: data.createdAt ?? data.sentAt,
+          seenAt: data.seenAt
+        };
+        handlers.onMessage?.(msg);
+      } catch (e) {
+        console.warn("[chat sse] bad message payload", e);
+      }
+    });
+    es.addEventListener("seen", (raw) => {
+      try {
+        const data = JSON.parse(raw.data);
+        handlers.onSeen?.(data);
+      } catch (e) {
+        console.warn("[chat sse] bad seen payload", e);
+      }
+    });
+    es.addEventListener("error", (e) => {
+      handlers.onError?.(e);
+    });
+    return () => es.close();
+  }
+};
+
+const {useState: useState$d,useEffect: useEffect$f} = await importShared('react');
 const pageTitles = {
   "/teacher": { title: "Хянах самбар", subtitle: "Тавтай морилно уу, Багш" },
   "/teacher/students": { title: "Оюутнууд", subtitle: "Харьцлаж буй оюутнуудынгоо харах, удирдах" },
@@ -8321,11 +8373,30 @@ const pageTitles = {
   "/teacher/settings": { title: "Тохиргоо", subtitle: "Профайл, тохиргоо удирдах" }
 };
 function TeacherLayout({ user }) {
-  const [collapsed, setCollapsed] = useState$c(false);
+  const [collapsed, setCollapsed] = useState$d(false);
+  const [unreadCount, setUnreadCount] = useState$d(0);
   const location = useLocation();
   const navigate = useNavigate();
   const pageInfo = pageTitles[location.pathname] || pageTitles["/teacher"];
   const initials = user.displayName.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+  const isExpertWorkspace = location.pathname.startsWith("/teacher/expert") || user.systemRole === "EXTERNAL_EXPERT";
+  const userId = user.userId || user.username || "";
+  useEffect$f(() => {
+    if (!userId || isExpertWorkspace) {
+      setUnreadCount(0);
+      return;
+    }
+    let cancelled = false;
+    const tick = () => chatService.unreadCount(userId).then((n) => {
+      if (!cancelled) setUnreadCount(n);
+    });
+    tick();
+    const interval = setInterval(tick, 2e4);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [userId, isExpertWorkspace, location.pathname]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-screen bg-slate-50 overflow-hidden", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherSidebar, { collapsed, onToggle: () => setCollapsed(!collapsed) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col flex-1 min-w-0", children: [
@@ -8341,12 +8412,12 @@ function TeacherLayout({ user }) {
           onLogout: logout
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 overflow-y-auto p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 overflow-y-auto p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) }) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    !isExpertWorkspace && /* @__PURE__ */ jsxRuntimeExports.jsx(
       FloatingMessageButton,
       {
-        unreadCount: 5,
+        unreadCount,
         onMessageClick: () => navigate("/teacher/messages")
       }
     )
@@ -11939,13 +12010,10 @@ const userService = {
   getDepartments: () => userApi.get("/api/users/departments")
 };
 
-const {useState: useState$b,useEffect: useEffect$d} = await importShared('react');
+const {useState: useState$c,useEffect: useEffect$e} = await importShared('react');
 const toneDot$6 = {
   positive: "bg-[var(--color-dot-positive)]",
-  warning: "bg-[var(--color-dot-warning)]",
-  negative: "bg-[var(--color-dot-negative)]",
-  neutral: "bg-[var(--color-dot-neutral)]"
-};
+  warning: "bg-[var(--color-dot-warning)]"};
 const STAGE_DEFS = [
   { key: "PROGRESS_1", title: "Явц 1" },
   { key: "PROGRESS_2", title: "Явц 2" },
@@ -11957,10 +12025,26 @@ const stageLabel$2 = (stageType) => {
     PROGRESS_1: "Явц 1-ийн хяналт",
     PROGRESS_2: "Явц 2-ын хяналт",
     PRE_DEFENSE: "Урьдчилсан хамгаалалт",
-    FINAL_DEFENSE: "Эцсийн хамгаалалт"
+    PRELIMINARY: "Урьдчилсан хамгаалалт",
+    FINAL_DEFENSE: "Эцсийн хамгаалалт",
+    FINAL: "Эцсийн хамгаалалт"
   };
   return map[stageType] || stageType;
 };
+function fmtDateTime(iso) {
+  if (!iso) return null;
+  return new Date(iso).toLocaleString("mn-MN", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+function daysFrom(iso) {
+  if (!iso) return null;
+  return Math.ceil((new Date(iso).getTime() - Date.now()) / 864e5);
+}
 function TermTimeline({ stageState }) {
   const activeIndex = (() => {
     const i = STAGE_DEFS.findIndex((s) => stageState[s.key]?.state === "active");
@@ -12000,14 +12084,14 @@ function TermTimeline({ stageState }) {
 }
 function TeacherDashboard() {
   const navigate = useNavigate();
-  const [studentCount, setStudentCount] = useState$b(0);
-  const [pendingReports, setPendingReports] = useState$b([]);
-  const [reviewedCount, setReviewedCount] = useState$b(0);
-  const [mySessions, setMySessions] = useState$b([]);
-  const [myCommittees, setMyCommittees] = useState$b([]);
-  const [studentMap, setStudentMap] = useState$b({});
-  const [loading, setLoading] = useState$b(true);
-  useEffect$d(() => {
+  const [studentCount, setStudentCount] = useState$c(0);
+  const [pendingReports, setPendingReports] = useState$c([]);
+  const [reviewedCount, setReviewedCount] = useState$c(0);
+  const [mySessions, setMySessions] = useState$c([]);
+  const [myCommittees, setMyCommittees] = useState$c([]);
+  const [studentMap, setStudentMap] = useState$c({});
+  const [loading, setLoading] = useState$c(true);
+  useEffect$e(() => {
     const user = getStoredUser();
     const teacherId = user?.userId || user?.username || "";
     if (user?.systemRole === "EXTERNAL_EXPERT") {
@@ -12080,13 +12164,7 @@ function TeacherDashboard() {
     return !!d && new Date(d).getTime() < todayMs;
   };
   const upcomingSchedule = sortedSessions.filter((s) => !isPast(s));
-  const pastSchedule = sortedSessions.filter(isPast);
-  const sessionStatusTone = (status) => {
-    const s = (status || "").toUpperCase();
-    if (s === "OPEN" || s === "SCHEDULED") return "warning";
-    if (s === "CLOSED" || s === "COMPLETED") return "positive";
-    return "neutral";
-  };
+  const upcomingSession = upcomingSchedule[0];
   const canonicalStage = (s) => s === "PRE_DEFENSE" ? "PRELIMINARY" : s === "FINAL_DEFENSE" ? "FINAL" : s ?? "";
   const stageState = {};
   STAGE_DEFS.forEach((stage) => {
@@ -12104,41 +12182,6 @@ function TeacherDashboard() {
     else if (st === "OPEN" || st === "ACTIVE") state = "active";
     stageState[stage.key] = { state, date: sessionDate(latest) };
   });
-  const renderScheduleRow = (session) => {
-    const committee = session.committeeId ? committeeMap.get(session.committeeId) : void 0;
-    const dateStr = sessionDate(session);
-    const [datePart, timePart] = dateStr.split("T");
-    const month = datePart?.split("-")[1] || "—";
-    const day = datePart?.split("-")[2] || "—";
-    const time = timePart?.substring(0, 5);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:bg-surface-muted transition-colors", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3 min-w-0 flex-1", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-11 h-11 rounded-md border border-border-strong bg-surface-muted flex flex-col items-center justify-center shrink-0 tabular-nums", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-[10px] font-medium text-ink-500 leading-none", children: [
-          month,
-          "/"
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-base font-semibold text-ink-900 leading-none mt-0.5", children: day })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0 flex-1", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-semibold text-ink-900 tracking-tight truncate", children: stageLabel$2(session.stageType) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-600 mt-0.5 truncate", children: committee ? `${committee.name} · ${committee.role}` : "—" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mt-1 text-xs text-ink-500 flex-wrap", children: [
-          time && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1 tabular-nums", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3", strokeWidth: 1.6 }),
-            time
-          ] }),
-          session.location && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-3 h-3", strokeWidth: 1.6 }),
-            session.location
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-ink-700", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$6[sessionStatusTone(session.status)]}` }),
-            session.status
-          ] })
-        ] })
-      ] })
-    ] }) }, session.id);
-  };
   const heroStageEntry = STAGE_DEFS.find((s) => stageState[s.key]?.state === "active") || STAGE_DEFS.slice().reverse().find((s) => stageState[s.key]?.state === "done") || STAGE_DEFS[0];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6 max-w-7xl mx-auto pb-10", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
@@ -12196,28 +12239,6 @@ function TeacherDashboard() {
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
-            "Хамгаалалтын хуваарь"
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0", children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6 text-center text-ink-400 text-sm", children: "Ачааллаж байна..." }) : liveSessions.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-6 text-center text-ink-400 text-sm", children: "Идэвхтэй комиссын хамгаалалт алга." }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 pt-3 pb-1 text-[11px] uppercase tracking-wider font-medium text-ink-500", children: [
-              "Удахгүй болох (",
-              upcomingSchedule.length,
-              ")"
-            ] }),
-            upcomingSchedule.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 py-3 text-xs text-ink-400", children: "Удахгүй болох хамгаалалт алга." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divide-y divide-border", children: upcomingSchedule.map(renderScheduleRow) }),
-            pastSchedule.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 pt-3 pb-1 text-[11px] uppercase tracking-wider font-medium text-ink-500 border-t border-border", children: [
-                "Өнгөрсөн (",
-                pastSchedule.length,
-                ")"
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divide-y divide-border", children: pastSchedule.map(renderScheduleRow) })
-            ] })
-          ] }) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
             "Тойм мэдээлэл"
           ] }) }),
@@ -12255,20 +12276,80 @@ function TeacherDashboard() {
           ] }, report.id)) }) })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquare, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
-          "Хурдан харагдац"
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-4 space-y-2", children: [
-          { label: "Удирдаж буй", value: studentCount },
-          { label: "Хүлээгдэж буй", value: pendingReports.length },
-          { label: "Хянагдсан", value: reviewedCount }
-        ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between py-1.5 border-b border-border last:border-0", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-500", children: item.label }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-semibold text-ink-900 tracking-tight tabular-nums", children: loading ? "—" : item.value })
-        ] }, item.label)) })
-      ] }) })
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-ink-700", strokeWidth: 1.6 }),
+            "Хамгаалалтын хуваарь"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-4 space-y-3", children: [
+            upcomingSession ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[11px] uppercase tracking-wider font-medium text-accent", children: "Дараагийн хамгаалалт" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-semibold text-ink-900 tracking-tight mt-0.5", children: stageLabel$2(upcomingSession.stageType) })
+              ] }),
+              upcomingSession.scheduledDate && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-md border border-border-strong flex items-center justify-center shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-ink-700", strokeWidth: 1.6 }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-wider font-medium text-ink-500", children: "Огноо" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900", children: fmtDateTime(upcomingSession.scheduledDate) }),
+                  (() => {
+                    const d = daysFrom(upcomingSession.scheduledDate);
+                    if (d === null) return null;
+                    if (d === 0) return /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-700 flex items-center gap-1.5 mt-0.5", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)]" }),
+                      "Өнөөдөр"
+                    ] });
+                    if (d > 0) return /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-500 mt-0.5 tabular-nums", children: [
+                      d,
+                      " хоногийн дараа"
+                    ] });
+                    return /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-400 mt-0.5 tabular-nums", children: [
+                      Math.abs(d),
+                      " хоногийн өмнө"
+                    ] });
+                  })()
+                ] })
+              ] }),
+              upcomingSession.location && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-md border border-border-strong flex items-center justify-center shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-4 h-4 text-ink-700", strokeWidth: 1.6 }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-wider font-medium text-ink-500", children: "Байршил" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900", children: upcomingSession.location })
+                ] })
+              ] }),
+              upcomingSession.committeeId && (() => {
+                const cmt = committeeMap.get(upcomingSession.committeeId);
+                if (!cmt) return null;
+                return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pt-2 border-t border-border", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1", children: "Комисс" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900 tracking-tight", children: cmt.name }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mt-0.5", children: cmt.role })
+                ] });
+              })()
+            ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center py-6", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-7 h-7 text-ink-300 mx-auto mb-2", strokeWidth: 1.4 }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-700", children: "Хуваарьт хамгаалалт байхгүй" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mt-0.5", children: "Тогтоогдох үед энд харагдана." })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "outline", size: "sm", className: "w-full mt-1", onClick: () => navigate("/teacher/committee"), children: "Бүх хуваарь харах" })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquare, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
+            "Хурдан харагдац"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-4 space-y-2", children: [
+            { label: "Удирдаж буй", value: studentCount },
+            { label: "Хүлээгдэж буй", value: pendingReports.length },
+            { label: "Хянагдсан", value: reviewedCount }
+          ].map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between py-1.5 border-b border-border last:border-0", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-500", children: item.label }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-semibold text-ink-900 tracking-tight tabular-nums", children: loading ? "—" : item.value })
+          ] }, item.label)) })
+        ] })
+      ] })
     ] })
   ] });
 }
@@ -31587,7 +31668,7 @@ function canInsertNode(state, nodeType) {
 }
 
 const React$2 = await importShared('react');
-const {forwardRef,useState: useState$a,useDebugValue,useLayoutEffect,useEffect: useEffect$c,useRef: useRef$2,createContext,useContext,version,createRef,memo,createElement} = React$2;
+const {forwardRef,useState: useState$b,useDebugValue,useLayoutEffect,useEffect: useEffect$d,useRef: useRef$2,createContext,useContext,version,createRef,memo,createElement} = React$2;
 
 const ReactDOM = await importShared('react-dom');
 const {flushSync} = ReactDOM;
@@ -31917,7 +31998,7 @@ function requireWithSelector_production_min() {
   withSelector.exports = requireWithSelector_production_min();
 }
 var withSelectorExports = withSelector.exports;
-const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect$c;
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect$d;
 class EditorStateManager {
   constructor(initialEditor) {
     this.transactionNumber = 0;
@@ -31977,7 +32058,7 @@ class EditorStateManager {
 }
 function useEditorState(options) {
   var _a;
-  const [editorStateManager] = useState$a(() => new EditorStateManager(options.editor));
+  const [editorStateManager] = useState$b(() => new EditorStateManager(options.editor));
   const selectedState = withSelectorExports.useSyncExternalStoreWithSelector(editorStateManager.subscribe, editorStateManager.getSnapshot, editorStateManager.getServerSnapshot, options.selector, (_a = options.equalityFn) !== null && _a !== void 0 ? _a : deepEqual);
   useIsomorphicLayoutEffect(() => {
     return editorStateManager.watch(options.editor);
@@ -32196,10 +32277,10 @@ class EditorInstanceManager {
 function useEditor(options = {}, deps = []) {
   const mostRecentOptions = useRef$2(options);
   mostRecentOptions.current = options;
-  const [instanceManager] = useState$a(() => new EditorInstanceManager(mostRecentOptions));
+  const [instanceManager] = useState$b(() => new EditorInstanceManager(mostRecentOptions));
   const editor = shimExports.useSyncExternalStore(instanceManager.subscribe, instanceManager.getEditor, instanceManager.getServerSnapshot);
   useDebugValue(editor);
-  useEffect$c(instanceManager.onRender(deps));
+  useEffect$d(instanceManager.onRender(deps));
   useEditorState({
     editor,
     selector: ({ transactionNumber }) => {
@@ -36046,7 +36127,7 @@ function createDOMPurify() {
 }
 var purify = createDOMPurify();
 
-const {useEffect: useEffect$b} = await importShared('react');
+const {useEffect: useEffect$c} = await importShared('react');
 const isEmptyHtml = (html) => !html || html === "<p></p>" || html.replace(/<[^>]*>/g, "").trim() === "";
 const sanitize = (html) => purify.sanitize(html, {
   ALLOWED_TAGS: ["p", "br", "strong", "em", "u", "s", "ul", "ol", "li"],
@@ -36088,7 +36169,7 @@ function RichTextEditor({
       onChange(isEmptyHtml(html) ? "" : html);
     }
   });
-  useEffect$b(() => {
+  useEffect$c(() => {
     if (!editor) return;
     const current = editor.getHTML();
     const next = value || "";
@@ -36096,7 +36177,7 @@ function RichTextEditor({
       editor.commands.setContent(next, false);
     }
   }, [value, editor]);
-  useEffect$b(() => {
+  useEffect$c(() => {
     if (!editor) return;
     if (editor.isEditable === !disabled) return;
     editor.setEditable(!disabled);
@@ -36211,7 +36292,7 @@ function RichText({
   );
 }
 
-const {useState: useState$9,useEffect: useEffect$a,useRef: useRef$1} = await importShared('react');
+const {useState: useState$a,useEffect: useEffect$b,useRef: useRef$1} = await importShared('react');
 const toneDot$5 = {
   positive: "bg-[var(--color-dot-positive)]",
   warning: "bg-[var(--color-dot-warning)]",
@@ -36272,14 +36353,15 @@ const stageFromStatus = (status) => {
 };
 const progressFromStatus$1 = (status) => {
   const map = {
-    DRAFT: 10,
-    PENDING_TEACHER_APPROVAL: 20,
-    DEPT_PENDING: 30,
-    APPROVED: 40,
-    ACTIVE: 60,
-    SUBMITTED: 80
+    DRAFT: 0,
+    PENDING_TEACHER_APPROVAL: 5,
+    DEPT_PENDING: 10,
+    APPROVED: 20,
+    // topic batlagdsan = 1/5 stages done
+    ACTIVE: 20,
+    SUBMITTED: 20
   };
-  return map[status] ?? 30;
+  return map[status] ?? 0;
 };
 function TeacherStudents() {
   const [searchParams] = useSearchParams();
@@ -36287,61 +36369,61 @@ function TeacherStudents() {
   const stageType = searchParams.get("stageType") || "";
   const navigate = useNavigate();
   const search = searchParams.get("q") ?? "";
-  const [activeTab, setActiveTab] = useState$9(committeeId ? "evaluations" : "roster");
-  const [assignedStudents, setAssignedStudents] = useState$9([]);
-  const [committeeStudents, setCommitteeStudents] = useState$9([]);
-  const [submittedReports, setSubmittedReports] = useState$9([]);
-  const [studentNameMap, setStudentNameMap] = useState$9({});
-  const [loading, setLoading] = useState$9(true);
-  const [reviewReportId, setReviewReportId] = useState$9(null);
-  const [commentInput, setCommentInput] = useState$9("");
-  const [reviewStatus, setReviewStatus] = useState$9("idle");
-  const [reviewFiles, setReviewFiles] = useState$9([]);
-  const [activeFileId, setActiveFileId] = useState$9(null);
-  const [evalStudentId, setEvalStudentId] = useState$9(null);
-  const [scores, setScores] = useState$9({});
-  const [evalStatus, setEvalStatus] = useState$9("idle");
-  const [evalError, setEvalError] = useState$9(null);
-  const [defenseSessionId, setDefenseSessionId] = useState$9(null);
-  const [teacherRole, setTeacherRole] = useState$9("MEMBER");
-  const [progress1Session, setProgress1Session] = useState$9(null);
-  const [scheduleForm, setScheduleForm] = useState$9({ scheduledDate: "", location: "", notes: "" });
-  const [scheduleStatus, setScheduleStatus] = useState$9("idle");
-  const [p1GradeStudentId, setP1GradeStudentId] = useState$9(null);
-  const [p1Scores, setP1Scores] = useState$9({});
-  const [p1GradeStatus, setP1GradeStatus] = useState$9("idle");
-  const [p1GradeError, setP1GradeError] = useState$9(null);
-  const [p1ExistingGrades, setP1ExistingGrades] = useState$9({});
+  const [activeTab, setActiveTab] = useState$a(committeeId ? "evaluations" : "roster");
+  const [assignedStudents, setAssignedStudents] = useState$a([]);
+  const [committeeStudents, setCommitteeStudents] = useState$a([]);
+  const [submittedReports, setSubmittedReports] = useState$a([]);
+  const [studentNameMap, setStudentNameMap] = useState$a({});
+  const [loading, setLoading] = useState$a(true);
+  const [reviewReportId, setReviewReportId] = useState$a(null);
+  const [commentInput, setCommentInput] = useState$a("");
+  const [reviewStatus, setReviewStatus] = useState$a("idle");
+  const [reviewFiles, setReviewFiles] = useState$a([]);
+  const [activeFileId, setActiveFileId] = useState$a(null);
+  const [evalStudentId, setEvalStudentId] = useState$a(null);
+  const [scores, setScores] = useState$a({});
+  const [evalStatus, setEvalStatus] = useState$a("idle");
+  const [evalError, setEvalError] = useState$a(null);
+  const [defenseSessionId, setDefenseSessionId] = useState$a(null);
+  const [teacherRole, setTeacherRole] = useState$a("MEMBER");
+  const [progress1Session, setProgress1Session] = useState$a(null);
+  const [scheduleForm, setScheduleForm] = useState$a({ scheduledDate: "", location: "", notes: "" });
+  const [scheduleStatus, setScheduleStatus] = useState$a("idle");
+  const [p1GradeStudentId, setP1GradeStudentId] = useState$a(null);
+  const [p1Scores, setP1Scores] = useState$a({});
+  const [p1GradeStatus, setP1GradeStatus] = useState$a("idle");
+  const [p1GradeError, setP1GradeError] = useState$a(null);
+  const [p1ExistingGrades, setP1ExistingGrades] = useState$a({});
   const P1_CRITERIA = [{ name: "Судалгааны тайлан", max: 10 }, { name: "Танилцуулга", max: 5 }];
-  const [secretarySubmitting, setSecretarySubmitting] = useState$9(false);
-  const [secretaryDone, setSecretaryDone] = useState$9(false);
-  const [secretaryError, setSecretaryError] = useState$9(null);
-  const [closingNote, setClosingNote] = useState$9("");
-  const [committeeMembers, setCommitteeMembers] = useState$9([]);
-  const [reviewerAssignments, setReviewerAssignments] = useState$9([]);
-  const [assigningReviewer, setAssigningReviewer] = useState$9({});
-  const [teacherNameMap, setTeacherNameMap] = useState$9({});
-  const [reviewUploadStudentId, setReviewUploadStudentId] = useState$9(null);
-  const [reviewFile, setReviewFile] = useState$9(null);
-  const [reviewScore, setReviewScore] = useState$9("");
-  const [reviewUploadStatus, setReviewUploadStatus] = useState$9("idle");
-  const [reviewUploadError, setReviewUploadError] = useState$9(null);
-  const [uploadedReviews, setUploadedReviews] = useState$9([]);
+  const [secretarySubmitting, setSecretarySubmitting] = useState$a(false);
+  const [secretaryDone, setSecretaryDone] = useState$a(false);
+  const [secretaryError, setSecretaryError] = useState$a(null);
+  const [closingNote, setClosingNote] = useState$a("");
+  const [committeeMembers, setCommitteeMembers] = useState$a([]);
+  const [reviewerAssignments, setReviewerAssignments] = useState$a([]);
+  const [assigningReviewer, setAssigningReviewer] = useState$a({});
+  const [teacherNameMap, setTeacherNameMap] = useState$a({});
+  const [reviewUploadStudentId, setReviewUploadStudentId] = useState$a(null);
+  const [reviewFile, setReviewFile] = useState$a(null);
+  const [reviewScore, setReviewScore] = useState$a("");
+  const [reviewUploadStatus, setReviewUploadStatus] = useState$a("idle");
+  const [reviewUploadError, setReviewUploadError] = useState$a(null);
+  const [uploadedReviews, setUploadedReviews] = useState$a([]);
   const fileInputRef = useRef$1(null);
-  const [allSessions, setAllSessions] = useState$9([]);
-  const [studentSubmissions, setStudentSubmissions] = useState$9({});
-  const [studentGrades, setStudentGrades] = useState$9({});
-  const [confirmState, setConfirmState] = useState$9({});
-  const [viewReportsStudent, setViewReportsStudent] = useState$9(null);
-  const [viewReportsFiles, setViewReportsFiles] = useState$9([]);
-  const [viewReportsActiveId, setViewReportsActiveId] = useState$9(null);
-  const [viewReportsLoading, setViewReportsLoading] = useState$9(false);
-  const [viewReportsError, setViewReportsError] = useState$9(null);
-  const [committeeGrades, setCommitteeGrades] = useState$9({});
-  const [sessionGrades, setSessionGrades] = useState$9([]);
-  const [sessionSubmissions, setSessionSubmissions] = useState$9([]);
-  const [sendAvgStatus, setSendAvgStatus] = useState$9({});
-  const [sendAvgError, setSendAvgError] = useState$9({});
+  const [allSessions, setAllSessions] = useState$a([]);
+  const [studentSubmissions, setStudentSubmissions] = useState$a({});
+  const [studentGrades, setStudentGrades] = useState$a({});
+  const [confirmState, setConfirmState] = useState$a({});
+  const [viewReportsStudent, setViewReportsStudent] = useState$a(null);
+  const [viewReportsFiles, setViewReportsFiles] = useState$a([]);
+  const [viewReportsActiveId, setViewReportsActiveId] = useState$a(null);
+  const [viewReportsLoading, setViewReportsLoading] = useState$a(false);
+  const [viewReportsError, setViewReportsError] = useState$a(null);
+  const [committeeGrades, setCommitteeGrades] = useState$a({});
+  const [sessionGrades, setSessionGrades] = useState$a([]);
+  const [sessionSubmissions, setSessionSubmissions] = useState$a([]);
+  const [sendAvgStatus, setSendAvgStatus] = useState$a({});
+  const [sendAvgError, setSendAvgError] = useState$a({});
   const openStudentReports = async (student) => {
     setViewReportsStudent(student);
     setViewReportsLoading(true);
@@ -36382,14 +36464,15 @@ function TeacherStudents() {
   const getEffectiveScheme = (_studentId) => gradingScheme;
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || "";
-  useEffect$a(() => {
+  useEffect$b(() => {
     const load = async () => {
       try {
-        const [plansRes, usersRes, reportsRes, reqRes] = await Promise.all([
+        const [plansRes, usersRes, reportsRes, reqRes, finalGradesRes] = await Promise.all([
           planService.getPlans({ supervisorId: teacherId }),
           userService.getStudents(),
           thesisService.getReports({}),
-          topicService.getTopicRequests({ status: "APPROVED" }).catch(() => ({ data: [] }))
+          topicService.getTopicRequests({ status: "APPROVED" }).catch(() => ({ data: [] })),
+          evaluationService.getFinalGrades().catch(() => ({ data: [] }))
         ]);
         const plans = plansRes.data;
         const users = usersRes.data;
@@ -36399,6 +36482,9 @@ function TeacherStudents() {
           userMap[u.id] = u.displayName;
         });
         setStudentNameMap(userMap);
+        const gradedStudentIds = new Set(
+          (finalGradesRes.data || []).map((g) => g.studentId).filter(Boolean)
+        );
         const planStudentIds = new Set(plans.map((p) => p.studentId));
         const approvedRequests = (reqRes.data || []).filter(
           (r) => r.status === "APPROVED" && r.respondedById === teacherId && !planStudentIds.has(r.requestedById)
@@ -36407,9 +36493,9 @@ function TeacherStudents() {
           id: r.requestedById,
           name: resolveName$1(r.requestedById, userMap, "Тодорхойгүй оюутан"),
           thesis: "Гарчиггүй",
-          stage: "Сэдэв батлагдсан",
+          stage: gradedStudentIds.has(r.requestedById) ? "Дүн гарсан" : "Сэдэв батлагдсан",
           status: "APPROVED",
-          progress: 5,
+          progress: gradedStudentIds.has(r.requestedById) ? 100 : 5,
           studentId: r.requestedById
         }));
         const students = [
@@ -36417,9 +36503,9 @@ function TeacherStudents() {
             id: p.studentId,
             name: resolveName$1(p.studentId, userMap, "Тодорхойгүй оюутан"),
             thesis: p.title || "Гарчиггүй",
-            stage: stageFromStatus(p.status),
+            stage: gradedStudentIds.has(p.studentId) ? "Дүн гарсан" : stageFromStatus(p.status),
             status: p.status,
-            progress: progressFromStatus$1(p.status),
+            progress: gradedStudentIds.has(p.studentId) ? 100 : progressFromStatus$1(p.status),
             studentId: p.studentId
           })),
           ...fromRequests
@@ -36478,7 +36564,7 @@ function TeacherStudents() {
     };
     load();
   }, [teacherId, committeeId]);
-  useEffect$a(() => {
+  useEffect$b(() => {
     if (!committeeId || !teacherId) return;
     committeeService.getMyAssignments(teacherId).then((res) => {
       const assignment = res.data.find((a) => a.committeeId === committeeId);
@@ -36535,7 +36621,7 @@ function TeacherStudents() {
       setTeacherNameMap(map);
     });
   }, [committeeId, teacherId, stageType]);
-  useEffect$a(() => {
+  useEffect$b(() => {
     if (teacherRole !== "HEAD" || stageType !== "FINAL_DEFENSE" || committeeStudents.length === 0) return;
     Promise.all(
       committeeStudents.map(
@@ -38080,7 +38166,7 @@ const Input = React$1.forwardRef(
 );
 Input.displayName = "Input";
 
-const {useState: useState$8,useEffect: useEffect$9} = await importShared('react');
+const {useState: useState$9,useEffect: useEffect$a} = await importShared('react');
 const toneDot$4 = {
   positive: "bg-[var(--color-dot-positive)]",
   warning: "bg-[var(--color-dot-warning)]",
@@ -38098,13 +38184,13 @@ const statusMap$1 = {
 function TeacherTopicManagementTab() {
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || "";
-  const [topics, setTopics] = useState$8([]);
-  const [loading, setLoading] = useState$8(true);
-  const [showForm, setShowForm] = useState$8(false);
-  const [submitting, setSubmitting] = useState$8(false);
-  const [form, setForm] = useState$8({ title: "", titleEn: "", description: "", goal: "", keywords: "", visibility: "PUBLIC" });
-  const [errors, setErrors] = useState$8({});
-  useEffect$9(() => {
+  const [topics, setTopics] = useState$9([]);
+  const [loading, setLoading] = useState$9(true);
+  const [showForm, setShowForm] = useState$9(false);
+  const [submitting, setSubmitting] = useState$9(false);
+  const [form, setForm] = useState$9({ title: "", titleEn: "", description: "", goal: "", keywords: "", visibility: "PUBLIC" });
+  const [errors, setErrors] = useState$9({});
+  useEffect$a(() => {
     if (!teacherId) {
       setLoading(false);
       return;
@@ -38307,7 +38393,7 @@ function FormField({ label, required, hint, error, children }) {
   ] });
 }
 
-const {useEffect: useEffect$8} = await importShared('react');
+const {useEffect: useEffect$9} = await importShared('react');
 function Dialog({
   open,
   onClose,
@@ -38316,7 +38402,7 @@ function Dialog({
   scrollable = false,
   closeOnOverlayClick = true
 }) {
-  useEffect$8(() => {
+  useEffect$9(() => {
     if (!open) return;
     const onKey = (e) => {
       if (e.key === "Escape") onClose();
@@ -38324,7 +38410,7 @@ function Dialog({
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [open, onClose]);
-  useEffect$8(() => {
+  useEffect$9(() => {
     if (open) {
       document.body.style.overflow = "hidden";
     } else {
@@ -38376,16 +38462,16 @@ function DialogFooter({ children }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-2 justify-end px-6 py-4 border-t border-border shrink-0", children });
 }
 
-const {useState: useState$7,useEffect: useEffect$7} = await importShared('react');
+const {useState: useState$8,useEffect: useEffect$8} = await importShared('react');
 function TeacherTopicRequestsTab() {
-  const [activeRequests, setActiveRequests] = useState$7([]);
-  const [selectedRequest, setSelectedRequest] = useState$7(null);
-  const [showConfirmModal, setShowConfirmModal] = useState$7(null);
-  const [loading, setLoading] = useState$7(true);
-  const [rejectionReason, setRejectionReason] = useState$7("");
-  const [userMap, setUserMap] = useState$7({});
-  const [topicMap, setTopicMap] = useState$7({});
-  useEffect$7(() => {
+  const [activeRequests, setActiveRequests] = useState$8([]);
+  const [selectedRequest, setSelectedRequest] = useState$8(null);
+  const [showConfirmModal, setShowConfirmModal] = useState$8(null);
+  const [loading, setLoading] = useState$8(true);
+  const [rejectionReason, setRejectionReason] = useState$8("");
+  const [userMap, setUserMap] = useState$8({});
+  const [topicMap, setTopicMap] = useState$8({});
+  useEffect$8(() => {
     Promise.all([
       topicService.getTopicRequests({ status: "PENDING" }).catch(() => ({ data: [] })),
       userService.getStudents().catch(() => ({ data: [] })),
@@ -38577,19 +38663,19 @@ function TeacherTopicRequestsTab() {
   ] });
 }
 
-const {useState: useState$6,useEffect: useEffect$6} = await importShared('react');
+const {useState: useState$7,useEffect: useEffect$7} = await importShared('react');
 function TeacherStudentProposalsTab() {
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || "";
-  const [proposals, setProposals] = useState$6([]);
-  const [selectedProp, setSelectedProp] = useState$6(null);
-  const [showConfirmModal, setShowConfirmModal] = useState$6(null);
-  const [rejectionReason, setRejectionReason] = useState$6("");
-  const [submitting, setSubmitting] = useState$6(false);
-  const [errMsg, setErrMsg] = useState$6(null);
-  const [loading, setLoading] = useState$6(true);
-  const [userMap, setUserMap] = useState$6({});
-  useEffect$6(() => {
+  const [proposals, setProposals] = useState$7([]);
+  const [selectedProp, setSelectedProp] = useState$7(null);
+  const [showConfirmModal, setShowConfirmModal] = useState$7(null);
+  const [rejectionReason, setRejectionReason] = useState$7("");
+  const [submitting, setSubmitting] = useState$7(false);
+  const [errMsg, setErrMsg] = useState$7(null);
+  const [loading, setLoading] = useState$7(true);
+  const [userMap, setUserMap] = useState$7({});
+  useEffect$7(() => {
     if (!teacherId) {
       setLoading(false);
       return;
@@ -38781,11 +38867,11 @@ function TeacherStudentProposalsTab() {
   ] });
 }
 
-const {useState: useState$5,useEffect: useEffect$5} = await importShared('react');
+const {useState: useState$6,useEffect: useEffect$6} = await importShared('react');
 const toneDot$3 = {
   positive: "bg-[var(--color-dot-positive)]",
   warning: "bg-[var(--color-dot-warning)]"};
-const PLAN_STATUS_LABEL = {
+const PLAN_STATUS_LABEL$1 = {
   SUBMITTED: "Илгээсэн",
   REVISION_REQUIRED: "Засвар шаардлагатай",
   APPROVED: "Батлагдсан",
@@ -38794,17 +38880,18 @@ const PLAN_STATUS_LABEL = {
 function TeacherPlanReviewTab() {
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || "";
-  const [plans, setPlans] = useState$5([]);
-  const [loadingPlans, setLoadingPlans] = useState$5(true);
-  const [selectedPlan, setSelectedPlan] = useState$5(null);
-  const [planWeeks, setPlanWeeks] = useState$5([]);
-  const [loadingWeeks, setLoadingWeeks] = useState$5(false);
-  const [expandedWeeks, setExpandedWeeks] = useState$5(/* @__PURE__ */ new Set());
-  const [showConfirmModal, setShowConfirmModal] = useState$5(null);
-  const [rejectionReason, setRejectionReason] = useState$5("");
-  const [submitting, setSubmitting] = useState$5(false);
-  const [userMap, setUserMap] = useState$5({});
-  useEffect$5(() => {
+  const [plans, setPlans] = useState$6([]);
+  const [loadingPlans, setLoadingPlans] = useState$6(true);
+  const [selectedPlan, setSelectedPlan] = useState$6(null);
+  const [planWeeks, setPlanWeeks] = useState$6([]);
+  const [loadingWeeks, setLoadingWeeks] = useState$6(false);
+  const [expandedWeeks, setExpandedWeeks] = useState$6(/* @__PURE__ */ new Set());
+  const [showConfirmModal, setShowConfirmModal] = useState$6(null);
+  const [rejectionReason, setRejectionReason] = useState$6("");
+  const [submitting, setSubmitting] = useState$6(false);
+  const [reviewError, setReviewError] = useState$6(null);
+  const [userMap, setUserMap] = useState$6({});
+  useEffect$6(() => {
     planService.getPlans({ supervisorId: teacherId, status: "SUBMITTED" }).then((res) => setPlans(res.data)).catch(() => {
     }).finally(() => setLoadingPlans(false));
     userService.getStudents().then((res) => {
@@ -38838,6 +38925,7 @@ function TeacherPlanReviewTab() {
     if (!selectedPlan || !showConfirmModal) return;
     if (showConfirmModal === "reject" && !rejectionReason.trim()) return;
     setSubmitting(true);
+    setReviewError(null);
     const decision = showConfirmModal === "approve" ? "APPROVED" : "REVISION_REQUIRED";
     planService.reviewPlan(selectedPlan.id, {
       reviewedBy: teacherId,
@@ -38849,7 +38937,10 @@ function TeacherPlanReviewTab() {
       setPlanWeeks([]);
       setShowConfirmModal(null);
       setRejectionReason("");
-    }).catch(() => {
+    }).catch((err) => {
+      const msg = err?.response?.data?.error || err?.response?.data?.message || err?.message || "Үйлдэл амжилтгүй боллоо. Дахин оролдоно уу.";
+      setReviewError(typeof msg === "string" ? msg : "Үйлдэл амжилтгүй боллоо.");
+      console.error("[reviewPlan]", err);
     }).finally(() => setSubmitting(false));
   };
   const resetModal = () => {
@@ -38884,7 +38975,7 @@ function TeacherPlanReviewTab() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex justify-between items-center text-[11px]", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-ink-700", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$3.warning}` }),
-                    PLAN_STATUS_LABEL[p.status] || p.status
+                    PLAN_STATUS_LABEL$1[p.status] || p.status
                   ] }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-ink-400 tabular-nums", children: p.submittedAt?.split("T")[0] || "Огноогүй" })
                 ] })
@@ -38991,34 +39082,41 @@ function TeacherPlanReviewTab() {
           onClose: resetModal
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(DialogBody, { children: showConfirmModal === "approve" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-ink-700 leading-relaxed", children: [
-        "Та ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-ink-900", children: studentName(selectedPlan?.studentId) }),
-        "-ийн төлөвлөгөөг батлах гэж байна. Баталсны дараа оюутан дипломын ажлаа эхлэх боломжтой болно."
-      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-ink-700 leading-relaxed", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogBody, { children: [
+        showConfirmModal === "approve" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-ink-700 leading-relaxed", children: [
           "Та ",
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-ink-900", children: studentName(selectedPlan?.studentId) }),
-          "-ийн төлөвлөгөөг засварт буцаах гэж байна."
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5", children: [
-            "Засварт буцаах шалтгаан ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[var(--color-dot-negative)]", children: "*" })
+          "-ийн төлөвлөгөөг батлах гэж байна. Баталсны дараа оюутан дипломын ажлаа эхлэх боломжтой болно."
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-ink-700 leading-relaxed", children: [
+            "Та ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-ink-900", children: studentName(selectedPlan?.studentId) }),
+            "-ийн төлөвлөгөөг засварт буцаах гэж байна."
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            RichTextEditor,
-            {
-              value: rejectionReason,
-              onChange: setRejectionReason,
-              placeholder: "Засварт буцаах шалтгаан, зөвлөмжөө бичнэ үү...",
-              minHeight: 120,
-              ariaLabel: "Засварт буцаах шалтгаан"
-            }
-          ),
-          !rejectionReason.trim() && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mt-1", children: "Шалтгаан заавал бичих шаардлагатай." })
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5", children: [
+              "Засварт буцаах шалтгаан ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[var(--color-dot-negative)]", children: "*" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              RichTextEditor,
+              {
+                value: rejectionReason,
+                onChange: setRejectionReason,
+                placeholder: "Засварт буцаах шалтгаан, зөвлөмжөө бичнэ үү...",
+                minHeight: 120,
+                ariaLabel: "Засварт буцаах шалтгаан"
+              }
+            ),
+            !rejectionReason.trim() && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mt-1", children: "Шалтгаан заавал бичих шаардлагатай." })
+          ] })
+        ] }),
+        reviewError && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-3 text-xs text-[var(--color-dot-negative)] inline-flex items-center gap-1.5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)]" }),
+          " ",
+          reviewError
         ] })
-      ] }) }),
+      ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogFooter, { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "outline", onClick: resetModal, children: "Цуцлах" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -39034,11 +39132,11 @@ function TeacherPlanReviewTab() {
   ] });
 }
 
-const {useState: useState$4,useEffect: useEffect$4} = await importShared('react');
+const {useState: useState$5,useEffect: useEffect$5} = await importShared('react');
 function TeacherThesis() {
-  const [activeTab, setActiveTab] = useState$4("topics");
-  const [counts, setCounts] = useState$4({ topics: 0, requests: 0, proposals: 0, plans: 0 });
-  useEffect$4(() => {
+  const [activeTab, setActiveTab] = useState$5("topics");
+  const [counts, setCounts] = useState$5({ topics: 0, requests: 0, proposals: 0, plans: 0 });
+  useEffect$5(() => {
     const user = getStoredUser();
     const teacherId = user?.userId || user?.username || "";
     if (!teacherId) return;
@@ -39113,57 +39211,29 @@ function TeacherThesis() {
   ] });
 }
 
-const fromV2 = (m, fallbackThesisId) => ({
-  id: m.id,
-  thesisId: m.conversationId ?? fallbackThesisId,
-  senderId: m.senderId,
-  senderType: "",
-  // sender role no longer in payload — set by caller if needed
-  content: m.content,
-  sentAt: m.createdAt,
-  read: m.status === "SEEN",
-  conversationId: m.conversationId,
-  receiverId: m.receiverId,
-  status: m.status,
-  seenAt: m.seenAt
-});
-const warn = (msg) => console.warn(`[chatService v2-adapter] ${msg}`);
-const chatService = {
-  getMessages: (thesisId) => messageApi.get(`/api/messages/${thesisId}`).then((r) => ({ data: r.data.map((m) => fromV2(m, thesisId)) })).catch(() => ({ data: [] })),
-  /**
-   * Send a message in a conversation.
-   *
-   * `receiverId` is required by v2. Callers that omit it trigger a warning
-   * and the backend will reject with 400.
-   */
-  sendMessage: (thesisId, senderId, senderRole, content, receiverId) => {
-    if (!receiverId) {
-      warn(`sendMessage to thesis ${thesisId} missing receiverId — v2 message_service will reject this. Update caller to pass the counterpart user id (senderRole=${senderRole}).`);
-    }
-    return messageApi.post("/api/messages", {
-      conversationId: thesisId,
-      senderId,
-      receiverId: receiverId ?? "",
-      content
-    }).then((r) => ({ data: fromV2(r.data, thesisId) }));
-  },
-  markRead: (thesisId, readerId) => messageApi.post(`/api/messages/${thesisId}/seen`, null, { params: { userId: readerId } })
+const {useState: useState$4,useEffect: useEffect$4,useRef,useMemo} = await importShared('react');
+const PLAN_STATUS_LABEL = {
+  DRAFT: "Ноорог",
+  SUBMITTED: "Илгээсэн",
+  REVISION_REQUIRED: "Засвар шаардлагатай",
+  APPROVED: "Багш баталсан",
+  DEPT_APPROVED: "Тэнхим баталсан"
 };
-
-const {useState: useState$3,useEffect: useEffect$3,useRef} = await importShared('react');
 function TeacherMessages() {
-  const [plans, setPlans] = useState$3([]);
-  const [selectedPlan, setSelectedPlan] = useState$3(null);
-  const [messages, setMessages] = useState$3([]);
-  const [messageText, setMessageText] = useState$3("");
-  const [searchQuery, setSearchQuery] = useState$3("");
-  const [sending, setSending] = useState$3(false);
-  const [userMap, setUserMap] = useState$3({});
-  const bottomRef = useRef(null);
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || "";
   const teacherName = user?.username || "Багш";
-  useEffect$3(() => {
+  const [plans, setPlans] = useState$4([]);
+  const [selectedPlan, setSelectedPlan] = useState$4(null);
+  const [messages, setMessages] = useState$4([]);
+  const [messageText, setMessageText] = useState$4("");
+  const [searchQuery, setSearchQuery] = useState$4("");
+  const [sending, setSending] = useState$4(false);
+  const [sendError, setSendError] = useState$4(null);
+  const [userMap, setUserMap] = useState$4({});
+  const bottomRef = useRef(null);
+  useEffect$4(() => {
+    if (!teacherId) return;
     Promise.all([
       planService.getPlans({ supervisorId: teacherId }).catch(() => ({ data: [] })),
       userService.getStudents().catch(() => ({ data: [] }))
@@ -39178,47 +39248,84 @@ function TeacherMessages() {
     });
   }, [teacherId]);
   const studentLabel = (sid) => resolveName$1(sid, userMap, "Оюутан");
-  const planStatusLabel = {
-    DRAFT: "Ноорог",
-    SUBMITTED: "Илгээсэн",
-    REVISION_REQUIRED: "Засвар шаардлагатай",
-    APPROVED: "Багш баталсан",
-    DEPT_APPROVED: "Тэнхим баталсан"
-  };
-  const statusLabel = (s) => s && planStatusLabel[s] || s || "";
-  useEffect$3(() => {
-    const thesisId = selectedPlan?.thesisId ?? selectedPlan?.studentId;
-    if (!thesisId) {
+  const statusLabel = (s) => s && PLAN_STATUS_LABEL[s] || s || "";
+  const conversationId = useMemo(() => {
+    if (!selectedPlan) return null;
+    return chatService.conversationId(selectedPlan.studentId, teacherId, selectedPlan.thesisId ?? null);
+  }, [selectedPlan, teacherId]);
+  useEffect$4(() => {
+    if (!conversationId || !teacherId) {
       setMessages([]);
       return;
     }
-    const load = () => {
-      chatService.getMessages(thesisId).then((res) => {
-        setMessages(res.data);
-        setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }), 50);
-      }).catch(() => {
-      });
+    let cancelled = false;
+    let pollInterval = null;
+    let stop = null;
+    const scrollToBottom = () => setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }), 50);
+    const reconcileSeen = (msgs) => {
+      if (msgs.some((m) => m.receiverId === teacherId && m.status !== "SEEN")) {
+        chatService.markRead(conversationId, teacherId);
+      }
     };
-    load();
-    const interval = setInterval(load, 1e4);
-    return () => clearInterval(interval);
-  }, [selectedPlan]);
-  const handleSendMessage = () => {
-    const thesisId = selectedPlan?.thesisId ?? selectedPlan?.studentId;
-    if (!messageText.trim() || !thesisId) return;
+    const loadBacklog = async () => {
+      const res = await chatService.getMessages(conversationId);
+      if (cancelled) return;
+      setMessages(res.data);
+      scrollToBottom();
+      reconcileSeen(res.data);
+    };
+    loadBacklog();
+    stop = chatService.openStream(conversationId, {
+      onMessage: (m) => {
+        if (cancelled) return;
+        setMessages((prev) => prev.some((x) => x.id === m.id) ? prev : [...prev, m]);
+        scrollToBottom();
+        if (m.receiverId === teacherId && m.status !== "SEEN") {
+          chatService.markRead(conversationId, teacherId);
+        }
+      },
+      onSeen: (e) => {
+        if (cancelled || e.viewerId === teacherId) return;
+        setMessages((prev) => prev.map(
+          (m) => m.senderId === teacherId && m.receiverId === e.viewerId ? { ...m, status: "SEEN", seenAt: e.at } : m
+        ));
+      },
+      onError: () => {
+        if (pollInterval || cancelled) return;
+        pollInterval = setInterval(loadBacklog, 1e4);
+      }
+    });
+    return () => {
+      cancelled = true;
+      if (stop) stop();
+      if (pollInterval) clearInterval(pollInterval);
+    };
+  }, [conversationId, teacherId]);
+  const handleSendMessage = async () => {
+    if (!messageText.trim() || !conversationId || !selectedPlan) return;
     setSending(true);
-    chatService.sendMessage(thesisId, teacherId, "TEACHER", messageText.trim()).then((res) => {
-      setMessages((prev) => [...prev, res.data]);
+    setSendError(null);
+    try {
+      const res = await chatService.sendMessage({
+        conversationId,
+        senderId: teacherId,
+        receiverId: selectedPlan.studentId,
+        content: messageText.trim()
+      });
+      setMessages((prev) => prev.some((x) => x.id === res.data.id) ? prev : [...prev, res.data]);
       setMessageText("");
       setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }), 50);
-    }).catch(() => {
-    }).finally(() => setSending(false));
+    } catch (err) {
+      const msg = err?.response?.data?.message || err?.response?.data || err?.message || "";
+      setSendError(typeof msg === "string" && msg ? msg : "Илгээж чадсангүй.");
+    } finally {
+      setSending(false);
+    }
   };
   const filteredPlans = plans.filter((p) => {
     const q = searchQuery.toLowerCase();
     return p.studentId.toLowerCase().includes(q) || studentLabel(p.studentId).toLowerCase().includes(q);
   });
-  const isTeacherMessage = (msg) => msg.senderType === "TEACHER" || msg.senderId === teacherId;
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-[calc(100vh-200px)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0 h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-12 h-full", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-4 border-r border-border flex flex-col h-full bg-surface", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
@@ -39253,36 +39360,35 @@ function TeacherMessages() {
       }) })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "col-span-8 flex flex-col h-full", children: !selectedPlan ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex items-center justify-center bg-surface-sunken", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-ink-400 text-sm", children: "Зүүн талаас оюутан сонгоно уу" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 border-b border-border flex items-center justify-between bg-surface", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-10 w-10 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-sm font-medium", children: initialsFromName(studentLabel(selectedPlan.studentId)) }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-ink-900 tracking-tight", children: studentLabel(selectedPlan.studentId) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500", children: statusLabel(selectedPlan.status) })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "ghost", size: "icon", "aria-label": "Дэлгэрэнгүй", children: /* @__PURE__ */ jsxRuntimeExports.jsx(EllipsisVertical, { className: "h-4 w-4", strokeWidth: 1.6 }) })
-      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-border flex items-center justify-between bg-surface", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-10 w-10 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-sm font-medium", children: initialsFromName(studentLabel(selectedPlan.studentId)) }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-ink-900 tracking-tight", children: studentLabel(selectedPlan.studentId) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500", children: statusLabel(selectedPlan.status) })
+        ] })
+      ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 overflow-y-auto p-6 space-y-4 bg-surface-sunken", children: [
         messages.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center text-ink-500 pt-8", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm", children: "Харилцаа алга байна" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs mt-1 text-ink-400", children: "Оюутантайгаа харилцаагаа эхлүүлнэ үү." })
         ] }) : messages.map((msg) => {
-          const mine = isTeacherMessage(msg);
+          const mine = msg.senderId === teacherId;
           return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `flex ${mine ? "justify-end" : "justify-start"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end gap-2 max-w-[70%]", children: [
             !mine && /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-7 w-7 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-[10px] font-medium", children: initialsFromName(studentLabel(msg.senderId)) }) }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `rounded-md px-3 py-2 ${mine ? "bg-ink-900 text-white" : "bg-surface text-ink-900 border border-border"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-relaxed", children: msg.content }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: `text-[10px] mt-1 text-ink-400 tabular-nums ${mine ? "text-right" : ""}`, children: msg.sentAt?.split("T")[1]?.substring(0, 5) || "" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `rounded-md px-3 py-2 ${mine ? "bg-ink-900 text-white" : "bg-surface text-ink-900 border border-border"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-relaxed whitespace-pre-wrap break-words", children: msg.content }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: `text-[10px] mt-1 text-ink-400 tabular-nums ${mine ? "text-right" : ""}`, children: [
+                msg.sentAt ? new Date(msg.sentAt).toLocaleTimeString("mn-MN", { hour: "2-digit", minute: "2-digit" }) : "",
+                mine && msg.status === "SEEN" ? " · Уншсан" : ""
+              ] })
             ] }),
             mine && /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-7 w-7 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-[10px] font-medium", children: initialsFromName(teacherName) }) })
           ] }) }, msg.id);
         }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: bottomRef })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 border-t border-border bg-surface", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 border-t border-border bg-surface space-y-2", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "ghost", size: "icon", className: "flex-shrink-0", "aria-label": "Файл хавсаргах", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Paperclip, { className: "h-4 w-4", strokeWidth: 1.6 }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             Input,
             {
@@ -39290,7 +39396,8 @@ function TeacherMessages() {
               value: messageText,
               onChange: (e) => setMessageText(e.target.value),
               onKeyDown: (e) => e.key === "Enter" && !e.shiftKey && handleSendMessage(),
-              className: "flex-1"
+              className: "flex-1",
+              disabled: sending
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { className: "flex-shrink-0", disabled: sending || !messageText.trim(), onClick: handleSendMessage, children: [
@@ -39298,13 +39405,18 @@ function TeacherMessages() {
             "Илгээх"
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-400 mt-2", children: "Enter — илгээх, Shift+Enter — шинэ мөр" })
+        sendError && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-[var(--color-dot-negative)] inline-flex items-center gap-1.5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)]" }),
+          " ",
+          sendError
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-400", children: "Enter — илгээх" })
       ] })
     ] }) })
   ] }) }) }) });
 }
 
-const {useState: useState$2,useEffect: useEffect$2} = await importShared('react');
+const {useState: useState$3,useEffect: useEffect$3} = await importShared('react');
 const toneDot$2 = {
   positive: "bg-[var(--color-dot-positive)]",
   warning: "bg-[var(--color-dot-warning)]",
@@ -39325,15 +39437,14 @@ const stageLabel$1 = (status) => {
 };
 const progressFromStatus = (status) => {
   const map = {
-    DRAFT: 5,
-    PENDING_TEACHER_APPROVAL: 15,
-    DEPT_PENDING: 25,
-    APPROVED: 40,
-    ACTIVE: 60,
-    SUBMITTED: 80,
-    REVISION_REQUIRED: 35
+    DRAFT: 0,
+    PENDING_TEACHER_APPROVAL: 5,
+    DEPT_PENDING: 10,
+    APPROVED: 20,
+    ACTIVE: 20,
+    SUBMITTED: 20
   };
-  return map[status] ?? 20;
+  return map[status] ?? 0;
 };
 const statusMap = {
   SUBMITTED: { label: "Тайлан илгаасэн", tone: "warning" },
@@ -39345,25 +39456,26 @@ const statusMap = {
   DRAFT: { label: "Ноорог", tone: "neutral" }
 };
 function TeacherProgress() {
-  const [students, setStudents] = useState$2([]);
-  const [loading, setLoading] = useState$2(true);
-  const [search, setSearch] = useState$2("");
-  const [statusFilter, setStatusFilter] = useState$2("Бүгд");
-  const [sortKey, setSortKey] = useState$2("name");
-  const [sortDir, setSortDir] = useState$2("asc");
-  const [selectedStudent, setSelectedStudent] = useState$2(null);
+  const [students, setStudents] = useState$3([]);
+  const [loading, setLoading] = useState$3(true);
+  const [search, setSearch] = useState$3("");
+  const [statusFilter, setStatusFilter] = useState$3("Бүгд");
+  const [sortKey, setSortKey] = useState$3("name");
+  const [sortDir, setSortDir] = useState$3("asc");
+  const [selectedStudent, setSelectedStudent] = useState$3(null);
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || "";
-  useEffect$2(() => {
+  useEffect$3(() => {
     if (!teacherId) {
       setLoading(false);
       return;
     }
     const load = async () => {
       try {
-        const [plansRes, usersRes] = await Promise.all([
+        const [plansRes, usersRes, finalGradesRes] = await Promise.all([
           planService.getPlans({ supervisorId: teacherId }),
-          userService.getStudents()
+          userService.getStudents(),
+          evaluationService.getFinalGrades().catch(() => ({ data: [] }))
         ]);
         const plans = plansRes.data;
         const users = usersRes.data;
@@ -39372,13 +39484,16 @@ function TeacherProgress() {
           if (u.username) userMap[u.username] = u.displayName;
           userMap[u.id] = u.displayName;
         });
+        const gradedStudentIds = new Set(
+          (finalGradesRes.data || []).map((g) => g.studentId).filter(Boolean)
+        );
         setStudents(plans.map((p) => ({
           id: p.studentId,
           name: resolveName$1(p.studentId, userMap, "Тодорхойгүй оюутан"),
           thesis: p.title || "Гарчиггүй",
-          stage: stageLabel$1(p.status),
+          stage: gradedStudentIds.has(p.studentId) ? "Дүн гарсан" : stageLabel$1(p.status),
           status: p.status,
-          progress: progressFromStatus(p.status),
+          progress: gradedStudentIds.has(p.studentId) ? 100 : progressFromStatus(p.status),
           submittedAt: p.submittedAt,
           revisionCount: p.revisionCount || 0
         })));
@@ -39569,7 +39684,7 @@ function TeacherProgress() {
   ] });
 }
 
-const {useState: useState$1,useEffect: useEffect$1} = await importShared('react');
+const {useState: useState$2,useEffect: useEffect$2} = await importShared('react');
 const toneDot$1 = {
   positive: "bg-[var(--color-dot-positive)]",
   warning: "bg-[var(--color-dot-warning)]"};
@@ -39583,13 +39698,13 @@ const stageLabel = (stageType) => {
   return map[stageType] || stageType;
 };
 function TeacherCommittee() {
-  const [activeTab, setActiveTab] = useState$1("students");
-  const [myCommittees, setMyCommittees] = useState$1([]);
-  const [loading, setLoading] = useState$1(true);
+  const [activeTab, setActiveTab] = useState$2("students");
+  const [myCommittees, setMyCommittees] = useState$2([]);
+  const [loading, setLoading] = useState$2(true);
   const navigate = useNavigate();
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || "";
-  useEffect$1(() => {
+  useEffect$2(() => {
     const load = async () => {
       try {
         const assignmentsRes = await committeeService.getMyAssignments(teacherId);
@@ -39747,7 +39862,7 @@ function TeacherCommittee() {
   ] });
 }
 
-const {useState,useEffect} = await importShared('react');
+const {useState: useState$1,useEffect: useEffect$1} = await importShared('react');
 const toneDot = {
   warning: "bg-[var(--color-dot-warning)]",
   negative: "bg-[var(--color-dot-negative)]",
@@ -39780,17 +39895,17 @@ const GRADING_SCHEMES = {
 function ExternalExpertGrading() {
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || "";
-  const [committees, setCommittees] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [gradingStudent, setGradingStudent] = useState(null);
-  const [scores, setScores] = useState({});
-  const [comment, setComment] = useState("");
-  const [gradeStatus, setGradeStatus] = useState("idle");
-  const [gradeError, setGradeError] = useState(null);
-  const [manuscriptFiles, setManuscriptFiles] = useState([]);
-  const [manuscriptActiveId, setManuscriptActiveId] = useState(null);
-  const [manuscriptLoadingFor, setManuscriptLoadingFor] = useState(null);
-  const [manuscriptError, setManuscriptError] = useState(null);
+  const [committees, setCommittees] = useState$1([]);
+  const [loading, setLoading] = useState$1(true);
+  const [gradingStudent, setGradingStudent] = useState$1(null);
+  const [scores, setScores] = useState$1({});
+  const [comment, setComment] = useState$1("");
+  const [gradeStatus, setGradeStatus] = useState$1("idle");
+  const [gradeError, setGradeError] = useState$1(null);
+  const [manuscriptFiles, setManuscriptFiles] = useState$1([]);
+  const [manuscriptActiveId, setManuscriptActiveId] = useState$1(null);
+  const [manuscriptLoadingFor, setManuscriptLoadingFor] = useState$1(null);
+  const [manuscriptError, setManuscriptError] = useState$1(null);
   const openManuscript = async (studentId) => {
     setManuscriptLoadingFor(studentId);
     setManuscriptError(null);
@@ -39817,7 +39932,7 @@ function ExternalExpertGrading() {
       setManuscriptLoadingFor(null);
     }
   };
-  useEffect(() => {
+  useEffect$1(() => {
     if (!teacherId) {
       setLoading(false);
       return;
@@ -40201,6 +40316,122 @@ function ComingSoon() {
   ] });
 }
 
+const {useEffect,useState} = await importShared('react');
+function NotificationsPage() {
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("all");
+  const [error, setError] = useState(null);
+  const user = getStoredUser();
+  const userId = user?.userId || "";
+  const isUnread = (n) => !(n.isRead || n.status === "READ");
+  useEffect(() => {
+    if (!userId) {
+      setLoading(false);
+      return;
+    }
+    let cancelled = false;
+    const load = () => notificationService.getByUserId(userId).then((res) => {
+      if (cancelled) return;
+      setNotifications(res.data);
+    });
+    load().finally(() => {
+      if (!cancelled) setLoading(false);
+    });
+    const interval = setInterval(load, 3e4);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [userId]);
+  const handleClick = async (n) => {
+    if (!isUnread(n)) return;
+    setNotifications((prev) => prev.map((x) => x.id === n.id ? { ...x, isRead: true, status: "READ" } : x));
+    try {
+      await notificationService.markRead(n.id);
+    } catch {
+      setError("Уншсан гэж тэмдэглэхэд алдаа гарлаа.");
+    }
+  };
+  const handleMarkAll = async () => {
+    if (!userId) return;
+    setNotifications((prev) => prev.map((x) => ({ ...x, isRead: true, status: "READ" })));
+    try {
+      await notificationService.markAllRead(userId);
+    } catch {
+      setError("Бүгдийг уншсан болгож чадсангүй.");
+    }
+  };
+  const visible = filter === "unread" ? notifications.filter(isUnread) : notifications;
+  const unreadCount = notifications.filter(isUnread).length;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6 max-w-3xl mx-auto pb-10", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between gap-4 flex-wrap", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-semibold text-ink-900 tracking-tight", children: "Мэдэгдэл" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500 mt-1", children: "Системээс ирсэн бүх мэдэгдлийг энд харна уу." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 shrink-0", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "inline-flex bg-surface-muted p-0.5 rounded-md border border-border", children: ["all", "unread"].map((opt) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "button",
+          {
+            onClick: () => setFilter(opt),
+            className: `px-3 h-8 text-xs font-medium tracking-tight rounded-sm transition-colors ${filter === opt ? "bg-surface text-ink-900 border border-border-strong" : "text-ink-500 hover:text-ink-900"}`,
+            children: opt === "all" ? "Бүгд" : `Уншаагүй${unreadCount ? ` (${unreadCount})` : ""}`
+          },
+          opt
+        )) }),
+        unreadCount > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "button",
+          {
+            onClick: handleMarkAll,
+            className: "inline-flex items-center gap-1.5 h-8 px-3 text-xs font-medium tracking-tight text-ink-700 hover:text-ink-900 border border-border-strong hover:border-ink-900 rounded-md transition-colors",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(CheckCheck, { className: "w-3.5 h-3.5", strokeWidth: 1.7 }),
+              "Бүгдийг уншсан болгох"
+            ]
+          }
+        )
+      ] })
+    ] }),
+    error && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-2 px-3 py-2 text-sm text-red-700 bg-red-50 border border-red-200 rounded-md", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(TriangleAlert, { className: "w-4 h-4 mt-0.5 shrink-0", strokeWidth: 1.7 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: error })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-surface border border-border rounded-md overflow-hidden", children: loading ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "py-16 text-center text-ink-400 text-sm", children: "Ачааллаж байна..." }) : visible.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "py-20 text-center", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Bell, { className: "w-8 h-8 mx-auto mb-3 text-ink-300", strokeWidth: 1.4 }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500", children: filter === "unread" ? "Уншаагүй мэдэгдэл байхгүй байна." : "Мэдэгдэл байхгүй байна." })
+    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "divide-y divide-border", children: visible.map((n) => {
+      const unread = isUnread(n);
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "button",
+        {
+          type: "button",
+          onClick: () => handleClick(n),
+          className: `w-full text-left flex items-start gap-3 px-5 py-4 transition-colors hover:bg-surface-muted ${unread ? "bg-accent-soft/40" : ""}`,
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `w-8 h-8 rounded-full border flex items-center justify-center text-xs font-semibold shrink-0 ${unread ? "border-accent text-accent" : "border-border-strong text-ink-500"}`, children: (n.type || "N").substring(0, 1).toUpperCase() }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 flex-wrap", children: [
+                n.title && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-ink-900 tracking-tight truncate", children: n.title }),
+                n.type && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] uppercase tracking-wider text-ink-500 border border-border-strong rounded-sm px-1.5 py-0.5", children: n.type })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-700 leading-relaxed mt-1 whitespace-pre-line", children: n.message }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-400 mt-2 tabular-nums", children: n.createdAt ? new Date(n.createdAt).toLocaleString("mn-MN", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+              }) : "" })
+            ] }),
+            unread && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-2 h-2 bg-accent rounded-full shrink-0 mt-2" })
+          ]
+        }
+      ) }, n.id);
+    }) }) })
+  ] });
+}
+
 function App({ user }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(HashRouter, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Routes, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs(Route, { path: "/teacher", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherLayout, { user }), children: [
@@ -40215,6 +40446,7 @@ function App({ user }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "committee", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherCommittee, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "scores", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherProgress, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "expert", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalExpertGrading, {}) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "notifications", element: /* @__PURE__ */ jsxRuntimeExports.jsx(NotificationsPage, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "settings", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ComingSoon, {}) })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "*", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Navigate, { to: "/teacher", replace: true }) })

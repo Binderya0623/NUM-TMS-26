@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import numLogo from "../../assets/image/num_logo.png";
 import { Home, BookOpen, MessageSquare, Calendar, Award, Bell } from "lucide-react";
+import { notificationService } from "../../services/notificationService";
+import { getStoredUser } from "../../lib/authGuard";
 
 interface StudentSidebarProps {
   collapsed: boolean;
@@ -16,6 +19,20 @@ const menuItems: { icon: typeof Home; label: string; path: string; end?: boolean
 ];
 
 export default function StudentSidebar({ collapsed }: StudentSidebarProps) {
+  const [unread, setUnread] = useState(0);
+
+  // Pull the unread count for the badge next to "Мэдэгдэл". Refresh every
+  // 30s so a fresh notification surfaces without a full reload.
+  useEffect(() => {
+    const userId = getStoredUser()?.userId;
+    if (!userId) return;
+    let cancelled = false;
+    const tick = () => notificationService.unreadCount(userId).then(c => { if (!cancelled) setUnread(c); });
+    tick();
+    const interval = setInterval(tick, 30000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, []);
+
   return (
     <aside
       className={`relative flex flex-col bg-ink-900 border-r border-black/20 transition-[width] duration-300 ${
@@ -89,14 +106,26 @@ export default function StudentSidebar({ collapsed }: StudentSidebarProps) {
       </nav>
 
       <div className="px-5 py-3 border-t border-white/10">
-        <button
-          className={`w-full flex items-center gap-3 h-9 text-white/55 hover:text-white transition-colors ${
-            collapsed ? "justify-center" : ""
-          }`}
+        <NavLink
+          to="/student/notifications"
+          className={({ isActive }) =>
+            `relative w-full flex items-center gap-3 h-9 transition-colors rounded-sm ${
+              collapsed ? "justify-center" : ""
+            } ${isActive ? "text-white" : "text-white/55 hover:text-white"}`
+          }
         >
-          <Bell className="w-[18px] h-[18px] shrink-0" strokeWidth={1.6} />
-          {!collapsed && <span className="text-[13px] tracking-tight">Мэдэгдэл</span>}
-        </button>
+          <span className="relative inline-flex shrink-0">
+            <Bell className="w-[18px] h-[18px]" strokeWidth={1.6} />
+            {unread > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center min-w-[16px] h-4 px-1 text-[9px] font-semibold leading-none rounded-full bg-accent text-white tabular-nums">
+                {unread > 99 ? "99+" : unread}
+              </span>
+            )}
+          </span>
+          {!collapsed && (
+            <span className="text-[13px] tracking-tight">Мэдэгдэл</span>
+          )}
+        </NavLink>
       </div>
     </aside>
   );

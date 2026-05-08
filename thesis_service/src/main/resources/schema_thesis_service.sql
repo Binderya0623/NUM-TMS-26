@@ -119,24 +119,13 @@ CREATE TABLE IF NOT EXISTS chat_message (
 );
 
 -- ─────────────────────────────────────────────────────────────────
--- THESIS NOTIFICATION — Phase 4 + 5 events
+-- THESIS NOTIFICATION — DEPRECATED
 -- ─────────────────────────────────────────────────────────────────
-CREATE TABLE IF NOT EXISTS thesis_notification (
-    id              VARCHAR(255) PRIMARY KEY,
-    recipient_id    VARCHAR(255) NOT NULL,   -- user_service UUID
-    thesis_id       VARCHAR(255),
-    type            VARCHAR(60)  NOT NULL,
-    -- REPORT_SUBMITTED, REPORT_ACCEPTED, REVISION_REQUIRED,
-    -- EXECUTION_SESSION_OPENED, EXECUTION_SESSION_CLOSED,
-    -- DEFENSE_SESSION_OPENED, DEFENSE_SESSION_CLOSED,
-    -- NEW_CHAT_MESSAGE
-    title           VARCHAR(255) NOT NULL,
-    message         TEXT         NOT NULL,
-    reference_id    VARCHAR(255),
-    reference_type  VARCHAR(50),   -- 'REPORT' | 'DEFENSE_SESSION' | 'EXECUTION_SESSION'
-    is_read         BOOLEAN      NOT NULL DEFAULT FALSE,
-    created_at      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+-- This table is no longer written to. notification_service is now the
+-- canonical store (see notification_service/schema.sql). Kept here so
+-- existing rows aren't dropped on startup; new code should not depend
+-- on it. Drop manually with:
+--   DROP TABLE IF EXISTS thesis_notification CASCADE;
 
 -- ── Indexes ──────────────────────────────────────────────────────
 CREATE INDEX IF NOT EXISTS idx_theses_student       ON theses(student_id);
@@ -160,5 +149,4 @@ CREATE INDEX IF NOT EXISTS idx_chat_unread
     ON chat_message(thesis_id, is_read)
     WHERE is_read = FALSE;
 
-CREATE INDEX IF NOT EXISTS idx_tn_recipient         ON thesis_notification(recipient_id, is_read);
-CREATE INDEX IF NOT EXISTS idx_tn_created           ON thesis_notification(created_at DESC);
+-- thesis_notification indexes removed alongside the deprecated table.

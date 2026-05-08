@@ -6,6 +6,7 @@ export interface Plan {
   studentId: string;
   supervisorId?: string;
   sessionId?: number;
+  topicId?: number;
   title?: string;
   status: string;
   revisionCount?: number;

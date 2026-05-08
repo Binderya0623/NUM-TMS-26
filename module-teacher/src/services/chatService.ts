@@ -1,31 +1,27 @@
 /**
- * chatService.ts — message_service v2 adapter
+ * chatService.ts — message_service client
  *
- * Old: thesis_service `/api/chat/{thesisId}/messages` — messages keyed by
- *      `thesisId`, with senderType (STUDENT/TEACHER), no receiver.
- * New: message_service `/api/messages/{conversationId}` — messages keyed by
- *      a `conversationId` (we use thesisId as the conversation id), with
- *      explicit `receiverId`.
+ * Backend: message_service `/api/messages` (port 8089).
+ *   - POST   /api/messages                       send message
+ *   - GET    /api/messages/{conversationId}      list conversation
+ *   - POST   /api/messages/{conversationId}/seen mark as read for a viewer
  *
- * The new API requires a `receiverId`. Callers that don't pass one will
- * trigger a console.warn and the call will likely 400 from the backend.
- * Callers (TeacherMessages / StudentMessages) should be updated to pass the
- * counterpart id (student id from teacher's side, supervisor id from student's).
+ * Conversation key: in this prototype every student/supervisor pair has a
+ * single conversation. We use the thesisId as conversationId when the thesis
+ * exists; otherwise we fall back to a synthetic id so the chat is still
+ * usable during the topic-request phase. Both sides converge on the same
+ * conversationId because both derive it from the same plan record.
  */
 import { messageApi } from '../lib/apiClient';
 
 export interface ChatMessage {
-  id: number | string;
-  thesisId: string;        // = conversationId in v2
+  id: string;
+  conversationId: string;
   senderId: string;
-  senderType: string;      // legacy "STUDENT" | "TEACHER" — derived from sender role
+  receiverId: string;
   content: string;
-  read?: boolean;
-  sentAt?: string;
-  // v2-only fields (also set, for callers that want them)
-  conversationId?: string;
-  receiverId?: string;
-  status?: string;
+  status: string;        // 'SENT' | 'DELIVERED' | 'SEEN'
+  sentAt: string;        // ISO instant
   seenAt?: string;
 }
 
@@ -40,47 +36,109 @@ interface MessageResponse {
   seenAt?: string;
 }
 
-const fromV2 = (m: MessageResponse, fallbackThesisId: string): ChatMessage => ({
+const fromV2 = (m: MessageResponse): ChatMessage => ({
   id: m.id,
-  thesisId: m.conversationId ?? fallbackThesisId,
-  senderId: m.senderId,
-  senderType: '',          // sender role no longer in payload — set by caller if needed
-  content: m.content,
-  sentAt: m.createdAt,
-  read: m.status === 'SEEN',
   conversationId: m.conversationId,
+  senderId: m.senderId,
   receiverId: m.receiverId,
+  content: m.content,
   status: m.status,
+  sentAt: m.createdAt,
   seenAt: m.seenAt,
 });
 
-const warn = (msg: string) => console.warn(`[chatService v2-adapter] ${msg}`);
-
 export const chatService = {
-  getMessages: (thesisId: string) =>
-    messageApi.get<MessageResponse[]>(`/api/messages/${thesisId}`)
-      .then(r => ({ data: r.data.map(m => fromV2(m, thesisId)) }))
+  /** Conversation id used by the chat. Stable across both ends. */
+  conversationId: (studentId: string, supervisorId: string, thesisId?: string | null) =>
+    thesisId && thesisId.trim() ? thesisId : `pair:${studentId}:${supervisorId}`,
+
+  getMessages: (conversationId: string) =>
+    messageApi.get<MessageResponse[]>(`/api/messages/${conversationId}`)
+      .then(r => ({ data: (r.data || []).map(fromV2) }))
       .catch(() => ({ data: [] as ChatMessage[] })),
 
-  /**
-   * Send a message in a conversation.
-   *
-   * `receiverId` is required by v2. Callers that omit it trigger a warning
-   * and the backend will reject with 400.
-   */
-  sendMessage: (thesisId: string, senderId: string, senderRole: string, content: string, receiverId?: string) => {
-    if (!receiverId) {
-      warn(`sendMessage to thesis ${thesisId} missing receiverId — v2 message_service will reject this. ` +
-           `Update caller to pass the counterpart user id (senderRole=${senderRole}).`);
-    }
-    return messageApi.post<MessageResponse>('/api/messages', {
-      conversationId: thesisId,
-      senderId,
-      receiverId: receiverId ?? '',
-      content,
-    }).then(r => ({ data: fromV2(r.data, thesisId) }));
-  },
+  sendMessage: (params: {
+    conversationId: string;
+    senderId: string;
+    receiverId: string;
+    content: string;
+  }) =>
+    messageApi.post<MessageResponse>('/api/messages', {
+      conversationId: params.conversationId,
+      senderId: params.senderId,
+      receiverId: params.receiverId,
+      content: params.content,
+    }).then(r => ({ data: fromV2(r.data) })),
 
-  markRead: (thesisId: string, readerId: string) =>
-    messageApi.post(`/api/messages/${thesisId}/seen`, null, { params: { userId: readerId } }),
+  markRead: (conversationId: string, viewerId: string) =>
+    messageApi.post(`/api/messages/${conversationId}/seen`, null, { params: { userId: viewerId } })
+      .catch(() => undefined),
+
+  /** Total unread messages addressed to this user across every conversation. */
+  unreadCount: (userId: string) =>
+    messageApi.get<{ count: number }>('/api/messages/unread-count', { params: { userId } })
+      .then(r => Number(r.data?.count ?? 0))
+      .catch(() => 0),
+
+  /**
+   * Open a Server-Sent Events stream for one conversation. Events arrive in
+   * real time; consumers handle two named types:
+   *   - "message": payload is a {@link ChatMessage}
+   *   - "seen":    payload is { conversationId, viewerId, at }
+   *
+   * Returns a cleanup function. Caller is responsible for calling it on unmount.
+   */
+  openStream(
+    conversationId: string,
+    handlers: {
+      onMessage?: (m: ChatMessage) => void;
+      onSeen?: (e: { conversationId: string; viewerId: string; at: string }) => void;
+      onError?: (e: Event) => void;
+      onOpen?: () => void;
+    },
+  ): () => void {
+    const base = (messageApi.defaults.baseURL ?? '').replace(/\/$/, '');
+    // EventSource doesn't carry the axios interceptor's Bearer header; when
+    // backend auth is enabled the SSE endpoint must be permitted (it is — see
+    // JwtAuthWebFilter PUBLIC_PREFIXES) or the token has to be passed via
+    // query string. For the prototype we keep the connection unauthenticated.
+    const url = `${base}/api/messages/stream/${encodeURIComponent(conversationId)}`;
+    const es = new EventSource(url);
+
+    if (handlers.onOpen) es.addEventListener('open', () => handlers.onOpen!());
+
+    es.addEventListener('message', (raw) => {
+      try {
+        const data = JSON.parse((raw as MessageEvent).data);
+        const msg: ChatMessage = {
+          id: data.id,
+          conversationId: data.conversationId,
+          senderId: data.senderId,
+          receiverId: data.receiverId,
+          content: data.content,
+          status: data.status,
+          sentAt: data.createdAt ?? data.sentAt,
+          seenAt: data.seenAt,
+        };
+        handlers.onMessage?.(msg);
+      } catch (e) {
+        console.warn('[chat sse] bad message payload', e);
+      }
+    });
+
+    es.addEventListener('seen', (raw) => {
+      try {
+        const data = JSON.parse((raw as MessageEvent).data);
+        handlers.onSeen?.(data);
+      } catch (e) {
+        console.warn('[chat sse] bad seen payload', e);
+      }
+    });
+
+    es.addEventListener('error', (e) => {
+      handlers.onError?.(e);
+    });
+
+    return () => es.close();
+  },
 };

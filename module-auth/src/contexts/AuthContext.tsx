@@ -1,7 +1,9 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-const AUTH_API  = 'http://localhost:8887';
-const USER_API  = 'http://localhost:8086';
+// Backend bases — overridable at build time via Vite env vars so the same
+// bundle can be deployed to staging/prod without code changes.
+const AUTH_API = (import.meta as any).env?.VITE_API_AUTH ?? 'http://localhost:8887';
+const USER_API = (import.meta as any).env?.VITE_API_USER ?? 'http://localhost:8086';
 
 export type UserRole = 'admin' | 'teacher' | 'student';
 

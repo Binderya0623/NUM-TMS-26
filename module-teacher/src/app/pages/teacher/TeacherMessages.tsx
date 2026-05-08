@@ -1,30 +1,40 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Card, CardContent } from "../../components/ui/card";
 import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/button";
 import { Avatar, AvatarFallback } from "../../components/ui/avatar";
-import { Search, Send, MoreVertical, Paperclip } from "lucide-react";
+import { Search, Send } from "lucide-react";
 import { planService, type Plan } from "../../../services/planService";
 import { chatService, type ChatMessage } from "../../../services/chatService";
 import { userService } from "../../../services/userService";
 import { getStoredUser } from "../../../lib/authGuard";
 import { resolveName, initialsFromName } from "../../../lib/utils";
 
+const PLAN_STATUS_LABEL: Record<string, string> = {
+  DRAFT: "Ноорог",
+  SUBMITTED: "Илгээсэн",
+  REVISION_REQUIRED: "Засвар шаардлагатай",
+  APPROVED: "Багш баталсан",
+  DEPT_APPROVED: "Тэнхим баталсан",
+};
+
 export default function TeacherMessages() {
+  const user = getStoredUser();
+  const teacherId = user?.userId || user?.username || "";
+  const teacherName = user?.username || "Багш";
+
   const [plans, setPlans] = useState<Plan[]>([]);
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [messageText, setMessageText] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
   const [userMap, setUserMap] = useState<Record<string, string>>({});
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  const user = getStoredUser();
-  const teacherId = user?.userId || user?.username || '';
-  const teacherName = user?.username || 'Багш';
-
   useEffect(() => {
+    if (!teacherId) return;
     Promise.all([
       planService.getPlans({ supervisorId: teacherId }).catch(() => ({ data: [] as Plan[] })),
       userService.getStudents().catch(() => ({ data: [] as any[] })),
@@ -40,47 +50,92 @@ export default function TeacherMessages() {
   }, [teacherId]);
 
   const studentLabel = (sid?: string) => resolveName(sid, userMap, "Оюутан");
+  const statusLabel = (s?: string) => (s && PLAN_STATUS_LABEL[s]) || s || "";
 
-  const planStatusLabel: Record<string, string> = {
-    DRAFT: 'Ноорог',
-    SUBMITTED: 'Илгээсэн',
-    REVISION_REQUIRED: 'Засвар шаардлагатай',
-    APPROVED: 'Багш баталсан',
-    DEPT_APPROVED: 'Тэнхим баталсан',
-  };
-  const statusLabel = (s?: string) => (s && planStatusLabel[s]) || s || '';
+  const conversationId = useMemo(() => {
+    if (!selectedPlan) return null;
+    return chatService.conversationId(selectedPlan.studentId, teacherId, selectedPlan.thesisId ?? null);
+  }, [selectedPlan, teacherId]);
 
+  // Live conversation feed: fetch the backlog once, then subscribe to SSE.
+  // Polling kicks in only if the stream fails to open.
   useEffect(() => {
-    const thesisId = selectedPlan?.thesisId ?? selectedPlan?.studentId;
-    if (!thesisId) {
+    if (!conversationId || !teacherId) {
       setMessages([]);
       return;
     }
-    const load = () => {
-      chatService.getMessages(thesisId)
-        .then(res => {
-          setMessages(res.data);
-          setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
-        })
-        .catch(() => {});
-    };
-    load();
-    const interval = setInterval(load, 10000);
-    return () => clearInterval(interval);
-  }, [selectedPlan]);
+    let cancelled = false;
+    let pollInterval: ReturnType<typeof setInterval> | null = null;
+    let stop: (() => void) | null = null;
 
-  const handleSendMessage = () => {
-    const thesisId = selectedPlan?.thesisId ?? selectedPlan?.studentId;
-    if (!messageText.trim() || !thesisId) return;
+    const scrollToBottom = () =>
+      setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }), 50);
+    const reconcileSeen = (msgs: ChatMessage[]) => {
+      if (msgs.some(m => m.receiverId === teacherId && m.status !== "SEEN")) {
+        chatService.markRead(conversationId, teacherId);
+      }
+    };
+    const loadBacklog = async () => {
+      const res = await chatService.getMessages(conversationId);
+      if (cancelled) return;
+      setMessages(res.data);
+      scrollToBottom();
+      reconcileSeen(res.data);
+    };
+
+    loadBacklog();
+    stop = chatService.openStream(conversationId, {
+      onMessage: (m) => {
+        if (cancelled) return;
+        setMessages(prev => prev.some(x => x.id === m.id) ? prev : [...prev, m]);
+        scrollToBottom();
+        if (m.receiverId === teacherId && m.status !== "SEEN") {
+          chatService.markRead(conversationId, teacherId);
+        }
+      },
+      onSeen: (e) => {
+        if (cancelled || e.viewerId === teacherId) return;
+        setMessages(prev => prev.map(m =>
+          m.senderId === teacherId && m.receiverId === e.viewerId
+            ? { ...m, status: "SEEN", seenAt: e.at }
+            : m,
+        ));
+      },
+      onError: () => {
+        if (pollInterval || cancelled) return;
+        pollInterval = setInterval(loadBacklog, 10000);
+      },
+    });
+
+    return () => {
+      cancelled = true;
+      if (stop) stop();
+      if (pollInterval) clearInterval(pollInterval);
+    };
+  }, [conversationId, teacherId]);
+
+  const handleSendMessage = async () => {
+    if (!messageText.trim() || !conversationId || !selectedPlan) return;
     setSending(true);
-    chatService.sendMessage(thesisId, teacherId, 'TEACHER', messageText.trim())
-      .then(res => {
-        setMessages(prev => [...prev, res.data]);
-        setMessageText("");
-        setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: 'smooth' }), 50);
-      })
-      .catch(() => {})
-      .finally(() => setSending(false));
+    setSendError(null);
+    try {
+      const res = await chatService.sendMessage({
+        conversationId,
+        senderId: teacherId,
+        receiverId: selectedPlan.studentId,
+        content: messageText.trim(),
+      });
+      // The same message will also arrive via the SSE stream — dedupe by id
+      // so we don't render it twice when the broadcast wins the race.
+      setMessages(prev => prev.some(x => x.id === res.data.id) ? prev : [...prev, res.data]);
+      setMessageText("");
+      setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }), 50);
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || err?.response?.data || err?.message || "";
+      setSendError(typeof msg === "string" && msg ? msg : "Илгээж чадсангүй.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const filteredPlans = plans.filter(p => {
@@ -88,9 +143,6 @@ export default function TeacherMessages() {
     return p.studentId.toLowerCase().includes(q)
       || studentLabel(p.studentId).toLowerCase().includes(q);
   });
-
-  const isTeacherMessage = (msg: ChatMessage) =>
-    msg.senderType === 'TEACHER' || msg.senderId === teacherId;
 
   return (
     <div className="h-[calc(100vh-200px)]">
@@ -164,9 +216,6 @@ export default function TeacherMessages() {
                         <p className="text-xs text-ink-500">{statusLabel(selectedPlan.status)}</p>
                       </div>
                     </div>
-                    <Button variant="ghost" size="icon" aria-label="Дэлгэрэнгүй">
-                      <MoreVertical className="h-4 w-4" strokeWidth={1.6} />
-                    </Button>
                   </div>
 
                   <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-surface-sunken">
@@ -177,7 +226,7 @@ export default function TeacherMessages() {
                       </div>
                     ) : (
                       messages.map(msg => {
-                        const mine = isTeacherMessage(msg);
+                        const mine = msg.senderId === teacherId;
                         return (
                           <div key={msg.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
                             <div className="flex items-end gap-2 max-w-[70%]">
@@ -194,10 +243,13 @@ export default function TeacherMessages() {
                                     ? "bg-ink-900 text-white"
                                     : "bg-surface text-ink-900 border border-border"
                                 }`}>
-                                  <p className="text-sm leading-relaxed">{msg.content}</p>
+                                  <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
                                 </div>
                                 <p className={`text-[10px] mt-1 text-ink-400 tabular-nums ${mine ? "text-right" : ""}`}>
-                                  {msg.sentAt?.split('T')[1]?.substring(0, 5) || ''}
+                                  {msg.sentAt
+                                    ? new Date(msg.sentAt).toLocaleTimeString("mn-MN", { hour: "2-digit", minute: "2-digit" })
+                                    : ""}
+                                  {mine && msg.status === "SEEN" ? " · Уншсан" : ""}
                                 </p>
                               </div>
                               {mine && (
@@ -215,24 +267,27 @@ export default function TeacherMessages() {
                     <div ref={bottomRef} />
                   </div>
 
-                  <div className="p-4 border-t border-border bg-surface">
+                  <div className="p-4 border-t border-border bg-surface space-y-2">
                     <div className="flex gap-2">
-                      <Button variant="ghost" size="icon" className="flex-shrink-0" aria-label="Файл хавсаргах">
-                        <Paperclip className="h-4 w-4" strokeWidth={1.6} />
-                      </Button>
                       <Input
                         placeholder="Мессежээ бичнэ үү..."
                         value={messageText}
                         onChange={e => setMessageText(e.target.value)}
                         onKeyDown={e => e.key === "Enter" && !e.shiftKey && handleSendMessage()}
                         className="flex-1"
+                        disabled={sending}
                       />
                       <Button className="flex-shrink-0" disabled={sending || !messageText.trim()} onClick={handleSendMessage}>
                         <Send className="h-4 w-4 mr-2" strokeWidth={1.6} />
                         Илгээх
                       </Button>
                     </div>
-                    <p className="text-xs text-ink-400 mt-2">Enter — илгээх, Shift+Enter — шинэ мөр</p>
+                    {sendError && (
+                      <p className="text-xs text-[var(--color-dot-negative)] inline-flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)]" /> {sendError}
+                      </p>
+                    )}
+                    <p className="text-xs text-ink-400">Enter — илгээх</p>
                   </div>
                 </>
               )}

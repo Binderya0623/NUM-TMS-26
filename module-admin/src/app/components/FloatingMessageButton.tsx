@@ -9,21 +9,20 @@ export function FloatingMessageButton({ unreadCount = 0, onMessageClick }: Float
   return (
     <button
       onClick={onMessageClick}
-      className="fixed bottom-6 right-6 p-4 bg-[#1455BD] text-white rounded-full shadow-lg hover:bg-blue-700 transition-all hover:scale-105 z-50 group flex items-center justify-center"
-      aria-label="Messages"
+      className="fixed bottom-6 right-6 w-12 h-12 bg-ink-900 text-white rounded-full hover:bg-black transition-all hover:scale-105 z-50 group flex items-center justify-center"
+      aria-label="Мессеж"
     >
-      <div className="relative">
-        <MessageSquare className="w-6 h-6" />
+      <div className="relative flex items-center justify-center">
+        <MessageSquare className="w-5 h-5" strokeWidth={1.6} />
         {unreadCount > 0 && (
-          <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white">
+          <span className="absolute -top-2 -right-2 bg-white text-accent text-[10px] font-semibold tabular-nums px-1.5 py-0.5 rounded-full border border-accent min-w-[18px] text-center leading-tight">
             {unreadCount > 99 ? "99+" : unreadCount}
           </span>
         )}
       </div>
-      
-      {/* Tooltip on hover */}
-      <span className="absolute right-full mr-4 bg-slate-800 text-white text-xs px-2.5 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-        Open Messages
+
+      <span className="absolute right-full mr-3 bg-ink-900 text-white text-xs px-2.5 py-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none tracking-tight">
+        Мессеж
       </span>
     </button>
   );

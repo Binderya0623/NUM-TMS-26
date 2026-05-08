@@ -11,7 +11,6 @@ import AdminDashboard from './app/pages/admin/AdminDashboard';
 import Teachers from './app/pages/admin/Teachers';
 import ExternalExperts from './app/pages/admin/ExternalExperts';
 import Students from './app/pages/admin/Students';
-import AdminThesis from './app/pages/admin/Thesis';
 import Statistics from './app/pages/admin/Statistics';
 import AdminCommittees from './app/pages/admin/AdminCommittees';
 import AdminEvaluationProcess from './app/pages/admin/AdminEvaluationProcess';
@@ -19,6 +18,7 @@ import AdminReports from './app/pages/admin/AdminReports';
 import AdminGrades from './app/pages/admin/AdminGrades';
 import AdminTopicManagement from './app/pages/admin/AdminTopicManagement';
 import ComingSoon from './app/pages/ComingSoon';
+import NotificationsPage from './app/pages/NotificationsPage';
 import type { StoredUser } from './lib/authGuard';
 
 interface AppProps {
@@ -34,7 +34,7 @@ export default function App({ user }: AppProps) {
           <Route path="teachers"          element={<Teachers />} />
           <Route path="external-experts" element={<ExternalExperts />} />
           <Route path="students"          element={<Students />} />
-          <Route path="thesis"            element={<AdminThesis />} />
+          <Route path="thesis"            element={<Navigate to="/admin/students" replace />} />
           <Route path="topics"            element={<AdminTopicManagement />} />
           <Route path="statistics"        element={<Statistics />} />
           <Route path="committees"        element={<AdminCommittees />} />
@@ -45,6 +45,7 @@ export default function App({ user }: AppProps) {
           <Route path="grades"            element={<AdminGrades />} />
           <Route path="deadlines"         element={<ComingSoon />} />
           <Route path="closure"           element={<AdminCommittees />} />
+          <Route path="notifications"     element={<NotificationsPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>

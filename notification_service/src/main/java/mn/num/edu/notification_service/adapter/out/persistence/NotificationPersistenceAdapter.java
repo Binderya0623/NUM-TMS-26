@@ -22,12 +22,16 @@ public class NotificationPersistenceAdapter implements SaveNotificationPort, Loa
 
     @Override
     public Mono<Notification> save(Notification notification) {
-        return repository.save(toEntity(notification)).map(this::toDomain);
+        NotificationEntity e = toEntity(notification);
+        e.setNew(true);
+        return repository.save(e).map(this::toDomain);
     }
 
     @Override
     public Mono<Notification> update(Notification notification) {
-        return repository.save(toEntity(notification)).map(this::toDomain);
+        NotificationEntity e = toEntity(notification);
+        e.setNew(false);
+        return repository.save(e).map(this::toDomain);
     }
 
     @Override
@@ -37,7 +41,17 @@ public class NotificationPersistenceAdapter implements SaveNotificationPort, Loa
 
     @Override
     public Flux<Notification> findByUserId(UUID userId) {
-        return repository.findByUserId(userId).map(this::toDomain);
+        return repository.findByUserIdOrderByCreatedAtDesc(userId).map(this::toDomain);
+    }
+
+    @Override
+    public Flux<Notification> findUnreadByUserId(UUID userId) {
+        return repository.findByUserIdAndIsReadOrderByCreatedAtDesc(userId, false).map(this::toDomain);
+    }
+
+    @Override
+    public Mono<Long> countUnreadByUserId(UUID userId) {
+        return repository.countUnreadByUserId(userId).defaultIfEmpty(0L);
     }
 
     private NotificationEntity toEntity(Notification n) {
@@ -49,6 +63,10 @@ public class NotificationPersistenceAdapter implements SaveNotificationPort, Loa
                 n.getType().name(),
                 null,
                 n.getStatus().name(),
+                n.getThesisId(),
+                n.getReferenceId(),
+                n.getReferenceType(),
+                n.isRead(),
                 n.getCreatedAt(),
                 n.getSentAt()
         );
@@ -62,6 +80,10 @@ public class NotificationPersistenceAdapter implements SaveNotificationPort, Loa
                 e.getMessage(),
                 NotificationType.valueOf(e.getType()),
                 NotificationStatus.valueOf(e.getStatus()),
+                e.getThesisId(),
+                e.getReferenceId(),
+                e.getReferenceType(),
+                Boolean.TRUE.equals(e.getIsRead()),
                 e.getCreatedAt(),
                 e.getSentAt()
         );

@@ -1,20 +1,19 @@
 # =============================================================
-# docker-compose.yml — Local dev stack for the diploma system.
+# docker-compose.yml — Full-stack deployment for the diploma system.
 #
 # What this brings up:
-#   • postgres        14-alpine, 11 databases auto-created
-#   • kafka           bitnami/kafka in KRaft mode (no zookeeper)
-#   • all 11 backend Spring Boot services
-#
-# What this does NOT bring up:
-#   • React MFEs (run `./build-modules.sh` on the host)
-#   • jsf-host (run `cd jsf-host && mvn tomcat7:run` on the host)
+#   • postgres        14-alpine, 12 databases auto-created
+#   • kafka           apache/kafka KRaft (no zookeeper)
+#   • auth_service    JWT mint (port 8887)
+#   • all 11 backend Spring Boot services (8081–8091)
+#   • jsf_host        Tomcat 9 with all MFE bundles baked in (port 8080)
 #
 # Usage:
-#   cp .env.example .env       # tune POSTGRES_PASSWORD if you want
-#   docker compose up -d       # start everything
-#   docker compose logs -f user_service
-#   docker compose down -v     # nuke including data volume
+#   cp .env.example .env       # tune POSTGRES_PASSWORD, APP_JWT_SECRET, ...
+#   docker compose up -d --build
+#   docker compose logs -f jsf_host
+#   ./infra/seed.sh            # populate demo dataset
+#   docker compose down -v     # nuke including data volumes
 # =============================================================
 name: diploma-system
 
@@ -31,6 +30,8 @@ x-spring-common: &spring-common
     SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
     SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    APP_SECURITY_JWT_ENABLED: ${APP_SECURITY_JWT_ENABLED:-false}
+    APP_JWT_SECRET: ${APP_JWT_SECRET:-YW5kMTIzNDU2Nzg5MGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MTIzNDU2Nzg5MA==}
     JAVA_OPTS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=60.0"
 
 services:
@@ -52,13 +53,10 @@ services:
       retries: 10
 
   kafka:
-    # Official Apache image — stable long-lived tags. (bitnami removed 3.7
-    # from Docker Hub; see https://hub.docker.com/r/apache/kafka/tags)
     image: apache/kafka:3.7.0
     ports:
       - "${KAFKA_PORT:-9092}:9092"
     environment:
-      # KRaft single-node (broker + controller in one process)
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
@@ -76,6 +74,25 @@ services:
       interval: 10s
       timeout: 5s
       retries: 12
+
+  # ───────────────────────────────────────────── auth-service
+  # Minted by num_auth-main/auth-service. Issues HS256 JWTs to clients.
+  # Backend services validate against the same secret (APP_JWT_SECRET).
+  auth_service:
+    build:
+      context: ./num_auth-main/auth-service
+      dockerfile: ../../Dockerfile.spring
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      AUTH_DB_URL: jdbc:postgresql://postgres:5432/auth_service_db
+      AUTH_DB_USERNAME: ${POSTGRES_USER:-postgres}
+      AUTH_DB_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      JWT_SECRET: ${APP_JWT_SECRET:-YW5kMTIzNDU2Nzg5MGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MTIzNDU2Nzg5MA==}
+      JAVA_OPTS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=60.0"
+    ports: ["${AUTH_PORT:-8887}:8887"]
 
   # ───────────────────────────────────────── backend services
   user_service:
@@ -164,13 +181,41 @@ services:
     <<: *spring-common
     build: { context: ./grading_service, dockerfile: ../Dockerfile.spring }
     # grading_service defaults to :8089, but message_service holds 8089.
-    # Override to :8091 so the frontend's apiClient (which already points at 8091)
-    # keeps working without changes.
+    # Override to :8091 so the frontend's apiClient (which already points at
+    # 8091) keeps working without changes.
     ports: ["8091:8091"]
     environment:
       <<: *spring-env
       SERVER_PORT: 8091
       SPRING_R2DBC_URL: r2dbc:postgresql://postgres:5432/grading_service
+
+  # ───────────────────────────────────── JSF host (Tomcat + MFEs)
+  # Build-time VITE_API_* args are baked into the bundles. Override per
+  # environment in .env to point the frontend at a real public hostname
+  # (e.g. VITE_API_USER=https://api.thesis.example.com instead of
+  # http://localhost:8086 for non-localhost deploys).
+  jsf_host:
+    build:
+      context: .
+      dockerfile: Dockerfile.jsf-host
+      args:
+        VITE_API_AUTH: ${VITE_API_AUTH:-http://localhost:8887}
+        VITE_API_USER: ${VITE_API_USER:-http://localhost:8086}
+        VITE_API_TOPIC: ${VITE_API_TOPIC:-http://localhost:8081}
+        VITE_API_WORKFLOW: ${VITE_API_WORKFLOW:-http://localhost:8084}
+        VITE_API_COMMITTEE: ${VITE_API_COMMITTEE:-http://localhost:8082}
+        VITE_API_THESIS: ${VITE_API_THESIS:-http://localhost:8083}
+        VITE_API_EVALUATION: ${VITE_API_EVALUATION:-http://localhost:8085}
+        VITE_API_NOTIFICATION: ${VITE_API_NOTIFICATION:-http://localhost:8087}
+        VITE_API_REPORT: ${VITE_API_REPORT:-http://localhost:8088}
+        VITE_API_MESSAGE: ${VITE_API_MESSAGE:-http://localhost:8089}
+        VITE_API_ANALYTIC: ${VITE_API_ANALYTIC:-http://localhost:8090}
+        VITE_API_GRADING: ${VITE_API_GRADING:-http://localhost:8091}
+    restart: unless-stopped
+    ports: ["${JSF_HOST_PORT:-8080}:8080"]
+    depends_on:
+      auth_service: { condition: service_started }
+      user_service: { condition: service_started }
 
 volumes:
   postgres-data:

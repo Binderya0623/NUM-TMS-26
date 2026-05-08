@@ -12,6 +12,7 @@ import StudentMessages from './app/pages/student/StudentMessages';
 import StudentFeedback from './app/pages/student/StudentFeedback';
 import StudentEvaluationDeadlines from './app/pages/student/StudentEvaluationDeadlines';
 import StudentFinalGrade from './app/pages/student/StudentFinalGrade';
+import NotificationsPage from './app/pages/NotificationsPage';
 import type { StoredUser } from './lib/authGuard';
 
 interface AppProps { user: StoredUser; }
@@ -28,7 +29,8 @@ export default function App({ user }: AppProps) {
           <Route path="feedback"   element={<StudentFeedback />} />
           <Route path="evaluation" element={<StudentEvaluationDeadlines />} />
           <Route path="deadlines"  element={<StudentEvaluationDeadlines />} />
-          <Route path="grade"      element={<StudentFinalGrade />} />
+          <Route path="grade"          element={<StudentFinalGrade />} />
+          <Route path="notifications"  element={<NotificationsPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/student" replace />} />
       </Routes>

@@ -6,13 +6,11 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../components/ui/ta
 import {
   CheckCircle2, ToggleLeft, ToggleRight,
   Plus, Trash2, BookOpen, Users, FileText,
-  Shield, ChevronDown, ChevronUp, UserCheck, X,
+  Shield, ChevronDown, ChevronUp, X,
 } from "lucide-react";
 import { workflowService, type ExecutionSession, type DefenseSession } from "../../../services/workflowService";
 import { selectionSessionService, type SelectionSession } from "../../../services/selectionSessionService";
-import { committeeService, type Committee, type CommitteeTeacher } from "../../../services/committeeService";
-import { userService } from "../../../services/userService";
-import type { UserRecord } from "../../../services/userService";
+import { committeeService, type Committee } from "../../../services/committeeService";
 
 // ─── Session type definitions ─────────────────────────────────────────────────
 
@@ -246,83 +244,6 @@ function CreateSessionModal({
   );
 }
 
-// ─── External Expert Panel ────────────────────────────────────────────────────
-
-function ExternalExpertPanel({
-  committeeId, teachers,
-}: {
-  committeeId: string;
-  teachers: UserRecord[];
-}) {
-  const [members, setMembers] = useState<CommitteeTeacher[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    committeeService.getMembers(committeeId)
-      .then(res => setMembers(res.data))
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, [committeeId]);
-
-  const experts = members.filter(m => m.role === 'EXTERNAL_EXPERT' || m.role === 'Эксперт');
-  const regularMembers = members.filter(m => m.role !== 'EXTERNAL_EXPERT' && m.role !== 'Эксперт');
-
-  if (loading) return <p className="text-xs text-ink-400">Ачааллаж байна...</p>;
-
-  const roleLabel: Record<string, string> = {
-    HEAD: 'Дарга', SECRETARY: 'Нарийн бичиг', MEMBER: 'Гишүүн',
-  };
-
-  return (
-    <div className="mt-5 pt-5 border-t border-border grid gap-5 md:grid-cols-2">
-      {/* Regular members */}
-      <div>
-        <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-2">
-          Комиссын гишүүд
-        </p>
-        {regularMembers.length === 0 ? (
-          <p className="text-xs text-ink-400">Гишүүн томилогдоогүй</p>
-        ) : (
-          <ul className="space-y-1.5">
-            {regularMembers.map(m => {
-              const t = teachers.find(x => x.id === m.teacherId);
-              return (
-                <li key={m.id} className="flex items-baseline justify-between text-sm">
-                  <span className="text-ink-800">{t?.displayName || 'Тодорхойгүй'}</span>
-                  <span className="text-xs text-ink-400">{roleLabel[m.role] || m.role}</span>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
-
-      {/* External experts */}
-      <div>
-        <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-2 flex items-center gap-1.5">
-          <UserCheck className="w-3 h-3" strokeWidth={1.8} /> Гадаад эксперт
-        </p>
-        {experts.length === 0 ? (
-          <p className="text-xs text-ink-500 leading-relaxed">
-            Томилогдоогүй. Комиссын тохиргооноос EXTERNAL_EXPERT үүрэгтэй гишүүн нэмнэ үү.
-          </p>
-        ) : (
-          <ul className="space-y-1.5">
-            {experts.map(m => {
-              const t = teachers.find(x => x.id === m.teacherId);
-              return (
-                <li key={m.id} className="text-sm text-ink-900 font-medium">
-                  {t?.displayName || 'Тодорхойгүй'}
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
-    </div>
-  );
-}
-
 // ─── Grading scheme editor ────────────────────────────────────────────────────
 
 function GradingSchemeCard({ scheme, onChange }: { scheme: GradingScheme; onChange: (s: GradingScheme) => void }) {
@@ -425,24 +346,21 @@ export default function AdminEvaluationProcess() {
   const [defenseSessions, setDefenseSessions] = useState<DefenseSession[]>([]);
   const [selectionSessions, setSelectionSessions] = useState<SelectionSession[]>([]);
   const [committees, setCommittees] = useState<Committee[]>([]);
-  const [teachers, setTeachers] = useState<UserRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"stages" | "methods">("stages");
   const [creatingKind, setCreatingKind] = useState<SessionKind | null>(null);
   const [createError, setCreateError] = useState<string | null>(null);
   const [schemes, setSchemes] = useState<GradingScheme[]>(defaultSchemes);
   const [saveStatus, setSaveStatus] = useState<"idle" | "saved">("idle");
-  const [expandedExpert, setExpandedExpert] = useState<Set<SessionKind>>(new Set());
 
   const loadAll = async () => {
     setLoading(true);
     try {
-      const [execRes, defRes, selRes, commRes, teachRes] = await Promise.all([
+      const [execRes, defRes, selRes, commRes] = await Promise.all([
         workflowService.getExecutionSessions().catch(() => ({ data: [] as ExecutionSession[] })),
         workflowService.getDefenseSessions().catch(() => ({ data: [] as DefenseSession[] })),
         selectionSessionService.listSessions().catch(() => ({ data: [] as SelectionSession[] })),
         committeeService.getCommittees().catch(() => ({ data: [] as Committee[] })),
-        userService.getTeachers().catch(() => ({ data: [] as UserRecord[] })),
       ]);
       let sessions: SelectionSession[] = Array.isArray(selRes.data) ? selRes.data : [];
       if (sessions.length === 0) {
@@ -462,7 +380,6 @@ export default function AdminEvaluationProcess() {
       setDefenseSessions(defRes.data);
       setSelectionSessions(sessions);
       setCommittees(commRes.data);
-      setTeachers(teachRes.data);
     } finally {
       setLoading(false);
     }
@@ -595,14 +512,6 @@ export default function AdminEvaluationProcess() {
     }
   };
 
-  const toggleExpertPanel = (kind: SessionKind) => {
-    setExpandedExpert(prev => {
-      const next = new Set(prev);
-      if (next.has(kind)) next.delete(kind); else next.add(kind);
-      return next;
-    });
-  };
-
   return (
     <div className="space-y-8 max-w-4xl mx-auto pb-10">
       <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "stages" | "methods")}>
@@ -622,8 +531,6 @@ export default function AdminEvaluationProcess() {
                 const isOpen = unified?.status === 'OPEN';
                 const exists = !!unified?.id || !!unified?.selectionId;
                 const Icon = meta.icon;
-                const showExpertExpand = meta.hasExternalExpert && exists && !!unified?.committeeId;
-                const expertExpanded = expandedExpert.has(kind);
                 const committeeName =
                   unified?.committeeId && unified.committeeId !== 'GLOBAL'
                     ? committees.find(c => c.id === unified.committeeId)?.name
@@ -665,17 +572,6 @@ export default function AdminEvaluationProcess() {
                       </div>
 
                       <div className="flex items-center gap-2 shrink-0">
-                        {showExpertExpand && (
-                          <button
-                            type="button"
-                            onClick={() => toggleExpertPanel(kind)}
-                            className="flex items-center gap-1.5 text-xs text-ink-700 hover:text-ink-900 border border-border-strong hover:border-ink-900 rounded-md px-2.5 h-8 transition-colors"
-                          >
-                            <UserCheck className="w-3 h-3" strokeWidth={1.8} />
-                            Эксперт
-                            {expertExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                          </button>
-                        )}
                         {(!exists && kind !== 'TOPIC_CREATION' && kind !== 'PRE_DEFENSE' && kind !== 'FINAL_DEFENSE') ? (
                           <Button size="sm" onClick={() => setCreatingKind(kind)}>
                             <Plus className="w-3.5 h-3.5" strokeWidth={1.8} /> Сесс үүсгэх
@@ -695,9 +591,6 @@ export default function AdminEvaluationProcess() {
                       </div>
                     </div>
 
-                    {showExpertExpand && expertExpanded && unified?.committeeId && (
-                      <ExternalExpertPanel committeeId={unified.committeeId} teachers={teachers} />
-                    )}
                   </div>
                 );
               })}

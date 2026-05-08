@@ -7,6 +7,7 @@
 set -e
 
 databases=(
+  auth_service_db     # used by num_auth-main/auth-service
   user_service
   thesisdb            # used by topic_service
   committee_service

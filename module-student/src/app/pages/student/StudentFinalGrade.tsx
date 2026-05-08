@@ -6,15 +6,21 @@ import {
   type FinalGradeConfirmation,
   type SecretarySubmission,
   type DefenseGrade,
+  type ReviewDocument,
 } from "../../../services/evaluationService";
 import { workflowService, type DefenseSession } from "../../../services/workflowService";
 import { getStoredUser } from "../../../lib/authGuard";
 
+// Reviewer's 5-pt score is captured up-front during PRE_DEFENSE on the
+// review_document upload, so we surface it as its own bar separate from the
+// Эцсийн (committee) 35-pt block. Splitting matches what HEAD confirmation +
+// admin grades already display.
 const STAGES = [
   { stageType: "PROGRESS_1",    label: "Явц 1",                 maxPoints: 15 },
   { stageType: "PROGRESS_2",    label: "Явц 2",                 maxPoints: 20 },
   { stageType: "PRE_DEFENSE",   label: "Урьдчилсан хамгаалалт", maxPoints: 25 },
-  { stageType: "FINAL_DEFENSE", label: "Эцсийн хамгаалалт",     maxPoints: 40 },
+  { stageType: "FINAL_DEFENSE", label: "Эцсийн хамгаалалт",     maxPoints: 35 },
+  { stageType: "REVIEWER",      label: "Шүүмжийн оноо",         maxPoints: 5  },
 ] as const;
 
 export default function StudentFinalGrade() {
@@ -25,6 +31,7 @@ export default function StudentFinalGrade() {
   const [submissions, setSubmissions] = useState<SecretarySubmission[]>([]);
   const [grades, setGrades] = useState<DefenseGrade[]>([]);
   const [sessions, setSessions] = useState<DefenseSession[]>([]);
+  const [reviewDocs, setReviewDocs] = useState<ReviewDocument[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -34,12 +41,14 @@ export default function StudentFinalGrade() {
       evaluationService.getSecretarySubmissions(studentId),
       evaluationService.getMyDefenseGrades(studentId),
       workflowService.getDefenseSessions(),
+      evaluationService.getMyReviewDocuments(studentId),
     ])
-      .then(([gradeRes, subRes, gradesRes, sessRes]) => {
+      .then(([gradeRes, subRes, gradesRes, sessRes, reviewRes]) => {
         setFinalGrade(gradeRes.data ?? null);
         setSubmissions(subRes.data);
         setGrades(gradesRes.data);
         setSessions(sessRes.data);
+        setReviewDocs(reviewRes.data);
       })
       .finally(() => setLoading(false));
   }, [studentId]);
@@ -80,6 +89,25 @@ export default function StudentFinalGrade() {
     if (!existing || (submittedAt ?? "") > (existing.submittedAt ?? "")) {
       scoreByStage.set(stageType, { averageScore: score, submittedAt });
     }
+  }
+
+  // Reviewer score: prefer the HEAD-confirmed value (final_grade.reviewerScore)
+  // since that's the canonical truth; fall back to the score saved on the
+  // review_document at upload time if HEAD hasn't confirmed yet.
+  const reviewerScoreFromFinal = finalGrade?.reviewerScore;
+  const latestDocWithScore = reviewDocs
+    .filter(d => d.reviewerScore != null)
+    .sort((a, b) => (b.uploadedAt ?? "").localeCompare(a.uploadedAt ?? ""))[0];
+  if (reviewerScoreFromFinal != null) {
+    scoreByStage.set("REVIEWER", {
+      averageScore: Number(reviewerScoreFromFinal),
+      submittedAt: finalGrade?.confirmedAt,
+    });
+  } else if (latestDocWithScore?.reviewerScore != null) {
+    scoreByStage.set("REVIEWER", {
+      averageScore: Number(latestDocWithScore.reviewerScore),
+      submittedAt: latestDocWithScore.uploadedAt,
+    });
   }
 
   const revealedTotal = STAGES.reduce((sum, s) => {

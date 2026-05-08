@@ -66,6 +66,7 @@ export default function AdminCommittees() {
   const [submitting, setSubmitting] = useState(false);
   const [committeeSessions, setCommitteeSessions] = useState<Record<string, DefenseSession>>({});
   const [exportingId, setExportingId] = useState<string | null>(null);
+  const [assignedStudentIds, setAssignedStudentIds] = useState<Set<string>>(new Set());
 
   const resetForm = () => {
     setForm({ name: "", type: "", scheduledDate: "", location: "", notes: "", selectedTeachers: [], selectedStudents: [] });
@@ -73,6 +74,22 @@ export default function AdminCommittees() {
     setStudentSearch("");
     setCopySourceId("");
     setCopyResult(null);
+  };
+
+  // Refreshes the set of student IDs already on a committee so the create
+  // dialog won't offer them. Called on mount and after any committee mutation.
+  const refreshAssignedStudents = async () => {
+    try {
+      const cRes = await committeeService.getCommittees();
+      const lists = await Promise.all(
+        cRes.data.map(c => committeeService.getStudents(c.id).catch(() => ({ data: [] as any[] })))
+      );
+      const ids = new Set<string>();
+      lists.forEach(r => (r.data || []).forEach((s: any) => { if (s.studentId) ids.add(s.studentId); }));
+      setAssignedStudentIds(ids);
+    } catch {
+      // ignore
+    }
   };
 
   useEffect(() => {
@@ -89,6 +106,7 @@ export default function AdminCommittees() {
     userService.getStudents()
       .then(res => setStudents(res.data))
       .catch(() => {});
+    refreshAssignedStudents();
   }, []);
 
   const handleSelectCommittee = (c: Committee) => {
@@ -127,6 +145,7 @@ export default function AdminCommittees() {
       const res = await committeeService.getStudents(selectedCommittee.id);
       setCommitteeStudents(res.data);
       setDrawerStudentSearch("");
+      refreshAssignedStudents();
     } catch {
       // ignore
     } finally {
@@ -184,6 +203,7 @@ export default function AdminCommittees() {
       } catch { /* committee is already created */ }
 
       setCommittees(prev => [...prev, newCommittee]);
+      refreshAssignedStudents();
       setCreateSuccess(true);
       setTimeout(() => {
         setCreateSuccess(false);
@@ -299,6 +319,7 @@ export default function AdminCommittees() {
 
   const filteredStudents = students.filter(s =>
     !form.selectedStudents.find(x => x.id === s.id) &&
+    !assignedStudentIds.has(s.id) &&
     (s.displayName.toLowerCase().includes(studentSearch.toLowerCase()) ||
      s.id.toLowerCase().includes(studentSearch.toLowerCase()))
   );

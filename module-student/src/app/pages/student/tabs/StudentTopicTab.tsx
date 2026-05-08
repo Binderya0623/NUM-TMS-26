@@ -60,6 +60,7 @@ export default function StudentTopicTab() {
 
   const [myRequests, setMyRequests] = useState<TopicRequest[]>([]);
   const [loadingRequests, setLoadingRequests] = useState(true);
+  const [takenTopicIds, setTakenTopicIds] = useState<Set<number>>(new Set());
 
   const [proposals, setProposals] = useState<Topic[]>([]);
   const [loadingProposals, setLoadingProposals] = useState(true);
@@ -95,6 +96,15 @@ export default function StudentTopicTab() {
       .catch(() => {})
       .finally(() => setLoadingRequests(false));
   }, [studentId]);
+
+  // Topics that already belong to someone (any approved request) → "Аль
+  // хэдийн сонгогдсон". Done as a separate fetch so we don't conflate with
+  // the user's own requests.
+  useEffect(() => {
+    topicService.getApprovedRequests()
+      .then(res => setTakenTopicIds(new Set((res.data || []).map(r => r.topicId))))
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (!studentId) { setLoadingProposals(false); return; }
@@ -193,7 +203,12 @@ export default function StudentTopicTab() {
       resetForm();
       setSubTab("propose");
     })
-    .catch(() => {})
+    .catch((err: any) => {
+      const msg = err?.response?.data?.error || err?.response?.data?.message
+                  || err?.message || 'Илгээж чадсангүй. Дахин оролдоно уу.';
+      setErrors({ _form: typeof msg === 'string' ? msg : 'Илгээж чадсангүй. Дахин оролдоно уу.' });
+      console.error('[submitProposal]', err);
+    })
     .finally(() => setSubmitting(false));
   };
 
@@ -244,6 +259,7 @@ export default function StudentTopicTab() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredTopics.map((topic) => {
                 const requested = hasRequested(topic.id);
+                const takenByOther = !requested && takenTopicIds.has(topic.id);
                 return (
                   <Card key={topic.id} className="flex flex-col h-full hover:border-ink-900 transition-colors">
                     <CardHeader className="pb-3 border-b border-border">
@@ -310,12 +326,18 @@ export default function StudentTopicTab() {
                         )}
                       </div>
                       <Button
-                        variant={requested || sessionOpen === false ? "secondary" : "outline"}
+                        variant={requested || takenByOther || sessionOpen === false ? "secondary" : "outline"}
                         className="w-full"
-                        disabled={requested || sessionOpen === false}
+                        disabled={requested || takenByOther || sessionOpen === false}
                         onClick={() => { setSelectedTopic(topic); setRequestError(null); setShowModal(true); }}
                       >
-                        {requested ? "Хүсэлт илгээсэн" : sessionOpen === false ? "Сесс хаалттай" : "Хүсэлт илгээх"}
+                        {requested
+                          ? "Хүсэлт илгээсэн"
+                          : takenByOther
+                            ? "Аль хэдийн сонгогдсон"
+                            : sessionOpen === false
+                              ? "Сесс хаалттай"
+                              : "Хүсэлт илгээх"}
                       </Button>
                     </CardContent>
                   </Card>
@@ -520,6 +542,11 @@ export default function StudentTopicTab() {
                     ))}
                   </select>
                 </FormField>
+                {errors._form && (
+                  <p className="text-xs text-[var(--color-dot-negative)] inline-flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)]" /> {errors._form}
+                  </p>
+                )}
                 <div className="flex gap-3 justify-end pt-4 border-t border-border">
                   <Button variant="outline" disabled={submitting} onClick={() => handleSubmitProposal("draft")}>Ноорог хадгалах</Button>
                   <Button disabled={submitting} onClick={() => handleSubmitProposal("submit")}>

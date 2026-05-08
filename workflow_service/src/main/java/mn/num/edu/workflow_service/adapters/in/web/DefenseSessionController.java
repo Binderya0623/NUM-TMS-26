@@ -2,14 +2,18 @@ package mn.num.edu.workflow_service.adapters.in.web;
 
 import mn.num.edu.workflow_service.adapters.out.persistence.entity.DefenseSessionEntity;
 import mn.num.edu.workflow_service.adapters.out.persistence.repository.DefenseSessionR2dbcRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,10 +21,18 @@ import java.util.UUID;
 @RequestMapping("/api/defense-sessions")
 public class DefenseSessionController {
 
-    private final DefenseSessionR2dbcRepository repository;
+    private static final Logger log = LoggerFactory.getLogger(DefenseSessionController.class);
+    /** notification_service listens here. Fanout for committee/global sessions
+     *  is a follow-up (see {@link #publishDeadlineIfApplicable(DefenseSessionEntity)}). */
+    private static final String DEADLINE_TOPIC = "workflow-deadline-set";
 
-    public DefenseSessionController(DefenseSessionR2dbcRepository repository) {
+    private final DefenseSessionR2dbcRepository repository;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
+
+    public DefenseSessionController(DefenseSessionR2dbcRepository repository,
+                                     KafkaTemplate<String, Object> kafkaTemplate) {
         this.repository = repository;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     // Canonical DB stage names + frontend aliases
@@ -102,6 +114,7 @@ public class DefenseSessionController {
         if (req.notes() != null) entity.setNotes(req.notes());
 
         return repository.save(entity)
+                .doOnNext(this::publishDeadlineIfApplicable)
                 .map(saved -> ResponseEntity.status(HttpStatus.CREATED).body(saved))
                 .onErrorResume(org.springframework.dao.DuplicateKeyException.class, e -> {
                     Mono<DefenseSessionEntity> finder = isProgress1
@@ -118,11 +131,14 @@ public class DefenseSessionController {
         return repository.findById(id)
                 .switchIfEmpty(Mono.error(new IllegalArgumentException("Not found")))
                 .flatMap(e -> {
+                    boolean dateChanged = req.scheduledDate() != null
+                            && !req.scheduledDate().equals(e.getScheduledDate());
                     if (req.scheduledDate() != null) e.setScheduledDate(req.scheduledDate());
                     if (req.location() != null) e.setLocation(req.location());
                     if (req.notes() != null) e.setNotes(req.notes());
                     e.setNew(false);
-                    return repository.save(e);
+                    return repository.save(e)
+                            .doOnNext(saved -> { if (dateChanged) publishDeadlineIfApplicable(saved); });
                 })
                 .map(ResponseEntity::ok);
     }
@@ -157,6 +173,43 @@ public class DefenseSessionController {
                     return repository.save(e);
                 })
                 .map(ResponseEntity::ok);
+    }
+
+    /**
+     * Fire-and-forget publish to {@code workflow-deadline-set} when a session
+     * has a {@code scheduledDate} and a single recipient we can identify.
+     *
+     * Coverage today:
+     *   • PROGRESS_1 sessions — supervisor is the recipient (1:1).
+     *
+     * Skipped (logged):
+     *   • Committee/department-scoped sessions (PROGRESS_2, PRELIMINARY,
+     *     FINAL). They affect every student in the committee, so notifying
+     *     all of them needs a cross-service committee_service lookup. That
+     *     fan-out is a follow-up — for now the supervisor seeing the date in
+     *     the dashboard is enough to drive behavior.
+     */
+    private void publishDeadlineIfApplicable(DefenseSessionEntity saved) {
+        if (saved.getScheduledDate() == null) return;
+        String recipient = saved.getSupervisorId();
+        if (recipient == null || recipient.isBlank()) {
+            log.info("workflow-deadline-set skipped: session={} stage={} has no single recipient (committee/global)",
+                    saved.getId(), saved.getStageType());
+            return;
+        }
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("workflowId", saved.getId());
+        payload.put("thesisId", null);
+        payload.put("studentId", recipient);  // recipient slot — handler notifies this user
+        payload.put("stageName", saved.getStageType());
+        payload.put("deadline", saved.getScheduledDate().toString());
+        try {
+            kafkaTemplate.send(DEADLINE_TOPIC, saved.getId(), payload);
+            log.info("📤 published workflow-deadline-set: session={} stage={} deadline={}",
+                    saved.getId(), saved.getStageType(), saved.getScheduledDate());
+        } catch (Exception ex) {
+            log.warn("Failed to publish workflow-deadline-set", ex);
+        }
     }
 
     public record CreateDefenseSessionRequest(String departmentId, String committeeId,

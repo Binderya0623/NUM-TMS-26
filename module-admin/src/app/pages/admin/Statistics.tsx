@@ -4,7 +4,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { Activity } from "lucide-react";
 import { userService, type UserRecord } from "../../../services/userService";
 import { planService, type Plan } from "../../../services/planService";
-import { analyticService } from "../../../services/analyticService";
+import { evaluationService, type FinalGrade, type ReviewDocument } from "../../../services/evaluationService";
+import { thesisReportService, type ThesisReport } from "../../../services/thesisReportService";
 
 // Navy-rooted brand ramp (deep → light) — matches student/teacher accent #1455bd
 const MONO_SHADES = ["#1455bd", "#1d4ed8", "#3b82f6", "#60a5fa", "#93c5fd", "#bfdbfe"];
@@ -16,7 +17,9 @@ export default function Statistics() {
   const [teachers, setTeachers] = useState<UserRecord[]>([]);
   const [students, setStudents] = useState<UserRecord[]>([]);
   const [plans, setPlans] = useState<Plan[]>([]);
-  const [analytics, setAnalytics] = useState<Record<string, number>>({});
+  const [finalGrades, setFinalGrades] = useState<FinalGrade[]>([]);
+  const [reviewDocs, setReviewDocs] = useState<ReviewDocument[]>([]);
+  const [reports, setReports] = useState<ThesisReport[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,12 +27,16 @@ export default function Statistics() {
       userService.getTeachers(),
       userService.getStudents(),
       planService.getPlans(),
-      analyticService.getOverview(),
-    ]).then(([tr, sr, pr, ar]) => {
+      evaluationService.getFinalGrades(),
+      evaluationService.getReviewDocuments({}),
+      thesisReportService.getReports().catch(() => ({ data: [] as ThesisReport[] })),
+    ]).then(([tr, sr, pr, fr, rv, rep]) => {
       setTeachers(tr.data);
       setStudents(sr.data);
       setPlans(pr.data);
-      setAnalytics(ar.data);
+      setFinalGrades(fr.data);
+      setReviewDocs(rv.data);
+      setReports(rep.data);
     }).catch(() => {})
       .finally(() => setLoading(false));
   }, []);
@@ -54,8 +61,7 @@ export default function Statistics() {
       plans: teacherPlanMap[t.id] || teacherPlanMap[t.username || ''] || 0,
     }))
     .filter(t => t.plans > 0)
-    .sort((a, b) => b.plans - a.plans)
-    .slice(0, 10);
+    .sort((a, b) => b.plans - a.plans);
 
   const statusMap: Record<string, number> = {};
   plans.forEach(p => { statusMap[p.status] = (statusMap[p.status] || 0) + 1; });
@@ -63,6 +69,31 @@ export default function Statistics() {
 
   const approvedCount = plans.filter(p => p.status === 'APPROVED').length;
   const approvalRate = plans.length > 0 ? ((approvedCount / plans.length) * 100).toFixed(0) : '0';
+
+  // Stage-level reality (status = APPROVED already means topic batlagdsan, plus
+  // anything past it). DRAFT / *_PENDING are pre-approval.
+  const POST_APPROVAL: ReadonlyArray<string> = ['APPROVED', 'ACTIVE', 'SUBMITTED'];
+  const approvedTheses     = plans.filter(p => POST_APPROVAL.includes(p.status)).length;
+  const evaluationsDone    = reviewDocs.length;
+  const gradesCalculated   = finalGrades.length;
+  const workflowsCompleted = finalGrades.filter(g => g.isPublished).length;
+  const reportsSubmitted   = reports.filter(r => r.status === 'SUBMITTED' || r.submittedAt).length;
+
+  // "Active" = a thesis in progress (post-approval, not yet finalized with a
+  // confirmed grade). We exclude students whose final grade is already in.
+  const finalizedStudentIds = new Set(finalGrades.map(g => g.studentId).filter(Boolean));
+  const activeTheses = plans.filter(p =>
+    POST_APPROVAL.includes(p.status) && !finalizedStudentIds.has(p.studentId)
+  ).length;
+
+  // Avg supervisor load: plans/unique-supervisors is more meaningful than
+  // students/teachers (most teachers don't supervise; not all students have a
+  // thesis). Falls back to "—" if no plans yet.
+  const supervisedPlans = plans.filter(p => !!p.supervisorId).length;
+  const uniqueSupervisors = new Set(plans.map(p => p.supervisorId).filter(Boolean)).size;
+  const avgStudentsPerTeacher = uniqueSupervisors > 0
+    ? (supervisedPlans / uniqueSupervisors).toFixed(1)
+    : '—';
 
   if (loading) {
     return <div className="text-center py-16 text-ink-400 text-sm">Ачааллаж байна...</div>;
@@ -151,13 +182,13 @@ export default function Statistics() {
           {teacherWorkload.length === 0 ? (
             <p className="text-sm text-ink-400 text-center py-8">Өгөгдөл байхгүй</p>
           ) : (
-            <ResponsiveContainer width="100%" height={280}>
-              <BarChart data={teacherWorkload}>
-                <CartesianGrid strokeDasharray="3 3" stroke={GRID_STROKE} />
-                <XAxis dataKey="name" tick={AXIS_TICK} stroke={GRID_STROKE} />
-                <YAxis tick={AXIS_TICK} stroke={GRID_STROKE} />
+            <ResponsiveContainer width="100%" height={Math.max(280, teacherWorkload.length * 28 + 40)}>
+              <BarChart data={teacherWorkload} layout="vertical" margin={{ top: 8, right: 24, bottom: 8, left: 8 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke={GRID_STROKE} horizontal={false} />
+                <XAxis type="number" tick={AXIS_TICK} stroke={GRID_STROKE} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" tick={AXIS_TICK} stroke={GRID_STROKE} width={120} />
                 <Tooltip cursor={{ fill: "rgba(20,85,189,0.06)" }} />
-                <Bar dataKey="plans" fill={BAR_FILL} name="Дипломын ажлын тоо" radius={[4,4,0,0]} />
+                <Bar dataKey="plans" fill={BAR_FILL} name="Дипломын ажлын тоо" radius={[0,4,4,0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
@@ -166,9 +197,9 @@ export default function Statistics() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {[
-          { label: "Дундаж оюутан/багш",    value: teachers.length > 0 ? (students.length / teachers.length).toFixed(1) : "—" },
-          { label: "Нийт идэвхтэй диплом",   value: plans.filter(p => p.status === 'ACTIVE').length },
-          { label: "Тайлан илгээсэн",         value: plans.filter(p => p.status === 'SUBMITTED').length },
+          { label: "Дундаж оюутан/багш",   value: avgStudentsPerTeacher },
+          { label: "Нийт идэвхтэй диплом", value: activeTheses },
+          { label: "Тайлан илгээсэн",       value: reportsSubmitted },
         ].map(m => (
           <Card key={m.label}>
             <CardHeader className="pb-2">
@@ -189,15 +220,15 @@ export default function Statistics() {
         <CardContent>
           <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-4">
             {[
-              { key: "total_approved_theses",       label: "Батлагдсан сэдвүүд" },
-              { key: "total_evaluations_completed", label: "Дүгнэлт хийгдсэн" },
-              { key: "total_grades_calculated",     label: "Дүн тооцоолсон" },
-              { key: "total_workflows_completed",   label: "Workflow дууссан" },
-              { key: "total_reports_submitted",     label: "Тайлан илгээсэн" },
-            ].map(({ key, label }) => (
-              <div key={key} className="rounded-md border border-border p-4 flex flex-col gap-1">
+              { label: "Батлагдсан сэдвүүд", value: approvedTheses },
+              { label: "Дүгнэлт хийгдсэн",   value: evaluationsDone },
+              { label: "Дүн тооцоолсон",     value: gradesCalculated },
+              { label: "Workflow дууссан",   value: workflowsCompleted },
+              { label: "Тайлан илгээсэн",     value: reportsSubmitted },
+            ].map(({ label, value }) => (
+              <div key={label} className="rounded-md border border-border p-4 flex flex-col gap-1">
                 <span className="text-[11px] uppercase tracking-wider text-ink-500">{label}</span>
-                <span className="text-2xl font-semibold text-ink-900 tabular-nums tracking-tight">{analytics[key] ?? 0}</span>
+                <span className="text-2xl font-semibold text-ink-900 tabular-nums tracking-tight">{value}</span>
               </div>
             ))}
           </div>

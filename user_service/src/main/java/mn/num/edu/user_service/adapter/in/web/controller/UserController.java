@@ -11,11 +11,14 @@ import mn.num.edu.user_service.application.dto.CreateExternalExpertCommand;
 import mn.num.edu.user_service.application.dto.CreateStudentCommand;
 import mn.num.edu.user_service.application.dto.CreateTeacherCommand;
 import mn.num.edu.user_service.application.dto.CreateUserCommand;
+import mn.num.edu.user_service.adapter.out.persistence.ExternalExpertR2dbcRepository;
 import mn.num.edu.user_service.adapter.out.persistence.StudentR2dbcRepository;
 import mn.num.edu.user_service.adapter.out.persistence.UserR2dbcRepository;
 import mn.num.edu.user_service.application.port.in.*;
 import mn.num.edu.user_service.application.port.out.DepartmentRepositoryPort;
+import mn.num.edu.user_service.application.port.out.ExternalExpertRepositoryPort;
 import mn.num.edu.user_service.domain.model.Department;
+import mn.num.edu.user_service.domain.model.ExternalExpert;
 import mn.num.edu.user_service.domain.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +45,8 @@ public class UserController {
     private final FindUserUseCase findUserUseCase;
     private final UserR2dbcRepository userR2dbcRepository;
     private final StudentR2dbcRepository studentR2dbcRepository;
+    private final ExternalExpertR2dbcRepository externalExpertRepository;
+    private final ExternalExpertRepositoryPort externalExpertRepositoryPort;
     private final DepartmentRepositoryPort departmentRepositoryPort;
 
     public UserController(
@@ -52,6 +57,8 @@ public class UserController {
             FindUserUseCase findUserUseCase,
             UserR2dbcRepository userR2dbcRepository,
             StudentR2dbcRepository studentR2dbcRepository,
+            ExternalExpertR2dbcRepository externalExpertRepository,
+            ExternalExpertRepositoryPort externalExpertRepositoryPort,
             DepartmentRepositoryPort departmentRepositoryPort
     ) {
         this.createStudentUseCase = createStudentUseCase;
@@ -61,6 +68,8 @@ public class UserController {
         this.findUserUseCase = findUserUseCase;
         this.userR2dbcRepository = userR2dbcRepository;
         this.studentR2dbcRepository = studentR2dbcRepository;
+        this.externalExpertRepository = externalExpertRepository;
+        this.externalExpertRepositoryPort = externalExpertRepositoryPort;
         this.departmentRepositoryPort = departmentRepositoryPort;
     }
 
@@ -167,17 +176,6 @@ public class UserController {
                         .defaultIfEmpty(userToMap(user)));
     }
 
-    private Map<String, Object> userToMap(User user) {
-        Map<String, Object> m = new HashMap<>();
-        m.put("id", user.getId());
-        m.put("firstName", user.getFirstName());
-        m.put("lastName", user.getLastName());
-        m.put("email", user.getEmail());
-        m.put("departmentId", user.getDepartmentId());
-        m.put("systemRole", user.getSystemRole());
-        return m;
-    }
-
     @GetMapping("/teachers")
     public Flux<User> findTeachers(@RequestParam(required = false) String departmentId) {
         log.info("Fetching teachers. departmentId={}", departmentId);
@@ -202,10 +200,83 @@ public class UserController {
                 .map(savedUser -> ResponseEntity.status(HttpStatus.CREATED).body(savedUser));
     }
 
+    /**
+     * GET /api/users/external-experts
+     *
+     * Returns each external-expert User enriched with their {@code organization}
+     * and {@code expertise} from the {@code external_experts} profile table.
+     * Frontend expects these as flat fields on the row (and renders "—" if
+     * absent), so we project both into a Map.
+     */
     @GetMapping("/external-experts")
-    public Flux<User> findExternalExperts(@RequestParam(required = false) String departmentId) {
+    public Flux<Map<String, Object>> findExternalExperts(@RequestParam(required = false) String departmentId) {
         log.info("Fetching external experts. departmentId={}", departmentId);
-        return findUserUseCase.findExternalExperts(departmentId);
+        return findUserUseCase.findExternalExperts(departmentId)
+                .flatMap(user ->
+                        externalExpertRepository.findByUserId(user.getId())
+                                .map(profile -> {
+                                    Map<String, Object> enriched = userToMap(user);
+                                    enriched.put("organization", profile.getOrganization());
+                                    enriched.put("expertise", profile.getExpertise());
+                                    return enriched;
+                                })
+                                // Fall back gracefully if the profile row is missing
+                                // (legacy data, mid-migration). FE renders "—".
+                                .switchIfEmpty(Mono.just(userToMap(user)))
+                );
+    }
+
+    /**
+     * PUT /api/users/external-experts/{userId}/profile
+     *
+     * Upsert {@code organization} and {@code expertise} on an existing expert.
+     * Backfills legacy users that were created before the profile table existed
+     * — without it, the GET endpoint falls back to userToMap and the admin UI
+     * renders "—" forever.
+     */
+    @PutMapping("/external-experts/{userId}/profile")
+    public Mono<ResponseEntity<Map<String, Object>>> updateExpertProfile(
+            @PathVariable String userId,
+            @RequestBody Map<String, String> body
+    ) {
+        String organization = body.getOrDefault("organization", "");
+        String expertise    = body.getOrDefault("expertise", "");
+        log.info("Upsert external-expert profile. userId={}", userId);
+
+        return userR2dbcRepository.findById(userId)
+                .switchIfEmpty(Mono.error(new IllegalArgumentException("User not found: " + userId)))
+                .flatMap(user -> externalExpertRepository.findByUserId(userId)
+                        .flatMap(existing -> {
+                            existing.setOrganization(organization);
+                            existing.setExpertise(expertise);
+                            existing.setNew(false);
+                            return externalExpertRepositoryPort.save(existing);
+                        })
+                        .switchIfEmpty(externalExpertRepositoryPort.save(
+                                ExternalExpert.create(userId, organization, expertise)))
+                        .map(profile -> {
+                            Map<String, Object> enriched = userToMap(user);
+                            enriched.put("organization", profile.getOrganization());
+                            enriched.put("expertise", profile.getExpertise());
+                            return ResponseEntity.ok(enriched);
+                        })
+                );
+    }
+
+    /** Reflect every getter on User into a Map so we don't lose any field that
+     *  Jackson would otherwise emit. Done dynamically because adding a hand-rolled
+     *  DTO every time User changes would be a maintenance hole. */
+    private static Map<String, Object> userToMap(User user) {
+        Map<String, Object> m = new HashMap<>();
+        m.put("id",          user.getId());
+        m.put("email",       user.getEmail());
+        m.put("firstName",   user.getFirstName());
+        m.put("lastName",    user.getLastName());
+        m.put("systemRole",  user.getSystemRole());
+        m.put("departmentId", user.getDepartmentId());
+        m.put("active",      user.isActive());
+        m.put("createdAt",   user.getCreatedAt());
+        return m;
     }
 
     @GetMapping("/departments")

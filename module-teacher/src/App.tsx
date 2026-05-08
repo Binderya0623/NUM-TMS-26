@@ -13,6 +13,7 @@ import TeacherProgress from './app/pages/teacher/TeacherProgress';
 import TeacherCommittee from './app/pages/teacher/TeacherCommittee';
 import ExternalExpertGrading from './app/pages/teacher/ExternalExpertGrading';
 import ComingSoon from './app/pages/ComingSoon';
+import NotificationsPage from './app/pages/NotificationsPage';
 import type { StoredUser } from './lib/authGuard';
 
 interface AppProps { user: StoredUser; }
@@ -32,8 +33,9 @@ export default function App({ user }: AppProps) {
           <Route path="progress"    element={<TeacherProgress />} />
           <Route path="committee"   element={<TeacherCommittee />} />
           <Route path="scores"      element={<TeacherProgress />} />
-          <Route path="expert"      element={<ExternalExpertGrading />} />
-          <Route path="settings"    element={<ComingSoon />} />
+          <Route path="expert"        element={<ExternalExpertGrading />} />
+          <Route path="notifications" element={<NotificationsPage />} />
+          <Route path="settings"      element={<ComingSoon />} />
         </Route>
         <Route path="*" element={<Navigate to="/teacher" replace />} />
       </Routes>

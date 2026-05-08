@@ -36,10 +36,25 @@ const stageLabel = (stageType: string) => {
     PROGRESS_1: "Явц 1-ийн хяналт",
     PROGRESS_2: "Явц 2-ын хяналт",
     PRE_DEFENSE: "Урьдчилсан хамгаалалт",
+    PRELIMINARY: "Урьдчилсан хамгаалалт",
     FINAL_DEFENSE: "Эцсийн хамгаалалт",
+    FINAL: "Эцсийн хамгаалалт",
   };
   return map[stageType] || stageType;
 };
+
+// Helpers for the right-sidebar "Хамгаалалтын хуваарь" card. Mirrors student.
+function fmtDateTime(iso?: string): string | null {
+  if (!iso) return null;
+  return new Date(iso).toLocaleString("mn-MN", {
+    year: "numeric", month: "short", day: "numeric",
+    hour: "2-digit", minute: "2-digit",
+  });
+}
+function daysFrom(iso?: string): number | null {
+  if (!iso) return null;
+  return Math.ceil((new Date(iso).getTime() - Date.now()) / 86400000);
+}
 
 type StageState = "done" | "active" | "upcoming";
 
@@ -197,14 +212,7 @@ export default function TeacherDashboard() {
     return !!d && new Date(d).getTime() < todayMs;
   };
   const upcomingSchedule = sortedSessions.filter(s => !isPast(s));
-  const pastSchedule = sortedSessions.filter(isPast);
-
-  const sessionStatusTone = (status: string): Tone => {
-    const s = (status || "").toUpperCase();
-    if (s === "OPEN" || s === "SCHEDULED") return "warning";
-    if (s === "CLOSED" || s === "COMPLETED") return "positive";
-    return "neutral";
-  };
+  const upcomingSession = upcomingSchedule[0];
 
   // Backend canonicalizes PRE_DEFENSE→PRELIMINARY and FINAL_DEFENSE→FINAL when
   // it stores the row. Sessions returned via the API carry the canonical name,
@@ -229,47 +237,6 @@ export default function TeacherDashboard() {
     else if (st === "OPEN" || st === "ACTIVE") state = "active";
     stageState[stage.key] = { state, date: sessionDate(latest) };
   });
-
-  const renderScheduleRow = (session: DefenseSession) => {
-    const committee = session.committeeId ? committeeMap.get(session.committeeId) : undefined;
-    const dateStr = sessionDate(session);
-    const [datePart, timePart] = dateStr.split("T");
-    const month = datePart?.split("-")[1] || "—";
-    const day = datePart?.split("-")[2] || "—";
-    const time = timePart?.substring(0, 5);
-    return (
-      <div key={session.id} className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:bg-surface-muted transition-colors">
-        <div className="flex items-start gap-3 min-w-0 flex-1">
-          <div className="w-11 h-11 rounded-md border border-border-strong bg-surface-muted flex flex-col items-center justify-center shrink-0 tabular-nums">
-            <span className="text-[10px] font-medium text-ink-500 leading-none">{month}/</span>
-            <span className="text-base font-semibold text-ink-900 leading-none mt-0.5">{day}</span>
-          </div>
-          <div className="min-w-0 flex-1">
-            <h3 className="text-sm font-semibold text-ink-900 tracking-tight truncate">{stageLabel(session.stageType)}</h3>
-            <p className="text-xs text-ink-600 mt-0.5 truncate">
-              {committee ? `${committee.name} · ${committee.role}` : "—"}
-            </p>
-            <div className="flex items-center gap-3 mt-1 text-xs text-ink-500 flex-wrap">
-              {time && (
-                <span className="flex items-center gap-1 tabular-nums">
-                  <Clock className="w-3 h-3" strokeWidth={1.6} />{time}
-                </span>
-              )}
-              {session.location && (
-                <span className="flex items-center gap-1">
-                  <MapPin className="w-3 h-3" strokeWidth={1.6} />{session.location}
-                </span>
-              )}
-              <span className="inline-flex items-center gap-1.5 text-ink-700">
-                <span className={`w-1.5 h-1.5 rounded-full ${toneDot[sessionStatusTone(session.status)]}`} />
-                {session.status}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
 
   const heroStageEntry = STAGE_DEFS.find(s => stageState[s.key]?.state === "active")
     || STAGE_DEFS.slice().reverse().find(s => stageState[s.key]?.state === "done")
@@ -338,46 +305,6 @@ export default function TeacherDashboard() {
             </CardHeader>
             <CardContent className="p-6">
               <TermTimeline stageState={stageState} />
-            </CardContent>
-          </Card>
-
-          {/* Schedule — moved from TeacherCommittee. Hides closed committees. */}
-          <Card>
-            <CardHeader className="border-b border-border">
-              <CardTitle className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-accent" strokeWidth={1.6} />
-                Хамгаалалтын хуваарь
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              {loading ? (
-                <div className="p-6 text-center text-ink-400 text-sm">Ачааллаж байна...</div>
-              ) : liveSessions.length === 0 ? (
-                <div className="p-6 text-center text-ink-400 text-sm">Идэвхтэй комиссын хамгаалалт алга.</div>
-              ) : (
-                <>
-                  <div className="px-4 pt-3 pb-1 text-[11px] uppercase tracking-wider font-medium text-ink-500">
-                    Удахгүй болох ({upcomingSchedule.length})
-                  </div>
-                  {upcomingSchedule.length === 0 ? (
-                    <div className="px-4 py-3 text-xs text-ink-400">Удахгүй болох хамгаалалт алга.</div>
-                  ) : (
-                    <div className="divide-y divide-border">
-                      {upcomingSchedule.map(renderScheduleRow)}
-                    </div>
-                  )}
-                  {pastSchedule.length > 0 && (
-                    <>
-                      <div className="px-4 pt-3 pb-1 text-[11px] uppercase tracking-wider font-medium text-ink-500 border-t border-border">
-                        Өнгөрсөн ({pastSchedule.length})
-                      </div>
-                      <div className="divide-y divide-border">
-                        {pastSchedule.map(renderScheduleRow)}
-                      </div>
-                    </>
-                  )}
-                </>
-              )}
             </CardContent>
           </Card>
 
@@ -452,6 +379,76 @@ export default function TeacherDashboard() {
 
         {/* Sidebar — Quick view */}
         <div className="space-y-6">
+          <Card>
+            <CardHeader className="border-b border-border">
+              <CardTitle className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-ink-700" strokeWidth={1.6} />
+                Хамгаалалтын хуваарь
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 space-y-3">
+              {upcomingSession ? (
+                <>
+                  <div>
+                    <p className="text-[11px] uppercase tracking-wider font-medium text-accent">Дараагийн хамгаалалт</p>
+                    <h3 className="text-base font-semibold text-ink-900 tracking-tight mt-0.5">
+                      {stageLabel(upcomingSession.stageType)}
+                    </h3>
+                  </div>
+                  {upcomingSession.scheduledDate && (
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md border border-border-strong flex items-center justify-center shrink-0">
+                        <Calendar className="w-4 h-4 text-ink-700" strokeWidth={1.6} />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500">Огноо</p>
+                        <p className="text-sm font-medium text-ink-900">{fmtDateTime(upcomingSession.scheduledDate)}</p>
+                        {(() => {
+                          const d = daysFrom(upcomingSession.scheduledDate);
+                          if (d === null) return null;
+                          if (d === 0) return <p className="text-xs text-ink-700 flex items-center gap-1.5 mt-0.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)]" />Өнөөдөр</p>;
+                          if (d > 0)  return <p className="text-xs text-ink-500 mt-0.5 tabular-nums">{d} хоногийн дараа</p>;
+                          return <p className="text-xs text-ink-400 mt-0.5 tabular-nums">{Math.abs(d)} хоногийн өмнө</p>;
+                        })()}
+                      </div>
+                    </div>
+                  )}
+                  {upcomingSession.location && (
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-md border border-border-strong flex items-center justify-center shrink-0">
+                        <MapPin className="w-4 h-4 text-ink-700" strokeWidth={1.6} />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500">Байршил</p>
+                        <p className="text-sm font-medium text-ink-900">{upcomingSession.location}</p>
+                      </div>
+                    </div>
+                  )}
+                  {upcomingSession.committeeId && (() => {
+                    const cmt = committeeMap.get(upcomingSession.committeeId);
+                    if (!cmt) return null;
+                    return (
+                      <div className="pt-2 border-t border-border">
+                        <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1">Комисс</p>
+                        <p className="text-sm font-medium text-ink-900 tracking-tight">{cmt.name}</p>
+                        <p className="text-xs text-ink-500 mt-0.5">{cmt.role}</p>
+                      </div>
+                    );
+                  })()}
+                </>
+              ) : (
+                <div className="text-center py-6">
+                  <Calendar className="w-7 h-7 text-ink-300 mx-auto mb-2" strokeWidth={1.4} />
+                  <p className="text-sm font-medium text-ink-700">Хуваарьт хамгаалалт байхгүй</p>
+                  <p className="text-xs text-ink-500 mt-0.5">Тогтоогдох үед энд харагдана.</p>
+                </div>
+              )}
+              <Button variant="outline" size="sm" className="w-full mt-1" onClick={() => navigate('/teacher/committee')}>
+                Бүх хуваарь харах
+              </Button>
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader className="border-b border-border">
               <CardTitle className="flex items-center gap-2">

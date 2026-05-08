@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import numLogo from "../../assets/image/num_logo.png";
 import { Home, Users, FileSearch, TrendingUp, CheckCircle, Award, Bell } from "lucide-react";
 import { getStoredUser } from "../../lib/authGuard";
+import { notificationService } from "../../services/notificationService";
 
 interface TeacherSidebarProps {
   collapsed: boolean;
@@ -23,6 +25,20 @@ export default function TeacherSidebar({ collapsed }: TeacherSidebarProps) {
   const menuItems = isExpert
     ? [{ icon: Award, label: "Гадаад эксперт үнэлгээ", path: "/teacher/expert", end: true }]
     : BASE_MENU;
+
+  const [unread, setUnread] = useState(0);
+
+  // Unread badge feed for the bottom "Мэдэгдэл" link. External experts also
+  // see this — every authenticated user has a notification inbox.
+  useEffect(() => {
+    const userId = user?.userId;
+    if (!userId) return;
+    let cancelled = false;
+    const tick = () => notificationService.unreadCount(userId).then(c => { if (!cancelled) setUnread(c); });
+    tick();
+    const interval = setInterval(tick, 30000);
+    return () => { cancelled = true; clearInterval(interval); };
+  }, [user?.userId]);
 
   return (
     <aside
@@ -97,14 +113,26 @@ export default function TeacherSidebar({ collapsed }: TeacherSidebarProps) {
       </nav>
 
       <div className="px-5 py-3 border-t border-white/10">
-        <button
-          className={`w-full flex items-center gap-3 h-9 text-white/55 hover:text-white transition-colors ${
-            collapsed ? "justify-center" : ""
-          }`}
+        <NavLink
+          to="/teacher/notifications"
+          className={({ isActive }) =>
+            `relative w-full flex items-center gap-3 h-9 transition-colors rounded-sm ${
+              collapsed ? "justify-center" : ""
+            } ${isActive ? "text-white" : "text-white/55 hover:text-white"}`
+          }
         >
-          <Bell className="w-[18px] h-[18px] shrink-0" strokeWidth={1.6} />
-          {!collapsed && <span className="text-[13px] tracking-tight">Мэдэгдэл</span>}
-        </button>
+          <span className="relative inline-flex shrink-0">
+            <Bell className="w-[18px] h-[18px]" strokeWidth={1.6} />
+            {unread > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center min-w-[16px] h-4 px-1 text-[9px] font-semibold leading-none rounded-full bg-accent text-white tabular-nums">
+                {unread > 99 ? "99+" : unread}
+              </span>
+            )}
+          </span>
+          {!collapsed && (
+            <span className="text-[13px] tracking-tight">Мэдэгдэл</span>
+          )}
+        </NavLink>
       </div>
     </aside>
   );

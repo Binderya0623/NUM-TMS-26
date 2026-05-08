@@ -155,8 +155,35 @@ public class NotificationApplicationService implements CreateNotificationUseCase
                 });
     }
 
+    /**
+     * Coerce an upstream "user id" to a UUID for the {@code notifications.user_id}
+     * column.
+     * <ul>
+     *   <li>If it's already a valid UUID string, parse it directly (this is the
+     *       happy path for events that carry user_service UUIDs).</li>
+     *   <li>If it's something else (sisiId like {@code 22b1num0027}, numeric id,
+     *       arbitrary string), derive a deterministic UUID via {@code UUID.nameUUIDFromBytes}
+     *       so the row can still be inserted. The frontend keys notifications by
+     *       the user's UUID from auth-service, so these "derived" rows won't be
+     *       visible to the user — but the consumer no longer crashes and the
+     *       record exists for backfill once the upstream producer is corrected.</li>
+     *   <li>If null/blank, return a fallback UUID and log a warning. Caller should
+     *       avoid this path.</li>
+     * </ul>
+     */
     private UUID toUserId(String userId) {
-        return UUID.fromString(userId);
+        if (userId == null || userId.isBlank()) {
+            log.warn("toUserId called with null/blank — using zero UUID");
+            return new UUID(0L, 0L);
+        }
+        try {
+            return UUID.fromString(userId);
+        } catch (IllegalArgumentException ex) {
+            log.warn("toUserId got non-UUID '{}' — deriving deterministic UUID. " +
+                    "Notification will not surface in the user's inbox until the producer " +
+                    "emits the user_service UUID.", userId);
+            return UUID.nameUUIDFromBytes(userId.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        }
     }
 
     private String valueOrDefault(String value, String fallback) {

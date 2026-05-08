@@ -11,7 +11,21 @@ import { isUuid, initialsFromName, resolveName } from "../../../lib/utils";
 const MONO_SHADES = ["#1455bd", "#1d4ed8", "#3b82f6", "#60a5fa", "#93c5fd"];
 const ACCENT = "#1455bd";
 const ACCENT_LIGHT = "#60a5fa";
-const MONTHS = ["9-р сар", "10-р сар", "11-р сар", "12-р сар", "1-р сар", "2-р сар", "3-р сар"];
+// 2025–2026 academic year: September → May (summer 6/7/8 excluded).
+// Index 0 = September of the start year, index 8 = May of the end year.
+const ACADEMIC_YEAR_START = 2025;
+const ACADEMIC_YEAR_END   = 2026;
+const MONTHS = [
+  "9-р сар", "10-р сар", "11-р сар", "12-р сар",
+  "1-р сар", "2-р сар", "3-р сар", "4-р сар", "5-р сар",
+];
+
+/** Map (year, month) → MONTHS index for the academic year, or -1 if outside. */
+function academicMonthIndex(year: number, month: number): number {
+  if (year === ACADEMIC_YEAR_START && month >= 9 && month <= 12) return month - 9;       // 0..3
+  if (year === ACADEMIC_YEAR_END   && month >= 1 && month <= 5)  return month + 3;       // 4..8
+  return -1;
+}
 const AXIS_TICK = { fontSize: 11, fill: "#737373" } as const;
 const GRID_STROKE = "#e5e5e5";
 
@@ -92,14 +106,16 @@ export default function AdminDashboard() {
   const trendMap: Record<string, { submitted: number; approved: number }> = {};
   MONTHS.forEach(m => { trendMap[m] = { submitted: 0, approved: 0 }; });
   topics.forEach(t => {
-    const month = t.createdAt?.split('T')[0];
-    if (!month) return;
-    const m = parseInt(month.split('-')[1]);
-    const label = MONTHS[m <= 3 ? m + 5 : m - 4] || MONTHS[0];
-    if (trendMap[label]) {
-      trendMap[label].submitted++;
-      if (t.status === 'APPROVED') trendMap[label].approved++;
-    }
+    if (!t.createdAt) return;
+    const datePart = t.createdAt.split('T')[0];      // "YYYY-MM-DD"
+    const [yStr, mStr] = datePart.split('-');
+    const year = parseInt(yStr, 10);
+    const month = parseInt(mStr, 10);
+    const idx = academicMonthIndex(year, month);
+    if (idx < 0) return;                              // outside the 2025–2026 academic year
+    const label = MONTHS[idx];
+    trendMap[label].submitted++;
+    if (t.status === 'APPROVED') trendMap[label].approved++;
   });
   const submissionTrend = MONTHS.map(m => ({ month: m, ...trendMap[m] }));
 
@@ -112,7 +128,7 @@ export default function AdminDashboard() {
           { label: "Нийт багш нар",        value: loading ? "—" : teachers.length, icon: Users },
           { label: "Идэвхтэй оюутнууд",     value: loading ? "—" : students.length, icon: GraduationCap },
           { label: "Нийт дипломын ажил",   value: loading ? "—" : plans.length,    icon: BookOpen },
-          { label: "Хүлээгдэж буй хяналт", value: loading ? "—" : (statusCounts['SUBMITTED'] || 0), icon: Clock },
+          { label: "Хүлээгдэж буй тайлан", value: loading ? "—" : (statusCounts['SUBMITTED'] || 0), icon: Clock },
         ].map(card => {
           const Icon = card.icon;
           return (
@@ -134,7 +150,7 @@ export default function AdminDashboard() {
           <CardHeader className="flex-row items-center justify-between">
             <div>
               <CardTitle>Сэдвийн илгээлт</CardTitle>
-              <p className="text-xs text-ink-400 mt-1">2024–2025 оносны жил</p>
+              <p className="text-xs text-ink-400 mt-1">{ACADEMIC_YEAR_START}–{ACADEMIC_YEAR_END} оны хичээлийн жил</p>
             </div>
             <div className="flex items-center gap-4 text-xs text-ink-500">
               <div className="flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: ACCENT }} />Илгээсэн</div>
