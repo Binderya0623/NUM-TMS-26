@@ -37,7 +37,7 @@ const navSections: {
     label: "Хэрэглэгчид",
     items: [
       { path: "/admin/teachers",          label: "Багш нар",          icon: GraduationCap },
-      { path: "/admin/external-experts",  label: "Гадаад экспертүүд", icon: Star },
+      { path: "/admin/external-experts",  label: "Зочин шүүгчид", icon: Star },
       { path: "/admin/students",          label: "Оюутнууд",          icon: Users },
     ],
   },

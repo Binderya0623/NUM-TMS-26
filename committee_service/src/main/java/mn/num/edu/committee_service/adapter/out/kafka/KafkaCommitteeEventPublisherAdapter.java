@@ -57,6 +57,7 @@ public class KafkaCommitteeEventPublisherAdapter implements CommitteeEventPublis
 
         TeacherAssignedEvent event = new TeacherAssignedEvent(
                 committeeId,
+                "",
                 teacherId,
                 role,
                 departmentId,
@@ -87,6 +88,7 @@ public class KafkaCommitteeEventPublisherAdapter implements CommitteeEventPublis
 
         StudentAssignedEvent event = new StudentAssignedEvent(
                 committeeId,
+                "",
                 studentId,
                 departmentId,
                 java.time.Instant.now()

@@ -87,12 +87,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = async (username: string, password: string, rememberMe: boolean) => {
+    // Login is case-insensitive: backend stores sisiId in lowercase, so
+    // normalise here once at the entry point.
+    const sisiId = username.trim().toLowerCase();
     let res: Response;
     try {
       res = await fetch(`${AUTH_API}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sisiId: username.trim(), password }),
+        body: JSON.stringify({ sisiId, password }),
       });
     } catch {
       return { success: false, error: 'Сервертэй холбогдож чадсангүй. Дахин оролдоно уу.' };
@@ -104,7 +107,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const data = await res.json();
     localStorage.setItem('mauth_token', data.token ?? '');
-    const userData = await buildAuthUser(data, username);
+    const userData = await buildAuthUser(data, sisiId);
 
     setUser(userData);
     const storage = rememberMe ? localStorage : sessionStorage;

@@ -55,7 +55,8 @@ public class TopicService {
     public Map<String, Object> createTopic(String createdById, String createdByType, String proposedToTeacherId,
                                             String program, Object fields, String keywords,
                                             String title, String titleEn, String description, String researchGoal,
-                                            String requestedStatus, String requestedVisibility) {
+                                            String requestedStatus, String requestedVisibility,
+                                            Integer maxStudents) {
         // Build fields JSON from either nested object or top-level title/description/researchGoal
         Map<String, Object> fieldsMap = new LinkedHashMap<>();
         if (fields instanceof Map<?, ?> m) {
@@ -95,10 +96,14 @@ public class TopicService {
         String visibility = (requestedVisibility != null && List.of("PUBLIC", "PRIVATE").contains(requestedVisibility.toUpperCase()))
                 ? requestedVisibility.toUpperCase() : "PRIVATE";
 
+        // max_students: how many students can have an APPROVED request for this
+        // topic. Defaults to 1 (the original single-student behaviour). Caller
+        // can pass any positive integer; non-positive values are ignored.
+        int maxStudentsValue = (maxStudents != null && maxStudents > 0) ? maxStudents : 1;
         jdbc.update(
-                "INSERT INTO topic (created_by_id, created_by_type, proposed_to_teacher_id, program, fields, keywords, visibility, status, created_at, created_at_ts, updated_at) " +
-                "VALUES (?, ?, ?, ?, ?::json, ?, ?, ?, CURRENT_DATE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)",
-                createdById, createdByType, proposedToTeacherId, program, fieldsJson, keywords, visibility, initialStatus
+                "INSERT INTO topic (created_by_id, created_by_type, proposed_to_teacher_id, program, fields, keywords, visibility, status, max_students, created_at, created_at_ts, updated_at) " +
+                "VALUES (?, ?, ?, ?, ?::json, ?, ?, ?, ?, CURRENT_DATE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)",
+                createdById, createdByType, proposedToTeacherId, program, fieldsJson, keywords, visibility, initialStatus, maxStudentsValue
         );
 
         List<Map<String, Object>> rows = jdbc.queryForList(
@@ -251,6 +256,7 @@ public class TopicService {
         result.put("program", row.get("program"));
         result.put("keywords", row.get("keywords"));
         result.put("rejectionReason", row.get("rejection_reason"));
+        result.put("maxStudents", row.get("max_students"));
 
         Object ts = row.get("created_at_ts");
         result.put("createdAt", ts != null ? ts.toString() : (row.get("created_at") != null ? row.get("created_at").toString() : null));

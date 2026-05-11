@@ -13,7 +13,7 @@ import type { Topic, TopicRequest } from "../../../../services/topicService";
 import { getStoredUser } from "../../../../lib/authGuard";
 import { userService } from "../../../../services/userService";
 import type { UserRecord } from "../../../../services/userService";
-import { initialsFromName } from "../../../../lib/utils";
+import { initialsFromName, fmtDateTime} from "../../../../lib/utils";
 import { RichText } from "../../../components/RichText";
 import { RichTextEditor } from "../../../components/RichTextEditor";
 
@@ -60,7 +60,10 @@ export default function StudentTopicTab() {
 
   const [myRequests, setMyRequests] = useState<TopicRequest[]>([]);
   const [loadingRequests, setLoadingRequests] = useState(true);
-  const [takenTopicIds, setTakenTopicIds] = useState<Set<number>>(new Set());
+  // approvedCountByTopic[topicId] = how many students have an APPROVED
+  // request for that topic. A topic becomes "Аль хэдийн сонгогдсон" only
+  // when this count meets/exceeds the topic's maxStudents (default 1).
+  const [approvedCountByTopic, setApprovedCountByTopic] = useState<Record<number, number>>({});
 
   const [proposals, setProposals] = useState<Topic[]>([]);
   const [loadingProposals, setLoadingProposals] = useState(true);
@@ -97,12 +100,17 @@ export default function StudentTopicTab() {
       .finally(() => setLoadingRequests(false));
   }, [studentId]);
 
-  // Topics that already belong to someone (any approved request) → "Аль
-  // хэдийн сонгогдсон". Done as a separate fetch so we don't conflate with
-  // the user's own requests.
+  // Tally approved requests per topic. Multi-slot topics (maxStudents > 1)
+  // stay selectable even after another student is approved, until full.
   useEffect(() => {
     topicService.getApprovedRequests()
-      .then(res => setTakenTopicIds(new Set((res.data || []).map(r => r.topicId))))
+      .then(res => {
+        const counts: Record<number, number> = {};
+        (res.data || []).forEach(r => {
+          counts[r.topicId] = (counts[r.topicId] || 0) + 1;
+        });
+        setApprovedCountByTopic(counts);
+      })
       .catch(() => {});
   }, []);
 
@@ -259,13 +267,23 @@ export default function StudentTopicTab() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredTopics.map((topic) => {
                 const requested = hasRequested(topic.id);
-                const takenByOther = !requested && takenTopicIds.has(topic.id);
+                const cap = topic.maxStudents && topic.maxStudents > 0 ? topic.maxStudents : 1;
+                const taken = approvedCountByTopic[topic.id] || 0;
+                const slotsLeft = Math.max(0, cap - taken);
+                const takenByOther = !requested && slotsLeft <= 0;
                 return (
                   <Card key={topic.id} className="flex flex-col h-full hover:border-ink-900 transition-colors">
                     <CardHeader className="pb-3 border-b border-border">
                       <div className="flex justify-between items-start gap-2 mb-2">
                         <Badge variant="outline" className="text-[10px]">{topic.departmentId || "Тэнхим"}</Badge>
-                        <Badge variant="secondary" className="text-[10px]">{topic.status}</Badge>
+                        <div className="flex items-center gap-1.5">
+                          {cap > 1 && (
+                            <Badge variant="outline" className="text-[10px] tabular-nums">
+                              {taken}/{cap} оюутан
+                            </Badge>
+                          )}
+                          <Badge variant="secondary" className="text-[10px]">{topic.status}</Badge>
+                        </div>
                       </div>
                       <CardTitle className="text-base font-semibold leading-tight text-ink-900 tracking-tight line-clamp-2">
                         {topic.title}
@@ -439,7 +457,7 @@ export default function StudentTopicTab() {
                     <CardContent className="p-5">
                       <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
                         <span className="text-xs text-ink-500 tabular-nums">
-                          Хүсэлт илгээсэн: {req.requestedAt?.split("T")[0] || "—"}
+                          Хүсэлт илгээсэн: {fmtDateTime(req.requestedAt) || "—"}
                         </span>
                         <span className="inline-flex items-center gap-1.5 text-xs text-ink-700">
                           <span className={`w-1.5 h-1.5 rounded-full ${toneDot[info.tone]}`} />
@@ -503,7 +521,7 @@ export default function StudentTopicTab() {
                 <FormField label="Сэдвийн нэр" required error={errors.title}>
                   <Input value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} placeholder="Жишээ: Монгол хэлний дуу таних систем..." />
                 </FormField>
-                <FormField label="Сэдвийн нэр (English)" required hint="NUM TMS bilingual requirement" error={errors.titleEn}>
+                <FormField label="Сэдвийн нэр (Англи)" required hint="NUM TMS bilingual requirement" error={errors.titleEn}>
                   <Input value={formData.titleEn} onChange={(e) => setFormData({ ...formData, titleEn: e.target.value })} placeholder="e.g. Mongolian speech recognition system…" />
                 </FormField>
                 <FormField label="Сэдвийн тайлбар" required error={errors.description}>
@@ -580,7 +598,7 @@ export default function StudentTopicTab() {
                           <span className={`w-1.5 h-1.5 rounded-full ${toneDot[info.tone]}`} />
                           {info.label}
                         </span>
-                        <div className="text-xs text-ink-500 tabular-nums">{p.createdAt ? `Илгээсэн: ${p.createdAt.split("T")[0]}` : "Ноорог"}</div>
+                        <div className="text-xs text-ink-500 tabular-nums">{p.createdAt ? `Илгээсэн: ${fmtDateTime(p.createdAt)}` : "Ноорог"}</div>
                       </div>
                       <h3 className="text-base font-semibold text-ink-900 tracking-tight">{p.title}</h3>
                       {p.titleEn && (

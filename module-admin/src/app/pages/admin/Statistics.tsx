@@ -57,7 +57,7 @@ export default function Statistics() {
   });
   const teacherWorkload = teachers
     .map(t => ({
-      name: t.displayName?.split(' ').slice(-1)[0] || t.id,
+      name: t.displayName || t.name || t.username,
       plans: teacherPlanMap[t.id] || teacherPlanMap[t.username || ''] || 0,
     }))
     .filter(t => t.plans > 0)
@@ -176,7 +176,7 @@ export default function Statistics() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Багшны ачаалалтын тархалт</CardTitle>
+          <CardTitle>Багш нарын ачаалалтын тархалт</CardTitle>
         </CardHeader>
         <CardContent>
           {teacherWorkload.length === 0 ? (

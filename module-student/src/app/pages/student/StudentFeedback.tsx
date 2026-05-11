@@ -9,7 +9,7 @@ import { thesisService, type ThesisReport } from "../../../services/thesisServic
 import { evaluationService, type ReviewDocument } from "../../../services/evaluationService";
 import { userService } from "../../../services/userService";
 import { getStoredUser } from "../../../lib/authGuard";
-import { resolveName, isUuid, initialsFromName } from "../../../lib/utils";
+import { resolveName, isUuid, initialsFromName, fmtDateTime} from "../../../lib/utils";
 import { RichText } from "../../components/RichText";
 
 const reportTypeLabel = (t: string) => {
@@ -103,7 +103,7 @@ export default function StudentFeedback() {
                     <div className="min-w-0">
                       <p className="text-sm font-medium text-ink-900 truncate tracking-tight">{doc.originalFilename}</p>
                       <p className="text-xs text-ink-500 tabular-nums">
-                        {doc.uploadedAt?.split("T")[0] || "Огноогүй"} · Шүүмжлэгч: {resolveName(doc.reviewerId, userMap, "Тодорхойгүй")}
+                        {fmtDateTime(doc.uploadedAt) || "Огноогүй"} · Шүүмжлэгч: {resolveName(doc.reviewerId, userMap, "Тодорхойгүй")}
                       </p>
                     </div>
                   </div>
@@ -168,7 +168,7 @@ export default function StudentFeedback() {
                                 {resolveName(report.reviewedBy || report.supervisorId, userMap, "Удирдагч багш")}
                               </h3>
                               <span className="text-xs text-ink-500 tabular-nums">
-                                {report.reviewedAt?.split("T")[0] || "Огноогүй"}
+                                {fmtDateTime(report.reviewedAt) || "Огноогүй"}
                               </span>
                             </div>
                             <div className="flex items-center gap-2 mt-1.5 flex-wrap">

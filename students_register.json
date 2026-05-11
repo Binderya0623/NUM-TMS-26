@@ -1,0 +1,792 @@
+[
+  {
+    "sisiId": "22b1num4505",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1281",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num7226",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1numi1148",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num2495",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num0643",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6150",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "19b1num0177",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num2488",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num2811",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1numi1142",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num4522",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "23b1num1098",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num1291",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num4532",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1367",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num1306",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num4520",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6769",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num7043",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b6num4163",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num2057",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5300",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "20b1num2319",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "17b1num0098",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "20b1num2390",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num0853",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0287",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num7309",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5773",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1numi1186",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5762",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num1625",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "16b1sas3418",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0719",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "16b1seas1788",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0260",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "23b1num2846",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num3109",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5610",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6631",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num3647",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6566",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num2994",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num1342",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6999",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num1896",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0797",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num2562",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num0219",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num4715",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "19b1num2021",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num1940",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num1608",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num4716",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num7885",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0312",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num2366",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num7055",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5484",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0049",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0510",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1282",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num0871",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0033",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0656",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "20b1num2754",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1411",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0227",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1046",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5469",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num0104",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0735",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num2633",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "20b1num1695",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "20b1num1799",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num7566",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0706",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6548",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num0631",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1357",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num0908",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6572",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5289",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5769",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0776",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num1818",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0796",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0157",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "20b1num0291",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num0027",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num0126",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num7594",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "18b1num0064",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "19b1num1573",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num4400",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1485",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5958",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0331",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num2341",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num3306",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0124",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0756",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6983",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1059",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5914",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num0367",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num7322",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5578",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5330",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0027",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num3435",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5335",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0191",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1034",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "19b1num1212",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5504",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0166",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5541",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num3154",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5577",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num3392",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "18b1num1038",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0592",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num7158",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num4802",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1680",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1796",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5326",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6928",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "20b1num0667",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1811",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0035",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num7118",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num4640",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5736",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num1036",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0002",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0514",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6650",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1637",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num1789",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0764",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num4971",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "20b1num3051",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0103",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "21b1num1197",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num7184",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num5806",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "19b1num1728",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6701",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "18b1num1404",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "17b1num2078",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "19b1num2181",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num0332",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num3410",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num1256",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  },
+  {
+    "sisiId": "22b1num6575",
+    "password": "Num2026!",
+    "roles": ["ROLE_STUDENT"]
+  }
+]

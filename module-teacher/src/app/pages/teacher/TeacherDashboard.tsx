@@ -44,7 +44,7 @@ const stageLabel = (stageType: string) => {
 };
 
 // Helpers for the right-sidebar "Хамгаалалтын хуваарь" card. Mirrors student.
-function fmtDateTime(iso?: string): string | null {
+function fmtLocaleDateTime(iso?: string): string | null {
   if (!iso) return null;
   return new Date(iso).toLocaleString("mn-MN", {
     year: "numeric", month: "short", day: "numeric",
@@ -101,7 +101,7 @@ function TermTimeline({ stageState }: { stageState: Record<string, { state: Stag
                 {stage.title}
               </p>
               <p className="text-[10px] text-ink-500 tabular-nums mt-0.5">
-                {info.date ? info.date.split("T")[0] : "—"}
+                {info.date ? fmtLocaleDateTime(info.date) : "—"}
               </p>
             </div>
           );
@@ -361,7 +361,7 @@ export default function TeacherDashboard() {
                         <div>
                           <p className="text-sm font-medium text-ink-900 tracking-tight">{resolveName(report.studentId, studentMap, "Тодорхойгүй оюутан")}</p>
                           <p className="text-xs text-ink-500 mt-0.5 tabular-nums">
-                            {report.reportType} • {report.submittedAt?.split("T")[0] || "Огноогүй"}
+                            {report.reportType} • {fmtLocaleDateTime(report.submittedAt) || "Огноогүй"}
                           </p>
                         </div>
                       </div>
@@ -402,7 +402,7 @@ export default function TeacherDashboard() {
                       </div>
                       <div>
                         <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500">Огноо</p>
-                        <p className="text-sm font-medium text-ink-900">{fmtDateTime(upcomingSession.scheduledDate)}</p>
+                        <p className="text-sm font-medium text-ink-900">{fmtLocaleDateTime(upcomingSession.scheduledDate)}</p>
                         {(() => {
                           const d = daysFrom(upcomingSession.scheduledDate);
                           if (d === null) return null;

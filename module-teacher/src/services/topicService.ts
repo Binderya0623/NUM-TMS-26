@@ -15,6 +15,8 @@ export interface Topic {
   keywords?: string;
   rejectionReason?: string;
   createdAt?: string;
+  /** Number of students that may have an APPROVED request for this topic. Default 1. */
+  maxStudents?: number;
 }
 
 export interface TopicRequest {
@@ -35,6 +37,7 @@ export const topicService = {
     title: string; titleEn: string; description: string; researchGoal: string;
     keywords?: string; createdById: string; departmentId?: string;
     visibility?: string; status?: string;
+    maxStudents?: number;
   }) =>
     topicApi.post<Topic>('/api/v2/topics', {
       ...body,

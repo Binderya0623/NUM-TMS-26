@@ -18,134 +18,22 @@
 
 ### Алхам А: user_service-д профайл үүсгэх
 ```bash
-curl -X POST http://localhost:8086/api/users/teachers \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Жавхлан",
-    "lastName": "Рэнцэндорж",
-    "email": "r.javkhlan@num.edu.mn",
-    "departmentId": "МКУТ",
-    "position": "Ахлах багш"
-  }'
-  
-curl -X POST http://localhost:8086/api/users/teachers \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Энхтуяа",
-    "lastName": "Цогтбаатар",
-    "email": "enkhtuya.ts@num.edu.mn",
-    "departmentId": "МКУТ",
-    "position": "Багш"
-  }'
-  
-curl -X POST http://localhost:8086/api/users/teachers \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Отгоннаран",
-    "lastName": "Очирбат",
-    "email": "otgonnaran@num.edu.mn",
-    "departmentId": "МКУТ",
-    "position": "Ахлах багш"
-  }'
-
-  curl -X POST http://localhost:8086/api/users/teachers \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Үйтүмэн",
-    "lastName": "Жам",
-    "email": "uitumen@num.edu.mn",
-    "departmentId": "МКУТ",
-    "position": "Ахлах багш"
-  }'
-
-    curl -X POST http://localhost:8086/api/users/teachers \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Багаболд",
-    "lastName": "Гэндэнсүрэн",
-    "email": "bagabold.g@num.edu.mn",
-    "departmentId": "МКУТ",
-    "position": "Багш"
-  }'
-
-curl -X POST http://localhost:8086/api/users/teachers \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Гантуяа",
-    "lastName": "Пэрэнлэйхүндэв",
-    "email": "gantuya.p@num.edu.mn",
-    "departmentId": "МКУТ",
-    "position": "Дэд профессор"
-  }'
-
-  curl -X POST http://localhost:8086/api/users/teachers \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Батням",
-    "lastName": "Баттулга",
-    "email": "bbatnyam@num.edu.mn",
-    "departmentId": "МКУТ",
-    "position": "Ахлах багш"
-  }'
+jq -c '.[]' teachers.json | while read row; do
+  curl -sS -X POST http://localhost:8086/api/users/teachers \
+    -H 'Content-Type: application/json' \
+    -d "$row"
+  echo
+done
 ```
 
 ### Алхам Б: auth_service-д нэвтрэх эрх нэмэх
 ```bash
-curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "r.javkhlan",
-    "password": "Num2026!",
-    "roles": ["ROLE_TEACHER"]
-  }'
-
-curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "enkhtuya.ts",
-    "password": "Num2026!",
-    "roles": ["ROLE_TEACHER"]
-  }'
-
-  curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "otgonnaran",
-    "password": "Num2026!",
-    "roles": ["ROLE_TEACHER"]
-  }'
-
-    curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "uitumen",
-    "password": "Num2026!",
-    "roles": ["ROLE_TEACHER"]
-  }'
-
-    curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "bagabold.g",
-    "password": "Num2026!",
-    "roles": ["ROLE_TEACHER"]
-  }'
-
-  curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "gantuya.p",
-    "password": "Num2026!",
-    "roles": ["ROLE_TEACHER"]
-  }'
-
-    curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "bbatnyam",
-    "password": "Num2026!",
-    "roles": ["ROLE_TEACHER"]
-  }'
+jq -c '.[]' teachers_register.json | while read row; do
+  curl -sS -X POST http://localhost:8887/auth/register \
+    -H 'Content-Type: application/json' \
+    -d "$row"
+  echo
+done
 ```
 
 > **Тэмдэглэл:** Багш `batbayar` / `Num2024!` гэж нэвтэрнэ. Систем нэвтрэх үед `{sisiId}@num.edu.mn` имэйлээр `user_service` дээрх профайлтай автоматаар холбогдоно.
@@ -156,153 +44,22 @@ curl -X POST http://localhost:8887/auth/register \
 
 ### Алхам А: user_service-д профайл үүсгэх
 ```bash
-curl -X POST http://localhost:8086/api/users/students \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Биндэрцэцэг",
-    "lastName": "Цэдэн-Иш",
-    "email": "22b1num0027@stud.num.edu.mn",
-    "studentId": "22B1NUM0027",
-    "departmentId": "МКУТ",
-    "major": "Программ хангамж"
-  }'
-
-curl -X POST http://localhost:8086/api/users/students \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Нинжбадгар",
-    "lastName": "Цогтбаяр",
-    "email": "22b1num1811@stud.num.edu.mn",
-    "studentId": "22B1NUM1811",
-    "departmentId": "МКУТ",
-    "major": "Программ хангамж"
-  }'
-
-  curl -X POST http://localhost:8086/api/users/students \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Дэлгэрмаа",
-    "lastName": "Галбаяр",
-    "email": "22b1num5541@stud.num.edu.mn",
-    "studentId": "22B1NUM5541",
-    "departmentId": "МКУТ",
-    "major": "Программ хангамж"
-  }'
-
-  curl -X POST http://localhost:8086/api/users/students \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Билгүүн",
-    "lastName": "Эрхэмбаяр",
-    "email": "22b1num5330@stud.num.edu.mn",
-    "studentId": "22B1NUM5330",
-    "departmentId": "МКУТ",
-    "major": "Программ хангамж"
-  }'
-
-  curl -X POST http://localhost:8086/api/users/students \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Хишигжаргал",
-    "lastName": "Гантулга",
-    "email": "22b1num5300@stud.num.edu.mn",
-    "studentId": "22B1NUM5300",
-    "departmentId": "МКУТ",
-    "major": "Компьютерын ухаан"
-  }'
-
-    curl -X POST http://localhost:8086/api/users/students \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Тест",
-    "lastName": "Тест",
-    "email": "22b1num0000@stud.num.edu.mn",
-    "studentId": "22B1NUM0000",
-    "departmentId": "МКУТ",
-    "major": "Компьютерын ухаан"
-  }'
-
-    curl -X POST http://localhost:8086/api/users/students \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Энхбаяр",
-    "lastName": "Бямбасүрэн",
-    "email": "22b1num5773@stud.num.edu.mn",
-    "studentId": "22B1NUM5773",
-    "departmentId": "МКУТ",
-    "major": "Компьютерын ухаан"
-  }'
-  curl -X POST http://localhost:8086/api/users/students \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "firstName": "Анар",
-    "lastName": "Төвшинжаргал",
-    "email": "22b1num5762@stud.num.edu.mn",
-    "studentId": "22B1NUM5762",
-    "departmentId": "МКУТ",
-    "major": "Компьютерын ухаан"
-  }'
-  
+jq -c '.[]' students.json | while read row; do
+  curl -sS -X POST http://localhost:8086/api/users/students \
+    -H 'Content-Type: application/json' \
+    -d "$row"
+  echo
+done
 ```
 
 ### Алхам Б: auth_service-д нэвтрэх эрх нэмэх
 ```bash
-curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "22b1num0027",
-    "password": "Num2026!",
-    "roles": ["ROLE_STUDENT"]
-  }'
-  curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "22b1num0000",
-    "password": "Num2026!",
-    "roles": ["ROLE_STUDENT"]
-  }'
-  curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "22b1num1811",
-    "password": "Num2026!",
-    "roles": ["ROLE_STUDENT"]
-  }'
-  curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "22b1num5541",
-    "password": "Num2026!",
-    "roles": ["ROLE_STUDENT"]
-  }'
-  curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "22b1num5330",
-    "password": "Num2026!",
-    "roles": ["ROLE_STUDENT"]
-  }'
-  curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "22b1num5300",
-    "password": "Num2026!",
-    "roles": ["ROLE_STUDENT"]
-  }'
-  curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "22b1num5773",
-    "password": "Num2026!",
-    "roles": ["ROLE_STUDENT"]
-  }'
-  curl -X POST http://localhost:8887/auth/register \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "sisiId": "22b1num5762",
-    "password": "Num2026!",
-    "roles": ["ROLE_STUDENT"]
-  }'
+jq -c '.[]' students_register.json | while read row; do
+  curl -sS -X POST http://localhost:8887/auth/register \
+    -H 'Content-Type: application/json' \
+    -d "$row"
+  echo
+done
 ```
 > **Тэмдэглэл:** Оюутан нэвтрэх үед `{sisiId}@stud.num.edu.mn` загвараар профайлтай холбогдоно.
 
@@ -337,3 +94,81 @@ curl -X POST http://localhost:8887/auth/register \
 * Ашиглагдаагүй `Plus` импорт болон Modal-той холбоотой state-үүдийг цэвэрлэх шаардлагатай.
 
 ---
+
+
+### Topics:
+
+```bash
+  POST http://localhost:8081/api/v2/topics
+  Content-Type: application/json
+  {
+    "createdById":   "575c0ea8-0fcc-4dbb-a0a4-ff203d897a04",
+    "createdByType": "TEACHER",
+    "supervisorId":  "575c0ea8-0fcc-4dbb-a0a4-ff203d897a04",
+    "title":         "Холимог микрофронтенд архитектур",
+    "titleEn":       "Hybrid microfrontend architecture",
+    "description":   "<p>...html allowed (TipTap)</p>",
+    "researchGoal":  "<p>...</p>",
+    "keywords":      "react, jsf, microfrontend",
+    "program":       "Программ Хангамж",
+    "status":        "APPROVED",
+    "visibility":    "PUBLIC"
+  }  
+
+  POST http://localhost:8081/api/v2/topic-requests
+  Content-Type: application/json
+    {
+    "topicId": 12,
+    "requestedById": "7d59cd21-f4b2-4c70-bed9-534c17d196a6",
+    "sessionId": 14,
+    "motivation": ""
+  }      
+
+
+  # ── 1) Parse source files ──────────────────────────────
+  python3 infra/exam-prep/parse-bsa.py            # → out/parsed.json      
+  python3 infra/exam-prep/parse-committees.py     # → out/committees-source.json
+  # ── 2) Build the import JSONs ──────────────────────────
+  python3 infra/exam-prep/build-experts-json.py   # → out/external-experts.json
+  python3 infra/exam-prep/build-jsons.py          # → out/topics.json, out/grades.json
+  python3 infra/exam-prep/build-stage-jsons.py    # → out/committees-{PROGRESS_2,PRE_DEFENSE,FINAL_DEFENSE}.json
+  # ── 3) Optional manual edits to the stage JSONs ──────── 
+  #  - Fix "Э.Цог-" → "Э.Цог-Эрдэнэ" wherever it appears
+  #  - Move any guest into externalExperts → members if you want them as MEMBER instead
+  #  - Adjust head/secretary if any short-name didn't match
+  nano infra/exam-prep/out/external-experts.json                  
+  nano infra/exam-prep/out/committees-PROGRESS_2.json
+  nano infra/exam-prep/out/committees-PRE_DEFENSE.json
+  nano infra/exam-prep/out/committees-FINAL_DEFENSE.json
+
+  # ── 4) Register external experts FIRST so the committee  
+  #       importer can resolve them by their new emails ─── 
+  infra/exam-prep/import-experts.sh
+  # ── 5) Topics + auto-select students (idempotent on empty topic_service DB) ──
+  infra/import-topics.sh infra/exam-prep/out/topics.json
+  # ── 6) Per-stage phase scores (progress1 / phase2 / pre) ─
+  infra/exam-prep/import-grades.sh
+  # ── 7) Committees + students + sessions + grades + closure, per stage ─
+  infra/exam-prep/import-committees.sh PROGRESS_2     # closes after seeding phase2 score
+  infra/exam-prep/import-committees.sh PRE_DEFENSE    # closes after seeding pre score
+  infra/exam-prep/import-committees.sh FINAL_DEFENSE  # stays ACTIVE (live event) 
+```
+```bash
+  {
+    "createdBy":   "amgalan.a",
+    "createdByType": "TEACHER",
+    "requestedById": "22B1NUM6150",
+    "motivation": ""
+    "supervisor":  "amgalan.a",
+    "reviewer": "bilguun.o",
+    "title":         "Холимог микрофронтенд архитектур",
+    "titleEn":       "Hybrid microfrontend architecture",
+    "description":   "<p>-</p>",
+    "researchGoal":  "<p>-</p>",
+    "keywords":      "react, jsf, microfrontend",
+    "program":       "Программ Хангамж",
+    "status":        "APPROVED",
+    "visibility":    "PUBLIC",
+    "maxStudents":   1
+  }  
+```

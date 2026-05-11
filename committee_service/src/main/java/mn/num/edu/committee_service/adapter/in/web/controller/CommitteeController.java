@@ -170,4 +170,24 @@ public class CommitteeController {
                 .onErrorResume(org.springframework.dao.DuplicateKeyException.class, e ->
                         Mono.just(ResponseEntity.ok(new ApiResponse("Student already assigned"))));
     }
+
+    /**
+     * DELETE /api/committees/{committeeId}/students/{studentId}
+     *
+     * Detach a student from a committee. We delete by composite key rather
+     * than by row id so the FE doesn't need to know the assignment id.
+     */
+    @DeleteMapping("/{committeeId}/students/{studentId}")
+    public Mono<ResponseEntity<ApiResponse>> unassignStudent(
+            @PathVariable String committeeId,
+            @PathVariable String studentId
+    ) {
+        log.info("Unassigning student. committeeId={}, studentId={}", committeeId, studentId);
+        return studentRepo.findByCommitteeId(committeeId)
+                .filter(cs -> studentId.equals(cs.getStudentId()))
+                .next()
+                .flatMap(cs -> studentRepo.deleteById(cs.getId()).thenReturn(cs))
+                .map(cs -> ResponseEntity.ok(new ApiResponse("Student unassigned")))
+                .defaultIfEmpty(ResponseEntity.ok(new ApiResponse("Student not on this committee")));
+    }
 }

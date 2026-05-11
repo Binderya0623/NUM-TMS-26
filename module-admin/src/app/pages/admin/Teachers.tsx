@@ -262,7 +262,7 @@ export default function Teachers() {
           ) : (
             <>
               <DialogBody className="space-y-4">
-                <p className="text-sm text-ink-500 -mt-1">Гадаад эксперт болон багш нарыг энд нэмнэ.</p>
+                <p className="text-sm text-ink-500 -mt-1">Зочин шүүгч болон багш нарыг энд нэмнэ.</p>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1.5 block">Овог <span className="text-[var(--color-dot-negative)] normal-case">*</span></label>
@@ -307,7 +307,7 @@ export default function Teachers() {
                 <div>
                   <label className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1.5 block">Албан тушаал <span className="text-[var(--color-dot-negative)] normal-case">*</span></label>
                   <input
-                    type="text" placeholder="Дэд профессор / Гадаад эксперт"
+                    type="text" placeholder="Дэд профессор / Зочин шүүгч"
                     className={inputClass(!!formErrors.position)}
                     value={form.position} onChange={e => setForm(p => ({ ...p, position: e.target.value }))}
                   />

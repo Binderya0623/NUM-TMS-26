@@ -1,0 +1,83 @@
+[
+  {
+    "firstName": "Билгүүн",
+    "lastName": "Ж.",
+    "email": "bilguun.j@num.edu.mn",
+    "password": "Num2026!",
+    "organization": "",
+    "expertise": "",
+    "_short": "Ж.Билгүүн"
+  },
+  {
+    "firstName": "Болорхүү",
+    "lastName": "Н.",
+    "email": "bolorkhuu.n@num.edu.mn",
+    "password": "Num2026!",
+    "organization": "",
+    "expertise": "",
+    "_short": "Н.Болорхүү"
+  },
+  {
+    "firstName": "Гантулга",
+    "lastName": "Н.",
+    "email": "gantulga.n@num.edu.mn",
+    "password": "Num2026!",
+    "organization": "",
+    "expertise": "",
+    "_short": "Н.Гантулга"
+  },
+  {
+    "firstName": "Гэрэлчулуун",
+    "lastName": "Н.",
+    "email": "gerelchuluun.n@num.edu.mn",
+    "password": "Num2026!",
+    "organization": "",
+    "expertise": "",
+    "_short": "Н.Гэрэлчулуун"
+  },
+  {
+    "firstName": "Дэлгэрмаа",
+    "lastName": "Н.",
+    "email": "delgermaa.n@num.edu.mn",
+    "password": "Num2026!",
+    "organization": "",
+    "expertise": "",
+    "_short": "Н.Дэлгэрмаа"
+  },
+  {
+    "firstName": "Чулуунтулга",
+    "lastName": "С.",
+    "email": "chuluuntulga.s@num.edu.mn",
+    "password": "Num2026!",
+    "organization": "",
+    "expertise": "",
+    "_short": "С.Чулуунтулга"
+  },
+  {
+    "firstName": "Гүндэгмаа",
+    "lastName": "Ц.",
+    "email": "gundegmaa.ts@num.edu.mn",
+    "password": "Num2026!",
+    "organization": "",
+    "expertise": "",
+    "_short": "Ц.Гүндэгмаа"
+  },
+  {
+    "firstName": "Алтансүх",
+    "lastName": "Э.",
+    "email": "altansukh.e@num.edu.mn",
+    "password": "Num2026!",
+    "organization": "",
+    "expertise": "",
+    "_short": "Э.Алтансүх"
+  },
+  {
+    "firstName": "Цог-Эрдэнэ",
+    "lastName": "Э.",
+    "email": "tsog-erdene.e@num.edu.mn",
+    "password": "Num2026!",
+    "organization": "",
+    "expertise": "",
+    "_short": "Э.Цог-Эрдэнэ"
+  }
+]

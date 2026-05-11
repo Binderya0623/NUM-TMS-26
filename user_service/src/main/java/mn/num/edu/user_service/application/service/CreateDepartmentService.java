@@ -49,7 +49,7 @@ public class CreateDepartmentService implements CreateDepartmentUseCase {
                 command.firstName(),
                 command.lastName(),
                 command.email(),
-                SystemRole.DEPARTMENT,
+                SystemRole.DEPARTMENT_HEAD,
                 command.departmentName()
         );
 

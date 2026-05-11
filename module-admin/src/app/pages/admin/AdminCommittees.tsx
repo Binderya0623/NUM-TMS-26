@@ -16,14 +16,14 @@ import { workflowService, type DefenseSession } from "../../../services/workflow
 import { RichTextEditor } from "../../components/RichTextEditor";
 import { RichText } from "../../components/RichText";
 import { evaluationService } from "../../../services/evaluationService";
-import { resolveName, isUuid, initialsFromName } from "../../../lib/utils";
+import { resolveName, isUuid, initialsFromName, fmtDateTime} from "../../../lib/utils";
 
 const defenseTypes: { value: string; label: string }[] = [
   { value: "PROGRESS_2", label: "Явц 2" },
   { value: "PRE_DEFENSE", label: "Урьдчилсан хамгаалалт" },
   { value: "FINAL_DEFENSE", label: "Эцсийн хамгаалалт" },
 ];
-const roles = ["Дарга", "Нарийн бичгийн дарга", "Гишүүн", "Эксперт"];
+const roles = ["Ахлах", "Нарийн бичиг", "Гишүүн", "Зочин шүүгч"];
 
 const inputClass = (hasError?: boolean) =>
   `w-full h-9 border rounded-md px-3 text-sm text-ink-900 bg-surface focus:outline-none focus:border-ink-900 ${
@@ -61,6 +61,7 @@ export default function AdminCommittees() {
     selectedStudents: [] as { id: string; name: string }[],
   });
   const [studentSearch, setStudentSearch] = useState("");
+  const [teacherSearch, setTeacherSearch] = useState("");
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [createSuccess, setCreateSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -72,6 +73,7 @@ export default function AdminCommittees() {
     setForm({ name: "", type: "", scheduledDate: "", location: "", notes: "", selectedTeachers: [], selectedStudents: [] });
     setFormErrors({});
     setStudentSearch("");
+    setTeacherSearch("");
     setCopySourceId("");
     setCopyResult(null);
   };
@@ -130,6 +132,11 @@ export default function AdminCommittees() {
 
   const [drawerStudentSearch, setDrawerStudentSearch] = useState("");
   const [addingStudentId, setAddingStudentId] = useState<string | null>(null);
+  const [drawerTeacherSearch, setDrawerTeacherSearch] = useState("");
+  const [drawerTeacherRole, setDrawerTeacherRole] = useState("Гишүүн");
+  const [drawerExpertSearch, setDrawerExpertSearch] = useState("");
+  const [addingMemberId, setAddingMemberId] = useState<string | null>(null);
+  const [removingId, setRemovingId] = useState<string | null>(null);
 
   const allUserMap: Record<string, string> = {};
   [...teachers, ...externalExperts, ...students].forEach(u => {
@@ -153,6 +160,55 @@ export default function AdminCommittees() {
     }
   };
 
+  const handleRemoveStudentFromCommittee = async (studentId: string) => {
+    if (!selectedCommittee) return;
+    setRemovingId(`student:${studentId}`);
+    try {
+      await committeeService.removeStudent(selectedCommittee.id, studentId);
+      const res = await committeeService.getStudents(selectedCommittee.id);
+      setCommitteeStudents(res.data);
+      refreshAssignedStudents();
+    } catch {
+      // ignore
+    } finally {
+      setRemovingId(null);
+    }
+  };
+
+  const handleAddMemberToCommittee = async (teacherId: string, roleLabel: string) => {
+    if (!selectedCommittee) return;
+    setAddingMemberId(teacherId);
+    try {
+      await committeeService.addMember({
+        committeeId: selectedCommittee.id,
+        teacherId,
+        role: roleLabel,
+      });
+      const res = await committeeService.getMembers(selectedCommittee.id);
+      setSelectedMembers(res.data);
+      setDrawerTeacherSearch("");
+      setDrawerExpertSearch("");
+    } catch {
+      // ignore
+    } finally {
+      setAddingMemberId(null);
+    }
+  };
+
+  const handleRemoveMemberFromCommittee = async (assignmentId: string) => {
+    if (!selectedCommittee) return;
+    setRemovingId(`member:${assignmentId}`);
+    try {
+      await committeeService.removeMember(assignmentId);
+      const res = await committeeService.getMembers(selectedCommittee.id);
+      setSelectedMembers(res.data);
+    } catch {
+      // ignore
+    } finally {
+      setRemovingId(null);
+    }
+  };
+
   const filtered = committees
     .filter(c => filter === "ALL" || c.stageType === filter)
     .filter(c => c.name.toLowerCase().includes(search.toLowerCase()));
@@ -167,8 +223,8 @@ export default function AdminCommittees() {
     else if (new Date(form.scheduledDate).getTime() < Date.now()) errors.scheduledDate = "Огноо өнгөрсөн байна.";
     if (!form.location.trim()) errors.location = "Байршил оруулна уу.";
     if (form.selectedTeachers.length < 2) errors.teachers = "Дор хаяж 2 багш сонгоно уу.";
-    if (!form.selectedTeachers.some(t => t.role === "Дарга")) errors.role = "Дор хаяж нэг гишүүнийг Дарга болгон тогтооно уу.";
-    if (!form.selectedTeachers.some(t => t.role === "Нарийн бичгийн дарга")) errors.secretary = "Нарийн бичгийн дарга томилно уу.";
+    if (!form.selectedTeachers.some(t => t.role === "Ахлах")) errors.role = "Дор хаяж нэг гишүүнийг Ахлах болгон тогтооно уу.";
+    if (!form.selectedTeachers.some(t => t.role === "Нарийн бичиг")) errors.secretary = "Нарийн бичиг томилно уу.";
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -239,9 +295,9 @@ export default function AdminCommittees() {
 
       const graders = members.filter(m => m.role !== 'REVIEWER');
       const roleLabel = (r: string) =>
-        r === 'HEAD' ? 'Дарга' :
+        r === 'HEAD' ? 'Ахлах' :
         r === 'SECRETARY' ? 'Нарийн бичиг' :
-        r === 'EXTERNAL_EXPERT' ? 'Эксперт' : 'Гишүүн';
+        r === 'EXTERNAL_EXPERT' ? 'Зочин шүүгч' : 'Гишүүн';
       const nameOf = (id: string) => {
         const t = teachers.find(x => x.id === id) || externalExperts.find(x => x.id === id);
         return t?.displayName || id;
@@ -266,7 +322,7 @@ export default function AdminCommittees() {
         cells.push(avg !== null ? avg.toFixed(2) : '—');
         cells.push(maxTotal ? String(maxTotal) : '—');
         cells.push(sub ? 'Илгээсэн' : (count === graders.length && graders.length > 0 ? 'Бэлэн' : `${count}/${graders.length}`));
-        cells.push(sub?.submittedAt ? sub.submittedAt.split('T')[0] : '—');
+        cells.push(sub?.submittedAt ? fmtDateTime(sub.submittedAt) : '—');
         return cells;
       });
       const escape = (v: string) => {
@@ -429,7 +485,7 @@ export default function AdminCommittees() {
                     </Avatar>
                   </div>
                   {c.createdAt && (
-                    <p className="text-xs text-ink-400 mb-4 tabular-nums">Үүсгэсэн: {c.createdAt.split("T")[0]}</p>
+                    <p className="text-xs text-ink-400 mb-4 tabular-nums">Үүсгэсэн: {fmtDateTime(c.createdAt)}</p>
                   )}
                   <div className="flex gap-2">
                     <Button variant="outline" size="sm" className="flex-1" onClick={() => handleSelectCommittee(c)}>
@@ -540,9 +596,9 @@ export default function AdminCommittees() {
                                   const t = teachers.find(x => x.id === m.teacherId)
                                          || externalExperts.find(x => x.id === m.teacherId);
                                   const roleLabel =
-                                    m.role === 'HEAD' ? 'Дарга' :
-                                    m.role === 'SECRETARY' ? 'Нарийн бичгийн дарга' :
-                                    m.role === 'EXTERNAL_EXPERT' ? 'Эксперт' : 'Гишүүн';
+                                    m.role === 'HEAD' ? 'Ахлах' :
+                                    m.role === 'SECRETARY' ? 'Нарийн бичиг' :
+                                    m.role === 'EXTERNAL_EXPERT' ? 'Зочин шүүгч' : 'Гишүүн';
                                   return { id: m.teacherId, name: t?.displayName || 'Тодорхойгүй багш', role: roleLabel };
                                 });
                                 const copiedStudents = studentsData.map(cs => {
@@ -555,8 +611,10 @@ export default function AdminCommittees() {
                                 const newStudents = copiedStudents.filter(
                                   c => !form.selectedStudents.find(x => x.id === c.id)
                                 );
+                                const sourceName = committees.find(c => c.id === copySourceId)?.name || '';
                                 setForm(p => ({
                                   ...p,
+                                  name: sourceName || p.name,
                                   selectedTeachers: [
                                     ...p.selectedTeachers,
                                     ...copiedTeachers.filter(c => !p.selectedTeachers.find(x => x.id === c.id)),
@@ -575,7 +633,7 @@ export default function AdminCommittees() {
                             {copyingMembers ? 'Уншиж байна...' : 'Хуулах'}
                           </Button>
                         </div>
-                        <p className="text-[11px] text-ink-500">Гишүүд (гадаад эксперт орно), оюутнуудыг хуулна. Дараа нь өөрчлөх боломжтой.</p>
+                        <p className="text-[11px] text-ink-500">Гишүүд (зочин шүүгч орно), оюутнуудыг хуулна. Дараа нь өөрчлөх боломжтой.</p>
                         {copyResult && (
                           <p className="text-[11px] font-medium text-ink-700 border border-border rounded-md px-2 py-1 bg-surface inline-flex items-center gap-1.5">
                             <span className={`w-1.5 h-1.5 rounded-full ${
@@ -637,10 +695,29 @@ export default function AdminCommittees() {
 
                 <div>
                   <label className="text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5 block">Багш нар сонгох *</label>
+                  <input
+                    type="text"
+                    placeholder="Багш хайх (нэр, тэнхимээр)..."
+                    className={`${inputClass()} mb-2`}
+                    value={teacherSearch}
+                    onChange={e => setTeacherSearch(e.target.value)}
+                  />
                   <div className="border border-border rounded-md overflow-hidden max-h-48 overflow-y-auto">
-                    {teachers.length === 0 ? (
-                      <p className="text-sm text-ink-400 p-4 text-center">Багш олдсонгүй</p>
-                    ) : teachers.map(t => {
+                    {(() => {
+                      const q = teacherSearch.toLowerCase();
+                      const visible = teachers.filter(t =>
+                        !q ||
+                        (t.displayName || '').toLowerCase().includes(q) ||
+                        (t.departmentId || '').toLowerCase().includes(q) ||
+                        (t.email || '').toLowerCase().includes(q)
+                      );
+                      if (teachers.length === 0) {
+                        return <p className="text-sm text-ink-400 p-4 text-center">Багш олдсонгүй</p>;
+                      }
+                      if (visible.length === 0) {
+                        return <p className="text-sm text-ink-400 p-4 text-center">Хайлтад тохирох багш олдсонгүй</p>;
+                      }
+                      return visible.map(t => {
                       const selected = form.selectedTeachers.find(s => s.id === t.id);
                       return (
                         <div
@@ -669,7 +746,8 @@ export default function AdminCommittees() {
                           )}
                         </div>
                       );
-                    })}
+                    });
+                    })()}
                   </div>
                   {formErrors.teachers && <p className="text-[var(--color-dot-negative)] text-xs mt-1">{formErrors.teachers}</p>}
                   {formErrors.role && <p className="text-[var(--color-dot-negative)] text-xs mt-1">{formErrors.role}</p>}
@@ -679,12 +757,12 @@ export default function AdminCommittees() {
                 {(form.type === 'PRE_DEFENSE' || form.type === 'FINAL_DEFENSE') && (
                   <div>
                     <label className="text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5 flex items-center gap-2">
-                      Гадаад экспертүүд нэмэх
+                      Зочин шүүгч нэмэх
                       <span className="normal-case tracking-normal text-[10px] font-normal text-ink-500 border border-border rounded-sm px-1.5 py-0.5">Заавал биш</span>
                     </label>
                     <div className="border border-border rounded-md overflow-hidden max-h-40 overflow-y-auto">
                       {externalExperts.length === 0 ? (
-                        <p className="text-sm text-ink-400 p-4 text-center">Гадаад эксперт бүртгэгдээгүй байна</p>
+                        <p className="text-sm text-ink-400 p-4 text-center">Зочин шүүгч бүртгэгдээгүй байна</p>
                       ) : externalExperts.map(e => {
                         const selected = form.selectedTeachers.find(s => s.id === e.id);
                         return (
@@ -693,7 +771,7 @@ export default function AdminCommittees() {
                             className={`flex items-center justify-between px-3 py-2.5 border-b border-border last:border-0 cursor-pointer transition-colors ${selected ? 'bg-surface-muted' : 'hover:bg-surface-muted/60'}`}
                             onClick={() => selected
                               ? setForm(p => ({ ...p, selectedTeachers: p.selectedTeachers.filter(s => s.id !== e.id) }))
-                              : setForm(p => ({ ...p, selectedTeachers: [...p.selectedTeachers, { id: e.id, name: e.displayName, role: 'Эксперт' }] }))
+                              : setForm(p => ({ ...p, selectedTeachers: [...p.selectedTeachers, { id: e.id, name: e.displayName, role: 'Зочин шүүгч' }] }))
                             }
                           >
                             <div className="flex items-center gap-2.5 min-w-0">
@@ -701,7 +779,7 @@ export default function AdminCommittees() {
                                 {selected && <CheckCircle2 className="w-3 h-3 text-white" strokeWidth={2} />}
                               </div>
                               <span className="text-sm text-ink-900 truncate">{e.displayName}</span>
-                              <span className="text-[10px] uppercase tracking-wider text-ink-500 border border-border rounded-sm px-1.5 py-0.5 shrink-0">Гадаад</span>
+                              <span className="text-[10px] uppercase tracking-wider text-ink-500 border border-border rounded-sm px-1.5 py-0.5 shrink-0">Зочин</span>
                             </div>
                             <span className="text-xs text-ink-400 truncate shrink-0 ml-2">{e.email}</span>
                           </div>
@@ -826,10 +904,11 @@ export default function AdminCommittees() {
                     const displayName = teacher?.displayName || 'Тодорхойгүй';
                     const isExpert = m.role === 'EXTERNAL_EXPERT';
                     const roleLabel =
-                      m.role === 'HEAD' ? 'Дарга' :
-                      m.role === 'SECRETARY' ? 'Нарийн бичгийн дарга' :
-                      isExpert ? 'Гадаад эксперт' :
+                      m.role === 'HEAD' ? 'Ахлах' :
+                      m.role === 'SECRETARY' ? 'Нарийн бичиг' :
+                      isExpert ? 'Зочин шүүгч' :
                       m.role === 'MEMBER' ? 'Гишүүн' : m.role;
+                    const removing = removingId === `member:${m.id}`;
                     return (
                       <div key={m.id} className="flex items-center gap-3 px-3 py-2.5 border border-border rounded-md bg-surface">
                         <Avatar className="h-8 w-8">
@@ -842,9 +921,127 @@ export default function AdminCommittees() {
                         <span className="text-[11px] uppercase tracking-wider font-medium text-ink-500 border border-border rounded-sm px-2 py-0.5 shrink-0">
                           {roleLabel}
                         </span>
+                        {isActive(selectedCommittee) && (
+                          <button
+                            onClick={() => handleRemoveMemberFromCommittee(m.id)}
+                            disabled={removing}
+                            className="text-ink-400 hover:text-[var(--color-dot-negative)] hover:bg-accent-softer rounded-md p-1 transition-colors shrink-0"
+                            title="Хасах"
+                          >
+                            <X className="w-3.5 h-3.5" strokeWidth={1.8} />
+                          </button>
+                        )}
                       </div>
                     );
                   })}
+
+                  {isActive(selectedCommittee) && (
+                    <div className="pt-4 mt-2 border-t border-border space-y-3">
+                      <div className="space-y-2">
+                        <label className="text-[11px] uppercase tracking-wider font-medium text-ink-500 flex items-center gap-1.5">
+                          <Plus className="w-3.5 h-3.5" strokeWidth={1.6} /> Багш нэмэх
+                        </label>
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            placeholder="Багш хайх..."
+                            className={inputClass()}
+                            value={drawerTeacherSearch}
+                            onChange={e => setDrawerTeacherSearch(e.target.value)}
+                          />
+                          <select
+                            value={drawerTeacherRole}
+                            onChange={e => setDrawerTeacherRole(e.target.value)}
+                            className="border border-border-strong rounded-md text-sm px-2 h-9 bg-surface text-ink-900 focus:outline-none focus:border-ink-900"
+                          >
+                            {["Ахлах", "Нарийн бичиг", "Гишүүн"].map(r => <option key={r}>{r}</option>)}
+                          </select>
+                        </div>
+                        <div className="border border-border rounded-md overflow-hidden max-h-40 overflow-y-auto">
+                          {(() => {
+                            const memberIds = new Set(selectedMembers.map(m => m.teacherId));
+                            const q = drawerTeacherSearch.toLowerCase();
+                            const candidates = teachers.filter(t =>
+                              !memberIds.has(t.id) &&
+                              (!q ||
+                                (t.displayName || '').toLowerCase().includes(q) ||
+                                (t.departmentId || '').toLowerCase().includes(q) ||
+                                (t.email || '').toLowerCase().includes(q))
+                            );
+                            if (candidates.length === 0) {
+                              return (
+                                <p className="text-sm text-ink-400 p-3 text-center">
+                                  {drawerTeacherSearch ? "Багш олдсонгүй" : "Бүх багш нэмэгдсэн"}
+                                </p>
+                              );
+                            }
+                            return candidates.slice(0, 20).map(t => (
+                              <div
+                                key={t.id}
+                                className="flex items-center justify-between px-3 py-2 border-b border-border last:border-0 hover:bg-surface-muted/60 cursor-pointer"
+                                onClick={() => addingMemberId ? null : handleAddMemberToCommittee(t.id, drawerTeacherRole)}
+                              >
+                                <div className="min-w-0">
+                                  <p className="text-sm text-ink-900 truncate">{t.displayName}</p>
+                                  {t.departmentId && !isUuid(t.departmentId) && <p className="text-xs text-ink-400 truncate">{t.departmentId}</p>}
+                                </div>
+                                {addingMemberId === t.id
+                                  ? <span className="text-xs text-ink-400">Нэмж байна...</span>
+                                  : <Plus className="w-4 h-4 text-ink-400 shrink-0" strokeWidth={1.6} />}
+                              </div>
+                            ));
+                          })()}
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-[11px] uppercase tracking-wider font-medium text-ink-500 flex items-center gap-1.5">
+                          <Plus className="w-3.5 h-3.5" strokeWidth={1.6} /> Зочин шүүгч нэмэх
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Зочин шүүгч хайх..."
+                          className={inputClass()}
+                          value={drawerExpertSearch}
+                          onChange={e => setDrawerExpertSearch(e.target.value)}
+                        />
+                        <div className="border border-border rounded-md overflow-hidden max-h-40 overflow-y-auto">
+                          {(() => {
+                            const memberIds = new Set(selectedMembers.map(m => m.teacherId));
+                            const q = drawerExpertSearch.toLowerCase();
+                            const candidates = externalExperts.filter(e =>
+                              !memberIds.has(e.id) &&
+                              (!q ||
+                                (e.displayName || '').toLowerCase().includes(q) ||
+                                (e.email || '').toLowerCase().includes(q))
+                            );
+                            if (candidates.length === 0) {
+                              return (
+                                <p className="text-sm text-ink-400 p-3 text-center">
+                                  {drawerExpertSearch ? "Олдсонгүй" : "Бүх зочин шүүгч нэмэгдсэн"}
+                                </p>
+                              );
+                            }
+                            return candidates.slice(0, 20).map(e => (
+                              <div
+                                key={e.id}
+                                className="flex items-center justify-between px-3 py-2 border-b border-border last:border-0 hover:bg-surface-muted/60 cursor-pointer"
+                                onClick={() => addingMemberId ? null : handleAddMemberToCommittee(e.id, "Зочин шүүгч")}
+                              >
+                                <div className="min-w-0">
+                                  <p className="text-sm text-ink-900 truncate">{e.displayName}</p>
+                                  {e.email && <p className="text-xs text-ink-400 truncate">{e.email}</p>}
+                                </div>
+                                {addingMemberId === e.id
+                                  ? <span className="text-xs text-ink-400">Нэмж байна...</span>
+                                  : <Plus className="w-4 h-4 text-ink-400 shrink-0" strokeWidth={1.6} />}
+                              </div>
+                            ));
+                          })()}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </TabsContent>
 
                 <TabsContent value="students" className="px-6 pb-6 mt-4 space-y-2.5">
@@ -854,6 +1051,7 @@ export default function AdminCommittees() {
                     const studentInfo = students.find(s => s.id === cs.studentId);
                     const displayName = studentInfo?.displayName || 'Тодорхойгүй оюутан';
                     const sid = studentInfo?.studentId;
+                    const removing = removingId === `student:${cs.studentId}`;
                     return (
                       <div key={cs.id} className="flex items-center gap-3 px-3 py-2.5 border border-border rounded-md bg-surface">
                         <Avatar className="h-8 w-8">
@@ -863,6 +1061,16 @@ export default function AdminCommittees() {
                           <p className="text-sm font-medium text-ink-900 tracking-tight truncate">{displayName}</p>
                           {sid && !isUuid(sid) && <p className="text-xs text-ink-400 truncate">{sid}</p>}
                         </div>
+                        {isActive(selectedCommittee) && (
+                          <button
+                            onClick={() => handleRemoveStudentFromCommittee(cs.studentId)}
+                            disabled={removing}
+                            className="text-ink-400 hover:text-[var(--color-dot-negative)] hover:bg-accent-softer rounded-md p-1 transition-colors shrink-0"
+                            title="Хасах"
+                          >
+                            <X className="w-3.5 h-3.5" strokeWidth={1.8} />
+                          </button>
+                        )}
                       </div>
                     );
                   })}
@@ -954,10 +1162,10 @@ export default function AdminCommittees() {
 
                   <div className="border border-border rounded-md divide-y divide-border">
                     {[
-                      { label: "Үүсгэсэн",         value: selectedCommittee.createdAt?.split("T")[0] || "Огноогүй" },
+                      { label: "Үүсгэсэн",         value: fmtDateTime(selectedCommittee.createdAt) || "Огноогүй" },
                       { label: "Тэнхим",           value: selectedCommittee.departmentId && !isUuid(selectedCommittee.departmentId) ? selectedCommittee.departmentId : "Тодорхойгүй" },
                       { label: "Үүсгэсэн хэрэглэгч", value: resolveName(selectedCommittee.createdBy, allUserMap, "Удирдлага") },
-                      { label: "Хаасан огноо",     value: selectedCommittee.closedAt?.split("T")[0] || "Идэвхтэй" },
+                      { label: "Хаасан огноо",     value: fmtDateTime(selectedCommittee.closedAt) || "Идэвхтэй" },
                     ].map(item => (
                       <div key={item.label} className="flex justify-between items-center px-4 py-3 text-sm">
                         <span className="text-ink-500">{item.label}</span>

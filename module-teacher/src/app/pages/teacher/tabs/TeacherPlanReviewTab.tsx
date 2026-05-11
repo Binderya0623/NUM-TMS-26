@@ -10,7 +10,7 @@ import {
 import { planService, type Plan, type PlanWeek } from "../../../../services/planService";
 import { userService } from "../../../../services/userService";
 import { getStoredUser } from "../../../../lib/authGuard";
-import { resolveName, initialsFromName } from "../../../../lib/utils";
+import { resolveName, initialsFromName, fmtDateTime} from "../../../../lib/utils";
 import { RichTextEditor } from "../../../components/RichTextEditor";
 
 type Tone = "positive" | "warning" | "negative" | "neutral";
@@ -165,7 +165,7 @@ export default function TeacherPlanReviewTab() {
                         {PLAN_STATUS_LABEL[p.status] || p.status}
                       </span>
                       <span className="text-ink-400 tabular-nums">
-                        {p.submittedAt?.split("T")[0] || "Огноогүй"}
+                        {fmtDateTime(p.submittedAt) || "Огноогүй"}
                       </span>
                     </div>
                   </button>
@@ -191,7 +191,7 @@ export default function TeacherPlanReviewTab() {
                       <div className="flex items-center gap-3 mt-2 text-xs text-ink-500">
                         <span className="flex items-center gap-1 tabular-nums">
                           <CalendarDays className="w-3.5 h-3.5" strokeWidth={1.6} />
-                          Илгээсэн: {selectedPlan.submittedAt?.split("T")[0] || "Огноогүй"}
+                          Илгээсэн: {fmtDateTime(selectedPlan.submittedAt) || "Огноогүй"}
                         </span>
                         {(selectedPlan.revisionCount ?? 0) > 0 && (
                           <span className="inline-flex items-center gap-1.5 text-ink-700">

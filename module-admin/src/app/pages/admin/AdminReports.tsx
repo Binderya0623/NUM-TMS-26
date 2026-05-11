@@ -5,7 +5,7 @@ import { thesisReportService, type ThesisReport } from "../../../services/thesis
 import { workflowService, type DefenseSession } from "../../../services/workflowService";
 import { committeeService, type Committee } from "../../../services/committeeService";
 import { userService, type UserRecord } from "../../../services/userService";
-import { resolveName } from "../../../lib/utils";
+import { resolveName, fmtDateTime} from "../../../lib/utils";
 
 interface DisplayReport {
   id: string;
@@ -131,7 +131,7 @@ export default function AdminReports() {
           committeeName: committeeName || 'Хуваарилагдаагүй',
           reviewedBy: resolveName(r.reviewedBy, userMap, 'Хяналт хүлээгдэж буй'),
           status: r.status,
-          submittedAt: r.submittedAt?.split('T')[0] || 'Огноогүй',
+          submittedAt: fmtDateTime(r.submittedAt) || 'Огноогүй',
         };
       });
 

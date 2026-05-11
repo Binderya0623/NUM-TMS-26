@@ -25,7 +25,7 @@ const STAGE_LABELS: { key: string; label: string; sessionType?: string }[] = [
 ];
 
 // Helpers for the "Дараагийн хамгаалалт" card. Same shape as the deadlines page.
-function fmtDateTime(iso?: string): string | null {
+function fmtLocaleDateTime(iso?: string): string | null {
   if (!iso) return null;
   return new Date(iso).toLocaleString("mn-MN", {
     year: "numeric", month: "short", day: "numeric",
@@ -100,7 +100,7 @@ function StageTimeline({ stageState }: { stageState: Record<string, { state: Sta
                 {stage.label}
               </p>
               <p className="text-[10px] text-ink-500 tabular-nums mt-0.5">
-                {info.date ? info.date.split('T')[0] : '—'}
+                {info.date ? fmtLocaleDateTime(info.date) : '—'}
               </p>
             </div>
           );
@@ -568,8 +568,8 @@ export default function StudentDashboard() {
                 {[
                   { label: "Удирдагч багш",   value: supervisorName || "Хуваарилагдаагүй" },
                   { label: "Тэнхим",          value: departmentLabel || "Тодорхойгүй" },
-                  { label: "Эхэлсэн огноо",   value: thesis.createdAt?.split('T')[0] || "Тодорхойгүй" },
-                  { label: "Хүлээлгэх огноо", value: thesis.submissionDate?.split('T')[0] || "Тодорхойгүй" },
+                  { label: "Эхэлсэн огноо",   value: fmtLocaleDateTime(thesis.createdAt) || "Тодорхойгүй" },
+                  { label: "Хүлээлгэх огноо", value: fmtLocaleDateTime(thesis.submissionDate) || "Тодорхойгүй" },
                 ].map(item => (
                   <div key={item.label} className="border border-border rounded-md p-3 bg-surface-muted">
                     <p className="text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1">{item.label}</p>
@@ -596,7 +596,7 @@ export default function StudentDashboard() {
                     <div key={r.id} className="py-3 flex items-center justify-between">
                       <div>
                         <p className="text-sm font-medium text-ink-900 tracking-tight">{r.reportType}</p>
-                        <p className="text-xs text-ink-500 tabular-nums">{r.submittedAt?.split('T')[0] || 'Огноогүй'}</p>
+                        <p className="text-xs text-ink-500 tabular-nums">{fmtLocaleDateTime(r.submittedAt) || 'Огноогүй'}</p>
                       </div>
                       <span className="text-xs text-ink-700">{r.status}</span>
                     </div>
@@ -631,7 +631,7 @@ export default function StudentDashboard() {
                       </div>
                       <div>
                         <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500">Огноо</p>
-                        <p className="text-sm font-medium text-ink-900">{fmtDateTime(upcomingSession.scheduledDate)}</p>
+                        <p className="text-sm font-medium text-ink-900">{fmtLocaleDateTime(upcomingSession.scheduledDate)}</p>
                         {(() => {
                           const d = daysFrom(upcomingSession.scheduledDate);
                           if (d === null) return null;

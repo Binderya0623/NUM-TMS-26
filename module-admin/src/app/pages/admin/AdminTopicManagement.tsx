@@ -6,7 +6,7 @@ import { Dialog, DialogHeader, DialogBody, DialogFooter } from "../../components
 import { topicService, type Topic } from "../../../services/topicService";
 import { userService } from "../../../services/userService";
 import { getStoredUser } from "../../../lib/authGuard";
-import { resolveName, isUuid } from "../../../lib/utils";
+import { resolveName, isUuid, fmtDateTime} from "../../../lib/utils";
 import { RichText } from "../../components/RichText";
 import { RichTextEditor } from "../../components/RichTextEditor";
 
@@ -68,11 +68,12 @@ export default function AdminTopicManagement() {
       userService.getStudents().catch(() => ({ data: [] as any[] })),
       userService.getTeachers().catch(() => ({ data: [] as any[] })),
       userService.getDepartments().catch(() => ({ data: [] as any[] })),
-    ]).then(([tr, sr, teacherRes, dr]) => {
+      userService.getExternalExperts().catch(() => ({ data: [] as any[] })),
+    ]).then(([tr, sr, teacherRes, dr, expRes]) => {
       setTopics(tr.data);
       const map: Record<string, string> = {};
       const deptByUser: Record<string, string> = {};
-      [...(sr.data || []), ...(teacherRes.data || [])].forEach((u: any) => {
+      [...(sr.data || []), ...(teacherRes.data || []), ...(expRes.data || [])].forEach((u: any) => {
         if (u.id) map[u.id] = u.displayName || u.name || u.id;
         if (u.username) map[u.username] = u.displayName || u.name || u.username;
         if (u.departmentId) {
@@ -267,7 +268,7 @@ export default function AdminTopicManagement() {
                       )}
                     </td>
                     <td className="px-6 py-4 text-ink-500 whitespace-nowrap text-sm tabular-nums">
-                      {topic.createdAt?.split("T")[0] || "Огноогүй"}
+                      {fmtDateTime(topic.createdAt) || "Огноогүй"}
                     </td>
                     <td className="px-6 py-4">
                       <StatusBadge status={topic.status} />
@@ -302,21 +303,29 @@ export default function AdminTopicManagement() {
       {selectedTopic && (
         <Dialog open onClose={() => { setSelectedTopic(null); setRejectionReason(""); }} maxWidth="max-w-2xl" scrollable>
           <DialogHeader
-            title={selectedTopic.title}
+            title="Сэдвийн дэлгэрэнгүй"
             icon={<FileText className="w-4 h-4" strokeWidth={1.6} />}
             onClose={() => { setSelectedTopic(null); setRejectionReason(""); }}
           />
           <div className="flex-1 overflow-y-auto">
             <DialogBody className="space-y-6">
-              {selectedTopic.titleEn && (
-                <p className="text-sm italic text-ink-600 -mt-2">{selectedTopic.titleEn}</p>
-              )}
               <div className="flex items-center gap-3 flex-wrap">
                 <StatusBadge status={selectedTopic.status} />
                 <span className="text-xs text-ink-700 border border-border-strong rounded-sm px-2 py-0.5">
                   {selectedTopic.createdByType === "TEACHER" ? "Багш" : "Оюутан"} дэвшүүлсэн
                 </span>
               </div>
+
+              <div>
+                <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1">Сэдвийн нэр</p>
+                <p className="text-sm font-medium text-ink-900 tracking-tight">{selectedTopic.title}</p>
+              </div>
+              {selectedTopic.titleEn && (
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1">Сэдвийн нэр (Англи)</p>
+                  <p className="text-sm font-medium text-ink-900 tracking-tight italic">{selectedTopic.titleEn}</p>
+                </div>
+              )}
 
               <div className="grid grid-cols-2 gap-x-6 gap-y-4">
                 <div>

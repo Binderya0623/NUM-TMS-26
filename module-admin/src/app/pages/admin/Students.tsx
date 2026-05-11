@@ -10,7 +10,7 @@ import { planService, type Plan } from "../../../services/planService";
 import { topicService, type Topic } from "../../../services/topicService";
 import { evaluationService } from "../../../services/evaluationService";
 import { committeeService, type Committee } from "../../../services/committeeService";
-import { isUuid, resolveName } from "../../../lib/utils";
+import { isUuid, resolveName, fmtDateTime} from "../../../lib/utils";
 
 type SortKey = "progress" | "title";
 type SortDir = "asc" | "desc";
@@ -136,7 +136,7 @@ export default function Students() {
           supervisor: plan ? resolveName(plan.supervisorId, nameMap, 'Хуваарилагдаагүй') : '',
           status: plan?.status || '',
           progress: graded ? 100 : plan ? progressFromStatus(plan.status) : 0,
-          createdAt: plan?.createdAt?.split('T')[0] || '',
+          createdAt: fmtDateTime(plan?.createdAt) || '',
           topic: plan?.topicId ? topicMap.get(plan.topicId) : undefined,
           committeeName: studentToCommittee.get(s.id) || studentToCommittee.get(s.username || '') || '',
         };

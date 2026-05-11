@@ -1,0 +1,227 @@
+[
+  {
+    "sisiId": "altangerel",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "okhorloo",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "oyunerdene",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "uyanga",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "uyanga",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "gantuya.p",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "dalaijargal",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "zoljargal",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "magsarjav",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "munkhtsetseg_n",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "naranchimeg",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "nyamlkhagva",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "suvdaa",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "uuganbayar.g",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "khuyagbaatar",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "tserennadmid",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "enkhzol",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "enkhtuul.b",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "avirmed.e",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "amgalan.a",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "batbayar.s",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "batulzii",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "bbatnyam",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "dorjnamjirmaa",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "esenbek",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "r.javkhlan",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "munkhzul.a",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "nanzadragchaa",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "otgonnaran",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "uitumen",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "khurel-ochir",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "tsolmonz",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "tsetsegjargal.e",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "azzaya.b",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "a_bbileg",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "bagabold.g",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "bilguun.o",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "byambaa",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "gantulga_g",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "davaasuren.n",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "lkhamrolom",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "naranbat",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "enkhtuya.ts",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "garmaa",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  },
+  {
+    "sisiId": "choijamts.n",
+    "password": "Num2026!",
+    "roles": ["ROLE_TEACHER"]
+  }
+]

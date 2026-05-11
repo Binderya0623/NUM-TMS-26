@@ -5,7 +5,7 @@ import { Button } from "../../components/ui/button";
 import { Avatar, AvatarFallback } from "../../components/ui/avatar";
 import { Mail, MapPin, GraduationCap, BookOpen, User, Calendar } from "lucide-react";
 import { getStoredUser } from "../../../lib/authGuard";
-import { isUuid, initialsFromName } from "../../../lib/utils";
+import { isUuid, initialsFromName, fmtDateTime} from "../../../lib/utils";
 import { userService, type UserRecord } from "../../../services/userService";
 import { thesisService, type ThesisInfo } from "../../../services/thesisService";
 
@@ -194,8 +194,8 @@ export default function StudentProfile() {
                   {[
                     { label: "Удирдагч багш", value: supervisorName },
                     { label: "Тэнхим", value: deptLabel(thesis.departmentId) || profileDept || "Тодорхойгүй" },
-                    { label: "Эхэлсэн огноо", value: thesis.createdAt?.split("T")[0] || "Тодорхойгүй" },
-                    { label: "Хүлээлгэх огноо", value: thesis.submissionDate?.split("T")[0] || "Тодорхойгүй" },
+                    { label: "Эхэлсэн огноо", value: fmtDateTime(thesis.createdAt) || "Тодорхойгүй" },
+                    { label: "Хүлээлгэх огноо", value: fmtDateTime(thesis.submissionDate) || "Тодорхойгүй" },
                   ].map(({ label, value }) => (
                     <div key={label} className="p-3 bg-surface-muted rounded-md border border-border">
                       <p className="text-[11px] uppercase tracking-wider font-medium text-ink-500">{label}</p>

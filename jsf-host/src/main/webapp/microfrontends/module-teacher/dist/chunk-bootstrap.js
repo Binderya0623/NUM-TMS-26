@@ -8102,7 +8102,7 @@ const BASE_MENU = [
 function TeacherSidebar({ collapsed }) {
   const user = getStoredUser();
   const isExpert = user?.systemRole === "EXTERNAL_EXPERT";
-  const menuItems = isExpert ? [{ icon: Award, label: "Гадаад эксперт үнэлгээ", path: "/teacher/expert", end: true }] : BASE_MENU;
+  const menuItems = isExpert ? [{ icon: Award, label: "Зочин шүүгчийн үнэлгээ", path: "/teacher/expert", end: true }] : BASE_MENU;
   const [unread, setUnread] = useState$f(0);
   useEffect$g(() => {
     const userId = user?.userId;
@@ -8369,7 +8369,7 @@ const pageTitles = {
   "/teacher/progress": { title: "Явцын хяналт", subtitle: "Бүх оюутны дэвшил, шат, эцсийн хугацааг хянах" },
   "/teacher/committee": { title: "Комисс", subtitle: "Комиссийн үнэлгээний даалгавраа удирдах" },
   "/teacher/evaluations": { title: "Комисс", subtitle: "Комиссийн үнэлгээний даалгавраа удирдах" },
-  "/teacher/expert": { title: "Гадаад эксперт үнэлгээ", subtitle: "Томилогдсон комиссын оюутнуудад үнэлгээ өгөх" },
+  "/teacher/expert": { title: "Зочин шүүгчийн үнэлгээ", subtitle: "Томилогдсон комиссын оюутнуудад үнэлгээ өгөх" },
   "/teacher/settings": { title: "Тохиргоо", subtitle: "Профайл, тохиргоо удирдах" }
 };
 function TeacherLayout({ user }) {
@@ -11398,6 +11398,10 @@ function initialsFromName(name) {
   const letters = parts.map((p) => p[0]).join("").toUpperCase();
   return letters.substring(0, 2) || "??";
 }
+function fmtDateTime(value) {
+  if (!value) return "";
+  return value.replace("T", " ").split(".")[0];
+}
 
 const React$k = await importShared('react');
 const Card = React$k.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -12031,7 +12035,7 @@ const stageLabel$2 = (stageType) => {
   };
   return map[stageType] || stageType;
 };
-function fmtDateTime(iso) {
+function fmtLocaleDateTime(iso) {
   if (!iso) return null;
   return new Date(iso).toLocaleString("mn-MN", {
     year: "numeric",
@@ -12077,7 +12081,7 @@ function TermTimeline({ stageState }) {
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: `mt-3 text-[11px] text-center tracking-tight ${active ? "text-accent font-semibold" : "text-ink-600"}`, children: stage.title }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] text-ink-500 tabular-nums mt-0.5", children: info.date ? info.date.split("T")[0] : "—" })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] text-ink-500 tabular-nums mt-0.5", children: info.date ? fmtLocaleDateTime(info.date) : "—" })
       ] }, stage.key);
     }) })
   ] });
@@ -12265,7 +12269,7 @@ function TeacherDashboard() {
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-500 mt-0.5 tabular-nums", children: [
                   report.reportType,
                   " • ",
-                  report.submittedAt?.split("T")[0] || "Огноогүй"
+                  fmtLocaleDateTime(report.submittedAt) || "Огноогүй"
                 ] })
               ] })
             ] }),
@@ -12292,7 +12296,7 @@ function TeacherDashboard() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-md border border-border-strong flex items-center justify-center shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-ink-700", strokeWidth: 1.6 }) }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-wider font-medium text-ink-500", children: "Огноо" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900", children: fmtDateTime(upcomingSession.scheduledDate) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900", children: fmtLocaleDateTime(upcomingSession.scheduledDate) }),
                   (() => {
                     const d = daysFrom(upcomingSession.scheduledDate);
                     if (d === null) return null;
@@ -36787,7 +36791,7 @@ function TeacherStudents() {
     const graders = committeeMembers.filter(
       (m) => m.role === "HEAD" || m.role === "SECRETARY" || m.role === "MEMBER" || m.role === "EXTERNAL_EXPERT"
     );
-    const roleLabel = (r) => r === "HEAD" ? "Дарга" : r === "SECRETARY" ? "Нарийн бичиг" : r === "EXTERNAL_EXPERT" ? "Эксперт" : "Гишүүн";
+    const roleLabel = (r) => r === "HEAD" ? "Ахлах" : r === "SECRETARY" ? "Нарийн бичиг" : r === "EXTERNAL_EXPERT" ? "Зочин шүүгч" : "Гишүүн";
     const headers = [
       "Оюутан",
       "Оюутны ID",
@@ -36814,7 +36818,7 @@ function TeacherStudents() {
       cells.push(avg !== null ? avg.toFixed(2) : "—");
       cells.push(maxTotal ? String(maxTotal) : "—");
       cells.push(sub ? "Илгээсэн" : count === graders.length && graders.length > 0 ? "Бэлэн" : `${count}/${graders.length}`);
-      cells.push(sub?.submittedAt ? sub.submittedAt.split("T")[0] : "—");
+      cells.push(sub?.submittedAt ? fmtDateTime(sub.submittedAt) : "—");
       return cells;
     });
     const escape = (v) => {
@@ -37127,7 +37131,7 @@ function TeacherStudents() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-400 mt-1 flex items-center gap-1 tabular-nums", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-3 h-3", strokeWidth: 1.6 }),
                 " Илгээсэн: ",
-                report.submittedAt?.split("T")[0] || "Огноогүй"
+                fmtDateTime(report.submittedAt) || "Огноогүй"
               ] })
             ] })
           ] }),
@@ -37419,7 +37423,7 @@ function TeacherStudents() {
             const committeeGraders = committeeMembers.filter(
               (m) => m.role === "HEAD" || m.role === "SECRETARY" || m.role === "MEMBER" || m.role === "EXTERNAL_EXPERT"
             );
-            const roleLabel = (r) => r === "HEAD" ? "Дарга" : r === "SECRETARY" ? "Нарийн бичиг" : r === "EXTERNAL_EXPERT" ? "Эксперт" : "Гишүүн";
+            const roleLabel = (r) => r === "HEAD" ? "Ахлах" : r === "SECRETARY" ? "Нарийн бичиг" : r === "EXTERNAL_EXPERT" ? "Зочин шүүгч" : "Гишүүн";
             const submissionFor = (sid) => sessionSubmissions.find((s) => s.studentId === sid);
             if (committeeStudents.length === 0) {
               return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "py-4 text-center text-ink-400 text-sm", children: "Оюутан олдсонгүй." });
@@ -37481,7 +37485,7 @@ function TeacherStudents() {
                     "/",
                     committeeGraders.length
                   ] }) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "text-right px-3 py-2 border-b border-border", children: sub ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-500 tabular-nums", children: sub.submittedAt?.split("T")[0] || "—" }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-end gap-1", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "text-right px-3 py-2 border-b border-border", children: sub ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-500 tabular-nums", children: fmtDateTime(sub.submittedAt) || "—" }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-end gap-1", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx(
                       Button,
                       {
@@ -37718,9 +37722,9 @@ function TeacherStudents() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0", children: committeeStudents.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-8 text-center text-ink-400 text-sm", children: "Оюутан олдсонгүй." }) : committeeStudents.map((student) => {
           const existing = reviewerAssignments.find((a) => a.studentId === student.studentId);
           const roleLabel = (role) => {
-            if (role === "HEAD") return "Дарга";
-            if (role === "SECRETARY") return "Нарийн бичгийн дарга";
-            if (role === "EXTERNAL_EXPERT") return "Гадаад эксперт";
+            if (role === "HEAD") return "Ахлах";
+            if (role === "SECRETARY") return "Нарийн бичиг";
+            if (role === "EXTERNAL_EXPERT") return "Зочин шүүгч";
             return "Гишүүн";
           };
           return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 border-b border-border last:border-b-0", children: [
@@ -38188,7 +38192,7 @@ function TeacherTopicManagementTab() {
   const [loading, setLoading] = useState$9(true);
   const [showForm, setShowForm] = useState$9(false);
   const [submitting, setSubmitting] = useState$9(false);
-  const [form, setForm] = useState$9({ title: "", titleEn: "", description: "", goal: "", keywords: "", visibility: "PUBLIC" });
+  const [form, setForm] = useState$9({ title: "", titleEn: "", description: "", goal: "", keywords: "", visibility: "PUBLIC", maxStudents: 1 });
   const [errors, setErrors] = useState$9({});
   useEffect$a(() => {
     if (!teacherId) {
@@ -38208,7 +38212,7 @@ function TeacherTopicManagementTab() {
     return Object.keys(e).length === 0;
   };
   const resetForm = () => {
-    setForm({ title: "", titleEn: "", description: "", goal: "", keywords: "", visibility: "PUBLIC" });
+    setForm({ title: "", titleEn: "", description: "", goal: "", keywords: "", visibility: "PUBLIC", maxStudents: 1 });
     setErrors({});
     setShowForm(false);
   };
@@ -38223,7 +38227,8 @@ function TeacherTopicManagementTab() {
       keywords: form.keywords || void 0,
       createdById: teacherId,
       visibility: form.visibility,
-      status: "ACTIVE"
+      status: "ACTIVE",
+      maxStudents: form.maxStudents > 0 ? form.maxStudents : 1
     }).then((res) => {
       setTopics((prev) => [res.data, ...prev]);
       resetForm();
@@ -38263,7 +38268,7 @@ function TeacherTopicManagementTab() {
             className: errors.title ? "border-[var(--color-dot-negative)]" : ""
           }
         ) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Сэдвийн нэр (English)", required: true, hint: "NUM TMS bilingual requirement", error: errors.titleEn, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        /* @__PURE__ */ jsxRuntimeExports.jsx(FormField, { label: "Сэдвийн нэр (Англи)", required: true, hint: "NUM TMS bilingual requirement", error: errors.titleEn, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           Input,
           {
             value: form.titleEn,
@@ -38318,6 +38323,33 @@ function TeacherTopicManagementTab() {
             ]
           }
         ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(FormField, { label: "Сонголт", hint: "Хэдэн оюутан энэ сэдвийг сонгож болох вэ?", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "select",
+            {
+              value: form.maxStudents === 1 ? "single" : "multi",
+              onChange: (e) => setForm({ ...form, maxStudents: e.target.value === "single" ? 1 : Math.max(2, form.maxStudents) }),
+              className: "w-full border border-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-ink-900 bg-surface",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "single", children: "Зөвхөн нэг оюутан" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: "multi", children: "Олон оюутан" })
+              ]
+            }
+          ),
+          form.maxStudents > 1 && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Input,
+            {
+              type: "number",
+              min: 2,
+              className: "mt-2",
+              value: form.maxStudents,
+              onChange: (e) => {
+                const n = parseInt(e.target.value, 10);
+                setForm({ ...form, maxStudents: !Number.isFinite(n) || n < 2 ? 2 : n });
+              }
+            }
+          )
+        ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-3 pt-2 border-t border-border", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "outline", className: "flex-1", onClick: resetForm, disabled: submitting, children: "Цуцлах" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -38371,7 +38403,7 @@ function TeacherTopicManagementTab() {
           t.keywords && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-1.5 mt-2", children: t.keywords.split(",").map((k) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] bg-surface-muted text-ink-600 border border-border rounded-sm px-1.5 py-0.5", children: k.trim() }, k)) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-end gap-2 shrink-0", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-ink-400 whitespace-nowrap tabular-nums", children: t.createdAt ? t.createdAt.split("T")[0] : "" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-ink-400 whitespace-nowrap tabular-nums", children: t.createdAt ? fmtDateTime(t.createdAt) : "" }),
           t.status === "DRAFT" && /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { variant: "outline", size: "sm", onClick: () => handleSubmitForDeptReview(t.id), children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "w-3.5 h-3.5 mr-1.5", strokeWidth: 1.6 }),
             " Тэнхимд илгээх"
@@ -38539,7 +38571,7 @@ function TeacherTopicRequestsTab() {
                   /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1 tabular-nums", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-3 h-3", strokeWidth: 1.6 }),
                     " ",
-                    r.requestedAt?.split("T")[0] || "Огноогүй"
+                    fmtDateTime(r.requestedAt) || "Огноогүй"
                   ] }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "uppercase tracking-wider", children: r.status })
                 ] })
@@ -38592,7 +38624,7 @@ function TeacherTopicRequestsTab() {
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md p-3 border border-border bg-surface-muted", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1", children: "Илгээсэн огноо" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900 tabular-nums", children: selectedRequest.requestedAt?.split("T")[0] || "Огноогүй" })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900 tabular-nums", children: fmtDateTime(selectedRequest.requestedAt) || "Огноогүй" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md p-3 border border-border bg-surface-muted", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1", children: "Статус" }),
@@ -38740,7 +38772,7 @@ function TeacherStudentProposalsTab() {
                   /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1 tabular-nums", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-3 h-3", strokeWidth: 1.6 }),
                     " ",
-                    p.createdAt?.split("T")[0] || "Огноогүй"
+                    fmtDateTime(p.createdAt) || "Огноогүй"
                   ] }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] uppercase tracking-wider", children: p.status })
                 ] })
@@ -38977,7 +39009,7 @@ function TeacherPlanReviewTab() {
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$3.warning}` }),
                     PLAN_STATUS_LABEL$1[p.status] || p.status
                   ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-ink-400 tabular-nums", children: p.submittedAt?.split("T")[0] || "Огноогүй" })
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-ink-400 tabular-nums", children: fmtDateTime(p.submittedAt) || "Огноогүй" })
                 ] })
               ]
             },
@@ -38997,7 +39029,7 @@ function TeacherPlanReviewTab() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1 tabular-nums", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(CalendarDays, { className: "w-3.5 h-3.5", strokeWidth: 1.6 }),
                 "Илгээсэн: ",
-                selectedPlan.submittedAt?.split("T")[0] || "Огноогүй"
+                fmtDateTime(selectedPlan.submittedAt) || "Огноогүй"
               ] }),
               (selectedPlan.revisionCount ?? 0) > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-ink-700", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$3.warning}` }),
@@ -39664,7 +39696,7 @@ function TeacherProgress() {
           { label: "Шат", value: selectedStudent.stage },
           { label: "Байдал", value: statusMap[selectedStudent.status]?.label || selectedStudent.status },
           { label: "Засварын тоо", value: selectedStudent.revisionCount > 0 ? `${selectedStudent.revisionCount}x` : "—" },
-          { label: "Илгээсэн", value: selectedStudent.submittedAt ? selectedStudent.submittedAt.split("T")[0] : "—" }
+          { label: "Илгээсэн", value: selectedStudent.submittedAt ? fmtDateTime(selectedStudent.submittedAt) : "—" }
         ].map(({ label, value }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md p-3 border border-border bg-surface-muted", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1", children: label }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900 tabular-nums", children: value })
@@ -39969,8 +40001,9 @@ function ExternalExpertGrading() {
             if (committee.status !== "ACTIVE" && committee.status !== "Идэвхтэй") return;
             const stageType = committee.stageType || "";
             const sessionsRes = await workflowService.getDefenseSessions({ stageType }).catch(() => ({ data: [] }));
-            const liveSessions = sessionsRes.data.filter((s) => s.status === "OPEN" || s.status === "ACTIVE");
-            const session = liveSessions.find((s) => s.committeeId === assignment.committeeId) || liveSessions.find((s) => s.stageType === stageType) || null;
+            const all = sessionsRes.data;
+            const byStatus = (target) => all.find((s) => s.committeeId === assignment.committeeId && s.status === target) || all.find((s) => s.stageType === stageType && s.status === target);
+            const session = byStatus("ACTIVE") || byStatus("OPEN") || byStatus("SCHEDULED") || all.find((s) => s.committeeId === assignment.committeeId) || all.find((s) => s.stageType === stageType) || null;
             const students = studentsRes.data.map((cs) => ({
               studentId: cs.studentId,
               name: resolveName$1(cs.studentId, userMap, "Тодорхойгүй оюутан"),
@@ -40060,13 +40093,13 @@ function ExternalExpertGrading() {
   if (committees.length === 0) {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center h-72 text-ink-500", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "w-10 h-10 text-ink-200 mb-4", strokeWidth: 1.4 }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base font-medium text-ink-700", children: "Гадаад эксперт үнэлгээ байхгүй" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base font-medium text-ink-700", children: "Зочин шүүгчийн үнэлгээ байхгүй" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm mt-1 text-ink-400", children: "Танд хуваарилагдсан комиссийн үнэлгээ олдсонгүй." })
     ] });
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6 max-w-4xl mx-auto pb-10", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-semibold text-ink-900 tracking-tight", children: "Гадаад эксперт үнэлгээ" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-semibold text-ink-900 tracking-tight", children: "Зочин шүүгчийн үнэлгээ" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500 mt-1", children: "Томилогдсон комиссын оюутнуудад үнэлгээ өгнө үү." })
     ] }),
     committees.map((cmt) => {
@@ -40097,6 +40130,10 @@ function ExternalExpertGrading() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot.neutral}` }),
                 "Дууссан"
               ] }),
+              cmt.session && !sessionOpen && !sessionClosed && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-ink-500", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot.neutral}` }),
+                "Хуваарьт"
+              ] }),
               !cmt.session && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-ink-400", children: "Хуваарь тогтоогдоогүй" })
             ] })
           ] }),
@@ -40118,6 +40155,7 @@ function ExternalExpertGrading() {
         /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-0", children: [
           !cmt.session && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-8 text-center text-ink-400 text-sm", children: "Хамгаалалтын сесс эхлээгүй байна." }),
           cmt.session && cmt.students.length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-8 text-center text-ink-400 text-sm", children: "Комисст оюутан байхгүй байна." }),
+          cmt.session && !sessionOpen && !sessionClosed && cmt.students.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 py-2.5 bg-surface-muted border-b border-border text-xs text-ink-600", children: "Хамгаалалт хараахан эхлээгүй. Үнэлгээг сесс эхэлсний дараа өгнө үү." }),
           cmt.session && cmt.students.map((student) => {
             const existing = cmt.myGrades[student.studentId];
             const isGrading = gradingStudent?.committeeId === cmt.committeeId && gradingStudent?.studentId === student.studentId;
@@ -40126,9 +40164,9 @@ function ExternalExpertGrading() {
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 "div",
                 {
-                  className: "p-4 flex items-center justify-between hover:bg-surface-muted transition-colors cursor-pointer select-none",
+                  className: `p-4 flex items-center justify-between transition-colors select-none ${sessionOpen ? "hover:bg-surface-muted cursor-pointer" : "cursor-default"}`,
                   onClick: () => {
-                    if (sessionClosed) return;
+                    if (!sessionOpen) return;
                     if (isGrading) {
                       setGradingStudent(null);
                       return;
@@ -40166,7 +40204,7 @@ function ExternalExpertGrading() {
                         existing.points,
                         "/",
                         scheme?.total
-                      ] }) : sessionClosed ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-400", children: "Дууссан" }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1 text-xs text-ink-600", children: [
+                      ] }) : sessionClosed ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-400", children: "Дууссан" }) : !sessionOpen ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-400", children: "Хүлээгдэж буй" }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1 text-xs text-ink-600", children: [
                         isGrading ? /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronUp, { className: "w-3 h-3", strokeWidth: 1.6 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "w-3 h-3", strokeWidth: 1.6 }),
                         existing ? "Засах" : "Үнэлэх"
                       ] })

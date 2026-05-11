@@ -61,6 +61,7 @@ public class AssignTeacherService implements AssignTeacherUseCase {
                                             .flatMap(saved -> committeeEventPublisherPort.publishTeacherAssigned(
                                                     new TeacherAssignedEvent(
                                                             saved.getCommitteeId(),
+                                                            committee.getName(),
                                                             saved.getTeacherId(),
                                                             saved.getRole(),
                                                             committee.getDepartmentId(),

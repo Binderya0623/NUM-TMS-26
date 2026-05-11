@@ -45,16 +45,30 @@ public class NotificationController {
     }
 
     /**
+     * Coerce a path string to a UUID. Some legacy callers store the username
+     * instead of the UUID in localStorage and forward it here, which would
+     * otherwise cause Spring to fail conversion with a 400 before our handler
+     * runs. Returning {@code null} lets the endpoint short-circuit with an
+     * empty/zero response instead of breaking the bell badge for that user.
+     */
+    private static UUID parseUuidOrNull(String raw) {
+        if (raw == null || raw.isBlank()) return null;
+        try { return UUID.fromString(raw); } catch (IllegalArgumentException e) { return null; }
+    }
+
+    /**
      * GET /api/notifications/user/{userId}[?unreadOnly=true]
      * Lists this user's notifications, newest first.
      */
     @Operation(summary = "Get notifications by userId")
     @GetMapping("/user/{userId}")
     public Flux<Notification> getByUserId(
-            @PathVariable UUID userId,
+            @PathVariable String userId,
             @RequestParam(defaultValue = "false") boolean unreadOnly
     ) {
-        return unreadOnly ? loadPort.findUnreadByUserId(userId) : loadPort.findByUserId(userId);
+        UUID uuid = parseUuidOrNull(userId);
+        if (uuid == null) return Flux.empty();
+        return unreadOnly ? loadPort.findUnreadByUserId(uuid) : loadPort.findByUserId(uuid);
     }
 
     /**
@@ -62,8 +76,10 @@ public class NotificationController {
      * Drives the bell badge on the layout's TopHeader.
      */
     @GetMapping("/user/{userId}/unread-count")
-    public Mono<Map<String, Long>> unreadCount(@PathVariable UUID userId) {
-        return loadPort.countUnreadByUserId(userId).map(c -> Map.of("count", c));
+    public Mono<Map<String, Long>> unreadCount(@PathVariable String userId) {
+        UUID uuid = parseUuidOrNull(userId);
+        if (uuid == null) return Mono.just(Map.of("count", 0L));
+        return loadPort.countUnreadByUserId(uuid).map(c -> Map.of("count", c));
     }
 
     /**
@@ -128,8 +144,10 @@ public class NotificationController {
      * PATCH /api/notifications/user/{userId}/read-all — mass mark-read.
      */
     @PatchMapping("/user/{userId}/read-all")
-    public Mono<ResponseEntity<Void>> markAllRead(@PathVariable UUID userId) {
-        return loadPort.findUnreadByUserId(userId)
+    public Mono<ResponseEntity<Void>> markAllRead(@PathVariable String userId) {
+        UUID uuid = parseUuidOrNull(userId);
+        if (uuid == null) return Mono.just(ResponseEntity.noContent().build());
+        return loadPort.findUnreadByUserId(uuid)
                 .flatMap(n -> {
                     n.markRead();
                     return savePort.update(n);

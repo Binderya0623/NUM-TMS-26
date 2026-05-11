@@ -38,10 +38,15 @@ export interface ReviewerAssignment {
 
 // Role mapping: Mongolian UI labels → backend CommitteeRole enum values
 const roleMap: Record<string, string> = {
-  'Дарга': 'HEAD',
-  'Нарийн бичгийн дарга': 'SECRETARY',
+  'Ахлах': 'HEAD',
+  'Нарийн бичиг': 'SECRETARY',
   'Гишүүн': 'MEMBER',
   'Хянагч': 'MEMBER',
+  'Зочин шүүгч': 'EXTERNAL_EXPERT',
+  // Legacy labels kept for backward compatibility (older committees may still
+  // store the old role names in selectedTeachers state during a session).
+  'Дарга': 'HEAD',
+  'Нарийн бичгийн дарга': 'SECRETARY',
   'Эксперт': 'EXTERNAL_EXPERT',
 };
 
@@ -72,11 +77,17 @@ export const committeeService = {
       role: roleMap[body.role] || body.role.toUpperCase(),
     }),
 
+  removeMember: (assignmentId: string) =>
+    committeeApi.delete(`/api/committee-teachers/${assignmentId}`),
+
   getStudents: (committeeId: string) =>
     committeeApi.get<CommitteeStudent[]>(`/api/committees/${committeeId}/students`).catch(() => ({ data: [] as CommitteeStudent[] })),
 
   addStudent: (committeeId: string, studentId: string) =>
     committeeApi.post(`/api/committees/${committeeId}/students`, { studentId }),
+
+  removeStudent: (committeeId: string, studentId: string) =>
+    committeeApi.delete(`/api/committees/${committeeId}/students/${studentId}`),
 
   getReviewerAssignments: (params: { committeeId?: string; defenseSessionId?: string }) =>
     committeeApi.get<ReviewerAssignment[]>('/api/reviewer-assignments', { params })

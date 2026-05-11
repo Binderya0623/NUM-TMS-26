@@ -7,6 +7,7 @@ import { topicService } from '../../../../services/topicService';
 import type { Topic } from '../../../../services/topicService';
 import { getStoredUser } from '../../../../lib/authGuard';
 import { RichTextEditor, RichText } from '../../../components/RichTextEditor';
+import { fmtDateTime } from "../../../../lib/utils";
 
 type Tone = "positive" | "warning" | "negative" | "neutral";
 
@@ -34,7 +35,7 @@ export default function TeacherTopicManagementTab() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({ title: '', titleEn: '', description: '', goal: '', keywords: '', visibility: 'PUBLIC' });
+  const [form, setForm] = useState({ title: '', titleEn: '', description: '', goal: '', keywords: '', visibility: 'PUBLIC', maxStudents: 1 });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -56,7 +57,7 @@ export default function TeacherTopicManagementTab() {
   };
 
   const resetForm = () => {
-    setForm({ title: '', titleEn: '', description: '', goal: '', keywords: '', visibility: 'PUBLIC' });
+    setForm({ title: '', titleEn: '', description: '', goal: '', keywords: '', visibility: 'PUBLIC', maxStudents: 1 });
     setErrors({});
     setShowForm(false);
   };
@@ -73,6 +74,7 @@ export default function TeacherTopicManagementTab() {
       createdById: teacherId,
       visibility: form.visibility,
       status: 'ACTIVE',
+      maxStudents: form.maxStudents > 0 ? form.maxStudents : 1,
     })
       .then(res => {
         setTopics(prev => [res.data, ...prev]);
@@ -123,7 +125,7 @@ export default function TeacherTopicManagementTab() {
                 className={errors.title ? 'border-[var(--color-dot-negative)]' : ''}
               />
             </FormField>
-            <FormField label="Сэдвийн нэр (English)" required hint="NUM TMS bilingual requirement" error={errors.titleEn}>
+            <FormField label="Сэдвийн нэр (Англи)" required hint="NUM TMS bilingual requirement" error={errors.titleEn}>
               <Input
                 value={form.titleEn}
                 onChange={e => setForm({ ...form, titleEn: e.target.value })}
@@ -171,6 +173,28 @@ export default function TeacherTopicManagementTab() {
                 <option value="PUBLIC">Нийтэд нээлттэй</option>
                 <option value="PRIVATE">Зөвхөн урилгаар</option>
               </select>
+            </FormField>
+            <FormField label="Сонголт" hint="Хэдэн оюутан энэ сэдвийг сонгож болох вэ?">
+              <select
+                value={form.maxStudents === 1 ? "single" : "multi"}
+                onChange={e => setForm({ ...form, maxStudents: e.target.value === "single" ? 1 : Math.max(2, form.maxStudents) })}
+                className="w-full border border-border rounded-md px-3 py-2 text-sm focus:outline-none focus:border-ink-900 bg-surface"
+              >
+                <option value="single">Зөвхөн нэг оюутан</option>
+                <option value="multi">Олон оюутан</option>
+              </select>
+              {form.maxStudents > 1 && (
+                <Input
+                  type="number"
+                  min={2}
+                  className="mt-2"
+                  value={form.maxStudents}
+                  onChange={e => {
+                    const n = parseInt(e.target.value, 10);
+                    setForm({ ...form, maxStudents: !Number.isFinite(n) || n < 2 ? 2 : n });
+                  }}
+                />
+              )}
             </FormField>
             <div className="flex gap-3 pt-2 border-t border-border">
               <Button variant="outline" className="flex-1" onClick={resetForm} disabled={submitting}>Цуцлах</Button>
@@ -240,7 +264,7 @@ export default function TeacherTopicManagementTab() {
                     </div>
                     <div className="flex flex-col items-end gap-2 shrink-0">
                       <div className="text-xs text-ink-400 whitespace-nowrap tabular-nums">
-                        {t.createdAt ? t.createdAt.split('T')[0] : ''}
+                        {t.createdAt ? fmtDateTime(t.createdAt) : ''}
                       </div>
                       {t.status === "DRAFT" && (
                         <Button variant="outline" size="sm" onClick={() => handleSubmitForDeptReview(t.id)}>

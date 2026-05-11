@@ -109,21 +109,49 @@ public class TopicRequestService {
             throw new IllegalStateException("Request is not in PENDING status");
         }
 
+        // Cheapest sanity check: refuse only an outright missing/empty teacherId.
+        // Earlier we also enforced the local `teacher` snapshot, but that table
+        // isn't always synced with user-service for live-created teachers, so
+        // legitimate approvals were rejected. The real root cause of phantom
+        // supervisors was the SystemRole enum mismatch in user-service, which
+        // is fixed there.
+        if (teacherId == null || teacherId.isBlank()) {
+            throw new IllegalArgumentException("teacherId is required to approve a topic request");
+        }
+
         String studentId = (String) raw.get("requested_by_id");
+        Long topicId = ((Number) raw.get("topic_id")).longValue();
+
+        // Capacity check: how many slots does this topic offer, and how many
+        // are already taken? Reject the approve if already full.
+        Integer maxStudents = jdbc.queryForObject(
+                "SELECT COALESCE(max_students, 1) FROM topic WHERE id = ?", Integer.class, topicId);
+        if (maxStudents == null) maxStudents = 1;
+        Integer alreadyApproved = jdbc.queryForObject(
+                "SELECT COUNT(*) FROM topic_request WHERE topic_id = ? AND status = 'APPROVED'",
+                Integer.class, topicId);
+        if (alreadyApproved != null && alreadyApproved >= maxStudents) {
+            throw new IllegalStateException(
+                    "Topic capacity reached: " + alreadyApproved + "/" + maxStudents
+                    + " students already selected this topic.");
+        }
 
         // Approve this request
         jdbc.update("UPDATE topic_request SET status = 'APPROVED', is_selected = TRUE, selected_at = CURRENT_DATE, " +
                     "responded_by_id = ?, responded_at = CURRENT_TIMESTAMP WHERE id = ?", teacherId, requestId);
 
-        Long topicId = ((Number) raw.get("topic_id")).longValue();
-
-        // Auto-cancel all OTHER pending requests for this student
+        // Auto-cancel all OTHER pending requests for this student (one approved
+        // request per student is the workflow rule, regardless of topic capacity).
         jdbc.update("UPDATE topic_request SET status = 'CANCELLED' " +
                     "WHERE requested_by_id = ? AND status = 'PENDING' AND id != ?", studentId, requestId);
 
-        // Auto-cancel all other pending requests for this topic from other students
-        jdbc.update("UPDATE topic_request SET status = 'CANCELLED' " +
-                    "WHERE topic_id = ? AND status = 'PENDING' AND id != ?", topicId, requestId);
+        // Only cancel other pending requests for this topic when capacity is
+        // now exhausted. For multi-slot topics, leave other PENDING requests
+        // alone so additional students can still be approved later.
+        if (alreadyApproved != null && alreadyApproved + 1 >= maxStudents) {
+            jdbc.update("UPDATE topic_request SET status = 'CANCELLED' " +
+                        "WHERE topic_id = ? AND status = 'PENDING' AND id != ?", topicId, requestId);
+        }
 
         // Mark student as having approved topic in snapshot
         jdbc.update("UPDATE student SET is_choosed = TRUE WHERE sisi_id = ?", studentId);

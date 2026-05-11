@@ -117,13 +117,13 @@ export default function ExternalExperts() {
 
         <Button onClick={() => { resetForm(); setShowCreate(true); }}>
           <Plus className="w-4 h-4" strokeWidth={1.6} />
-          Гадаад эксперт нэмэх
+          Зочин шүүгч нэмэх
         </Button>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         {[
-          { label: "Нийт гадаад экспертүүд", value: loading ? "..." : experts.length },
+          { label: "Нийт зочин шүүгчид", value: loading ? "..." : experts.length },
           { label: "Шүүлтэнд тохирсон",     value: filtered.length },
         ].map((s) => (
           <Card key={s.label}>
@@ -142,7 +142,7 @@ export default function ExternalExperts() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-border bg-surface-muted">
-                <th className="text-left px-5 py-3 text-[11px] font-medium text-ink-500 uppercase tracking-wider">Эксперт</th>
+                <th className="text-left px-5 py-3 text-[11px] font-medium text-ink-500 uppercase tracking-wider">Зочин шүүгч</th>
                 <th className="text-left px-4 py-3 text-[11px] font-medium text-ink-500 uppercase tracking-wider hidden md:table-cell">Байгууллага</th>
                 <th className="text-left px-4 py-3 text-[11px] font-medium text-ink-500 uppercase tracking-wider hidden lg:table-cell">Мэргэжил</th>
                 <th className="text-left px-4 py-3 text-[11px] font-medium text-ink-500 uppercase tracking-wider">Үүрэг</th>
@@ -153,7 +153,7 @@ export default function ExternalExperts() {
               {loading ? (
                 <tr><td colSpan={5} className="text-center py-10 text-sm text-ink-400">Ачааллаж байна...</td></tr>
               ) : filtered.length === 0 ? (
-                <tr><td colSpan={5} className="text-center py-10 text-sm text-ink-400">Гадаад эксперт бүртгэгдээгүй байна.</td></tr>
+                <tr><td colSpan={5} className="text-center py-10 text-sm text-ink-400">Зочин шүүгч бүртгэгдээгүй байна.</td></tr>
               ) : filtered.map((expert) => (
                 <tr key={expert.id} className="border-b border-border last:border-b-0 hover:bg-surface-muted/60 transition-colors">
                   <td className="px-5 py-3.5">
@@ -176,7 +176,7 @@ export default function ExternalExperts() {
                   <td className="px-4 py-3.5">
                     <span className="inline-flex items-center gap-1.5 text-xs text-ink-700 font-medium tracking-tight">
                       <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-neutral)]" />
-                      Гадаад эксперт
+                      Зочин шүүгч
                     </span>
                   </td>
                   <td className="px-4 py-3.5 text-right">
@@ -194,7 +194,7 @@ export default function ExternalExperts() {
           </table>
 
           <div className="flex items-center justify-between px-5 py-3 border-t border-border">
-            <p className="text-xs text-ink-500">{filtered.length} / {experts.length} эксперт харагдаж байна</p>
+            <p className="text-xs text-ink-500">{filtered.length} / {experts.length} зочин шүүгч харагдаж байна</p>
           </div>
         </div>
       </Card>
@@ -208,7 +208,7 @@ export default function ExternalExperts() {
                 <div className="w-12 h-12 rounded-full border border-border-strong flex items-center justify-center">
                   <CheckCircle2 className="w-6 h-6 text-ink-900" strokeWidth={1.6} />
                 </div>
-                <p className="text-sm text-ink-500">Гадаад эксперт системд нэмэгдлээ.</p>
+                <p className="text-sm text-ink-500">Зочин шүүгч системд нэмэгдлээ.</p>
                 {createdCredentials && (
                   <div className="w-full border border-border rounded-md p-4 text-left space-y-2 bg-surface-muted">
                     <p className="text-[11px] font-medium text-ink-500 uppercase tracking-wider">Нэвтрэх мэдээлэл</p>
@@ -222,7 +222,7 @@ export default function ExternalExperts() {
                         <span className="font-mono font-medium text-ink-900">{createdCredentials.password}</span>
                       </div>
                     </div>
-                    <p className="text-xs text-ink-500 mt-2">Энэ мэдээллийг эксперттэй хуваалцана уу.</p>
+                    <p className="text-xs text-ink-500 mt-2">Энэ мэдээллийг зочин шүүгчтэй хуваалцана уу.</p>
                   </div>
                 )}
               </div>
@@ -233,7 +233,7 @@ export default function ExternalExperts() {
           </>
         ) : (
           <>
-            <DialogHeader title="Гадаад эксперт бүртгэх" onClose={closeDialog} />
+            <DialogHeader title="Зочин шүүгч бүртгэх" onClose={closeDialog} />
             <DialogBody>
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">

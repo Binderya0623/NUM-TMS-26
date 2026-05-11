@@ -10,7 +10,7 @@ import { planService, type Plan } from "../../../services/planService";
 import { userService, type UserRecord } from "../../../services/userService";
 import { evaluationService } from "../../../services/evaluationService";
 import { getStoredUser } from "../../../lib/authGuard";
-import { resolveName } from "../../../lib/utils";
+import { resolveName, fmtDateTime} from "../../../lib/utils";
 
 interface DisplayStudent {
   id: string;
@@ -352,7 +352,7 @@ export default function TeacherProgress() {
                   { label: "Шат", value: selectedStudent.stage },
                   { label: "Байдал", value: statusMap[selectedStudent.status]?.label || selectedStudent.status },
                   { label: "Засварын тоо", value: selectedStudent.revisionCount > 0 ? `${selectedStudent.revisionCount}x` : "—" },
-                  { label: "Илгээсэн", value: selectedStudent.submittedAt ? selectedStudent.submittedAt.split('T')[0] : "—" },
+                  { label: "Илгээсэн", value: selectedStudent.submittedAt ? fmtDateTime(selectedStudent.submittedAt) : "—" },
                 ].map(({ label, value }) => (
                   <div key={label} className="rounded-md p-3 border border-border bg-surface-muted">
                     <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1">{label}</p>

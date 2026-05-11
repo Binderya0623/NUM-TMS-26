@@ -38,7 +38,7 @@ function fmtDate(iso?: string) {
   if (!iso) return null;
   return new Date(iso).toLocaleDateString("mn-MN", { year: "numeric", month: "long", day: "numeric" });
 }
-function fmtDateTime(iso?: string) {
+function fmtLocaleDateTime(iso?: string) {
   if (!iso) return null;
   return new Date(iso).toLocaleString("mn-MN", {
     year: "numeric", month: "short", day: "numeric",
@@ -260,7 +260,7 @@ export default function StudentEvaluationDeadlines() {
                           <div className="flex items-center gap-4 text-xs text-ink-500 mt-1 flex-wrap">
                             <span className="flex items-center gap-1">
                               <Calendar className="w-3.5 h-3.5" strokeWidth={1.6} />
-                              {fmtDateTime(session.scheduledDate)}
+                              {fmtLocaleDateTime(session.scheduledDate)}
                             </span>
                             {session.location && (
                               <span className="flex items-center gap-1">
@@ -294,7 +294,7 @@ export default function StudentEvaluationDeadlines() {
                       {session ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3">
                           {session.scheduledDate && (
-                            <InfoTile icon={<Calendar className="w-4 h-4 text-ink-700" strokeWidth={1.6} />} label="Огноо, цаг" value={fmtDateTime(session.scheduledDate) ?? "—"} />
+                            <InfoTile icon={<Calendar className="w-4 h-4 text-ink-700" strokeWidth={1.6} />} label="Огноо, цаг" value={fmtLocaleDateTime(session.scheduledDate) ?? "—"} />
                           )}
                           {session.location && (
                             <InfoTile icon={<MapPin className="w-4 h-4 text-ink-700" strokeWidth={1.6} />} label="Байршил / Өрөө" value={session.location} />
@@ -483,7 +483,7 @@ export default function StudentEvaluationDeadlines() {
                     </div>
                     <div>
                       <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500">Огноо</p>
-                      <p className="text-sm font-medium text-ink-900">{fmtDateTime(upcomingSession.scheduledDate)}</p>
+                      <p className="text-sm font-medium text-ink-900">{fmtLocaleDateTime(upcomingSession.scheduledDate)}</p>
                       {(() => {
                         const d = daysFrom(upcomingSession.scheduledDate);
                         if (d === null) return null;

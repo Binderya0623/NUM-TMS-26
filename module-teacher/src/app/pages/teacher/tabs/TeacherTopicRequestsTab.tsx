@@ -7,7 +7,7 @@ import { BookOpen, CheckCircle2, XCircle, Calendar, AlertCircle, Bookmark } from
 import { topicService, type TopicRequest } from "../../../../services/topicService";
 import { userService } from "../../../../services/userService";
 import { getStoredUser } from "../../../../lib/authGuard";
-import { resolveName, initialsFromName } from "../../../../lib/utils";
+import { resolveName, initialsFromName, fmtDateTime} from "../../../../lib/utils";
 import { RichTextEditor, RichText } from "../../../components/RichTextEditor";
 
 export default function TeacherTopicRequestsTab() {
@@ -114,7 +114,7 @@ export default function TeacherTopicRequestsTab() {
                     </div>
                     <div className="mt-2.5 flex justify-between items-center text-[11px] text-ink-500">
                       <span className="flex items-center gap-1 tabular-nums">
-                        <Calendar className="w-3 h-3" strokeWidth={1.6} /> {r.requestedAt?.split("T")[0] || "Огноогүй"}
+                        <Calendar className="w-3 h-3" strokeWidth={1.6} /> {fmtDateTime(r.requestedAt) || "Огноогүй"}
                       </span>
                       <span className="uppercase tracking-wider">{r.status}</span>
                     </div>
@@ -182,7 +182,7 @@ export default function TeacherTopicRequestsTab() {
                 <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-md p-3 border border-border bg-surface-muted">
                     <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1">Илгээсэн огноо</p>
-                    <p className="text-sm font-medium text-ink-900 tabular-nums">{selectedRequest.requestedAt?.split("T")[0] || "Огноогүй"}</p>
+                    <p className="text-sm font-medium text-ink-900 tabular-nums">{fmtDateTime(selectedRequest.requestedAt) || "Огноогүй"}</p>
                   </div>
                   <div className="rounded-md p-3 border border-border bg-surface-muted">
                     <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mb-1">Статус</p>

@@ -16,6 +16,8 @@ export interface Topic {
   keywords?: string;
   rejectionReason?: string;
   createdAt?: string;
+  /** Number of students that may have an APPROVED request for this topic. Default 1. */
+  maxStudents?: number;
 }
 
 export interface TopicDeptDecisionRequest {

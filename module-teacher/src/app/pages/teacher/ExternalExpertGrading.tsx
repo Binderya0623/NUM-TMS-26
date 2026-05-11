@@ -144,12 +144,20 @@ export default function ExternalExpertGrading() {
             const stageType = committee.stageType || '';
             // Admin creates a single GLOBAL defense session per stage (committeeId='GLOBAL'),
             // so querying by committeeId misses it. Query by stageType, prefer per-committee
-            // session, else fall back to the global one.
+            // session, else fall back to the global one. Don't restrict to OPEN/ACTIVE —
+            // a SCHEDULED final-defense session should still surface so the expert sees
+            // the roster ahead of the session opening.
             const sessionsRes = await workflowService.getDefenseSessions({ stageType })
               .catch(() => ({ data: [] as DefenseSession[] }));
-            const liveSessions = sessionsRes.data.filter(s => s.status === 'OPEN' || s.status === 'ACTIVE');
-            const session = liveSessions.find(s => s.committeeId === assignment.committeeId)
-              || liveSessions.find(s => s.stageType === stageType)
+            const all = sessionsRes.data;
+            const byStatus = (target: string) =>
+              all.find(s => s.committeeId === assignment.committeeId && s.status === target)
+              || all.find(s => s.stageType === stageType && s.status === target);
+            const session = byStatus('ACTIVE')
+              || byStatus('OPEN')
+              || byStatus('SCHEDULED')
+              || all.find(s => s.committeeId === assignment.committeeId)
+              || all.find(s => s.stageType === stageType)
               || null;
 
             const students: StudentInfo[] = studentsRes.data.map(cs => ({
@@ -247,7 +255,7 @@ export default function ExternalExpertGrading() {
     return (
       <div className="flex flex-col items-center justify-center h-72 text-ink-500">
         <Award className="w-10 h-10 text-ink-200 mb-4" strokeWidth={1.4} />
-        <p className="text-base font-medium text-ink-700">Гадаад эксперт үнэлгээ байхгүй</p>
+        <p className="text-base font-medium text-ink-700">Зочин шүүгчийн үнэлгээ байхгүй</p>
         <p className="text-sm mt-1 text-ink-400">Танд хуваарилагдсан комиссийн үнэлгээ олдсонгүй.</p>
       </div>
     );
@@ -256,7 +264,7 @@ export default function ExternalExpertGrading() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto pb-10">
       <div>
-        <h1 className="text-2xl font-semibold text-ink-900 tracking-tight">Гадаад эксперт үнэлгээ</h1>
+        <h1 className="text-2xl font-semibold text-ink-900 tracking-tight">Зочин шүүгчийн үнэлгээ</h1>
         <p className="text-sm text-ink-500 mt-1">Томилогдсон комиссын оюутнуудад үнэлгээ өгнө үү.</p>
       </div>
 
@@ -298,6 +306,12 @@ export default function ExternalExpertGrading() {
                         Дууссан
                       </span>
                     )}
+                    {cmt.session && !sessionOpen && !sessionClosed && (
+                      <span className="inline-flex items-center gap-1.5 text-ink-500">
+                        <span className={`w-1.5 h-1.5 rounded-full ${toneDot.neutral}`} />
+                        Хуваарьт
+                      </span>
+                    )}
                     {!cmt.session && (
                       <span className="text-ink-400">Хуваарь тогтоогдоогүй</span>
                     )}
@@ -323,6 +337,11 @@ export default function ExternalExpertGrading() {
               {cmt.session && cmt.students.length === 0 && (
                 <div className="p-8 text-center text-ink-400 text-sm">Комисст оюутан байхгүй байна.</div>
               )}
+              {cmt.session && !sessionOpen && !sessionClosed && cmt.students.length > 0 && (
+                <div className="px-4 py-2.5 bg-surface-muted border-b border-border text-xs text-ink-600">
+                  Хамгаалалт хараахан эхлээгүй. Үнэлгээг сесс эхэлсний дараа өгнө үү.
+                </div>
+              )}
 
               {cmt.session && cmt.students.map(student => {
                 const existing = cmt.myGrades[student.studentId];
@@ -332,9 +351,11 @@ export default function ExternalExpertGrading() {
                 return (
                   <div key={student.studentId} className="border-b border-border last:border-0">
                     <div
-                      className="p-4 flex items-center justify-between hover:bg-surface-muted transition-colors cursor-pointer select-none"
+                      className={`p-4 flex items-center justify-between transition-colors select-none ${
+                        sessionOpen ? "hover:bg-surface-muted cursor-pointer" : "cursor-default"
+                      }`}
                       onClick={() => {
-                        if (sessionClosed) return;
+                        if (!sessionOpen) return;
                         if (isGrading) { setGradingStudent(null); return; }
                         openGrading(cmt.committeeId, student.studentId, existing);
                       }}
@@ -368,6 +389,8 @@ export default function ExternalExpertGrading() {
                           </span>
                         ) : sessionClosed ? (
                           <span className="text-xs text-ink-400">Дууссан</span>
+                        ) : !sessionOpen ? (
+                          <span className="text-xs text-ink-400">Хүлээгдэж буй</span>
                         ) : (
                           <span className="inline-flex items-center gap-1 text-xs text-ink-600">
                             {isGrading ? <ChevronUp className="w-3 h-3" strokeWidth={1.6} /> : <ChevronDown className="w-3 h-3" strokeWidth={1.6} />}

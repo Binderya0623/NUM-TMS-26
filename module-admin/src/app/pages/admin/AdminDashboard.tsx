@@ -5,7 +5,7 @@ import { userService, type UserRecord } from "../../../services/userService";
 import { planService, type Plan } from "../../../services/planService";
 import { topicService, type Topic } from "../../../services/topicService";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
-import { isUuid, initialsFromName, resolveName } from "../../../lib/utils";
+import { isUuid, initialsFromName, resolveName, fmtDateTime} from "../../../lib/utils";
 
 // Navy-rooted brand ramp (deep → light) — matches student/teacher accent #1455bd
 const MONO_SHADES = ["#1455bd", "#1d4ed8", "#3b82f6", "#60a5fa", "#93c5fd"];
@@ -274,7 +274,7 @@ export default function AdminDashboard() {
                             <span className={`w-1 h-1 rounded-full ${toneDot[tone]}`} />
                             {STATUS_LABEL[p.status] || p.status}
                           </span>
-                          <span className="text-[11px] text-ink-400 tabular-nums">· {p.createdAt?.split('T')[0] || 'Огноогүй'}</span>
+                          <span className="text-[11px] text-ink-400 tabular-nums">· {fmtDateTime(p.createdAt) || 'Огноогүй'}</span>
                         </div>
                       </div>
                     </div>

@@ -18,7 +18,7 @@ import { evaluationService } from "../../../services/evaluationService";
 import type { SecretarySubmission, ReviewDocument, DefenseGrade } from "../../../services/evaluationService";
 import type { ReviewerAssignment } from "../../../services/committeeService";
 import { getStoredUser } from "../../../lib/authGuard";
-import { resolveName } from "../../../lib/utils";
+import { resolveName, fmtDateTime} from "../../../lib/utils";
 import { useNavigate, useSearchParams } from "react-router";
 import FilePreviewModal from "../../components/FilePreviewModal";
 import { RichTextEditor } from "../../components/RichTextEditor";
@@ -639,9 +639,9 @@ export default function TeacherStudents() {
       m.role === 'HEAD' || m.role === 'SECRETARY' || m.role === 'MEMBER' || m.role === 'EXTERNAL_EXPERT'
     );
     const roleLabel = (r: string) =>
-      r === 'HEAD' ? 'Дарга' :
+      r === 'HEAD' ? 'Ахлах' :
       r === 'SECRETARY' ? 'Нарийн бичиг' :
-      r === 'EXTERNAL_EXPERT' ? 'Эксперт' : 'Гишүүн';
+      r === 'EXTERNAL_EXPERT' ? 'Зочин шүүгч' : 'Гишүүн';
     const headers = [
       'Оюутан', 'Оюутны ID',
       ...graders.map(m => `${teacherNameMap[m.teacherId] || m.teacherId} (${roleLabel(m.role)})`),
@@ -660,7 +660,7 @@ export default function TeacherStudents() {
       cells.push(avg !== null ? avg.toFixed(2) : '—');
       cells.push(maxTotal ? String(maxTotal) : '—');
       cells.push(sub ? 'Илгээсэн' : (count === graders.length && graders.length > 0 ? 'Бэлэн' : `${count}/${graders.length}`));
-      cells.push(sub?.submittedAt ? sub.submittedAt.split('T')[0] : '—');
+      cells.push(sub?.submittedAt ? fmtDateTime(sub.submittedAt) : '—');
       return cells;
     });
     const escape = (v: string) => {
@@ -1064,7 +1064,7 @@ export default function TeacherStudents() {
                                 <FileDown className="w-3.5 h-3.5" strokeWidth={1.6} /> Дипломын тайлан
                               </p>
                               <p className="text-xs text-ink-400 mt-1 flex items-center gap-1 tabular-nums">
-                                <Clock className="w-3 h-3" strokeWidth={1.6} /> Илгээсэн: {report.submittedAt?.split('T')[0] || 'Огноогүй'}
+                                <Clock className="w-3 h-3" strokeWidth={1.6} /> Илгээсэн: {fmtDateTime(report.submittedAt) || 'Огноогүй'}
                               </p>
                             </div>
                           </div>
@@ -1391,9 +1391,9 @@ export default function TeacherStudents() {
                       m.role === 'HEAD' || m.role === 'SECRETARY' || m.role === 'MEMBER' || m.role === 'EXTERNAL_EXPERT'
                     );
                     const roleLabel = (r: string) =>
-                      r === 'HEAD' ? 'Дарга' :
+                      r === 'HEAD' ? 'Ахлах' :
                       r === 'SECRETARY' ? 'Нарийн бичиг' :
-                      r === 'EXTERNAL_EXPERT' ? 'Эксперт' : 'Гишүүн';
+                      r === 'EXTERNAL_EXPERT' ? 'Зочин шүүгч' : 'Гишүүн';
                     const submissionFor = (sid: string) =>
                       sessionSubmissions.find(s => s.studentId === sid);
 
@@ -1491,7 +1491,7 @@ export default function TeacherStudents() {
                                   </td>
                                   <td className="text-right px-3 py-2 border-b border-border">
                                     {sub ? (
-                                      <span className="text-xs text-ink-500 tabular-nums">{sub.submittedAt?.split('T')[0] || '—'}</span>
+                                      <span className="text-xs text-ink-500 tabular-nums">{fmtDateTime(sub.submittedAt) || '—'}</span>
                                     ) : (
                                       <div className="flex flex-col items-end gap-1">
                                         <Button size="sm"
@@ -1762,9 +1762,9 @@ export default function TeacherStudents() {
                   ) : committeeStudents.map(student => {
                     const existing = reviewerAssignments.find(a => a.studentId === student.studentId);
                     const roleLabel = (role: string) => {
-                      if (role === 'HEAD') return 'Дарга';
-                      if (role === 'SECRETARY') return 'Нарийн бичгийн дарга';
-                      if (role === 'EXTERNAL_EXPERT') return 'Гадаад эксперт';
+                      if (role === 'HEAD') return 'Ахлах';
+                      if (role === 'SECRETARY') return 'Нарийн бичиг';
+                      if (role === 'EXTERNAL_EXPERT') return 'Зочин шүүгч';
                       return 'Гишүүн';
                     };
                     return (

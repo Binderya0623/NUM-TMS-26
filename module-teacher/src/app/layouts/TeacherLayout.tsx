@@ -14,7 +14,7 @@ const pageTitles: Record<string, { title: string; subtitle: string }> = {
   "/teacher/progress": { title: "Явцын хяналт", subtitle: "Бүх оюутны дэвшил, шат, эцсийн хугацааг хянах" },
   "/teacher/committee": { title: "Комисс", subtitle: "Комиссийн үнэлгээний даалгавраа удирдах" },
   "/teacher/evaluations": { title: "Комисс", subtitle: "Комиссийн үнэлгээний даалгавраа удирдах" },
-  "/teacher/expert": { title: "Гадаад эксперт үнэлгээ", subtitle: "Томилогдсон комиссын оюутнуудад үнэлгээ өгөх" },
+  "/teacher/expert": { title: "Зочин шүүгчийн үнэлгээ", subtitle: "Томилогдсон комиссын оюутнуудад үнэлгээ өгөх" },
   "/teacher/settings": { title: "Тохиргоо", subtitle: "Профайл, тохиргоо удирдах" },
 };
 

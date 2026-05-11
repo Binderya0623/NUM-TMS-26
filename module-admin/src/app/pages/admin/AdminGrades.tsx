@@ -10,7 +10,7 @@ import { evaluationService, type FinalGrade } from "../../../services/evaluation
 import { planService } from "../../../services/planService";
 import { workflowService } from "../../../services/workflowService";
 import { userService } from "../../../services/userService";
-import { resolveName } from "../../../lib/utils";
+import { resolveName, fmtDateTime} from "../../../lib/utils";
 
 interface DisplayGrade {
   id: string;
@@ -64,7 +64,7 @@ const toDisplayGrade = (g: FinalGrade, studentName: string): DisplayGrade => {
     letterGrade: g.gradeLetter || letterFromScore(total),
     status: g.isPublished ? 'Нийтлэгдсэн' : total != null ? 'Ноорог' : 'Хүлээгдэж буй',
     publishedBy: g.confirmedBy || null,
-    publishedOn: g.publishedAt?.split('T')[0] || null,
+    publishedOn: fmtDateTime(g.publishedAt) || null,
   };
 };
 

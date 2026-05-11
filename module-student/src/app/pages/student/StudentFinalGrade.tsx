@@ -10,6 +10,7 @@ import {
 } from "../../../services/evaluationService";
 import { workflowService, type DefenseSession } from "../../../services/workflowService";
 import { getStoredUser } from "../../../lib/authGuard";
+import { fmtDateTime } from "../../../lib/utils";
 
 // Reviewer's 5-pt score is captured up-front during PRE_DEFENSE on the
 // review_document upload, so we surface it as its own bar separate from the
@@ -237,7 +238,7 @@ export default function StudentFinalGrade() {
                         <p className="text-sm font-semibold text-ink-900 tabular-nums">{pct}%</p>
                         {sub.submittedAt && (
                           <p className="text-[10px] text-ink-500 tabular-nums">
-                            {sub.submittedAt.split("T")[0]}
+                            {fmtDateTime(sub.submittedAt)}
                           </p>
                         )}
                       </div>

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 public record StudentAssignedEvent(
         String committeeId,
+        String committeeName,
         String studentId,
         String departmentId,
         Instant assignedAt

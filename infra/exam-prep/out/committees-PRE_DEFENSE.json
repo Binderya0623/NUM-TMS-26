@@ -1,0 +1,836 @@
+[
+  {
+    "stageType": "PRE_DEFENSE",
+    "name": "КОМИСС 1",
+    "scheduledDate": "2026-04-20T09:20:00",
+    "location": "8-р байр 204 тоот",
+    "status": "CLOSED",
+    "head": "suvdaa",
+    "secretary": "bilguun.o",
+    "members": [
+      "gantulga_g"
+    ],
+    "externalExperts": [
+      "gantulga.n@num.edu.mn"
+    ],
+    "students": [
+      {
+        "sisiId": "22B1NUM4505",
+        "score": 21.0
+      },
+      {
+        "sisiId": "22B1NUM1281",
+        "score": 21.0
+      },
+      {
+        "sisiId": "22B1NUM7226",
+        "score": 25.0
+      },
+      {
+        "sisiId": "22B1NUM1148",
+        "score": 22.0
+      },
+      {
+        "sisiId": "21B1NUM2495",
+        "score": 24.0
+      },
+      {
+        "sisiId": "21B1NUM0643",
+        "score": 24.0
+      },
+      {
+        "sisiId": "22B1NUM6150",
+        "score": 24.0
+      },
+      {
+        "sisiId": "19B1NUM0390",
+        "score": null
+      },
+      {
+        "sisiId": "22B1NUM6575",
+        "score": 20.0
+      },
+      {
+        "sisiId": "19B1NUM0177",
+        "score": 17.0
+      },
+      {
+        "sisiId": "21B1NUM2488",
+        "score": 20.0
+      },
+      {
+        "sisiId": "21B1NUM2811",
+        "score": 24.0
+      },
+      {
+        "sisiId": "22B1NUM1142",
+        "score": 19.0
+      },
+      {
+        "sisiId": "22B1NUM4522",
+        "score": 25.0
+      },
+      {
+        "sisiId": "23B1NUM1098",
+        "score": 19.0
+      },
+      {
+        "sisiId": "21B1NUM1291",
+        "score": 20.0
+      },
+      {
+        "sisiId": "22B1NUM4532",
+        "score": 25.0
+      },
+      {
+        "sisiId": "22B1NUM1367",
+        "score": 17.0
+      },
+      {
+        "sisiId": "21B1NUM1306",
+        "score": 21.0
+      }
+    ]
+  },
+  {
+    "stageType": "PRE_DEFENSE",
+    "name": "КОМИСС 2",
+    "scheduledDate": "2026-04-20T14:00:00",
+    "location": "8-р байр 204 тоот",
+    "status": "CLOSED",
+    "head": "dalaijargal",
+    "secretary": "naranbat",
+    "members": [
+      "tsolmonz"
+    ],
+    "externalExperts": [
+      "delgermaa.n@num.edu.mn"
+    ],
+    "students": [
+      {
+        "sisiId": "22B1NUM4520",
+        "score": 20.5
+      },
+      {
+        "sisiId": "22B1NUM6769",
+        "score": 23.3
+      },
+      {
+        "sisiId": "22B1NUM7043",
+        "score": 22.5
+      },
+      {
+        "sisiId": "21B6NUM4163",
+        "score": 23.8
+      },
+      {
+        "sisiId": "21B1NUM2057",
+        "score": 22.0
+      },
+      {
+        "sisiId": "22B1NUM5300",
+        "score": 24.0
+      },
+      {
+        "sisiId": "20B1NUM2319",
+        "score": 20.5
+      },
+      {
+        "sisiId": "17B1NUM0098",
+        "score": 21.8
+      },
+      {
+        "sisiId": "20B1NUM2390",
+        "score": 24.3
+      },
+      {
+        "sisiId": "21B1NUM0853",
+        "score": 21.3
+      },
+      {
+        "sisiId": "22B1NUM0287",
+        "score": 21.8
+      },
+      {
+        "sisiId": "22B1NUM7309",
+        "score": 24.3
+      },
+      {
+        "sisiId": "22B1NUM5773",
+        "score": 24.0
+      },
+      {
+        "sisiId": "21B1NUM1186",
+        "score": 23.8
+      },
+      {
+        "sisiId": "22B1NUM5762",
+        "score": 24.8
+      },
+      {
+        "sisiId": "21B1NUM1625",
+        "score": 22.8
+      },
+      {
+        "sisiId": "16B1SAS3418",
+        "score": 23.3
+      },
+      {
+        "sisiId": "22B1NUM0719",
+        "score": 23.5
+      },
+      {
+        "sisiId": "16B1SEAS1788",
+        "score": 22.8
+      }
+    ]
+  },
+  {
+    "stageType": "PRE_DEFENSE",
+    "name": "КОМИСС 3",
+    "scheduledDate": "2026-04-21T09:20:00",
+    "location": "8-р байр 204 тоот",
+    "status": "CLOSED",
+    "head": "naranchimeg",
+    "secretary": "byambaa",
+    "members": [
+      "dorjnamjirmaa",
+      "avirmed.e"
+    ],
+    "externalExperts": [
+      "bolorkhuu.n@num.edu.mn"
+    ],
+    "students": [
+      {
+        "sisiId": "22B1NUM0260",
+        "score": 21.3
+      },
+      {
+        "sisiId": "23B1NUM2846",
+        "score": 22.0
+      },
+      {
+        "sisiId": "17B1NUM0702",
+        "score": null
+      },
+      {
+        "sisiId": "21B1NUM3109",
+        "score": 20.5
+      },
+      {
+        "sisiId": "22B1NUM5610",
+        "score": 24.2
+      },
+      {
+        "sisiId": "22B1NUM6631",
+        "score": 24.0
+      },
+      {
+        "sisiId": "21B1NUM3647",
+        "score": 25.0
+      },
+      {
+        "sisiId": "22B1NUM6566",
+        "score": 21.4
+      },
+      {
+        "sisiId": "21B1NUM2994",
+        "score": 16.2
+      },
+      {
+        "sisiId": "21B1NUM1165",
+        "score": null
+      },
+      {
+        "sisiId": "21B1NUM1342",
+        "score": 23.6
+      },
+      {
+        "sisiId": "22B1NUM6999",
+        "score": 13.0
+      },
+      {
+        "sisiId": "21B1NUM1896",
+        "score": 22.6
+      },
+      {
+        "sisiId": "22B1NUM0797",
+        "score": 20.0
+      },
+      {
+        "sisiId": "21B1NUM2562",
+        "score": 16.0
+      },
+      {
+        "sisiId": "21B1NUM0219",
+        "score": 18.0
+      },
+      {
+        "sisiId": "22B1NUM4715",
+        "score": 25.0
+      },
+      {
+        "sisiId": "19B1NUM2021",
+        "score": 15.7
+      },
+      {
+        "sisiId": "21B1NUM1940",
+        "score": 23.0
+      }
+    ]
+  },
+  {
+    "stageType": "PRE_DEFENSE",
+    "name": "КОМИСС 4",
+    "scheduledDate": "2026-04-21T14:00:00",
+    "location": "8-р байр 204 тоот",
+    "status": "CLOSED",
+    "head": "okhorloo",
+    "secretary": "lkhamrolom",
+    "members": [
+      "tserennadmid"
+    ],
+    "externalExperts": [
+      "chuluuntulga.s@num.edu.mn"
+    ],
+    "students": [
+      {
+        "sisiId": "21B1NUM1608",
+        "score": 15.0
+      },
+      {
+        "sisiId": "22B1NUM4716",
+        "score": 19.3
+      },
+      {
+        "sisiId": "22B1NUM7885",
+        "score": 12.3
+      },
+      {
+        "sisiId": "22B1NUM0312",
+        "score": 22.3
+      },
+      {
+        "sisiId": "21B1NUM2366",
+        "score": 20.5
+      },
+      {
+        "sisiId": "22B1NUM7055",
+        "score": 17.8
+      },
+      {
+        "sisiId": "22B1NUM5484",
+        "score": 21.3
+      },
+      {
+        "sisiId": "22B1NUM0049",
+        "score": 17.8
+      },
+      {
+        "sisiId": "22B1NUM0510",
+        "score": 22.5
+      },
+      {
+        "sisiId": "22B1NUM1282",
+        "score": 24.5
+      },
+      {
+        "sisiId": "21B1NUM0871",
+        "score": 23.3
+      },
+      {
+        "sisiId": "22B1NUM0033",
+        "score": 24.3
+      },
+      {
+        "sisiId": "22B1NUM0656",
+        "score": 25.0
+      },
+      {
+        "sisiId": "20B1NUM0071",
+        "score": null
+      },
+      {
+        "sisiId": "20B1NUM2754",
+        "score": 10.0
+      },
+      {
+        "sisiId": "22B1NUM1411",
+        "score": 22.3
+      },
+      {
+        "sisiId": "22B1NUM0227",
+        "score": 16.0
+      },
+      {
+        "sisiId": "22B1NUM1046",
+        "score": 22.3
+      },
+      {
+        "sisiId": "22B1NUM5469",
+        "score": 19.8
+      }
+    ]
+  },
+  {
+    "stageType": "PRE_DEFENSE",
+    "name": "КОМИСС 5",
+    "scheduledDate": "2026-04-22T09:20:00",
+    "location": "8-р байр 204 тоот",
+    "status": "CLOSED",
+    "head": "nyamlkhagva",
+    "secretary": "davaasuren.n",
+    "members": [
+      "magsarjav"
+    ],
+    "externalExperts": [
+      "altansukh.e@num.edu.mn"
+    ],
+    "students": [
+      {
+        "sisiId": "21B1NUM0245",
+        "score": null
+      },
+      {
+        "sisiId": "21B1NUM0104",
+        "score": 23.5
+      },
+      {
+        "sisiId": "22B1NUM0735",
+        "score": 24.75
+      },
+      {
+        "sisiId": "21B1NUM2633",
+        "score": 23.25
+      },
+      {
+        "sisiId": "20B1NUM1695",
+        "score": 20.5
+      },
+      {
+        "sisiId": "20B1NUM1799",
+        "score": 23.75
+      },
+      {
+        "sisiId": "22B1NUM7566",
+        "score": 23.88
+      },
+      {
+        "sisiId": "22B1NUM0706",
+        "score": 23.0
+      },
+      {
+        "sisiId": "22B1NUM6548",
+        "score": 21.5
+      },
+      {
+        "sisiId": "21B1NUM0631",
+        "score": 23.5
+      },
+      {
+        "sisiId": "22B1NUM1357",
+        "score": 24.0
+      },
+      {
+        "sisiId": "21B1NUM0908",
+        "score": 24.33
+      },
+      {
+        "sisiId": "22B1NUM6572",
+        "score": 24.0
+      },
+      {
+        "sisiId": "22B1NUM5289",
+        "score": 22.5
+      },
+      {
+        "sisiId": "22B1NUM5769",
+        "score": 25.0
+      },
+      {
+        "sisiId": "22B1NUM0776",
+        "score": 23.5
+      },
+      {
+        "sisiId": "21B1NUM1818",
+        "score": 23.75
+      },
+      {
+        "sisiId": "22B1NUM0796",
+        "score": 24.75
+      },
+      {
+        "sisiId": "22B1NUM0157",
+        "score": 22.33
+      }
+    ]
+  },
+  {
+    "stageType": "PRE_DEFENSE",
+    "name": "КОМИСС 6",
+    "scheduledDate": "2026-04-22T14:00:00",
+    "location": "8-р байр 204 тоот",
+    "status": "CLOSED",
+    "head": "khurel-ochir",
+    "secretary": "amgalan.a",
+    "members": [
+      "nanzadragchaa"
+    ],
+    "externalExperts": [
+      "gerelchuluun.n@num.edu.mn"
+    ],
+    "students": [
+      {
+        "sisiId": "17B1NUM2104",
+        "score": null
+      },
+      {
+        "sisiId": "20B1NUM0291",
+        "score": 22.0
+      },
+      {
+        "sisiId": "21B1NUM0027",
+        "score": 18.0
+      },
+      {
+        "sisiId": "21B1NUM0126",
+        "score": 19.0
+      },
+      {
+        "sisiId": "22B1NUM7594",
+        "score": 22.0
+      },
+      {
+        "sisiId": "18B1NUM0064",
+        "score": 23.0
+      },
+      {
+        "sisiId": "19B1NUM1573",
+        "score": 23.0
+      },
+      {
+        "sisiId": "22B1NUM4400",
+        "score": 22.0
+      },
+      {
+        "sisiId": "22B1NUM1485",
+        "score": 21.0
+      },
+      {
+        "sisiId": "22B1NUM5958",
+        "score": 20.0
+      },
+      {
+        "sisiId": "22B1NUM0331",
+        "score": 23.0
+      },
+      {
+        "sisiId": "22B1NUM2341",
+        "score": 23.0
+      },
+      {
+        "sisiId": "21B1NUM3306",
+        "score": 24.0
+      },
+      {
+        "sisiId": "22B1NUM0124",
+        "score": 23.0
+      },
+      {
+        "sisiId": "22B1NUM0756",
+        "score": 23.0
+      },
+      {
+        "sisiId": "22B1NUM6983",
+        "score": 25.0
+      },
+      {
+        "sisiId": "22B1NUM1059",
+        "score": 24.0
+      },
+      {
+        "sisiId": "22B1NUM5914",
+        "score": 21.0
+      },
+      {
+        "sisiId": "21B1NUM0367",
+        "score": 18.0
+      }
+    ]
+  },
+  {
+    "stageType": "PRE_DEFENSE",
+    "name": "КОМИСС 7",
+    "scheduledDate": "2026-04-23T09:20:00",
+    "location": "8-р байр 204 тоот",
+    "status": "CLOSED",
+    "head": "otgonnaran",
+    "secretary": "enkhtuya.ts",
+    "members": [
+      "r.javkhlan"
+    ],
+    "externalExperts": [
+      "tsog-erdene.e@num.edu.mn"
+    ],
+    "students": [
+      {
+        "sisiId": "22B1NUM7322",
+        "score": 24.3
+      },
+      {
+        "sisiId": "22B1NUM5578",
+        "score": 23.6
+      },
+      {
+        "sisiId": "20B1NUM3051",
+        "score": 17.0
+      },
+      {
+        "sisiId": "22B1NUM5330",
+        "score": 20.0
+      },
+      {
+        "sisiId": "22B1NUM0253",
+        "score": null
+      },
+      {
+        "sisiId": "22B1NUM0027",
+        "score": 25.0
+      },
+      {
+        "sisiId": "22B1NUM3435",
+        "score": 20.3
+      },
+      {
+        "sisiId": "22B1NUM5335",
+        "score": 23.3
+      },
+      {
+        "sisiId": "22B1NUM0191",
+        "score": 24.0
+      },
+      {
+        "sisiId": "22B1NUM1034",
+        "score": 23.6
+      },
+      {
+        "sisiId": "22B1NUM1267",
+        "score": null
+      },
+      {
+        "sisiId": "19B1NUM1212",
+        "score": 22.6
+      },
+      {
+        "sisiId": "22B1NUM5504",
+        "score": 23.3
+      },
+      {
+        "sisiId": "22B1NUM0166",
+        "score": 23.3
+      },
+      {
+        "sisiId": "22B1NUM5541",
+        "score": 23.6
+      },
+      {
+        "sisiId": "22B1NUM3154",
+        "score": 22.3
+      },
+      {
+        "sisiId": "22B1NUM5577",
+        "score": 22.0
+      },
+      {
+        "sisiId": "22B1NUM3392",
+        "score": 24.0
+      },
+      {
+        "sisiId": "18B1NUM1038",
+        "score": 2.3
+      }
+    ]
+  },
+  {
+    "stageType": "PRE_DEFENSE",
+    "name": "КОМИСС 8",
+    "scheduledDate": "2026-04-24T09:20:00",
+    "location": "8-р байр 204 тоот",
+    "status": "CLOSED",
+    "head": "bbatnyam",
+    "secretary": "bagabold.g",
+    "members": [
+      "uitumen"
+    ],
+    "externalExperts": [
+      "gundegmaa.ts@num.edu.mn"
+    ],
+    "students": [
+      {
+        "sisiId": "22B1NUM0592",
+        "score": 23.0
+      },
+      {
+        "sisiId": "22B1NUM7158",
+        "score": 21.0
+      },
+      {
+        "sisiId": "22B1NUM4802",
+        "score": 22.0
+      },
+      {
+        "sisiId": "22B1NUM1680",
+        "score": 23.5
+      },
+      {
+        "sisiId": "22B1NUM1796",
+        "score": 24.5
+      },
+      {
+        "sisiId": "22B1NUM5326",
+        "score": 23.0
+      },
+      {
+        "sisiId": "22B1NUM5973",
+        "score": null
+      },
+      {
+        "sisiId": "22B1NUM6928",
+        "score": 25.0
+      },
+      {
+        "sisiId": "20B1NUM0667",
+        "score": 18.0
+      },
+      {
+        "sisiId": "13B1SMCS0474",
+        "score": null
+      },
+      {
+        "sisiId": "22B1NUM1811",
+        "score": 23.5
+      },
+      {
+        "sisiId": "22B1NUM0035",
+        "score": 18.0
+      },
+      {
+        "sisiId": "22B1NUM7118",
+        "score": 21.0
+      },
+      {
+        "sisiId": "22B1NUM4640",
+        "score": 23.0
+      },
+      {
+        "sisiId": "22B1NUM5736",
+        "score": 25.0
+      },
+      {
+        "sisiId": "21B1NUM1036",
+        "score": 20.0
+      },
+      {
+        "sisiId": "22B1NUM0002",
+        "score": 25.0
+      },
+      {
+        "sisiId": "22B1NUM0514",
+        "score": 19.5
+      },
+      {
+        "sisiId": "17B1NUM2262",
+        "score": null
+      }
+    ]
+  },
+  {
+    "stageType": "PRE_DEFENSE",
+    "name": "КОМИСС 9",
+    "scheduledDate": "2026-04-24T14:00:00",
+    "location": "8-р байр 204 тоот",
+    "status": "CLOSED",
+    "head": "uuganbayar.g",
+    "secretary": "lkhamrolom",
+    "members": [
+      "munkhtsetseg_n"
+    ],
+    "externalExperts": [
+      "bilguun.j@num.edu.mn"
+    ],
+    "students": [
+      {
+        "sisiId": "22B1NUM6650",
+        "score": 24.0
+      },
+      {
+        "sisiId": "22B1NUM1637",
+        "score": 24.0
+      },
+      {
+        "sisiId": "21B1NUM1789",
+        "score": 24.0
+      },
+      {
+        "sisiId": "22B1NUM0764",
+        "score": 24.0
+      },
+      {
+        "sisiId": "22B1NUM4971",
+        "score": 23.0
+      },
+      {
+        "sisiId": "18B1NUM1498",
+        "score": null
+      },
+      {
+        "sisiId": "22B1NUM0103",
+        "score": 23.0
+      },
+      {
+        "sisiId": "21B1NUM1197",
+        "score": 24.0
+      },
+      {
+        "sisiId": "22B1NUM7184",
+        "score": 21.0
+      },
+      {
+        "sisiId": "22B1NUM5806",
+        "score": 18.0
+      },
+      {
+        "sisiId": "19B1NUM1728",
+        "score": 22.0
+      },
+      {
+        "sisiId": "22B1NUM6701",
+        "score": 24.0
+      },
+      {
+        "sisiId": "18B1NUM1404",
+        "score": 13.0
+      },
+      {
+        "sisiId": "17B1NUM2078",
+        "score": 20.0
+      },
+      {
+        "sisiId": "19B1NUM2181",
+        "score": 23.0
+      },
+      {
+        "sisiId": "22B1NUM0332",
+        "score": 23.0
+      },
+      {
+        "sisiId": "22B1NUM3410",
+        "score": 23.0
+      },
+      {
+        "sisiId": "22B1NUM1256",
+        "score": 23.0
+      }
+    ]
+  }
+]

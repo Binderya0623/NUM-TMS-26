@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public record TeacherAssignedEvent(
         String committeeId,
+        String committeeName,
         String teacherId,
         CommitteeRole role,
         String departmentId,

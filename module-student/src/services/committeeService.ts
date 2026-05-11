@@ -23,10 +23,10 @@ export interface CommitteeStudent {
 }
 
 const ROLE_LABEL: Record<string, string> = {
-  HEAD: 'Дарга',
-  SECRETARY: 'Нарийн бичгийн дарга',
+  HEAD: 'Ахлах',
+  SECRETARY: 'Нарийн бичиг',
   MEMBER: 'Гишүүн',
-  EXTERNAL_EXPERT: 'Гадаад эксперт',
+  EXTERNAL_EXPERT: 'Зочин шүүгч',
 };
 
 export const committeeService = {

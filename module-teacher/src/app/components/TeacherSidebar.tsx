@@ -23,7 +23,7 @@ export default function TeacherSidebar({ collapsed }: TeacherSidebarProps) {
   const isExpert = user?.systemRole === 'EXTERNAL_EXPERT';
 
   const menuItems = isExpert
-    ? [{ icon: Award, label: "Гадаад эксперт үнэлгээ", path: "/teacher/expert", end: true }]
+    ? [{ icon: Award, label: "Зочин шүүгчийн үнэлгээ", path: "/teacher/expert", end: true }]
     : BASE_MENU;
 
   const [unread, setUnread] = useState(0);

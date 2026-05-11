@@ -68,7 +68,8 @@ public class TopicController {
                 req.supervisorId() != null ? req.supervisorId() : req.proposedToTeacherId(),
                 req.program(), req.fields(), req.keywords(),
                 req.title(), req.titleEn(), req.description(), req.researchGoal(),
-                req.status(), req.visibility()
+                req.status(), req.visibility(),
+                req.maxStudents()
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
@@ -152,7 +153,10 @@ public class TopicController {
             // Allow caller to set initial status (e.g. DRAFT vs PENDING_TEACHER_APPROVAL)
             String status,
             // Visibility: PUBLIC or PRIVATE (defaults to PRIVATE if omitted)
-            String visibility
+            String visibility,
+            // How many students can be approved on this topic. Default 1.
+            // Boxed Integer so the FE can omit the field for legacy clients.
+            Integer maxStudents
     ) {}
 
     /**

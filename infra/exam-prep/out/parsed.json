@@ -1,0 +1,3580 @@
+{
+  "students": [
+    {
+      "sisiId": "22B1NUM4505",
+      "lastName": "Доржгочоо",
+      "firstName": "Анар",
+      "program": "Компьютерын ухаан",
+      "topic": "Бодит хугацаанд автоматаар хадмал үүсгэх, орчуулах систем",
+      "topicEn": "A Real-Time System for Automated Subtitling and Translation",
+      "supervisorShort": "О.Билгүүн",
+      "reviewerShort": "Ч.Алтангэрэл",
+      "phone": "80895369"
+    },
+    {
+      "sisiId": "22B1NUM1281",
+      "lastName": "Болдбаатар",
+      "firstName": "Бат-Өрнөх",
+      "program": "Компьютерын ухаан",
+      "topic": "Бизнесийн байгууллагын борлуулалтын орлогыг машин сургалтын аргаар таамаглах нь",
+      "topicEn": "Sales Revenue Prediction Using Machine Learning Models",
+      "supervisorShort": "Б.Энхтуул",
+      "reviewerShort": "О.Билгүүн",
+      "phone": "99130584"
+    },
+    {
+      "sisiId": "22B1NUM7226",
+      "lastName": "Бадарч",
+      "firstName": "Бат-Энх",
+      "program": "Компьютерын ухаан",
+      "topic": "Машин сургалтын загвар ашиглан хувьцааны үнийн өөрчлөлтийг таамаглах",
+      "topicEn": "Predicting stock price movements using machine learning models",
+      "supervisorShort": "З.Цолмон",
+      "reviewerShort": "Б.Сувдаа",
+      "phone": "99705797"
+    },
+    {
+      "sisiId": "22B1NUM1148",
+      "lastName": "Цэндхорлоо",
+      "firstName": "Бат-Эрдэнэ",
+      "program": "Компьютерын ухаан",
+      "topic": "Графт суурилсан объектын хамгийн ойр байршлыг тодорхойлох систем",
+      "topicEn": "Graph-Based System for Determining the Nearest Object Location",
+      "supervisorShort": "Н.Мөнхцэцэг",
+      "reviewerShort": "Г.Гантулга",
+      "phone": "89869221"
+    },
+    {
+      "sisiId": "21B1NUM2495",
+      "lastName": "Одгэрэл",
+      "firstName": "Баярцогт",
+      "program": "Компьютерын ухаан",
+      "topic": "Арьс оношилгоонд суурилсан гоо сайхны барааны борлуулалтын систем",
+      "topicEn": "Skin Diagnosis–Based Cosmetic Product Sales System",
+      "supervisorShort": "Т.Цэрэннадмид",
+      "reviewerShort": "Г.Гантулга",
+      "phone": "86589919"
+    },
+    {
+      "sisiId": "21B1NUM0643",
+      "lastName": "Буянхишиг",
+      "firstName": "Баясгалан",
+      "program": "Компьютерын ухаан",
+      "topic": "Барилгын материалын үлдэгдлийг хянах систем",
+      "topicEn": "Construction Material Inventory Tracking System",
+      "supervisorShort": "Н.Мөнхцэцэг",
+      "reviewerShort": "Г.Гантулга",
+      "phone": "80691109"
+    },
+    {
+      "sisiId": "22B1NUM6150",
+      "lastName": "Лувсанчүлтэм",
+      "firstName": "Билгүүн",
+      "program": "Компьютерын ухаан",
+      "topic": "Хүн компьютерын харилцааны үнэлгээ хийх",
+      "topicEn": "HCI behavour evaluation",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "О.Билгүүн",
+      "phone": "86386774"
+    },
+    {
+      "sisiId": "22B1NUM6575",
+      "lastName": "Даваадорж",
+      "firstName": "Бүрэнхаан",
+      "program": "Компьютерын ухаан",
+      "topic": "Монгол шүлгийн өргөлтийн үе тодорхойлох",
+      "topicEn": "Accent determining from mongolian poetry audio using machine learning",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "Г.Ууганбаяр",
+      "phone": "86446595"
+    },
+    {
+      "sisiId": "19B1NUM0177",
+      "lastName": "Баярсайхан",
+      "firstName": "Давгаренчин",
+      "program": "Компьютерын ухаан",
+      "topic": "Онлайн нээлттэй ертөнцийн тоглоом",
+      "topicEn": "Online First-Person Open-World",
+      "supervisorShort": "А.Амгалан",
+      "reviewerShort": "О.Билгүүн",
+      "phone": "99939755"
+    },
+    {
+      "sisiId": "21B1NUM2488",
+      "lastName": "Бат-Эрдэнэ",
+      "firstName": "Дашзэвэг",
+      "program": "Компьютерын ухаан",
+      "topic": "Цахим худалдааны систем",
+      "topicEn": "E-commerce system",
+      "supervisorShort": "Ш.Бат-Өлзий",
+      "reviewerShort": "Ч.Алтангэрэл",
+      "phone": "90323276"
+    },
+    {
+      "sisiId": "21B1NUM2811",
+      "lastName": "Үйтүмэн",
+      "firstName": "Ирмүүнбилэг",
+      "program": "Компьютерын ухаан",
+      "topic": "Үнэлгээний системийн фронт энд болон UI/UX хөгжүүлэлт",
+      "topicEn": "Development of front rnd UI/UX for Review System",
+      "supervisorShort": "Ж.Үйтүмэн",
+      "reviewerShort": "Б.Сувдаа",
+      "phone": "99646465"
+    },
+    {
+      "sisiId": "22B1NUM1142",
+      "lastName": "Эрдэнэбаатар",
+      "firstName": "Лхам-Эрдэнэ",
+      "program": "Компьютерын ухаан",
+      "topic": "Авто засварын газрын цаг захиалгын систем",
+      "topicEn": "Car Repair Shop Appointment Booking System",
+      "supervisorShort": "Т.Цэрэннадмид",
+      "reviewerShort": "Г.Гантулга",
+      "phone": "80127216"
+    },
+    {
+      "sisiId": "22B1NUM4522",
+      "lastName": "Туяа",
+      "firstName": "Намуулин",
+      "program": "Компьютерын ухаан",
+      "topic": "Судалгааны ухаалаг туслах: Хиймэл оюунд суурилсан хайлт болон өгөгдөл дүрслэлийн систем",
+      "topicEn": "Smart Research Assistant: An AI-Powered System for Literature Search and Data Visualization",
+      "supervisorShort": "О.Билгүүн",
+      "reviewerShort": "Б.Сувдаа",
+      "phone": "80860830"
+    },
+    {
+      "sisiId": "23B1NUM1098",
+      "lastName": "Төрбат",
+      "firstName": "Намуун",
+      "program": "Компьютерын ухаан",
+      "topic": "Хэрэглэгчийн  худалдан авалтын хувирлыг машин сургалтын аргаар таамаглах нь",
+      "topicEn": "Predicting Customer Conversion Using Machine Learning",
+      "supervisorShort": "С.Уянга",
+      "reviewerShort": "Б.Сувдаа",
+      "phone": "94861868"
+    },
+    {
+      "sisiId": "21B1NUM1291",
+      "lastName": "Аймшиггүй",
+      "firstName": "Очирбаяр",
+      "program": "Компьютерын ухаан",
+      "topic": "Их сургуулийн багш нарыг үнэлэх систем",
+      "topicEn": "University Faculty Evaluation System",
+      "supervisorShort": "Б.Магсаржав",
+      "reviewerShort": "Ч.Алтангэрэл",
+      "phone": "96003397"
+    },
+    {
+      "sisiId": "22B1NUM4532",
+      "lastName": "Гансүх",
+      "firstName": "Оюунбилэг",
+      "program": "Компьютерын ухаан",
+      "topic": "Хиймэл оюун ба RAG д суурилсан “Монголын нууц товчоо” лавлах чат веб аппликейшн",
+      "topicEn": "AI- and RAG-Based Reference Chat Web App for “The Secret History of the Mongols”",
+      "supervisorShort": "А.Амгалан",
+      "reviewerShort": "О.Билгүүн",
+      "phone": "95101096"
+    },
+    {
+      "sisiId": "22B1NUM1367",
+      "lastName": "Ууганхүү",
+      "firstName": "Оюу-Эрдэнэ",
+      "program": "Компьютерын ухаан",
+      "topic": "Фитнесс клубын гишүүн бүртгэлийн систем",
+      "topicEn": "Fitness Club Membership Registration System",
+      "supervisorShort": "Т.Цэрэннадмид",
+      "reviewerShort": "Ч.Алтангэрэл",
+      "phone": "94507713"
+    },
+    {
+      "sisiId": "21B1NUM1306",
+      "lastName": "Баяржавхлан",
+      "firstName": "Өнөболд",
+      "program": "Компьютерын ухаан",
+      "topic": "Хиймэл оюун ба RAG д суурилсан “Монголын нууц товчоо” лавлах чат веб аппликейшн",
+      "topicEn": "AI- and RAG-Based Reference Chat Web App for “The Secret History of the Mongols”",
+      "supervisorShort": "А.Амгалан",
+      "reviewerShort": "О.Билгүүн",
+      "phone": "94521450"
+    },
+    {
+      "sisiId": "22B1NUM4520",
+      "lastName": "Жанцан",
+      "firstName": "Саранчимэг",
+      "program": "Компьютерын ухаан",
+      "topic": "Хоолны илчлэгийг тооцоолох ухаалаг системийн судалгаа ба хэрэгжүүлэлт",
+      "topicEn": "Design and Implementation of a Calorie Calculation System",
+      "supervisorShort": "Б.Наранчимэг",
+      "reviewerShort": "П.Далайжаргал",
+      "phone": "95660910"
+    },
+    {
+      "sisiId": "22B1NUM6769",
+      "lastName": "Баярсайхан",
+      "firstName": "Тайванбат",
+      "program": "Компьютерын ухаан",
+      "topic": "Softmax-ын хязгаар: Chain-of-Tought эрэгцүүлэл дэх шинж чанарын нуралтын үнэлгээ болон сайжруулах боломж",
+      "topicEn": "The Softmax Bottleneck: Evaluating and Mitigating Feature Collapse in Chain-of-Thought Reasoning",
+      "supervisorShort": "О.Билгүүн",
+      "reviewerShort": "П.Далайжаргал",
+      "phone": "99378809"
+    },
+    {
+      "sisiId": "22B1NUM7043",
+      "lastName": "Оюундэлгэр",
+      "firstName": "Тодхүү",
+      "program": "Компьютерын ухаан",
+      "topic": "Жолоочийн нойрмоглолтыг илрүүлэн анхааруулах систем",
+      "topicEn": "Driver Drowsiness Detection and Alerting System",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "П.Далайжаргал",
+      "phone": "80875406"
+    },
+    {
+      "sisiId": "21B6NUM4163",
+      "lastName": "Мөнхбат",
+      "firstName": "Тунсаг",
+      "program": "Компьютерын ухаан",
+      "topic": "Цахим орчинд худал мэдээлэл илрүүлэх систем",
+      "topicEn": "A System for Detecting Fake News In The Digital Environment",
+      "supervisorShort": "О.Билгүүн",
+      "reviewerShort": "П.Далайжаргал",
+      "phone": "байхгvй"
+    },
+    {
+      "sisiId": "21B1NUM2057",
+      "lastName": "Хосбаяр",
+      "firstName": "Тэнгис",
+      "program": "Компьютерын ухаан",
+      "topic": "Дэд бүтцийн автоматжуулалтын системд микросервис ба мессежийн дараалалд суурилсан архитектурын харьцуулсан судалгаа",
+      "topicEn": "Comparative Study of Microservices and Message Queue Based Architectures for an Infrastructure Automation System",
+      "supervisorShort": "Н.Мөнхцэцэг",
+      "reviewerShort": "П.Далайжаргал",
+      "phone": "99506428"
+    },
+    {
+      "sisiId": "22B1NUM5300",
+      "lastName": "Гантулга",
+      "firstName": "Хишигжаргал",
+      "program": "Компьютерын ухаан",
+      "topic": "Зүрхний дуу авиа дээр суурилан зүрхний хэмийн хэвийн бус байдлыг илрүүлэх судалгаа",
+      "topicEn": "Detection of Abnormal Heart Rhythm Based on Heart Sound Signals",
+      "supervisorShort": "Б.Наранчимэг",
+      "reviewerShort": "З.Цолмон",
+      "phone": "90991441"
+    },
+    {
+      "sisiId": "20B1NUM2319",
+      "lastName": "Баатар",
+      "firstName": "Цолмон",
+      "program": "Компьютерын ухаан",
+      "topic": "Спорт гутлын хуурамч эсэхийг гүн сургалтын аргаар ангилах",
+      "topicEn": "Sports Shoe Counterfeit Classification Using Deep Learning",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "З.Цолмон",
+      "phone": "99648906"
+    },
+    {
+      "sisiId": "17B1NUM0098",
+      "lastName": "Гантулга",
+      "firstName": "Чингүүн",
+      "program": "Компьютерын ухаан",
+      "topic": "GAN (Generative Adversarial Network) ашиглан дүрс үүсгэх",
+      "topicEn": "Generating image using GAN (Generative Adversarial Network)",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "З.Цолмон",
+      "phone": "89509989"
+    },
+    {
+      "sisiId": "20B1NUM2390",
+      "lastName": "Доржмягмар",
+      "firstName": "Чингүүн",
+      "program": "Компьютерын ухаан",
+      "topic": "SIMD дээр суурилсан тэмдэгт мөр хайх алгоритмуудын гүйцэтгэлийн үнэлгээ",
+      "topicEn": "Performance Evaluation of SIMD-Based String Search Algorithms on Modern CPUs",
+      "supervisorShort": "Г.Гантулга",
+      "reviewerShort": "З.Цолмон",
+      "phone": "86116570"
+    },
+    {
+      "sisiId": "21B1NUM0853",
+      "lastName": "Чаминхүү",
+      "firstName": "Энхбилэг",
+      "program": "Компьютерын ухаан",
+      "topic": "Хүндэт Харуулын ёслолын нотломж бүртгэлийн систем",
+      "topicEn": "Honor Guard Ceremonial Event Record Management System",
+      "supervisorShort": "Ж.Үйтүмэн",
+      "reviewerShort": "З.Цолмон",
+      "phone": "96038687"
+    },
+    {
+      "sisiId": "22B1NUM0287",
+      "lastName": "Сундуйжав",
+      "firstName": "Энэрэл",
+      "program": "Компьютерын ухаан",
+      "topic": "Судлаачдын  бүтээлийн сангийн систем",
+      "topicEn": "Researcher Publications Repository System",
+      "supervisorShort": "Б.Магсаржав",
+      "reviewerShort": "Б.Энхтуул",
+      "phone": "80283338"
+    },
+    {
+      "sisiId": "22B1NUM7309",
+      "lastName": "Энхээ",
+      "firstName": "Эрдэнэ",
+      "program": "Компьютерын ухаан",
+      "topic": "Сканнердсан эхийг автоматаар боловсруулах хиймэл оюунт систем",
+      "topicEn": "AI-based System for Automatic Processing of Scanned Documents",
+      "supervisorShort": "О.Билгүүн",
+      "reviewerShort": "Б.Энхтуул",
+      "phone": "95883865"
+    },
+    {
+      "sisiId": "22B1NUM5773",
+      "lastName": "Бямбасүрэн",
+      "firstName": "Эрхбаяр",
+      "program": "Компьютерын ухаан",
+      "topic": "Бататгах сургалтын аргаар авто замын гэрлэн дохионы ажиллагааг сайжруулах нь",
+      "topicEn": "Traffic Signal Optimization Using Deep Reinforcement Learning",
+      "supervisorShort": "П.Далайжаргал",
+      "reviewerShort": "Б.Энхтуул",
+      "phone": "99257500"
+    },
+    {
+      "sisiId": "21B1NUM1608",
+      "lastName": "Баатархүү",
+      "firstName": "Дашням",
+      "program": "Мультимедиа технологи",
+      "topic": "Зурагнаас LEGO загвар үүсгэх автомат систем",
+      "topicEn": "Creating LEGO figurines from single image",
+      "supervisorShort": "Э.Цэцэгжаргал",
+      "reviewerShort": "Х.Оюундолгор",
+      "phone": "89691216"
+    },
+    {
+      "sisiId": "22B1NUM4716",
+      "lastName": "Энхболд",
+      "firstName": "Золбаяр",
+      "program": "Мультимедиа технологи",
+      "topic": "Монгол ардын үлгэрээс сэдэвлэсэн 3D тоглоомын судалгаа, хөгжүүлэлт",
+      "topicEn": "Development of a 3D game based on Mongolian folk tales",
+      "supervisorShort": "Х.Оюундолгор",
+      "reviewerShort": "Т.Цэрэннадмид",
+      "phone": "94054242"
+    },
+    {
+      "sisiId": "22B1NUM7885",
+      "lastName": "Алтанхуяг",
+      "firstName": "Нямдэлгэр",
+      "program": "Мультимедиа технологи",
+      "topic": "Мультимедиа контентын цахим худалдан авалтад үзүүлэх нөлөөлөл:\nМонголын 18-30 насны хэрэглэгчдийн судалгаа",
+      "topicEn": "The Impact of Multimedia Content on E-Commerce Purchasing Behavior: A\nStudy of Consumers Aged 18-30 in Mongolia",
+      "supervisorShort": "П.Гантуяа",
+      "reviewerShort": "Э.Цэцэгжаргал",
+      "phone": "99129369"
+    },
+    {
+      "sisiId": "22B1NUM0312",
+      "lastName": "Отгонбаяр",
+      "firstName": "Оюунбат",
+      "program": "Мультимедиа технологи",
+      "topic": "Нөхөн сэргээх эмчилгээнд дэмжлэг үзүүлэх VR контентын судалгаа, хөгжүүлэлт",
+      "topicEn": "Research and Development of VR Content to Support Rehabilitation Therapy",
+      "supervisorShort": "Х.Оюундолгор",
+      "reviewerShort": "Э.Цэцэгжаргал",
+      "phone": "94931716"
+    },
+    {
+      "sisiId": "21B1NUM2366",
+      "lastName": "Батдорж",
+      "firstName": "Өсөхбаяр",
+      "program": "Мультимедиа технологи",
+      "topic": "Хиймэл оюунд суурилсан график үүсгэгч загваруудын харьцуулсан судалгаа болон хэрэгжүүлэлт",
+      "topicEn": "Comparative Research of Artificial Intelligence-Powered Graphic Generation Models and Their Implementation",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "Э.Цэцэгжаргал",
+      "phone": "99673025"
+    },
+    {
+      "sisiId": "22B1NUM7055",
+      "lastName": "Энх-Амгалан",
+      "firstName": "Санчир",
+      "program": "Мультимедиа технологи",
+      "topic": "Микросервис архитектурт суурилсан \"Мөнх\" санхүүгийн платформ",
+      "topicEn": "MUNKH financial platform build on a microservice architecture",
+      "supervisorShort": "Э.Цэцэгжаргал",
+      "reviewerShort": "Т.Цэрэннадмид",
+      "phone": "94576068"
+    },
+    {
+      "sisiId": "22B1NUM5484",
+      "lastName": "Төрмөнх",
+      "firstName": "Төгөлдөр",
+      "program": "Мультимедиа технологи",
+      "topic": "МТЭС-ийн 360 виртуал аялал",
+      "topicEn": "SITE 360 Campus virtual tour",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "Х.Оюундолгор",
+      "phone": "80758785"
+    },
+    {
+      "sisiId": "22B1NUM0049",
+      "lastName": "Эрдэнэтуяа",
+      "firstName": "Хэрлэн",
+      "program": "Мультимедиа технологи",
+      "topic": "Модон барын бүтээлийг гар бичмэлээс ялган таних",
+      "topicEn": "Distinguishing wooden tiger artwork from manuscripts",
+      "supervisorShort": "П.Гантуяа",
+      "reviewerShort": "Т.Цэрэннадмид",
+      "phone": "88715060"
+    },
+    {
+      "sisiId": "22B1NUM0510",
+      "lastName": "Цэдэндорж",
+      "firstName": "Цэрэнням",
+      "program": "Мультимедиа технологи",
+      "topic": "Аюулгүй ажиллагааны дадлага олгох VR симуляци",
+      "topicEn": "VR Simulation for Occupational Safety Training",
+      "supervisorShort": "Х.Оюундолгор",
+      "reviewerShort": "Г.Амарсанаа",
+      "phone": "94369607"
+    },
+    {
+      "sisiId": "22B1NUM1282",
+      "lastName": "Даваацэрэн",
+      "firstName": "Цэцэнбилэг",
+      "program": "Мультимедиа технологи",
+      "topic": "Үзэмчин бүжгийн хөдөлгөөний онцлогийг хөдөлгөөн бүртгэх систем ашиглан шинжлэх нь",
+      "topicEn": "Analysis of the Movement Characteristics of Üzemchin Traditional Dance Using a Motion Capture System",
+      "supervisorShort": "Н.Оюун-Эрдэнэ",
+      "reviewerShort": "Г.Амарсанаа",
+      "phone": "80297357"
+    },
+    {
+      "sisiId": "21B1NUM0871",
+      "lastName": "Энхтөр",
+      "firstName": "Чойжилням",
+      "program": "Мультимедиа технологи",
+      "topic": "Нүдний хөдөлгөөн дагах",
+      "topicEn": "Eye tracking for HCI",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "Э.Цэцэгжаргал",
+      "phone": "95976779,89876779"
+    },
+    {
+      "sisiId": "22B1NUM0033",
+      "lastName": "Батчулуун",
+      "firstName": "Энхтамир",
+      "program": "Мультимедиа технологи",
+      "topic": "Монгол авдрын хээг алгоритмын аргаар үүсгэх ба CNC боловсруулалтад зориулсан систем хөгжүүлэлт",
+      "topicEn": "Generative Algorithm of Mongolian Chest Pattern and System Development for CNC Machining",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "Г.Амарсанаа",
+      "phone": "95960411"
+    },
+    {
+      "sisiId": "22B1NUM0656",
+      "lastName": "Ядамхүү",
+      "firstName": "Эрдэмдэлгэр",
+      "program": "Мультимедиа технологи",
+      "topic": "Монгол үндэсний хувцсыг таниулах интерактив тоглоом",
+      "topicEn": "An interactive visual game for promoting Mongolian traditional clothing",
+      "supervisorShort": "Э.Цэцэгжаргал",
+      "reviewerShort": "Х.Оюундолгор",
+      "phone": "85495869"
+    },
+    {
+      "sisiId": "21B1NUM1186",
+      "lastName": "Базаррагчаа",
+      "firstName": "Авиддарам",
+      "program": "Мэдээллийн систем",
+      "topic": "SISi системийн ухаалаг агент",
+      "topicEn": "Intelligent Agent for the SISi System",
+      "supervisorShort": "О.Билгүүн",
+      "reviewerShort": "Б.Энхтуул",
+      "phone": "94568799"
+    },
+    {
+      "sisiId": "22B1NUM5762",
+      "lastName": "Төвшинжаргал",
+      "firstName": "Анар",
+      "program": "Мэдээллийн систем",
+      "topic": "Зурагт суурилсан бүтээгдэхүүн таних, аудитын автомат шийдвэр гаргах машин сургалтын загвар",
+      "topicEn": "Image-Based Product Recognition and Automated Audit Decision Machine Learning Model",
+      "supervisorShort": "Р.Жавхлан",
+      "reviewerShort": "Б.Энхтуул",
+      "phone": "80790806"
+    },
+    {
+      "sisiId": "21B1NUM1625",
+      "lastName": "Билэгт",
+      "firstName": "Балдандорж",
+      "program": "Мэдээллийн систем",
+      "topic": "Улаанбаатар хотын агаарын чанарын үзүүлэлтэд суурилсан иргэдэд зөвлөмж өгөх веб мэдээллийн систем",
+      "topicEn": "Web information system to provide recommendations to citizens based on air quility indicators in Ulaanbaatar city",
+      "supervisorShort": "С.Уянга",
+      "reviewerShort": "Б.Наранбат",
+      "phone": "89192934"
+    },
+    {
+      "sisiId": "16B1SAS3418",
+      "lastName": "Лхаасүрэн",
+      "firstName": "Бархас",
+      "program": "Мэдээллийн систем",
+      "topic": "Цахим өргөдлийн систем",
+      "topicEn": "Electronic Application System",
+      "supervisorShort": "Т.Цэрэннадмид",
+      "reviewerShort": "Б.Наранбат",
+      "phone": "88602035"
+    },
+    {
+      "sisiId": "22B1NUM0719",
+      "lastName": "Ганбат",
+      "firstName": "Бат-Эрдэнэ",
+      "program": "Мэдээллийн систем",
+      "topic": "Микросервис архитектур бүхий уулзалт, эвент төлөвлөлтийн систем",
+      "topicEn": "Microservices-Based meeting and event planning system",
+      "supervisorShort": "Н.Мөнхцэцэг",
+      "reviewerShort": "Б.Наранбат",
+      "phone": "89273827"
+    },
+    {
+      "sisiId": "16B1SEAS1788",
+      "lastName": "Баасансүрэн",
+      "firstName": "Билгүүн",
+      "program": "Мэдээллийн систем",
+      "topic": "Бараа бүртгэлийн систем",
+      "topicEn": "Product Management System",
+      "supervisorShort": "Ч.Алтангэрэл",
+      "reviewerShort": "Б.Наранбат",
+      "phone": "89810500"
+    },
+    {
+      "sisiId": "22B1NUM0260",
+      "lastName": "Тогтохбаяр",
+      "firstName": "Билэгсайхан",
+      "program": "Мэдээллийн систем",
+      "topic": "Бизнесийн процессын дижитал твин (What-If симуляц)",
+      "topicEn": "Business Process Digital Twin (What-If Simulation)",
+      "supervisorShort": "И.Бямбасүрэн",
+      "reviewerShort": "Б.Доржнамжирмаа",
+      "phone": "99693901"
+    },
+    {
+      "sisiId": "23B1NUM2846",
+      "lastName": "Должин",
+      "firstName": "Гантулга",
+      "program": "Мэдээллийн систем",
+      "topic": "Аяллын компаниудыг нэгтгэн удирдах платформын загварчлал ба хэрэгжилт",
+      "topicEn": "Design and Implementation of Platform for Managing Multiple Travel Agencies",
+      "supervisorShort": "С.Уянга",
+      "reviewerShort": "Б.Доржнамжирмаа",
+      "phone": "99043019"
+    },
+    {
+      "sisiId": "21B1NUM3109",
+      "lastName": "Бат-Өлзий",
+      "firstName": "Дэлгэрмаа",
+      "program": "Мэдээллийн систем",
+      "topic": "Odoo ERP системийн Цалингийн модулийн шинжилгээ ба зохиомж",
+      "topicEn": "Payroll module of the Odoo ERP system: System Analysis and Design",
+      "supervisorShort": "С.Уянга",
+      "reviewerShort": "Б.Доржнамжирмаа",
+      "phone": "80750047"
+    },
+    {
+      "sisiId": "22B1NUM5610",
+      "lastName": "Азжаргал",
+      "firstName": "Жавхаа",
+      "program": "Мэдээллийн систем",
+      "topic": "Өгөгдөлд суурилсан аналитик систем ашиглан ачаа тээврийн хэрэгслийн ашиглалтын үр ашгийг үнэлэх нь",
+      "topicEn": "Evaluating Freight Vehicle Utilization Efficiency Using a Data-Driven Analytics System",
+      "supervisorShort": "Б.Энхтуул",
+      "reviewerShort": "Б.Доржнамжирмаа",
+      "phone": "99370567"
+    },
+    {
+      "sisiId": "22B1NUM6631",
+      "lastName": "Эрдэнэ",
+      "firstName": "Мөнх-Оргил",
+      "program": "Мэдээллийн систем",
+      "topic": "Соёлын өвийг таниулах виртуал тоглоом",
+      "topicEn": "Cultural Heritage Educational Virtual Game",
+      "supervisorShort": "Э.Цэцэгжаргал",
+      "reviewerShort": "Б.Наранчимэг",
+      "phone": "96656353"
+    },
+    {
+      "sisiId": "21B1NUM3647",
+      "lastName": "Баттулга",
+      "firstName": "Мөрөн",
+      "program": "Мэдээллийн систем",
+      "topic": "Сургуулийн өмнөх боловсролын байгууллагын нэгдсэн мэдээллийн систем",
+      "topicEn": "Integrated Information System for Preschool Education Institutions",
+      "supervisorShort": "С.Уянга",
+      "reviewerShort": "Б.Наранчимэг",
+      "phone": "94907150"
+    },
+    {
+      "sisiId": "22B1NUM6566",
+      "lastName": "Басан",
+      "firstName": "Нандинбилэг",
+      "program": "Мэдээллийн систем",
+      "topic": "Синтетик медиаг илрүүлэх хувилбар загвар",
+      "topicEn": "A Model for Synthetic Media Detection",
+      "supervisorShort": "С.Уянга",
+      "reviewerShort": "Б.Наранчимэг",
+      "phone": "80542102"
+    },
+    {
+      "sisiId": "21B1NUM2994",
+      "lastName": "Нямсүрэн",
+      "firstName": "Одонтуяа",
+      "program": "Мэдээллийн систем",
+      "topic": "Автомашины дундын хэрэглээний аппликэйшн",
+      "topicEn": "Car sharing application",
+      "supervisorShort": "С.Уянга",
+      "reviewerShort": "Б.Наранчимэг",
+      "phone": "80453802,96883802"
+    },
+    {
+      "sisiId": "21B1NUM1342",
+      "lastName": "Таванжин",
+      "firstName": "Ундрах",
+      "program": "Мэдээллийн систем",
+      "topic": "Хөрөнгө оруулагчийн зан төлөвт суурилсан шийдвэр гаргалтын таамаглалын загвар",
+      "topicEn": "A Behavioral-Based Predictive Model for Investor Decision-Making",
+      "supervisorShort": "Б.Энхтуул",
+      "reviewerShort": "Э.Авирмэд",
+      "phone": "99159652"
+    },
+    {
+      "sisiId": "22B1NUM6999",
+      "lastName": "Атарсайхан",
+      "firstName": "Хүслэн",
+      "program": "Мэдээллийн систем",
+      "topic": "Хүргэлтийн гүйцэтгэлийг үнэлэх аналитик систем",
+      "topicEn": "An Analytics System for Evaluating Delivery Performance",
+      "supervisorShort": "Б.Энхтуул",
+      "reviewerShort": "И.Бямбасүрэн",
+      "phone": "99378892"
+    },
+    {
+      "sisiId": "21B1NUM1896",
+      "lastName": "Баттогтох",
+      "firstName": "Хүслэн",
+      "program": "Мэдээллийн систем",
+      "topic": "Нэг удаагийн цагийн ажлын зуучлалын веб систем",
+      "topicEn": "One-Time Job Intermediation Web System",
+      "supervisorShort": "Ц.Лхамролом",
+      "reviewerShort": "Э.Авирмэд",
+      "phone": "94965023"
+    },
+    {
+      "sisiId": "22B1NUM0797",
+      "lastName": "Мандах",
+      "firstName": "Хүслэнзаяа",
+      "program": "Мэдээллийн систем",
+      "topic": "Монгол үндэсний бичиг сурах вэб аппликэйшн",
+      "topicEn": "Traditional Mongolian Script Online Learning Platform",
+      "supervisorShort": "Э.Цэцэгжаргал",
+      "reviewerShort": "И.Бямбасүрэн",
+      "phone": "95899691"
+    },
+    {
+      "sisiId": "21B1NUM2562",
+      "lastName": "Гүндсүрэн",
+      "firstName": "Цэдэнсодном",
+      "program": "Мэдээллийн систем",
+      "topic": "Вебд суурилсан хандив, тусламжийн систем",
+      "topicEn": "Web-Based Donation and Assistance System",
+      "supervisorShort": "С.Уянга",
+      "reviewerShort": "И.Бямбасүрэн",
+      "phone": "88876448"
+    },
+    {
+      "sisiId": "21B1NUM0219",
+      "lastName": "Батсайхан",
+      "firstName": "Цэлмэг",
+      "program": "Мэдээллийн систем",
+      "topic": "Монгол Улсын Санхүүгийн зохицуулах хорооны зөвшөөрлийн цахим систем",
+      "topicEn": "Electronic Licensing System of the Financial Regulatory Commission of Mongolia",
+      "supervisorShort": "С.Уянга",
+      "reviewerShort": "И.Бямбасүрэн",
+      "phone": "94850302"
+    },
+    {
+      "sisiId": "22B1NUM4715",
+      "lastName": "Амартод",
+      "firstName": "Чингүн",
+      "program": "Мэдээллийн систем",
+      "topic": "Convolutional neural network ашиглан зурагт дүрслэгдсэн бүтээгдэхүүнүүдийн нийт дүнг тооцоолох нь",
+      "topicEn": "Calculating the total price of products in an image using a convolutional neural network",
+      "supervisorShort": "Б.Наранчимэг",
+      "reviewerShort": "И.Бямбасүрэн",
+      "phone": "94178064"
+    },
+    {
+      "sisiId": "19B1NUM2021",
+      "lastName": "Баатаржав",
+      "firstName": "Энхзул",
+      "program": "Мэдээллийн систем",
+      "topic": "Номын клубын систем шинжилгээ ба зохиомж",
+      "topicEn": "Analysis and design of the book club system",
+      "supervisorShort": "И.Бямбасүрэн",
+      "reviewerShort": "Э.Авирмэд",
+      "phone": "99471464"
+    },
+    {
+      "sisiId": "21B1NUM1940",
+      "lastName": "Мөнхбат",
+      "firstName": "Эрдэнэ-Оюун",
+      "program": "Мэдээллийн систем",
+      "topic": "Процессын олборлолтын аргаар бизнесийн үйл ажиллагаа дахь гацааг илрүүлэх, шинжлэх",
+      "topicEn": "Process Mining based Identification and Analysis of Bottlenecks in Business Process",
+      "supervisorShort": "И.Бямбасүрэн",
+      "reviewerShort": "Э.Авирмэд",
+      "phone": "86876787"
+    },
+    {
+      "sisiId": "20B1NUM2754",
+      "lastName": "Лхаямядаг",
+      "firstName": "Анар",
+      "program": "Мэдээллийн технологи",
+      "topic": "Дуучны хоолой ангилах",
+      "topicEn": "Singer's Voice Classification",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "Х.Оюундолгор",
+      "phone": "95848622"
+    },
+    {
+      "sisiId": "22B1NUM1411",
+      "lastName": "Хүчитболд",
+      "firstName": "Ач-Эрдэнэ",
+      "program": "Мэдээллийн технологи",
+      "topic": "Монголд ургадаг ургамлын төрлийг Convolutional neural network ашиглан таних нь",
+      "topicEn": "Identifying plant species growing in Mongolia using Convolutional neural network",
+      "supervisorShort": "Б.Наранчимэг",
+      "reviewerShort": "Т.Цэрэннадмид",
+      "phone": "80913009"
+    },
+    {
+      "sisiId": "22B1NUM0227",
+      "lastName": "Бямбаханд",
+      "firstName": "Балбар",
+      "program": "Мэдээллийн технологи",
+      "topic": "Машин сургалтын аргаар замын гадаргуугийн эвдрэлийг илрүүлэх судалгаа",
+      "topicEn": "Automatic Detection of Pavement Damage Using Machine Learning",
+      "supervisorShort": "Г.Ууганбаяр",
+      "reviewerShort": "Т.Цэрэннадмид",
+      "phone": "94580038"
+    },
+    {
+      "sisiId": "22B1NUM1046",
+      "lastName": "Пунцаг",
+      "firstName": "Батгэрэл",
+      "program": "Мэдээллийн технологи",
+      "topic": "Хувийн мэдээлэл боловсруулах, автоматжуулах хиймэл оюунт туслах",
+      "topicEn": "Personal AI Assistant for Cross-Service Information Retrieval and Automation",
+      "supervisorShort": "О.Билгүүн",
+      "reviewerShort": "Г.Амарсанаа",
+      "phone": "85668186"
+    },
+    {
+      "sisiId": "22B1NUM5469",
+      "lastName": "Батбаяр",
+      "firstName": "Бат-Эрдэнэ",
+      "program": "Мэдээллийн технологи",
+      "topic": "Монгол тоглоомын вэб хөгжүүлэх",
+      "topicEn": "Mongolian traditional game development",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "Х.Оюундолгор",
+      "phone": "98990593"
+    },
+    {
+      "sisiId": "21B1NUM0104",
+      "lastName": "Гансүх",
+      "firstName": "Ган-Эрдэнэ",
+      "program": "Мэдээллийн технологи",
+      "topic": "Сүлжээний орчин дэх AI өрсөлдөгчтэй автомашины уралдааны тоглоом",
+      "topicEn": "Multiplayer Car Racing Game with AI Opponents",
+      "supervisorShort": "А.Амгалан",
+      "reviewerShort": "С. Нямлхагва",
+      "phone": "99158887"
+    },
+    {
+      "sisiId": "22B1NUM0735",
+      "lastName": "Эрдэнэбадрах",
+      "firstName": "Ган-Эрдэнэ",
+      "program": "Мэдээллийн технологи",
+      "topic": "Бичвэр ангилах системийн эх хэл боловсруулалт",
+      "topicEn": "Natural Language Processing for Document Classification",
+      "supervisorShort": "Ч.Алтангэрэл",
+      "reviewerShort": "С. Нямлхагва",
+      "phone": "80747176"
+    },
+    {
+      "sisiId": "21B1NUM2633",
+      "lastName": "Хайдав",
+      "firstName": "Дармаасүрэн",
+      "program": "Мэдээллийн технологи",
+      "topic": "Автомашины моделийг таних аппликейшн",
+      "topicEn": "Application of a car model recognition",
+      "supervisorShort": "Г.Ууганбаяр",
+      "reviewerShort": "С. Нямлхагва",
+      "phone": "99585675"
+    },
+    {
+      "sisiId": "20B1NUM1695",
+      "lastName": "Хуяг-Очир",
+      "firstName": "Дөлгөөн",
+      "program": "Мэдээллийн технологи",
+      "topic": "Цахим галлерей вэб",
+      "topicEn": "E-Gallery commercial web development",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "С. Нямлхагва",
+      "phone": "88901458"
+    },
+    {
+      "sisiId": "20B1NUM1799",
+      "lastName": "Төмөрбаатар",
+      "firstName": "Есөнхишиг",
+      "program": "Мэдээллийн технологи",
+      "topic": "Бичлэгээс хүн илрүүлэх, тоолох",
+      "topicEn": "Realtime person detection and counting system",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "С. Нямлхагва",
+      "phone": "96543133"
+    },
+    {
+      "sisiId": "22B1NUM7566",
+      "lastName": "Содномжамц",
+      "firstName": "Замилан",
+      "program": "Мэдээллийн технологи",
+      "topic": "Суралцагчийн ухаалаг туслагч",
+      "topicEn": "Smart assistant for learners",
+      "supervisorShort": "Ч.Алтангэрэл",
+      "reviewerShort": "С. Нямлхагва",
+      "phone": "99301072"
+    },
+    {
+      "sisiId": "22B1NUM0706",
+      "lastName": "Дүгэрээ",
+      "firstName": "Зунхов",
+      "program": "Мэдээллийн технологи",
+      "topic": "Дуу орчуулах апплекейшн",
+      "topicEn": "Voice Translator application",
+      "supervisorShort": "Ч.Алтангэрэл",
+      "reviewerShort": "Б.Магсаржав",
+      "phone": "90506057"
+    },
+    {
+      "sisiId": "22B1NUM6548",
+      "lastName": "Бямбасүрэн",
+      "firstName": "Ичинхорлоо",
+      "program": "Мэдээллийн технологи",
+      "topic": "Виртуал орчин дахь хэрэглэгчийн интерфэйс (UI) болон туршлага (UX)-ын оновчлолын судалгаа",
+      "topicEn": "Research on the Optimization of User Interface (UI) and User Experience (UX) in Virtual Environments",
+      "supervisorShort": "Х.Оюундолгор",
+      "reviewerShort": "Б.Магсаржав",
+      "phone": "89923267"
+    },
+    {
+      "sisiId": "21B1NUM0631",
+      "lastName": "Цогтбаатар",
+      "firstName": "Маргад-Эрдэнэ",
+      "program": "Мэдээллийн технологи",
+      "topic": "Байгууллагын цаг бүртгэлийн аппликейшн",
+      "topicEn": "Employee Time Attendance Mobile Application",
+      "supervisorShort": "А.Амгалан",
+      "reviewerShort": "Б.Магсаржав",
+      "phone": "99153174"
+    },
+    {
+      "sisiId": "22B1NUM1357",
+      "lastName": "Мөнхбаяр",
+      "firstName": "Мөнхбат",
+      "program": "Мэдээллийн технологи",
+      "topic": "Хүн роботын харилцаа",
+      "topicEn": "Human Robot Interaction",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "Б.Магсаржав",
+      "phone": "96550455"
+    },
+    {
+      "sisiId": "21B1NUM0908",
+      "lastName": "Ганхуяг",
+      "firstName": "Намхай",
+      "program": "Мэдээллийн технологи",
+      "topic": "Үүлэн дэд бүтцэд суурилсан программ хангамжийн тасралтгүй байршуулалтыг (CD) автоматжуулах нь",
+      "topicEn": "Automating Continuous Deployment of Software Based onCloud Infrastructure",
+      "supervisorShort": "Д.Нанзадрагчаа",
+      "reviewerShort": "Б.Магсаржав",
+      "phone": "99361463"
+    },
+    {
+      "sisiId": "22B1NUM6572",
+      "lastName": "Мөнхбаяр",
+      "firstName": "Насан-Очир",
+      "program": "Мэдээллийн технологи",
+      "topic": "Баримтаас хиймэл оюунаар үүсгэсэн хэсгийг илрүүлэх",
+      "topicEn": "Ai Detector For Document",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "Б.Магсаржав",
+      "phone": "86442770"
+    },
+    {
+      "sisiId": "22B1NUM5289",
+      "lastName": "Энхтөр",
+      "firstName": "Отгонтуяа",
+      "program": "Мэдээллийн технологи",
+      "topic": "Авто замын тэмдгийг таних программ",
+      "topicEn": "Detection and Recognition of Traffic sign",
+      "supervisorShort": "Т.Цэрэннадмид",
+      "reviewerShort": "Н.Даваасүрэн",
+      "phone": "99363186"
+    },
+    {
+      "sisiId": "22B1NUM5769",
+      "lastName": "Даваадорж",
+      "firstName": "Отгон-Эрдэнэ",
+      "program": "Мэдээллийн технологи",
+      "topic": "Хууль зүйн баримт бичгээс асуултад хариулах систем",
+      "topicEn": "Legal document question answering system",
+      "supervisorShort": "Ч.Алтангэрэл",
+      "reviewerShort": "Н.Даваасүрэн",
+      "phone": "85656675"
+    },
+    {
+      "sisiId": "22B1NUM0776",
+      "lastName": "Норовням",
+      "firstName": "Содбаяр",
+      "program": "Мэдээллийн технологи",
+      "topic": "Монголын аялал жуулчлалыг сайжруулах AR-д суурилсан тоглоомын зохиомж ба хөгжүүлэлт",
+      "topicEn": "Design and Development of an AR-Based Game for Enhancing  Mongolian tourism",
+      "supervisorShort": "Г.Ууганбаяр",
+      "reviewerShort": "Н.Даваасүрэн",
+      "phone": "94918249"
+    },
+    {
+      "sisiId": "21B1NUM1818",
+      "lastName": "Мөнхбаяр",
+      "firstName": "Сугарсүрэн",
+      "program": "Мэдээллийн технологи",
+      "topic": "Зах зээлийн сагсны шинжилгээнд суурилсан агуулахын нөөцийг оновчтой удирдах систем",
+      "topicEn": "An Inventory Optimization System Based on Market Basket Analysis",
+      "supervisorShort": "Б.Энхтуул",
+      "reviewerShort": "Н.Даваасүрэн",
+      "phone": "89666753"
+    },
+    {
+      "sisiId": "22B1NUM0796",
+      "lastName": "Лхагвадорж",
+      "firstName": "Сэргэлэн",
+      "program": "Мэдээллийн технологи",
+      "topic": "Нүд дагах загвар",
+      "topicEn": "Eye tracking model",
+      "supervisorShort": "Ч.Алтангэрэл",
+      "reviewerShort": "Н.Даваасүрэн",
+      "phone": "99504023"
+    },
+    {
+      "sisiId": "22B1NUM0157",
+      "lastName": "Баасандорж",
+      "firstName": "Тэмүүлэн",
+      "program": "Мэдээллийн технологи",
+      "topic": "Хостел түрээсийн удирдлагын систем",
+      "topicEn": "Hostel rental management system",
+      "supervisorShort": "Г.Ууганбаяр",
+      "reviewerShort": "Н.Даваасүрэн",
+      "phone": "86620013"
+    },
+    {
+      "sisiId": "20B1NUM0291",
+      "lastName": "Дашхорлоо",
+      "firstName": "Хулан",
+      "program": "Мэдээллийн технологи",
+      "topic": "Дүрс танилт, машин сургалтад суурилсан хог хаягдлыг ангилах ухаалаг систем",
+      "topicEn": "Smart waste sorting system based on computer  vision and Ml",
+      "supervisorShort": "Г.Ууганбаяр",
+      "reviewerShort": "Ц.Хүрэл-Очир",
+      "phone": "90151013"
+    },
+    {
+      "sisiId": "21B1NUM0027",
+      "lastName": "Бат-Эрдэнэ",
+      "firstName": "Цолмон",
+      "program": "Мэдээллийн технологи",
+      "topic": "ЕБС-ийн мэдээллийн систем",
+      "topicEn": "General Education School Information System",
+      "supervisorShort": "С.Уянга",
+      "reviewerShort": "Ц.Хүрэл-Очир",
+      "phone": "99569000"
+    },
+    {
+      "sisiId": "21B1NUM0126",
+      "lastName": "Чимэдбалдан",
+      "firstName": "Чимэд-Очир",
+      "program": "Мэдээллийн технологи",
+      "topic": "Классын алдааг урьдчилан таамаглах гүн сургалтын аргыг боловсруулах нь",
+      "topicEn": "Developing a deep learning model for predicting class defects",
+      "supervisorShort": "Б.Наранчимэг",
+      "reviewerShort": "Ц.Хүрэл-Очир",
+      "phone": "80779100"
+    },
+    {
+      "sisiId": "22B1NUM7594",
+      "lastName": "Рэнцэндорж",
+      "firstName": "Элчинбат",
+      "program": "Мэдээллийн технологи",
+      "topic": "Монгол орны хадны сийлмэл зураг дээрх амьтдын дүрсийг илрүүлж, тоолох",
+      "topicEn": "Animal detection and counting from Rock image",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "Ц.Хүрэл-Очир",
+      "phone": "89864433"
+    },
+    {
+      "sisiId": "18B1NUM0064",
+      "lastName": "Баярсайхан",
+      "firstName": "Энхболор",
+      "program": "Мэдээллийн технологи",
+      "topic": "Ажилтанд зориулсан хуримтлалын бүтээгдэхүүний хөгжүүлэлт ба судалгаа",
+      "topicEn": "Research and Development of Employee Savings Product",
+      "supervisorShort": "Ж.Үйтүмэн",
+      "reviewerShort": "Д.Нанзадрагчаа",
+      "phone": "99582311"
+    },
+    {
+      "sisiId": "19B1NUM1573",
+      "lastName": "Энхтайван",
+      "firstName": "Адъяасүрэн",
+      "program": "Программ хангамж",
+      "topic": "Хүний нөөцийн хайлтын систем",
+      "topicEn": "Human Resources Search Engine",
+      "supervisorShort": "Т.Цэрэннадмид",
+      "reviewerShort": "А.Амгалан",
+      "phone": "98191312"
+    },
+    {
+      "sisiId": "22B1NUM4400",
+      "lastName": "Баярсайхан",
+      "firstName": "Аззаяа",
+      "program": "Программ хангамж",
+      "topic": "Интерактив музейн хөтөч аппликейшн",
+      "topicEn": "Interactive Museum Guide Application",
+      "supervisorShort": "Г.Ууганбаяр",
+      "reviewerShort": "Д.Нанзадрагчаа",
+      "phone": "80210477"
+    },
+    {
+      "sisiId": "22B1NUM1485",
+      "lastName": "Болат",
+      "firstName": "Айдана",
+      "program": "Программ хангамж",
+      "topic": "Үзэгдлээр хөтлүүлсэн архитектурын судалгаа ба хэрэгжүүлэлт",
+      "topicEn": "Event-Driven Architecture for NUM hospital system",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "А.Амгалан",
+      "phone": "85338359"
+    },
+    {
+      "sisiId": "22B1NUM5958",
+      "lastName": "Сержан",
+      "firstName": "Айым",
+      "program": "Программ хангамж",
+      "topic": "Харилцааны үлгэр загварыг практикт хэрэгжүүлэх нь",
+      "topicEn": "Practical use of Communication Patterns",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Д.Нанзадрагчаа",
+      "phone": "88749900"
+    },
+    {
+      "sisiId": "22B1NUM0331",
+      "lastName": "Эрдэнэчимэг",
+      "firstName": "Алтаншагай",
+      "program": "Программ хангамж",
+      "topic": "Граф нейрал сүлжээнд суурилсан борлуулагч санал болгох систем",
+      "topicEn": "Graph Neural Network Based Merchant Recommendation System",
+      "supervisorShort": "Г.Амарсанаа",
+      "reviewerShort": "А.Амгалан",
+      "phone": "80562505"
+    },
+    {
+      "sisiId": "22B1NUM2341",
+      "lastName": "Пүрэвдорж",
+      "firstName": "Алтжин",
+      "program": "Программ хангамж",
+      "topic": "Дуудлага, яриаг хураангуйлах систем",
+      "topicEn": "Call and Conversation Summarization System",
+      "supervisorShort": "Н.Мөнхцэцэг",
+      "reviewerShort": "А.Амгалан",
+      "phone": "80570015"
+    },
+    {
+      "sisiId": "21B1NUM3306",
+      "lastName": "Ганцог",
+      "firstName": "Анунгуа",
+      "program": "Программ хангамж",
+      "topic": "Бүжгийн тэмцээний зохион байгуулалт ба олонхийн эрэмбэд суурилсан шүүгчийн үнэлгээний систем",
+      "topicEn": "Dance Competition Organization and Skating System–Based Judging Evaluation System",
+      "supervisorShort": "Ц.Лхамролом",
+      "reviewerShort": "А.Амгалан",
+      "phone": "94155801"
+    },
+    {
+      "sisiId": "22B1NUM0124",
+      "lastName": "Сэнгэсамба",
+      "firstName": "Бадамгарав",
+      "program": "Программ хангамж",
+      "topic": "Тархи компьютерын интерфейс судалгаа",
+      "topicEn": "Deep learning for Brain Computer Interface",
+      "supervisorShort": "Б.Сувдаа",
+      "reviewerShort": "С.Батбаяр",
+      "phone": "86136098"
+    },
+    {
+      "sisiId": "22B1NUM0756",
+      "lastName": "Гал",
+      "firstName": "Бадрал",
+      "program": "Программ хангамж",
+      "topic": "Монгол Улсын хууль тогтоомжид үндэслэсэн хуулийн зөвлөгөө өгөх хиймэл оюунт туслах",
+      "topicEn": "An AI Agent for Legal Consultation Based on Mongolian Legislation",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "С.Батбаяр",
+      "phone": "95469898"
+    },
+    {
+      "sisiId": "22B1NUM6983",
+      "lastName": "Балдандорж",
+      "firstName": "Балжинням",
+      "program": "Программ хангамж",
+      "topic": "Спортын наадмын веб апп",
+      "topicEn": "Web App for Sport Games",
+      "supervisorShort": "Г.Амарсанаа",
+      "reviewerShort": "Д.Нанзадрагчаа",
+      "phone": "88331446"
+    },
+    {
+      "sisiId": "22B1NUM1059",
+      "lastName": "Балдорж",
+      "firstName": "Батбаяр",
+      "program": "Программ хангамж",
+      "topic": "Нейрон сүлжээ ашиглан саадыг тойрон гарах өөрөө суралцдаг автомашины симуляци",
+      "topicEn": "Self-Learning Car Simulation for Obstacle Avoidance using Reinforcement Learning",
+      "supervisorShort": "А.Амгалан",
+      "reviewerShort": "С.Батбаяр",
+      "phone": "99983205"
+    },
+    {
+      "sisiId": "22B1NUM5914",
+      "lastName": "Жаргалсайхан",
+      "firstName": "Батбаяр",
+      "program": "Программ хангамж",
+      "topic": "Фитнесс дасгалжуулагч агентын судалгаа ба туршилт",
+      "topicEn": "Research and testing of a Fitness Coach Agent",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "С.Батбаяр",
+      "phone": "88828099"
+    },
+    {
+      "sisiId": "21B1NUM0367",
+      "lastName": "Бат-Эрдэнэ",
+      "firstName": "Батзолбоо",
+      "program": "Программ хангамж",
+      "topic": "Олон эх үүсвэрийн өгөгдлийг нэгтгэн боловсруулах ухаалаг тайлангийн систем",
+      "topicEn": "Multi-Source Data Integration and Builder System",
+      "supervisorShort": "Ж.Үйтүмэн",
+      "reviewerShort": "С.Батбаяр",
+      "phone": "95256684"
+    },
+    {
+      "sisiId": "22B1NUM7322",
+      "lastName": "Арслан",
+      "firstName": "Батзориг",
+      "program": "Программ хангамж",
+      "topic": "XOS дээр суурилсан AI тусламжтай агуулга удирдах систем (CMS)",
+      "topicEn": "AI-Assisted Content Management System (CMS) based on Experience OS (XOS)",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Р.Жавхлан",
+      "phone": "88019447"
+    },
+    {
+      "sisiId": "22B1NUM5578",
+      "lastName": "Гантулга",
+      "firstName": "Батням",
+      "program": "Программ хангамж",
+      "topic": "Annotation - д суурилсан java framework загварчлал хэрэгжүүлэлт",
+      "topicEn": "Design and Implementation of an Annotation-Based Java Framework",
+      "supervisorShort": "Т.Цэрэннадмид",
+      "reviewerShort": "Р.Жавхлан",
+      "phone": "90082380"
+    },
+    {
+      "sisiId": "20B1NUM3051",
+      "lastName": "Баттулга",
+      "firstName": "Баяржаргал",
+      "program": "Программ хангамж",
+      "topic": "RGB камерт суурилсан виртуал гар, хулганы хөгжүүлэлт",
+      "topicEn": "Development of an RGB Camera-based Virtual Keyboard and Mouse",
+      "supervisorShort": "Э.Авирмэд",
+      "reviewerShort": "Г.Ууганбаяр",
+      "phone": "95110789"
+    },
+    {
+      "sisiId": "22B1NUM5330",
+      "lastName": "Эрхэмбаяр",
+      "firstName": "Билгүүн",
+      "program": "Программ хангамж",
+      "topic": "Веб программ хөгжүүлэхэд зориулан визуал No-Code системийн зохиомж ба хэрэгжүүлэлт",
+      "topicEn": "Design and Implementation of a Visual No-Code System for Web Application Development",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Р.Жавхлан",
+      "phone": "99400477"
+    },
+    {
+      "sisiId": "22B1NUM0027",
+      "lastName": "Цэдэн-Иш",
+      "firstName": "Биндэрцэцэг",
+      "program": "Программ хангамж",
+      "topic": "Холимог Микрофронтэнд архитектур: React ба JSF ашигласан кейс судалгаа",
+      "topicEn": "Hybrid Microfrontend Architecture: A React and JSF Case Study",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Ц.Энхтуяа",
+      "phone": "94550623"
+    },
+    {
+      "sisiId": "22B1NUM3435",
+      "lastName": "Сэрээнэндорж",
+      "firstName": "Буян-Эрдэнэ",
+      "program": "Программ хангамж",
+      "topic": "Хэлний том загварт суурилсан асуулт хариултын гар утасны хэрэглүүр",
+      "topicEn": "LLM-Based Question-Answering Mobile Application",
+      "supervisorShort": "О.Билгүүн",
+      "reviewerShort": "Ц.Энхтуяа",
+      "phone": "93042050"
+    },
+    {
+      "sisiId": "22B1NUM5335",
+      "lastName": "Уламдэлгэр",
+      "firstName": "Бямбаболор",
+      "program": "Программ хангамж",
+      "topic": "Алхаад урамшуулал авах гар утасны аппликэйшн",
+      "topicEn": "Mobile App to earn rewards for walking",
+      "supervisorShort": "Н.Даваасүрэн",
+      "reviewerShort": "О.Отгоннаран",
+      "phone": "88547005"
+    },
+    {
+      "sisiId": "22B1NUM0191",
+      "lastName": "Ганбат",
+      "firstName": "Галданцэрэн",
+      "program": "Программ хангамж",
+      "topic": "Яригч таних ба ангилах систем",
+      "topicEn": "Speaker Recognition and Diarazation System",
+      "supervisorShort": "Ч.Алтангэрэл",
+      "reviewerShort": "О.Отгоннаран",
+      "phone": ""
+    },
+    {
+      "sisiId": "22B1NUM1034",
+      "lastName": "Эрдэнэ",
+      "firstName": "Гансүлд",
+      "program": "Программ хангамж",
+      "topic": "Архитектур хөрвүүлэлт (Монолитоос Бичил-Үйлчилгээ)",
+      "topicEn": "Architecture transformation (Monolith to Microservice)",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Р.Жавхлан",
+      "phone": "99181470"
+    },
+    {
+      "sisiId": "19B1NUM1212",
+      "lastName": "Бямбацогт",
+      "firstName": "Гоомарал",
+      "program": "Программ хангамж",
+      "topic": "Аялал ба зочлох үйлчилгээ санал болгох мобайл аппликейшн",
+      "topicEn": "Travel and Hospitality Recommendation Mobile Application",
+      "supervisorShort": "Н.Даваасүрэн",
+      "reviewerShort": "Ц.Энхтуяа",
+      "phone": "88401217"
+    },
+    {
+      "sisiId": "22B1NUM5504",
+      "lastName": "Чулуун",
+      "firstName": "Дарьбазар",
+      "program": "Программ хангамж",
+      "topic": "хиймэл оюун ухаанд суурилсан оюутанд туслах систем",
+      "topicEn": "Agentic ai student support",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Ц.Энхтуяа",
+      "phone": "95599977"
+    },
+    {
+      "sisiId": "22B1NUM0166",
+      "lastName": "Эрдэнэцогт",
+      "firstName": "Доржням",
+      "program": "Программ хангамж",
+      "topic": "Онлайн худалдааны хэрэглэгчийн зан төлөв – сагсанд хийсэн боловч авалгүй орхисон барааны шалтгаан шинжилгээ",
+      "topicEn": "Consumer Behavior in E-Commerce: Analyzing the Reasons for Cart Abandonment",
+      "supervisorShort": "С.Уянга",
+      "reviewerShort": "О.Отгоннаран",
+      "phone": "85371326"
+    },
+    {
+      "sisiId": "22B1NUM5541",
+      "lastName": "Галбаяр",
+      "firstName": "Дэлгэрмаа",
+      "program": "Программ хангамж",
+      "topic": "Зан үйлд суурилсан дадал хэвшүүлэх систем",
+      "topicEn": "Behavoir-Based Habit Formation System",
+      "supervisorShort": "Ж.Үйтүмэн",
+      "reviewerShort": "О.Отгоннаран",
+      "phone": "89231203"
+    },
+    {
+      "sisiId": "22B1NUM3154",
+      "lastName": "Ганбат",
+      "firstName": "Жавхлан",
+      "program": "Программ хангамж",
+      "topic": "Cинхрон болон үзэгдлээр хөтлүүлсэн микросервис архитектурыг харьцуулсан судалгаа, хэрэгжүүлэх",
+      "topicEn": "A comparitive study and implementation of synchronous and event-driven architectures",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Р.Жавхлан",
+      "phone": "99479540"
+    },
+    {
+      "sisiId": "22B1NUM5577",
+      "lastName": "Гантулга",
+      "firstName": "Жавхлан",
+      "program": "Программ хангамж",
+      "topic": "Монгол Улсын хууль тогтоомжид үндэслэсэн, хиймэл оюунт, хууль зүйн зөвлөгөөний систем",
+      "topicEn": "Artificial Intelligence-based Legal Advisory System Based on Mongolian Legislation",
+      "supervisorShort": "О.Билгүүн",
+      "reviewerShort": "Ц.Энхтуяа",
+      "phone": "94447509"
+    },
+    {
+      "sisiId": "22B1NUM3392",
+      "lastName": "Хүрэлсүх",
+      "firstName": "Жамъян",
+      "program": "Программ хангамж",
+      "topic": "Зудын эрсдэлийг тооцоолох ухаалаг системд суурилсан өвөлжөө түрээслэх вэб систем",
+      "topicEn": "A Smart Winter Camp Rental System Based on Dzud Risk Assessment",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "О.Отгоннаран",
+      "phone": "86238085"
+    },
+    {
+      "sisiId": "18B1NUM1038",
+      "lastName": "Раяадорж",
+      "firstName": "Жамъянсүрэн",
+      "program": "Программ хангамж",
+      "topic": "Шүдний эмнэлэгийн цаг захиалгын систем",
+      "topicEn": "Dental Clinic Appointment Booking System",
+      "supervisorShort": "Т.Цэрэннадмид",
+      "reviewerShort": "О.Отгоннаран",
+      "phone": "89237475"
+    },
+    {
+      "sisiId": "22B1NUM0592",
+      "lastName": "Сэлэнгэ",
+      "firstName": "Золзаяа",
+      "program": "Программ хангамж",
+      "topic": "Хиймэл оюунд суурилсан бие даасан ажилтан зуучлалын веб платформ",
+      "topicEn": "AI-Powered Freelance Job Marketplace Platform",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Г.Багаболд",
+      "phone": "99189217"
+    },
+    {
+      "sisiId": "22B1NUM7158",
+      "lastName": "Билимхан",
+      "firstName": "Мейрбан",
+      "program": "Программ хангамж",
+      "topic": "МУИС- ийн эмнэлгийн системийн Microservice architecture",
+      "topicEn": "NUM Hospital System Microservice Architecture",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Г.Багаболд",
+      "phone": "85419373"
+    },
+    {
+      "sisiId": "22B1NUM4802",
+      "lastName": "Алтангэрэл",
+      "firstName": "Мөнгөнтулга",
+      "program": "Программ хангамж",
+      "topic": "Хурлын протокол үүсгэх систем",
+      "topicEn": "Meeting Minutes Generation System",
+      "supervisorShort": "Ч.Алтангэрэл",
+      "reviewerShort": "Б.Батням",
+      "phone": "99618829"
+    },
+    {
+      "sisiId": "22B1NUM1680",
+      "lastName": "Мөнхтулга",
+      "firstName": "Мөнх-Оргил",
+      "program": "Программ хангамж",
+      "topic": "Загварчлалын нэгдсэн хэлний классын диаграммаас өгөгдөл менежментийн давхаргын код үүсгэх системийн судалгаа, хөгжүүлэлт",
+      "topicEn": "Research and Development of a System for Data Management Layer Code Generation from Unified Modeling Language (UML) Class Diagrams",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Ж.Үйтүмэн",
+      "phone": "94281918"
+    },
+    {
+      "sisiId": "22B1NUM1796",
+      "lastName": "Баяраа",
+      "firstName": "Мөнхсайхан",
+      "program": "Программ хангамж",
+      "topic": "ЭЕШ-ийн шалгалтын үр дүнг шинжлэх систем",
+      "topicEn": "National Exam Results Analysis System",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Ж.Үйтүмэн",
+      "phone": "94871015"
+    },
+    {
+      "sisiId": "22B1NUM5326",
+      "lastName": "Сүх-Очир",
+      "firstName": "Мөнхтулга",
+      "program": "Программ хангамж",
+      "topic": "Ухаалаг захиалга, төлбөрийн систем",
+      "topicEn": "Smart Order and Payment Management System",
+      "supervisorShort": "Н.Мөнхцэцэг",
+      "reviewerShort": "Б.Батням",
+      "phone": "88146801"
+    },
+    {
+      "sisiId": "22B1NUM6928",
+      "lastName": "Энхбаатар",
+      "firstName": "Намуундарь",
+      "program": "Программ хангамж",
+      "topic": "Зургийг монгол хэлээр тайлбарлах хэлний том загвар",
+      "topicEn": "Fine-Tuning LLM for Image Captioning in Mongolian",
+      "supervisorShort": "О.Билгүүн",
+      "reviewerShort": "Б.Батням",
+      "phone": "80541965"
+    },
+    {
+      "sisiId": "20B1NUM0667",
+      "lastName": "Эрдэнэбат",
+      "firstName": "Намуунзул",
+      "program": "Программ хангамж",
+      "topic": "Сэтгэл зүйч дээр цаг захиалах, зөвлөгөө авах систем",
+      "topicEn": "Psychologist  Appointment Booking, Consultation System",
+      "supervisorShort": "Т.Цэрэннадмид",
+      "reviewerShort": "Г.Багаболд",
+      "phone": "88444343"
+    },
+    {
+      "sisiId": "22B1NUM1811",
+      "lastName": "Цогтбаяр",
+      "firstName": "Нинжбадгар",
+      "program": "Программ хангамж",
+      "topic": "Үзэгдлээр хөтлүүлсэн архитектурт суурилсан реактив программчлал",
+      "topicEn": "Reactive programming implementation based on Event-Driven Architecture",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Ж.Үйтүмэн",
+      "phone": "86843738"
+    },
+    {
+      "sisiId": "22B1NUM0035",
+      "lastName": "Насанбаяр",
+      "firstName": "Номинбат",
+      "program": "Программ хангамж",
+      "topic": "Зээлийн судалгааны процесс автоматжуулах",
+      "topicEn": "Loan research process automation",
+      "supervisorShort": "Д.Нанзадрагчаа",
+      "reviewerShort": "Ж.Үйтүмэн",
+      "phone": "86008600"
+    },
+    {
+      "sisiId": "22B1NUM4640",
+      "lastName": "Пүрэвдорж",
+      "firstName": "Номин-Эрдэнэ",
+      "program": "Программ хангамж",
+      "topic": "Сошиал мониторингийн систем дэх агуулгын шинжилгээ, сэдэв загварчлалыг шийдэл",
+      "topicEn": "Content Analysis and Topic Modeling for Social Monitoring Systems",
+      "supervisorShort": "Ж.Үйтүмэн",
+      "reviewerShort": "Г.Багаболд",
+      "phone": "90250211"
+    },
+    {
+      "sisiId": "22B1NUM7118",
+      "lastName": "Пүрэвдорж",
+      "firstName": "Номин-Эрдэнэ",
+      "program": "Программ хангамж",
+      "topic": "Шинжлэх ухаанд суурилсан судалгаа, туршилтыг санхүүжүүлэх систем",
+      "topicEn": "Scientific Research and Experimental System",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Б.Батням",
+      "phone": "88077038"
+    },
+    {
+      "sisiId": "22B1NUM5736",
+      "lastName": "Телжан",
+      "firstName": "Нурлан",
+      "program": "Программ хангамж",
+      "topic": "МУИС - ийн эмнэлгийн системийн нэвтрүүлэлт",
+      "topicEn": "NUM Hospital system deployment",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Ж.Үйтүмэн",
+      "phone": "85432523"
+    },
+    {
+      "sisiId": "21B1NUM1036",
+      "lastName": "Зориг",
+      "firstName": "Одонтуяа",
+      "program": "Программ хангамж",
+      "topic": "Гоо сайхны салоны цаг захиалагын систем",
+      "topicEn": "Beauty Salon Reservation System",
+      "supervisorShort": "Т.Цэрэннадмид",
+      "reviewerShort": "Б.Батням",
+      "phone": "96760227"
+    },
+    {
+      "sisiId": "22B1NUM0002",
+      "lastName": "Нэргүй",
+      "firstName": "Оргил",
+      "program": "Программ хангамж",
+      "topic": "Хуулахаас сэргийлэх шалгалтын систем",
+      "topicEn": "Anti-Cheat Exam system",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Ж.Үйтүмэн",
+      "phone": "99152100"
+    },
+    {
+      "sisiId": "22B1NUM0514",
+      "lastName": "Баттамир",
+      "firstName": "Оюут",
+      "program": "Программ хангамж",
+      "topic": "Хэлний том загварын монгол хэл ойлгох чадварыг үнэлэх нь",
+      "topicEn": "Evaluating Large Language Models in Mongolian",
+      "supervisorShort": "О.Билгүүн",
+      "reviewerShort": "Г.Багаболд",
+      "phone": "99070964"
+    },
+    {
+      "sisiId": "22B1NUM6650",
+      "lastName": "Булган",
+      "firstName": "Өнөболд",
+      "program": "Программ хангамж",
+      "topic": "Зудын эрсдэлийг үнэлэх ухаалаг системийн модуль",
+      "topicEn": "AI-Based Dzud Risk Assessment System",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Н.Мөнхцэцэг",
+      "phone": "88934392"
+    },
+    {
+      "sisiId": "22B1NUM1637",
+      "lastName": "Отгонбаатар",
+      "firstName": "Саруулгэрэл",
+      "program": "Программ хангамж",
+      "topic": "Комиссын хувцас солилцооны мобайл аппликейшн",
+      "topicEn": "Mobile Application for Thrift Clothing Exchange",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Н.Мөнхцэцэг",
+      "phone": "99452788"
+    },
+    {
+      "sisiId": "21B1NUM1789",
+      "lastName": "Цэдэвсүрэн",
+      "firstName": "Сүрэнжамц",
+      "program": "Программ хангамж",
+      "topic": "Вебэд суурилсан монгол хэлний ижил утгат үгийн толь",
+      "topicEn": "Web-based Mongolian synonym dictionary",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Н.Мөнхцэцэг",
+      "phone": "94075099"
+    },
+    {
+      "sisiId": "22B1NUM0103",
+      "lastName": "Баттулга",
+      "firstName": "Төгөлдөр",
+      "program": "Программ хангамж",
+      "topic": "Бараа хүргэлтийн маршрут оновчлох систем",
+      "topicEn": "A Route Optimization System for Goods Delivery Services",
+      "supervisorShort": "Н.Мөнхцэцэг",
+      "reviewerShort": "Г.Ууганбаяр",
+      "phone": "86832828"
+    },
+    {
+      "sisiId": "22B1NUM0764",
+      "lastName": "Баясгалан",
+      "firstName": "Төгөлдөр",
+      "program": "Программ хангамж",
+      "topic": "Хоолны калори тооцоллох систем",
+      "topicEn": "Food calorie calculator system",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Н.Мөнхцэцэг",
+      "phone": "80340233"
+    },
+    {
+      "sisiId": "22B1NUM4971",
+      "lastName": "Мөнхбат",
+      "firstName": "Төгөлдөр",
+      "program": "Программ хангамж",
+      "topic": "Эрүүл мэндийн зөвлөгөө өгөх агентын судалгаа, туршилт",
+      "topicEn": "Research and Prototype Development of a Health Advisory Agent",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Н.Мөнхцэцэг",
+      "phone": "88152992"
+    },
+    {
+      "sisiId": "21B1NUM1197",
+      "lastName": "Батнасан",
+      "firstName": "Түмэнчөдөр",
+      "program": "Программ хангамж",
+      "topic": "Дипломын ажил удирдах системийн хөгжүүлэлт",
+      "topicEn": "Thesis supervision system development",
+      "supervisorShort": "Г.Амарсанаа",
+      "reviewerShort": "Ц.Лхамролом",
+      "phone": "99845087"
+    },
+    {
+      "sisiId": "22B1NUM7184",
+      "lastName": "Балдорж",
+      "firstName": "Тэгшбуян",
+      "program": "Программ хангамж",
+      "topic": "Цахим галарей веб систем",
+      "topicEn": "Dijital Art Gallery Web System",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Н.Мөнхцэцэг",
+      "phone": "94855899"
+    },
+    {
+      "sisiId": "22B1NUM5806",
+      "lastName": "Гэрэлт-Од",
+      "firstName": "Тэмүүлэн",
+      "program": "Программ хангамж",
+      "topic": "Албан бус монгол бичвэрийг стандарт бичгийн хэл рүү хөрвүүлдэг вэб систем",
+      "topicEn": "Development of a Web-Based System for Converting Informal Mongolian text into Standart Written Mongolian",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Г.Ууганбаяр",
+      "phone": "99667572"
+    },
+    {
+      "sisiId": "19B1NUM1728",
+      "lastName": "Чойжамц",
+      "firstName": "Тэмүүлэн",
+      "program": "Программ хангамж",
+      "topic": "Ашиг хамгийн их байхаар үйлдвэрлэлийн төлөвлөгөөг оновчлох систем",
+      "topicEn": "A Production Planning Optimization System for Profit Maximization",
+      "supervisorShort": "Б.Энхтуул",
+      "reviewerShort": "Ц.Лхамролом",
+      "phone": "89992524"
+    },
+    {
+      "sisiId": "22B1NUM6701",
+      "lastName": "Түмэнжаргал",
+      "firstName": "Уянга",
+      "program": "Программ хангамж",
+      "topic": "Сэтгэл зүйн байдалд тулгуурлан үйлчилгээ санал болгох систем",
+      "topicEn": "A Mood-Based Service Recommendation System",
+      "supervisorShort": "Н.Мөнхцэцэг",
+      "reviewerShort": "Ц.Лхамролом",
+      "phone": "85849818"
+    },
+    {
+      "sisiId": "18B1NUM1404",
+      "lastName": "Ганчулуун",
+      "firstName": "Уянга",
+      "program": "Программ хангамж",
+      "topic": "Хувь хүний орлого зарлагыг бүртгэх программ",
+      "topicEn": "Personal Finance & Expense Tracking Software",
+      "supervisorShort": "Т.Цэрэннадмид",
+      "reviewerShort": "Г.Ууганбаяр",
+      "phone": "95151555"
+    },
+    {
+      "sisiId": "17B1NUM2078",
+      "lastName": "Бал",
+      "firstName": "Хишигбаяр",
+      "program": "Программ хангамж",
+      "topic": "МУИС эмнэлгийн мэдээллийн систем",
+      "topicEn": "NUM Hospital Information System",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Ц.Лхамролом",
+      "phone": "99335671"
+    },
+    {
+      "sisiId": "19B1NUM2181",
+      "lastName": "Батнасан",
+      "firstName": "Хүлэгү",
+      "program": "Программ хангамж",
+      "topic": "Ном солилцох мобайл программ",
+      "topicEn": "Book trading mobile application",
+      "supervisorShort": "Э.Цэцэгжаргал",
+      "reviewerShort": "Ц.Лхамролом",
+      "phone": "80396039"
+    },
+    {
+      "sisiId": "22B1NUM0332",
+      "lastName": "Одгэрэл",
+      "firstName": "Хүрэлсүх",
+      "program": "Программ хангамж",
+      "topic": "Автомашины арчилгаа үйлчилгээ, засварын газартай холбогдсон хяналтын систем",
+      "topicEn": "Vehicle Maintenance Tracking System with Workshop-Verified Service History",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Г.Ууганбаяр",
+      "phone": "99354622"
+    },
+    {
+      "sisiId": "22B1NUM3410",
+      "lastName": "Шүрэнцэцэг",
+      "firstName": "Энхтайван",
+      "program": "Программ хангамж",
+      "topic": "Уншигч хоорондын ном болон хэрэгцээт мэдээлэл соилцох систем",
+      "topicEn": "A System for Book and Knowledge Sharing among Readers",
+      "supervisorShort": "Н.Мөнхцэцэг",
+      "reviewerShort": "Ц.Лхамролом",
+      "phone": "94369138"
+    },
+    {
+      "sisiId": "22B1NUM1256",
+      "lastName": "Болд",
+      "firstName": "Эрдэнэ-Очир",
+      "program": "Программ хангамж",
+      "topic": "Ухаалаг фермийн систем",
+      "topicEn": "Smart farm system",
+      "supervisorShort": "Б.Батням",
+      "reviewerShort": "Г.Ууганбаяр",
+      "phone": "86702025"
+    }
+  ],
+  "grades": [
+    {
+      "sisiId": "16B1SAS3418",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 23.3,
+      "reviewerShort": "Б.Наранбат"
+    },
+    {
+      "sisiId": "16B1SEAS1788",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 22.8,
+      "reviewerShort": "Б.Наранбат"
+    },
+    {
+      "sisiId": "17B1NUM0098",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 21.8,
+      "reviewerShort": "З.Цолмон"
+    },
+    {
+      "sisiId": "17B1NUM2078",
+      "phase1": 15.0,
+      "phase2": 16.0,
+      "pre": 20.0,
+      "reviewerShort": "Ц.Лхамролом"
+    },
+    {
+      "sisiId": "18B1NUM0064",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 23.0,
+      "reviewerShort": "Д.Нанзадрагчаа"
+    },
+    {
+      "sisiId": "18B1NUM1038",
+      "phase1": 15.0,
+      "phase2": 15.5,
+      "pre": 2.3,
+      "reviewerShort": "О.Отгоннаран"
+    },
+    {
+      "sisiId": "18B1NUM1404",
+      "phase1": 15.0,
+      "phase2": 13.0,
+      "pre": 13.0,
+      "reviewerShort": "Г.Ууганбаяр"
+    },
+    {
+      "sisiId": "19B1NUM0177",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 17.0,
+      "reviewerShort": "О.Билгүүн"
+    },
+    {
+      "sisiId": "19B1NUM1212",
+      "phase1": 15.0,
+      "phase2": 14.25,
+      "pre": 22.6,
+      "reviewerShort": "Ц.Энхтуяа"
+    },
+    {
+      "sisiId": "19B1NUM1573",
+      "phase1": 15.0,
+      "phase2": 16.0,
+      "pre": 23.0,
+      "reviewerShort": "А.Амгалан"
+    },
+    {
+      "sisiId": "19B1NUM1728",
+      "phase1": 15.0,
+      "phase2": 15.0,
+      "pre": 22.0,
+      "reviewerShort": "Ц.Лхамролом"
+    },
+    {
+      "sisiId": "19B1NUM2021",
+      "phase1": 14.0,
+      "phase2": 15.0,
+      "pre": 15.7,
+      "reviewerShort": "Э.Авирмэд"
+    },
+    {
+      "sisiId": "19B1NUM2181",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 23.0,
+      "reviewerShort": "Ц.Лхамролом"
+    },
+    {
+      "sisiId": "20B1NUM0291",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 22.0,
+      "reviewerShort": "Ц.Хүрэл-Очир"
+    },
+    {
+      "sisiId": "20B1NUM0667",
+      "phase1": 15.0,
+      "phase2": 16.6,
+      "pre": 18.0,
+      "reviewerShort": "Г.Багаболд"
+    },
+    {
+      "sisiId": "20B1NUM1695",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 20.5,
+      "reviewerShort": "С. Нямлхагва"
+    },
+    {
+      "sisiId": "20B1NUM1799",
+      "phase1": 15.0,
+      "phase2": 15.0,
+      "pre": 23.75,
+      "reviewerShort": "С. Нямлхагва"
+    },
+    {
+      "sisiId": "20B1NUM2319",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 20.5,
+      "reviewerShort": "З.Цолмон"
+    },
+    {
+      "sisiId": "20B1NUM2390",
+      "phase1": 15.0,
+      "phase2": 20.0,
+      "pre": 24.3,
+      "reviewerShort": "З.Цолмон"
+    },
+    {
+      "sisiId": "20B1NUM2754",
+      "phase1": 15.0,
+      "phase2": 15.3,
+      "pre": 10.0,
+      "reviewerShort": "Х.Оюундолгор"
+    },
+    {
+      "sisiId": "20B1NUM3051",
+      "phase1": 15.0,
+      "phase2": 10.0,
+      "pre": 17.0,
+      "reviewerShort": "Г.Ууганбаяр"
+    },
+    {
+      "sisiId": "21B1NUM0027",
+      "phase1": 15.0,
+      "phase2": 14.0,
+      "pre": 18.0,
+      "reviewerShort": "Ц.Хүрэл-Очир"
+    },
+    {
+      "sisiId": "21B1NUM0104",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 23.5,
+      "reviewerShort": "С. Нямлхагва"
+    },
+    {
+      "sisiId": "21B1NUM0126",
+      "phase1": 15.0,
+      "phase2": 15.0,
+      "pre": 19.0,
+      "reviewerShort": "Ц.Хүрэл-Очир"
+    },
+    {
+      "sisiId": "21B1NUM0219",
+      "phase1": 15.0,
+      "phase2": 15.3,
+      "pre": 18.0,
+      "reviewerShort": "И.Бямбасүрэн"
+    },
+    {
+      "sisiId": "21B1NUM0367",
+      "phase1": 15.0,
+      "phase2": 15.0,
+      "pre": 18.0,
+      "reviewerShort": "С.Батбаяр"
+    },
+    {
+      "sisiId": "21B1NUM0631",
+      "phase1": 15.0,
+      "phase2": 18.5,
+      "pre": 23.5,
+      "reviewerShort": "Б.Магсаржав"
+    },
+    {
+      "sisiId": "21B1NUM0643",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 24.0,
+      "reviewerShort": "Г.Гантулга"
+    },
+    {
+      "sisiId": "21B1NUM0853",
+      "phase1": 15.0,
+      "phase2": 17.7,
+      "pre": 21.3,
+      "reviewerShort": "З.Цолмон"
+    },
+    {
+      "sisiId": "21B1NUM0871",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 23.3,
+      "reviewerShort": "Э.Цэцэгжаргал"
+    },
+    {
+      "sisiId": "21B1NUM0908",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 24.33,
+      "reviewerShort": "Б.Магсаржав"
+    },
+    {
+      "sisiId": "21B1NUM1036",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 20.0,
+      "reviewerShort": "Б.Батням"
+    },
+    {
+      "sisiId": "21B1NUM1186",
+      "phase1": 15.0,
+      "phase2": 19.3,
+      "pre": 23.8,
+      "reviewerShort": "Б.Энхтуул"
+    },
+    {
+      "sisiId": "21B1NUM1197",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 24.0,
+      "reviewerShort": "Ц.Лхамролом"
+    },
+    {
+      "sisiId": "21B1NUM1291",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 20.0,
+      "reviewerShort": "Ч.Алтангэрэл"
+    },
+    {
+      "sisiId": "21B1NUM1306",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 21.0,
+      "reviewerShort": "О.Билгүүн"
+    },
+    {
+      "sisiId": "21B1NUM1342",
+      "phase1": 15.0,
+      "phase2": 18.5,
+      "pre": 23.6,
+      "reviewerShort": "Э.Авирмэд"
+    },
+    {
+      "sisiId": "21B1NUM1608",
+      "phase1": 15.0,
+      "phase2": 17.8,
+      "pre": 15.0,
+      "reviewerShort": "Х.Оюундолгор"
+    },
+    {
+      "sisiId": "21B1NUM1625",
+      "phase1": 15.0,
+      "phase2": 18.7,
+      "pre": 22.8,
+      "reviewerShort": "Б.Наранбат"
+    },
+    {
+      "sisiId": "21B1NUM1789",
+      "phase1": 15.0,
+      "phase2": 15.0,
+      "pre": 24.0,
+      "reviewerShort": "Н.Мөнхцэцэг"
+    },
+    {
+      "sisiId": "21B1NUM1818",
+      "phase1": 15.0,
+      "phase2": 19.5,
+      "pre": 23.75,
+      "reviewerShort": "Н.Даваасүрэн"
+    },
+    {
+      "sisiId": "21B1NUM1896",
+      "phase1": 15.0,
+      "phase2": 12.7,
+      "pre": 22.6,
+      "reviewerShort": "Э.Авирмэд"
+    },
+    {
+      "sisiId": "21B1NUM1940",
+      "phase1": 15.0,
+      "phase2": 18.5,
+      "pre": 23.0,
+      "reviewerShort": "Э.Авирмэд"
+    },
+    {
+      "sisiId": "21B1NUM2057",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 22.0,
+      "reviewerShort": "П.Далайжаргал"
+    },
+    {
+      "sisiId": "21B1NUM2366",
+      "phase1": 15.0,
+      "phase2": 17.3,
+      "pre": 20.5,
+      "reviewerShort": "Э.Цэцэгжаргал"
+    },
+    {
+      "sisiId": "21B1NUM2488",
+      "phase1": 15.0,
+      "phase2": 13.0,
+      "pre": 20.0,
+      "reviewerShort": "Ч.Алтангэрэл"
+    },
+    {
+      "sisiId": "21B1NUM2495",
+      "phase1": 15.0,
+      "phase2": 16.0,
+      "pre": 24.0,
+      "reviewerShort": "Г.Гантулга"
+    },
+    {
+      "sisiId": "21B1NUM2562",
+      "phase1": 15.0,
+      "phase2": 12.7,
+      "pre": 16.0,
+      "reviewerShort": "И.Бямбасүрэн"
+    },
+    {
+      "sisiId": "21B1NUM2633",
+      "phase1": 15.0,
+      "phase2": 19.5,
+      "pre": 23.25,
+      "reviewerShort": "С. Нямлхагва"
+    },
+    {
+      "sisiId": "21B1NUM2811",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 24.0,
+      "reviewerShort": "Б.Сувдаа"
+    },
+    {
+      "sisiId": "21B1NUM2994",
+      "phase1": 15.0,
+      "phase2": 13.3,
+      "pre": 16.2,
+      "reviewerShort": "Б.Наранчимэг"
+    },
+    {
+      "sisiId": "21B1NUM3109",
+      "phase1": 15.0,
+      "phase2": 17.5,
+      "pre": 20.5,
+      "reviewerShort": "Б.Доржнамжирмаа"
+    },
+    {
+      "sisiId": "21B1NUM3306",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 24.0,
+      "reviewerShort": "А.Амгалан"
+    },
+    {
+      "sisiId": "21B1NUM3647",
+      "phase1": 15.0,
+      "phase2": 19.3,
+      "pre": 25.0,
+      "reviewerShort": "Б.Наранчимэг"
+    },
+    {
+      "sisiId": "21B6NUM4163",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 23.8,
+      "reviewerShort": "П.Далайжаргал"
+    },
+    {
+      "sisiId": "22B1NUM0002",
+      "phase1": 15.0,
+      "phase2": 19.3,
+      "pre": 25.0,
+      "reviewerShort": "Ж.Үйтүмэн"
+    },
+    {
+      "sisiId": "22B1NUM0027",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 25.0,
+      "reviewerShort": "Ц.Энхтуяа"
+    },
+    {
+      "sisiId": "22B1NUM0033",
+      "phase1": 15.0,
+      "phase2": 19.8,
+      "pre": 24.3,
+      "reviewerShort": "Г.Амарсанаа"
+    },
+    {
+      "sisiId": "22B1NUM0035",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 18.0,
+      "reviewerShort": "Ж.Үйтүмэн"
+    },
+    {
+      "sisiId": "22B1NUM0049",
+      "phase1": 15.0,
+      "phase2": 13.5,
+      "pre": 17.8,
+      "reviewerShort": "Т.Цэрэннадмид"
+    },
+    {
+      "sisiId": "22B1NUM0103",
+      "phase1": 15.0,
+      "phase2": 14.0,
+      "pre": 23.0,
+      "reviewerShort": "Г.Ууганбаяр"
+    },
+    {
+      "sisiId": "22B1NUM0124",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 23.0,
+      "reviewerShort": "С.Батбаяр"
+    },
+    {
+      "sisiId": "22B1NUM0157",
+      "phase1": 15.0,
+      "phase2": 17.5,
+      "pre": 22.33,
+      "reviewerShort": "Н.Даваасүрэн"
+    },
+    {
+      "sisiId": "22B1NUM0166",
+      "phase1": 15.0,
+      "phase2": 18.33,
+      "pre": 23.3,
+      "reviewerShort": "О.Отгоннаран"
+    },
+    {
+      "sisiId": "22B1NUM0191",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 24.0,
+      "reviewerShort": "О.Отгоннаран"
+    },
+    {
+      "sisiId": "22B1NUM0227",
+      "phase1": 15.0,
+      "phase2": 17.7,
+      "pre": 16.0,
+      "reviewerShort": "Т.Цэрэннадмид"
+    },
+    {
+      "sisiId": "22B1NUM0260",
+      "phase1": 14.0,
+      "phase2": 16.8,
+      "pre": 21.3,
+      "reviewerShort": "Б.Доржнамжирмаа"
+    },
+    {
+      "sisiId": "22B1NUM0287",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 21.8,
+      "reviewerShort": "Б.Энхтуул"
+    },
+    {
+      "sisiId": "22B1NUM0312",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 22.3,
+      "reviewerShort": "Э.Цэцэгжаргал"
+    },
+    {
+      "sisiId": "22B1NUM0331",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 23.0,
+      "reviewerShort": "А.Амгалан"
+    },
+    {
+      "sisiId": "22B1NUM0332",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 23.0,
+      "reviewerShort": "Г.Ууганбаяр"
+    },
+    {
+      "sisiId": "22B1NUM0510",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 22.5,
+      "reviewerShort": "Г.Амарсанаа"
+    },
+    {
+      "sisiId": "22B1NUM0514",
+      "phase1": 15.0,
+      "phase2": 15.6,
+      "pre": 19.5,
+      "reviewerShort": "Г.Багаболд"
+    },
+    {
+      "sisiId": "22B1NUM0592",
+      "phase1": 15.0,
+      "phase2": 17.5,
+      "pre": 23.0,
+      "reviewerShort": "Г.Багаболд"
+    },
+    {
+      "sisiId": "22B1NUM0656",
+      "phase1": 15.0,
+      "phase2": 19.3,
+      "pre": 25.0,
+      "reviewerShort": "Х.Оюундолгор"
+    },
+    {
+      "sisiId": "22B1NUM0706",
+      "phase1": 15.0,
+      "phase2": 17.5,
+      "pre": 23.0,
+      "reviewerShort": "Б.Магсаржав"
+    },
+    {
+      "sisiId": "22B1NUM0719",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 23.5,
+      "reviewerShort": "Б.Наранбат"
+    },
+    {
+      "sisiId": "22B1NUM0735",
+      "phase1": 15.0,
+      "phase2": 20.0,
+      "pre": 24.75,
+      "reviewerShort": "С. Нямлхагва"
+    },
+    {
+      "sisiId": "22B1NUM0756",
+      "phase1": 15.0,
+      "phase2": 16.0,
+      "pre": 23.0,
+      "reviewerShort": "С.Батбаяр"
+    },
+    {
+      "sisiId": "22B1NUM0764",
+      "phase1": 15.0,
+      "phase2": 13.0,
+      "pre": 24.0,
+      "reviewerShort": "Н.Мөнхцэцэг"
+    },
+    {
+      "sisiId": "22B1NUM0776",
+      "phase1": 15.0,
+      "phase2": 18.5,
+      "pre": 23.5,
+      "reviewerShort": "Н.Даваасүрэн"
+    },
+    {
+      "sisiId": "22B1NUM0796",
+      "phase1": 15.0,
+      "phase2": 19.5,
+      "pre": 24.75,
+      "reviewerShort": "Н.Даваасүрэн"
+    },
+    {
+      "sisiId": "22B1NUM0797",
+      "phase1": 15.0,
+      "phase2": 16.0,
+      "pre": 20.0,
+      "reviewerShort": "И.Бямбасүрэн"
+    },
+    {
+      "sisiId": "22B1NUM1034",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 23.6,
+      "reviewerShort": "Р.Жавхлан"
+    },
+    {
+      "sisiId": "22B1NUM1046",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 22.3,
+      "reviewerShort": "Г.Амарсанаа"
+    },
+    {
+      "sisiId": "22B1NUM1059",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 24.0,
+      "reviewerShort": "С.Батбаяр"
+    },
+    {
+      "sisiId": "22B1NUM1142",
+      "phase1": 15.0,
+      "phase2": 13.0,
+      "pre": 19.0,
+      "reviewerShort": "Г.Гантулга"
+    },
+    {
+      "sisiId": "22B1NUM1148",
+      "phase1": 15.0,
+      "phase2": 13.0,
+      "pre": 22.0,
+      "reviewerShort": "Г.Гантулга"
+    },
+    {
+      "sisiId": "22B1NUM1256",
+      "phase1": 15.0,
+      "phase2": 16.0,
+      "pre": 23.0,
+      "reviewerShort": "Г.Ууганбаяр"
+    },
+    {
+      "sisiId": "22B1NUM1281",
+      "phase1": 15.0,
+      "phase2": 13.0,
+      "pre": 21.0,
+      "reviewerShort": "О.Билгүүн"
+    },
+    {
+      "sisiId": "22B1NUM1282",
+      "phase1": 15.0,
+      "phase2": 18.5,
+      "pre": 24.5,
+      "reviewerShort": "Г.Амарсанаа"
+    },
+    {
+      "sisiId": "22B1NUM1357",
+      "phase1": 15.0,
+      "phase2": 19.5,
+      "pre": 24.0,
+      "reviewerShort": "Б.Магсаржав"
+    },
+    {
+      "sisiId": "22B1NUM1367",
+      "phase1": 15.0,
+      "phase2": 10.0,
+      "pre": 17.0,
+      "reviewerShort": "Ч.Алтангэрэл"
+    },
+    {
+      "sisiId": "22B1NUM1411",
+      "phase1": 15.0,
+      "phase2": 19.7,
+      "pre": 22.3,
+      "reviewerShort": "Т.Цэрэннадмид"
+    },
+    {
+      "sisiId": "22B1NUM1485",
+      "phase1": 15.0,
+      "phase2": 15.0,
+      "pre": 21.0,
+      "reviewerShort": "А.Амгалан"
+    },
+    {
+      "sisiId": "22B1NUM1637",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 24.0,
+      "reviewerShort": "Н.Мөнхцэцэг"
+    },
+    {
+      "sisiId": "22B1NUM1680",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 23.5,
+      "reviewerShort": "Ж.Үйтүмэн"
+    },
+    {
+      "sisiId": "22B1NUM1796",
+      "phase1": 15.0,
+      "phase2": 18.6,
+      "pre": 24.5,
+      "reviewerShort": "Ж.Үйтүмэн"
+    },
+    {
+      "sisiId": "22B1NUM1811",
+      "phase1": 15.0,
+      "phase2": 18.6,
+      "pre": 23.5,
+      "reviewerShort": "Ж.Үйтүмэн"
+    },
+    {
+      "sisiId": "22B1NUM2341",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 23.0,
+      "reviewerShort": "А.Амгалан"
+    },
+    {
+      "sisiId": "22B1NUM3154",
+      "phase1": 15.0,
+      "phase2": 16.75,
+      "pre": 22.3,
+      "reviewerShort": "Р.Жавхлан"
+    },
+    {
+      "sisiId": "22B1NUM3392",
+      "phase1": 15.0,
+      "phase2": 16.0,
+      "pre": 24.0,
+      "reviewerShort": "О.Отгоннаран"
+    },
+    {
+      "sisiId": "22B1NUM3410",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 23.0,
+      "reviewerShort": "Ц.Лхамролом"
+    },
+    {
+      "sisiId": "22B1NUM3435",
+      "phase1": 15.0,
+      "phase2": 15.0,
+      "pre": 20.3,
+      "reviewerShort": "Ц.Энхтуяа"
+    },
+    {
+      "sisiId": "22B1NUM4400",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 22.0,
+      "reviewerShort": "Д.Нанзадрагчаа"
+    },
+    {
+      "sisiId": "22B1NUM4505",
+      "phase1": 14.0,
+      "phase2": 14.0,
+      "pre": 21.0,
+      "reviewerShort": "Ч.Алтангэрэл"
+    },
+    {
+      "sisiId": "22B1NUM4520",
+      "phase1": 15.0,
+      "phase2": 16.5,
+      "pre": 20.5,
+      "reviewerShort": "П.Далайжаргал"
+    },
+    {
+      "sisiId": "22B1NUM4522",
+      "phase1": 15.0,
+      "phase2": 20.0,
+      "pre": 25.0,
+      "reviewerShort": "Б.Сувдаа"
+    },
+    {
+      "sisiId": "22B1NUM4532",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 25.0,
+      "reviewerShort": "О.Билгүүн"
+    },
+    {
+      "sisiId": "22B1NUM4640",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 23.0,
+      "reviewerShort": "Б.Батням"
+    },
+    {
+      "sisiId": "22B1NUM4715",
+      "phase1": 15.0,
+      "phase2": 20.0,
+      "pre": 25.0,
+      "reviewerShort": "И.Бямбасүрэн"
+    },
+    {
+      "sisiId": "22B1NUM4716",
+      "phase1": 15.0,
+      "phase2": 16.3,
+      "pre": 19.3,
+      "reviewerShort": "Т.Цэрэннадмид"
+    },
+    {
+      "sisiId": "22B1NUM4802",
+      "phase1": 15.0,
+      "phase2": 17.3,
+      "pre": 22.0,
+      "reviewerShort": "Б.Батням"
+    },
+    {
+      "sisiId": "22B1NUM4971",
+      "phase1": 15.0,
+      "phase2": 12.0,
+      "pre": 23.0,
+      "reviewerShort": "Н.Мөнхцэцэг"
+    },
+    {
+      "sisiId": "22B1NUM5289",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 22.5,
+      "reviewerShort": "Н.Даваасүрэн"
+    },
+    {
+      "sisiId": "22B1NUM5300",
+      "phase1": 15.0,
+      "phase2": 18.7,
+      "pre": 24.0,
+      "reviewerShort": "З.Цолмон"
+    },
+    {
+      "sisiId": "22B1NUM5326",
+      "phase1": 15.0,
+      "phase2": 17.3,
+      "pre": 23.0,
+      "reviewerShort": "Б.Батням"
+    },
+    {
+      "sisiId": "22B1NUM5330",
+      "phase1": 15.0,
+      "phase2": 17.75,
+      "pre": 20.0,
+      "reviewerShort": "Р.Жавхлан"
+    },
+    {
+      "sisiId": "22B1NUM5335",
+      "phase1": 15.0,
+      "phase2": 18.5,
+      "pre": 23.3,
+      "reviewerShort": "О.Отгоннаран"
+    },
+    {
+      "sisiId": "22B1NUM5469",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 19.8,
+      "reviewerShort": "Х.Оюундолгор"
+    },
+    {
+      "sisiId": "22B1NUM5484",
+      "phase1": 15.0,
+      "phase2": 16.5,
+      "pre": 21.3,
+      "reviewerShort": "Х.Оюундолгор"
+    },
+    {
+      "sisiId": "22B1NUM5504",
+      "phase1": 15.0,
+      "phase2": 15.67,
+      "pre": 23.3,
+      "reviewerShort": "Ц.Энхтуяа"
+    },
+    {
+      "sisiId": "22B1NUM5541",
+      "phase1": 15.0,
+      "phase2": 18.5,
+      "pre": 23.6,
+      "reviewerShort": "О.Отгоннаран"
+    },
+    {
+      "sisiId": "22B1NUM5577",
+      "phase1": 15.0,
+      "phase2": 15.75,
+      "pre": 22.0,
+      "reviewerShort": "Ц.Энхтуяа"
+    },
+    {
+      "sisiId": "22B1NUM5578",
+      "phase1": 15.0,
+      "phase2": 20.0,
+      "pre": 23.6,
+      "reviewerShort": "Р.Жавхлан"
+    },
+    {
+      "sisiId": "22B1NUM5610",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 24.2,
+      "reviewerShort": "Б.Доржнамжирмаа"
+    },
+    {
+      "sisiId": "22B1NUM5736",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 25.0,
+      "reviewerShort": "Ж.Үйтүмэн"
+    },
+    {
+      "sisiId": "22B1NUM5762",
+      "phase1": 15.0,
+      "phase2": 20.0,
+      "pre": 24.8,
+      "reviewerShort": "Б.Энхтуул"
+    },
+    {
+      "sisiId": "22B1NUM5769",
+      "phase1": 15.0,
+      "phase2": 19.5,
+      "pre": 25.0,
+      "reviewerShort": "Н.Даваасүрэн"
+    },
+    {
+      "sisiId": "22B1NUM5773",
+      "phase1": 15.0,
+      "phase2": 20.0,
+      "pre": 24.0,
+      "reviewerShort": "Б.Энхтуул"
+    },
+    {
+      "sisiId": "22B1NUM5806",
+      "phase1": 15.0,
+      "phase2": 14.0,
+      "pre": 18.0,
+      "reviewerShort": "Г.Ууганбаяр"
+    },
+    {
+      "sisiId": "22B1NUM5914",
+      "phase1": 15.0,
+      "phase2": 15.0,
+      "pre": 21.0,
+      "reviewerShort": "С.Батбаяр"
+    },
+    {
+      "sisiId": "22B1NUM5958",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 20.0,
+      "reviewerShort": "Д.Нанзадрагчаа"
+    },
+    {
+      "sisiId": "22B1NUM6150",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 24.0,
+      "reviewerShort": "О.Билгүүн"
+    },
+    {
+      "sisiId": "22B1NUM6548",
+      "phase1": 15.0,
+      "phase2": 15.5,
+      "pre": 21.5,
+      "reviewerShort": "Б.Магсаржав"
+    },
+    {
+      "sisiId": "22B1NUM6566",
+      "phase1": 15.0,
+      "phase2": 13.3,
+      "pre": 21.4,
+      "reviewerShort": "Б.Наранчимэг"
+    },
+    {
+      "sisiId": "22B1NUM6572",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 24.0,
+      "reviewerShort": "Б.Магсаржав"
+    },
+    {
+      "sisiId": "22B1NUM6575",
+      "phase1": 15.0,
+      "phase2": 19.0,
+      "pre": 20.0,
+      "reviewerShort": "Г.Ууганбаяр"
+    },
+    {
+      "sisiId": "22B1NUM6631",
+      "phase1": 15.0,
+      "phase2": 19.3,
+      "pre": 24.0,
+      "reviewerShort": "Б.Наранчимэг"
+    },
+    {
+      "sisiId": "22B1NUM6650",
+      "phase1": 15.0,
+      "phase2": 13.0,
+      "pre": 24.0,
+      "reviewerShort": "Н.Мөнхцэцэг"
+    },
+    {
+      "sisiId": "22B1NUM6701",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 24.0,
+      "reviewerShort": "Ц.Лхамролом"
+    },
+    {
+      "sisiId": "22B1NUM6769",
+      "phase1": 15.0,
+      "phase2": 19.5,
+      "pre": 23.3,
+      "reviewerShort": "П.Далайжаргал"
+    },
+    {
+      "sisiId": "22B1NUM6928",
+      "phase1": 15.0,
+      "phase2": 15.6,
+      "pre": 25.0,
+      "reviewerShort": "Б.Батням"
+    },
+    {
+      "sisiId": "22B1NUM6983",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 25.0,
+      "reviewerShort": "Д.Нанзадрагчаа"
+    },
+    {
+      "sisiId": "22B1NUM6999",
+      "phase1": 15.0,
+      "phase2": 11.0,
+      "pre": 13.0,
+      "reviewerShort": "И.Бямбасүрэн"
+    },
+    {
+      "sisiId": "22B1NUM7043",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 22.5,
+      "reviewerShort": "П.Далайжаргал"
+    },
+    {
+      "sisiId": "22B1NUM7055",
+      "phase1": 15.0,
+      "phase2": 15.8,
+      "pre": 17.8,
+      "reviewerShort": "Т.Цэрэннадмид"
+    },
+    {
+      "sisiId": "22B1NUM7118",
+      "phase1": 15.0,
+      "phase2": 18.6,
+      "pre": 21.0,
+      "reviewerShort": "Г.Багаболд"
+    },
+    {
+      "sisiId": "22B1NUM7158",
+      "phase1": 15.0,
+      "phase2": 15.5,
+      "pre": 21.0,
+      "reviewerShort": "Г.Багаболд"
+    },
+    {
+      "sisiId": "22B1NUM7184",
+      "phase1": 15.0,
+      "phase2": 18.0,
+      "pre": 21.0,
+      "reviewerShort": "Н.Мөнхцэцэг"
+    },
+    {
+      "sisiId": "22B1NUM7226",
+      "phase1": 15.0,
+      "phase2": 17.0,
+      "pre": 25.0,
+      "reviewerShort": "Б.Сувдаа"
+    },
+    {
+      "sisiId": "22B1NUM7309",
+      "phase1": 15.0,
+      "phase2": 18.7,
+      "pre": 24.3,
+      "reviewerShort": "Б.Энхтуул"
+    },
+    {
+      "sisiId": "22B1NUM7322",
+      "phase1": 15.0,
+      "phase2": 18.5,
+      "pre": 24.3,
+      "reviewerShort": "Р.Жавхлан"
+    },
+    {
+      "sisiId": "22B1NUM7566",
+      "phase1": 15.0,
+      "phase2": 19.5,
+      "pre": 23.88,
+      "reviewerShort": "С. Нямлхагва"
+    },
+    {
+      "sisiId": "22B1NUM7594",
+      "phase1": 15.0,
+      "phase2": 16.0,
+      "pre": 22.0,
+      "reviewerShort": "Ц.Хүрэл-Очир"
+    },
+    {
+      "sisiId": "22B1NUM7885",
+      "phase1": 15.0,
+      "phase2": 13.3,
+      "pre": 12.3,
+      "reviewerShort": "Э.Цэцэгжаргал"
+    },
+    {
+      "sisiId": "23B1NUM1098",
+      "phase1": 15.0,
+      "phase2": 15.0,
+      "pre": 19.0,
+      "reviewerShort": "Б.Сувдаа"
+    },
+    {
+      "sisiId": "23B1NUM2846",
+      "phase1": 15.0,
+      "phase2": 16.0,
+      "pre": 22.0,
+      "reviewerShort": "Б.Доржнамжирмаа"
+    }
+  ],
+  "schedules": {
+    "PROGRESS_2": [
+      {
+        "name": "Бүлэг 1",
+        "date": "",
+        "time": "",
+        "location": "",
+        "students": [
+          "22B1NUM4505",
+          "22B1NUM1281",
+          "22B1NUM7226",
+          "22B1NUM1148",
+          "21B1NUM2495",
+          "21B1NUM0643",
+          "22B1NUM6150",
+          "19B1NUM0390",
+          "22B1NUM6575",
+          "19B1NUM0177",
+          "21B1NUM2488",
+          "21B1NUM2811",
+          "22B1NUM1142",
+          "22B1NUM4522",
+          "23B1NUM1098",
+          "21B1NUM1291",
+          "22B1NUM4532",
+          "22B1NUM1367",
+          "21B1NUM1306"
+        ]
+      },
+      {
+        "name": "Бүлэг 2",
+        "date": "",
+        "time": "",
+        "location": "",
+        "students": [
+          "22B1NUM4520",
+          "22B1NUM6769",
+          "22B1NUM7043",
+          "21B6NUM4163",
+          "21B1NUM2057",
+          "22B1NUM5300",
+          "20B1NUM2319",
+          "17B1NUM0098",
+          "20B1NUM2390",
+          "21B1NUM0853",
+          "22B1NUM0287",
+          "22B1NUM7309",
+          "22B1NUM5773",
+          "21B1NUM1186",
+          "22B1NUM5762",
+          "21B1NUM1625",
+          "16B1SAS3418",
+          "22B1NUM0719",
+          "16B1SEAS1788"
+        ]
+      },
+      {
+        "name": "Бүлэг 3",
+        "date": "",
+        "time": "",
+        "location": "",
+        "students": [
+          "22B1NUM0260",
+          "23B1NUM2846",
+          "17B1NUM0702",
+          "21B1NUM3109",
+          "22B1NUM5610",
+          "22B1NUM6631",
+          "21B1NUM3647",
+          "22B1NUM6566",
+          "21B1NUM2994",
+          "21B1NUM1165",
+          "21B1NUM1342",
+          "22B1NUM6999",
+          "21B1NUM1896",
+          "22B1NUM0797",
+          "21B1NUM2562",
+          "21B1NUM0219",
+          "22B1NUM4715",
+          "19B1NUM2021",
+          "21B1NUM1940"
+        ]
+      },
+      {
+        "name": "Бүлэг 4",
+        "date": "",
+        "time": "",
+        "location": "",
+        "students": [
+          "21B1NUM1608",
+          "22B1NUM4716",
+          "22B1NUM7885",
+          "22B1NUM0312",
+          "21B1NUM2366",
+          "22B1NUM7055",
+          "22B1NUM5484",
+          "22B1NUM0049",
+          "22B1NUM0510",
+          "22B1NUM1282",
+          "21B1NUM0871",
+          "22B1NUM0033",
+          "22B1NUM0656",
+          "20B1NUM0071",
+          "20B1NUM2754",
+          "22B1NUM1411",
+          "22B1NUM0227",
+          "22B1NUM1046",
+          "22B1NUM5469"
+        ]
+      },
+      {
+        "name": "Бүлэг 5",
+        "date": "",
+        "time": "",
+        "location": "",
+        "students": [
+          "21B1NUM0245",
+          "21B1NUM0104",
+          "22B1NUM0735",
+          "21B1NUM2633",
+          "20B1NUM1695",
+          "20B1NUM1799",
+          "22B1NUM7566",
+          "22B1NUM0706",
+          "22B1NUM6548",
+          "21B1NUM0631",
+          "22B1NUM1357",
+          "21B1NUM0908",
+          "22B1NUM6572",
+          "22B1NUM5289",
+          "22B1NUM5769",
+          "22B1NUM0776",
+          "21B1NUM1818",
+          "22B1NUM0796",
+          "22B1NUM0157"
+        ]
+      },
+      {
+        "name": "Бүлэг 6",
+        "date": "",
+        "time": "",
+        "location": "",
+        "students": [
+          "17B1NUM2104",
+          "20B1NUM0291",
+          "21B1NUM0027",
+          "21B1NUM0126",
+          "22B1NUM7594",
+          "18B1NUM0064",
+          "19B1NUM1573",
+          "22B1NUM4400",
+          "22B1NUM1485",
+          "22B1NUM5958",
+          "22B1NUM0331",
+          "22B1NUM2341",
+          "21B1NUM3306",
+          "22B1NUM0124",
+          "22B1NUM0756",
+          "22B1NUM6983",
+          "22B1NUM1059",
+          "22B1NUM5914",
+          "21B1NUM0367"
+        ]
+      },
+      {
+        "name": "Бүлэг 7",
+        "date": "",
+        "time": "",
+        "location": "",
+        "students": [
+          "22B1NUM7322",
+          "22B1NUM5578",
+          "20B1NUM3051",
+          "22B1NUM5330",
+          "22B1NUM0253",
+          "22B1NUM0027",
+          "22B1NUM3435",
+          "22B1NUM5335",
+          "22B1NUM0191",
+          "22B1NUM1034",
+          "22B1NUM1267",
+          "19B1NUM1212",
+          "22B1NUM5504",
+          "22B1NUM0166",
+          "22B1NUM5541",
+          "22B1NUM3154",
+          "22B1NUM5577",
+          "22B1NUM3392",
+          "18B1NUM1038"
+        ]
+      },
+      {
+        "name": "Бүлэг 8",
+        "date": "",
+        "time": "",
+        "location": "",
+        "students": [
+          "22B1NUM0592",
+          "22B1NUM7158",
+          "22B1NUM4802",
+          "22B1NUM1680",
+          "22B1NUM1796",
+          "22B1NUM5326",
+          "22B1NUM5973",
+          "22B1NUM6928",
+          "20B1NUM0667",
+          "13B1SMCS0474",
+          "22B1NUM1811",
+          "22B1NUM0035",
+          "22B1NUM7118",
+          "22B1NUM4640",
+          "22B1NUM5736",
+          "21B1NUM1036",
+          "22B1NUM0002",
+          "22B1NUM0514",
+          "17B1NUM2262"
+        ]
+      },
+      {
+        "name": "Бүлэг 9",
+        "date": "",
+        "time": "",
+        "location": "",
+        "students": [
+          "22B1NUM6650",
+          "22B1NUM1637",
+          "21B1NUM1789",
+          "22B1NUM0764",
+          "22B1NUM4971",
+          "18B1NUM1498",
+          "22B1NUM0103",
+          "21B1NUM1197",
+          "22B1NUM7184",
+          "22B1NUM5806",
+          "19B1NUM1728",
+          "22B1NUM6701",
+          "18B1NUM1404",
+          "17B1NUM2078",
+          "19B1NUM2181",
+          "22B1NUM0332",
+          "22B1NUM3410",
+          "22B1NUM1256"
+        ]
+      }
+    ],
+    "PRE_DEFENSE": [
+      {
+        "date": "2026.04.20",
+        "time": "09:20",
+        "location": "Багш,  оюутны хөгжлийн төв (БОХТ)-ийн 403 тоотод",
+        "name": "КОМИСС 1",
+        "students": [
+          "22B1NUM4505",
+          "22B1NUM1281",
+          "22B1NUM7226",
+          "22B1NUM1148",
+          "21B1NUM2495",
+          "21B1NUM0643",
+          "22B1NUM6150",
+          "19B1NUM0390",
+          "19B1NUM0177",
+          "21B1NUM2488",
+          "21B1NUM2811",
+          "22B1NUM1142",
+          "22B1NUM4522",
+          "23B1NUM1098",
+          "21B1NUM1291",
+          "22B1NUM4532",
+          "22B1NUM1367",
+          "21B1NUM1306"
+        ]
+      },
+      {
+        "date": "2026.04.20",
+        "time": "14:00",
+        "location": "Багш,  оюутны хөгжлийн төв (БОХТ)-ийн 403 тоотод",
+        "name": "КОМИСС 2",
+        "students": [
+          "22B1NUM4520",
+          "22B1NUM6769",
+          "22B1NUM7043",
+          "21B6NUM4163",
+          "21B1NUM2057",
+          "22B1NUM5300",
+          "20B1NUM2319",
+          "17B1NUM0098",
+          "20B1NUM2390",
+          "21B1NUM0853",
+          "22B1NUM0287",
+          "22B1NUM7309",
+          "22B1NUM5773",
+          "21B1NUM1186",
+          "22B1NUM5762",
+          "21B1NUM1625",
+          "16B1SAS3418",
+          "22B1NUM0719",
+          "16B1SEAS1788"
+        ]
+      },
+      {
+        "date": "2026.04.21",
+        "time": "09:20",
+        "location": "Багш,  оюутны хөгжлийн төв (БОХТ)-ийн 403 тоотод",
+        "name": "КОМИСС 3",
+        "students": [
+          "22B1NUM0260",
+          "23B1NUM2846",
+          "17B1NUM0702",
+          "21B1NUM3109",
+          "22B1NUM5610",
+          "22B1NUM6631",
+          "21B1NUM3647",
+          "22B1NUM6566",
+          "21B1NUM2994",
+          "21B1NUM1165",
+          "21B1NUM1342",
+          "22B1NUM6999",
+          "21B1NUM1896",
+          "22B1NUM0797",
+          "21B1NUM2562",
+          "21B1NUM0219",
+          "22B1NUM4715",
+          "19B1NUM2021",
+          "21B1NUM1940"
+        ]
+      },
+      {
+        "date": "2026.04.21",
+        "time": "09:20",
+        "location": "Багш,  оюутны хөгжлийн төв (БОХТ)-ийн 403 тоотод",
+        "name": "КОМИСС 3",
+        "students": [
+          "21B1NUM1608",
+          "22B1NUM4716",
+          "22B1NUM7885",
+          "22B1NUM0312",
+          "21B1NUM2366",
+          "22B1NUM7055",
+          "22B1NUM5484",
+          "22B1NUM0049",
+          "22B1NUM0510",
+          "22B1NUM1282",
+          "21B1NUM0871",
+          "22B1NUM0033",
+          "22B1NUM0656",
+          "20B1NUM0071",
+          "20B1NUM2754",
+          "22B1NUM1411",
+          "22B1NUM0227",
+          "22B1NUM1046",
+          "22B1NUM5469"
+        ]
+      },
+      {
+        "date": "2026.04.21",
+        "time": "14:00",
+        "location": "Багш,  оюутны хөгжлийн төв (БОХТ)-ийн 403 тоотод",
+        "name": "КОМИСС 4",
+        "students": [
+          "21B1NUM0245",
+          "21B1NUM0104",
+          "22B1NUM0735",
+          "21B1NUM2633",
+          "20B1NUM1695",
+          "20B1NUM1799",
+          "22B1NUM7566",
+          "22B1NUM0706",
+          "22B1NUM6548",
+          "21B1NUM0631",
+          "22B1NUM1357",
+          "21B1NUM0908",
+          "22B1NUM6572",
+          "22B1NUM5289",
+          "22B1NUM5769",
+          "22B1NUM0776",
+          "21B1NUM1818",
+          "22B1NUM0796",
+          "22B1NUM0157"
+        ]
+      },
+      {
+        "date": "2026.04.22",
+        "time": "9:20",
+        "location": "Багш,  оюутны хөгжлийн төв (БОХТ)-ийн 403 тоотод",
+        "name": "КОМИСС 5",
+        "students": [
+          "17B1NUM2104",
+          "20B1NUM0291",
+          "21B1NUM0027",
+          "21B1NUM0126",
+          "22B1NUM7594",
+          "18B1NUM0064",
+          "19B1NUM1573",
+          "22B1NUM4400",
+          "22B1NUM1485",
+          "22B1NUM5958",
+          "22B1NUM0331",
+          "22B1NUM2341",
+          "21B1NUM3306",
+          "22B1NUM0124",
+          "22B1NUM0756",
+          "22B1NUM6983",
+          "22B1NUM1059",
+          "22B1NUM5914",
+          "21B1NUM0367"
+        ]
+      },
+      {
+        "date": "2026.04.22",
+        "time": "14:00",
+        "location": "Багш,  оюутны хөгжлийн төв (БОХТ)-ийн 403 тоотод",
+        "name": "КОМИСС 6",
+        "students": [
+          "22B1NUM7322",
+          "22B1NUM5578",
+          "20B1NUM3051",
+          "22B1NUM5330",
+          "22B1NUM0253",
+          "22B1NUM0027",
+          "22B1NUM3435",
+          "22B1NUM5335",
+          "22B1NUM0191",
+          "22B1NUM1034",
+          "22B1NUM1267",
+          "19B1NUM1212",
+          "22B1NUM5504",
+          "22B1NUM0166",
+          "22B1NUM5541",
+          "22B1NUM3154",
+          "22B1NUM5577",
+          "22B1NUM3392",
+          "18B1NUM1038"
+        ]
+      },
+      {
+        "date": "2026.04.23",
+        "time": "14:00",
+        "location": "Багш,  оюутны хөгжлийн төв (БОХТ)-ийн 403 тоотод",
+        "name": "КОМИСС 8",
+        "students": [
+          "22B1NUM0592",
+          "22B1NUM7158",
+          "22B1NUM4802",
+          "22B1NUM1680",
+          "22B1NUM1796",
+          "22B1NUM5326",
+          "22B1NUM5973",
+          "22B1NUM6928",
+          "20B1NUM0667",
+          "13B1SMCS0474",
+          "22B1NUM1811",
+          "22B1NUM0035",
+          "22B1NUM7118",
+          "22B1NUM4640",
+          "22B1NUM5736",
+          "21B1NUM1036",
+          "22B1NUM0002",
+          "22B1NUM0514",
+          "17B1NUM2262"
+        ]
+      },
+      {
+        "date": "2026.04.22",
+        "time": "14:00",
+        "location": "Багш,  оюутны хөгжлийн төв (БОХТ)-ийн 403 тоотод",
+        "name": "КОМИСС 6",
+        "students": [
+          "22B1NUM6650",
+          "22B1NUM1637",
+          "21B1NUM1789",
+          "22B1NUM0764",
+          "22B1NUM4971",
+          "18B1NUM1498",
+          "22B1NUM0103",
+          "21B1NUM1197",
+          "22B1NUM7184",
+          "22B1NUM5806",
+          "19B1NUM1728",
+          "22B1NUM6701",
+          "18B1NUM1404",
+          "17B1NUM2078",
+          "19B1NUM2181",
+          "22B1NUM0332",
+          "22B1NUM3410",
+          "22B1NUM1256"
+        ]
+      },
+      {
+        "date": "2026.04.23",
+        "time": "09:20",
+        "location": "Багш,  оюутны хөгжлийн төв (БОХТ)-ийн 403 тоотод",
+        "name": "КОМИСС 7",
+        "students": [
+          "22B1NUM6575"
+        ]
+      }
+    ],
+    "FINAL_DEFENSE": [
+      {
+        "date": "2026.05.12",
+        "time": "09:20",
+        "location": "8-р байр 204  тоотод",
+        "name": "КОМИСС 3",
+        "students": [
+          "22B1NUM4505",
+          "22B1NUM1281",
+          "22B1NUM7226",
+          "22B1NUM1148",
+          "21B1NUM2495",
+          "21B1NUM0643",
+          "22B1NUM6150",
+          "19B1NUM0177",
+          "21B1NUM2488",
+          "21B1NUM2811",
+          "22B1NUM1142",
+          "22B1NUM4522",
+          "23B1NUM1098",
+          "21B1NUM1291",
+          "22B1NUM4532",
+          "22B1NUM1367",
+          "21B1NUM1306"
+        ]
+      },
+      {
+        "date": "2026.05.12",
+        "time": "14:00",
+        "location": "8-р байр 204  тоотод",
+        "name": "КОМИСС 4",
+        "students": [
+          "22B1NUM4520",
+          "22B1NUM6769",
+          "22B1NUM7043",
+          "21B6NUM4163",
+          "21B1NUM2057",
+          "22B1NUM5300",
+          "20B1NUM2319",
+          "17B1NUM0098",
+          "20B1NUM2390",
+          "21B1NUM0853",
+          "22B1NUM0287",
+          "22B1NUM7309",
+          "22B1NUM5773",
+          "21B1NUM1186",
+          "22B1NUM5762",
+          "21B1NUM1625",
+          "16B1SAS3418",
+          "22B1NUM0719",
+          "16B1SEAS1788"
+        ]
+      },
+      {
+        "date": "2026.05.11",
+        "time": "09:20",
+        "location": "8-р байр 204  тоотод",
+        "name": "КОМИСС 1",
+        "students": [
+          "22B1NUM0260",
+          "23B1NUM2846",
+          "21B1NUM3109",
+          "22B1NUM5610",
+          "22B1NUM6631",
+          "21B1NUM3647",
+          "22B1NUM6566",
+          "21B1NUM2994",
+          "21B1NUM1342",
+          "22B1NUM6999",
+          "21B1NUM1896",
+          "22B1NUM0797",
+          "21B1NUM2562",
+          "21B1NUM0219",
+          "22B1NUM4715",
+          "19B1NUM2021",
+          "21B1NUM1940"
+        ]
+      },
+      {
+        "date": "2026.05.11",
+        "time": "14:00",
+        "location": "8-р байр 204  тоотод",
+        "name": "КОМИСС 2",
+        "students": [
+          "21B1NUM1608",
+          "22B1NUM4716",
+          "22B1NUM7885",
+          "22B1NUM0312",
+          "21B1NUM2366",
+          "22B1NUM7055",
+          "22B1NUM5484",
+          "22B1NUM0049",
+          "22B1NUM0510",
+          "22B1NUM1282",
+          "21B1NUM0871",
+          "22B1NUM0033",
+          "22B1NUM0656",
+          "20B1NUM2754",
+          "22B1NUM1411",
+          "22B1NUM0227",
+          "22B1NUM1046",
+          "22B1NUM5469"
+        ]
+      },
+      {
+        "date": "2026.05.12",
+        "time": "14:00",
+        "location": "8-р байр 204  тоотод",
+        "name": "КОМИСС 4",
+        "students": [
+          "21B1NUM0104",
+          "22B1NUM0735",
+          "21B1NUM2633",
+          "20B1NUM1695",
+          "20B1NUM1799",
+          "22B1NUM7566",
+          "22B1NUM0706",
+          "22B1NUM6548",
+          "21B1NUM0631",
+          "22B1NUM1357",
+          "21B1NUM0908",
+          "22B1NUM6572",
+          "22B1NUM5289",
+          "22B1NUM5769",
+          "22B1NUM0776",
+          "21B1NUM1818",
+          "22B1NUM0796",
+          "22B1NUM0157"
+        ]
+      },
+      {
+        "date": "2026.05.13",
+        "time": "9:20",
+        "location": "8-р байр 204  тоотод",
+        "name": "КОМИСС 5",
+        "students": [
+          "20B1NUM0291",
+          "21B1NUM0027",
+          "21B1NUM0126",
+          "22B1NUM7594",
+          "18B1NUM0064",
+          "19B1NUM1573",
+          "22B1NUM4400",
+          "22B1NUM1485",
+          "22B1NUM5958",
+          "22B1NUM0331",
+          "22B1NUM2341",
+          "21B1NUM3306",
+          "22B1NUM0124",
+          "22B1NUM0756",
+          "22B1NUM6983",
+          "22B1NUM1059",
+          "22B1NUM5914",
+          "21B1NUM0367"
+        ]
+      },
+      {
+        "date": "2026.05.13",
+        "time": "14:00",
+        "location": "8-р байр 204  тоотод",
+        "name": "КОМИСС 6",
+        "students": [
+          "22B1NUM7322",
+          "22B1NUM5578",
+          "22B1NUM5330",
+          "22B1NUM0027",
+          "22B1NUM3435",
+          "22B1NUM5335",
+          "22B1NUM0191",
+          "22B1NUM1034",
+          "19B1NUM1212",
+          "22B1NUM5504",
+          "22B1NUM0166",
+          "22B1NUM5541",
+          "22B1NUM3154",
+          "22B1NUM5577",
+          "22B1NUM3392",
+          "18B1NUM1038"
+        ]
+      },
+      {
+        "date": "2026.05.14",
+        "time": "09:20",
+        "location": "8-р байр 204  тоотод",
+        "name": "КОМИСС 7",
+        "students": [
+          "22B1NUM0592",
+          "22B1NUM7158",
+          "22B1NUM4802",
+          "22B1NUM1680",
+          "22B1NUM1796",
+          "22B1NUM5326",
+          "22B1NUM6928",
+          "20B1NUM0667",
+          "22B1NUM1811",
+          "22B1NUM0035",
+          "22B1NUM7118",
+          "22B1NUM4640",
+          "22B1NUM5736",
+          "21B1NUM1036",
+          "22B1NUM0002",
+          "22B1NUM0514"
+        ]
+      },
+      {
+        "date": "2026.05.15",
+        "time": "14:00",
+        "location": "8-р байр 204  тоотод",
+        "name": "КОМИСС 9",
+        "students": [
+          "22B1NUM6650",
+          "22B1NUM1637",
+          "21B1NUM1789",
+          "22B1NUM0764",
+          "22B1NUM4971",
+          "20B1NUM3051",
+          "22B1NUM0103",
+          "21B1NUM1197",
+          "22B1NUM7184",
+          "22B1NUM5806",
+          "19B1NUM1728",
+          "22B1NUM6701",
+          "18B1NUM1404",
+          "17B1NUM2078",
+          "19B1NUM2181",
+          "22B1NUM0332",
+          "22B1NUM3410",
+          "22B1NUM1256",
+          "22B1NUM6575"
+        ]
+      }
+    ]
+  }
+}

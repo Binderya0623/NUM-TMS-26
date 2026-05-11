@@ -1,0 +1,366 @@
+[
+  {
+    "firstName": "Алтангэрэл",
+    "lastName": "Чагнаа",
+    "email": "altangerel@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Тэнхимийн эрхлэгч"
+  },
+  {
+    "firstName": "Оюундолгор",
+    "lastName": "Хорлоо",
+    "email": "okhorloo@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Профессор"
+  },
+  {
+    "firstName": "Оюун-Эрдэнэ",
+    "lastName": "Намсрай",
+    "email": "oyunerdene@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Профессор"
+  },
+  {
+    "firstName": "Уянга",
+    "lastName": "Самбуу",
+    "email": "uyanga@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Профессор"
+  },
+  {
+    "firstName": "Амарсанаа",
+    "lastName": "Ганболд",
+    "email": "uyanga@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Гантуяа",
+    "lastName": "Пэрэнлэйлхүндэв",
+    "email": "gantuya.p@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Далайжаргал",
+    "lastName": "Пүрэвсүрэн",
+    "email": "dalaijargal@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Золжаргал",
+    "lastName": "Мөнхжаргал",
+    "email": "zoljargal@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Магсаржав",
+    "lastName": "Батаа",
+    "email": "magsarjav@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Мөнхцэцэг",
+    "lastName": "Намсрайдорж",
+    "email": "munkhtsetseg_n@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Наранчимэг",
+    "lastName": "Болд",
+    "email": "naranchimeg@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Нямлхагва",
+    "lastName": "Сэнгээ",
+    "email": "nyamlkhagva@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Сувдаа",
+    "lastName": "Батсуурь",
+    "email": "suvdaa@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Ууганбаяр",
+    "lastName": "Ганболд",
+    "email": "uuganbayar.g@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Хуягбаатар",
+    "lastName": "Батсүрэн",
+    "email": "khuyagbaatar@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Цэрэннадмид",
+    "lastName": "Төмөрбаатар",
+    "email": "tserennadmid@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Энхзол",
+    "lastName": "Довдон",
+    "email": "enkhzol@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Энхтуул",
+    "lastName": "Бөхсүрэн",
+    "email": "enkhtuul.b@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Дэд профессор"
+  },
+  {
+    "firstName": "Авирмэд",
+    "lastName": "Энхбат",
+    "email": "avirmed.e@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Амгалан",
+    "lastName": "Алтансүх",
+    "email": "amgalan.a@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Батбаяр",
+    "lastName": "Сэрээтэр",
+    "email": "batbayar.s@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Бат-Өлзий",
+    "lastName": "Шагдарсүрэн",
+    "email": "batulzii@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Батням",
+    "lastName": "Баттулга",
+    "email": "bbatnyam@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Доржнамжирмаа",
+    "lastName": "Бадраа",
+    "email": "dorjnamjirmaa@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Есенбек",
+    "lastName": "Керей",
+    "email": "esenbek@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Жавхлан",
+    "lastName": "Рэнцэндорж",
+    "email": "r.javkhlan@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Мөнхзул",
+    "lastName": "Алтанцэцэг",
+    "email": "munkhzul.a@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Нанзадрагчаа",
+    "lastName": "Дамбасүрэн",
+    "email": "nanzadragchaa@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Отгоннаран",
+    "lastName": "Очирбат",
+    "email": "otgonnaran@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Үйтүмэн",
+    "lastName": "Жам",
+    "email": "uitumen@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Хүрэл-Очир",
+    "lastName": "Цэдэндамба",
+    "email": "khurel-ochir@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Цолмон",
+    "lastName": "Зундуй",
+    "email": "tsolmonz@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Цэцэгжаргал",
+    "lastName": "Эрдэнэбаатар",
+    "email": "tsetsegjargal.e@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Ахлах багш"
+  },
+  {
+    "firstName": "Аззаяа",
+    "lastName": "Баттогтох",
+    "email": "azzaya.b@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Баатарбилэг",
+    "lastName": "Алтангэрэл",
+    "email": "a_bbileg@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Багаболд",
+    "lastName": "Гэндэнсүрэн",
+    "email": "bagabold.g@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Билгүүн",
+    "lastName": "Очирбат",
+    "email": "bilguun.o@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Бямбасүрэн",
+    "lastName": "Иванов",
+    "email": "byambaa@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Гантулга",
+    "lastName": "Гомбожав",
+    "email": "gantulga_g@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Даваасүрэн",
+    "lastName": "Нямжав",
+    "email": "davaasuren.n@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Лхамролом",
+    "lastName": "Цоодол",
+    "email": "lkhamrolom@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Наранбат",
+    "lastName": "Баянмөнх",
+    "email": "naranbat@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Энхтуяа",
+    "lastName": "Цогтбаатар",
+    "email": "enkhtuya.ts@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Гармаа",
+    "lastName": "Дангаасүрэн",
+    "email": "garmaa@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Чойжамц",
+    "lastName": "Намсрайжав",
+    "email": "choijamts.n@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Багш"
+  },
+  {
+    "firstName": "Амарзаяа",
+    "lastName": "Мөнхбат",
+    "email": "amarzaya.m@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Тэнхимийн туслах ажилтан"
+  },
+  {
+    "firstName": "Пүрэвханд",
+    "lastName": "Пүрэвдорж",
+    "email": "purevkhand.p@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Тэнхимийн туслах ажилтан"
+  },
+  {
+    "firstName": "Билгүүн",
+    "lastName": "Эрдэнэбаатар",
+    "email": "bilguun.e@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Лабораторийн сургагч"
+  },
+  {
+    "firstName": "Сарнай",
+    "lastName": "Гантулга",
+    "email": "sarnai.g@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Лабораторийн сургагч"
+  },
+  {
+    "firstName": "Тэмүүжин",
+    "lastName": "Дэлгэрцогт",
+    "email": "temuujin.d@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Лабораторийн сургагч"
+  },
+  {
+    "firstName": "Батдэлгэр",
+    "lastName": "Гомбожав",
+    "email": "batdelger.g@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Лаборант"
+  },
+  {
+    "firstName": "Мөнх-Орших",
+    "lastName": "Түвшинбаатар",
+    "email": "munkhorshikh@num.edu.mn",
+    "departmentId": "МКУТ",
+    "position": "Лаборант"
+  }
+]

@@ -7,7 +7,7 @@ import { BookOpen, CheckCircle2, XCircle, Calendar, Bookmark, AlertCircle } from
 import { topicService, type Topic } from "../../../../services/topicService";
 import { userService } from "../../../../services/userService";
 import { getStoredUser } from "../../../../lib/authGuard";
-import { resolveName, initialsFromName } from "../../../../lib/utils";
+import { resolveName, initialsFromName, fmtDateTime} from "../../../../lib/utils";
 import { RichTextEditor, RichText } from "../../../components/RichTextEditor";
 
 export default function TeacherStudentProposalsTab() {
@@ -115,7 +115,7 @@ export default function TeacherStudentProposalsTab() {
                     </div>
                     <div className="mt-2.5 flex justify-between items-center text-[11px] text-ink-500">
                       <span className="flex items-center gap-1 tabular-nums">
-                        <Calendar className="w-3 h-3" strokeWidth={1.6} /> {p.createdAt?.split("T")[0] || "Огноогүй"}
+                        <Calendar className="w-3 h-3" strokeWidth={1.6} /> {fmtDateTime(p.createdAt) || "Огноогүй"}
                       </span>
                       <span className="text-[10px] uppercase tracking-wider">{p.status}</span>
                     </div>

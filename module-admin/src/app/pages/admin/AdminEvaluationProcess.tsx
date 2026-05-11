@@ -11,6 +11,7 @@ import {
 import { workflowService, type ExecutionSession, type DefenseSession } from "../../../services/workflowService";
 import { selectionSessionService, type SelectionSession } from "../../../services/selectionSessionService";
 import { committeeService, type Committee } from "../../../services/committeeService";
+import { fmtDateTime } from "../../../lib/utils";
 
 // ─── Session type definitions ─────────────────────────────────────────────────
 
@@ -75,7 +76,7 @@ const SESSION_META: Record<SessionKind, SessionMeta> = {
   PRE_DEFENSE: {
     label: "Урьдчилсан хамгаалалт",
     icon: Shield,
-    description: "Комисс + Гадаад эксперт сохроор үнэлнэ (25 оноо)",
+    description: "Комисс + Зочин шүүгч сохроор үнэлнэ (25 оноо)",
     isDefense: true,
     needsCommittee: false,
     hasExternalExpert: true,
@@ -84,7 +85,7 @@ const SESSION_META: Record<SessionKind, SessionMeta> = {
   FINAL_DEFENSE: {
     label: "Эцсийн хамгаалалт",
     icon: Shield,
-    description: "Комисс + Гадаад эксперт сохроор үнэлнэ (35 + 5 оноо)",
+    description: "Комисс + Зочин шүүгч сохроор үнэлнэ (35 + 5 оноо)",
     isDefense: true,
     needsCommittee: false,
     hasExternalExpert: true,
@@ -117,7 +118,7 @@ const defaultSchemes: GradingScheme[] = [
   },
   {
     sessionKind: "FINAL_DEFENSE", totalPoints: 40,
-    criteria: [{ id: "fd_1", name: "Судалгаа", points: 6 }, { id: "fd_2", name: "Хэрэгжүүлэлт", points: 9 }, { id: "fd_3", name: "Танилцуулга", points: 5 }, { id: "fd_4", name: "Гар бичмэл", points: 5 }, { id: "fd_5", name: "Шүүмжлэгчийн үнэлгээ", points: 5 }, { id: "fd_6", name: "Нэмэлт үнэлгээ (Эксперт)", points: 10 }],
+    criteria: [{ id: "fd_1", name: "Судалгаа", points: 6 }, { id: "fd_2", name: "Хэрэгжүүлэлт", points: 9 }, { id: "fd_3", name: "Танилцуулга", points: 5 }, { id: "fd_4", name: "Гар бичмэл", points: 5 }, { id: "fd_5", name: "Шүүмжлэгчийн үнэлгээ", points: 5 }, { id: "fd_6", name: "Нэмэлт үнэлгээ (Зочин шүүгч)", points: 10 }],
   },
 ];
 
@@ -226,7 +227,7 @@ function CreateSessionModal({
 
         {meta.hasExternalExpert && (
           <p className="text-xs text-ink-600 leading-relaxed border-l-2 border-ink-300 pl-3 py-1">
-            Энэ хамгаалалтад <strong className="text-ink-900">Гадаад эксперт</strong> оролцоно.
+            Энэ хамгаалалтад <strong className="text-ink-900">Зочин шүүгч</strong> оролцоно.
             Сонгосон комисст EXTERNAL_EXPERT үүрэгтэй гишүүн байгаа эсэхийг шалгана уу.
           </p>
         )}
@@ -563,8 +564,8 @@ export default function AdminEvaluationProcess() {
                           <p className="text-xs text-ink-500 mt-1.5 leading-relaxed">{meta.description}</p>
                           {(unified?.startedAt || committeeName) && (
                             <p className="text-[11px] text-ink-400 mt-2 tabular-nums">
-                              {unified?.startedAt && <>Эхэлсэн: {unified.startedAt.split('T')[0]}</>}
-                              {unified?.closedAt && <> · Дууссан: {unified.closedAt.split('T')[0]}</>}
+                              {unified?.startedAt && <>Эхэлсэн: {fmtDateTime(unified.startedAt)}</>}
+                              {unified?.closedAt && <> · Дууссан: {fmtDateTime(unified.closedAt)}</>}
                               {committeeName && <span className="text-ink-600"> · {committeeName}</span>}
                             </p>
                           )}
@@ -654,15 +655,15 @@ export default function AdminEvaluationProcess() {
             </div>
             <Card>
               <CardHeader>
-                <CardTitle>Гадаад экспертийн оролцоо</CardTitle>
+                <CardTitle>Зочин шүүгчийн оролцоо</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2 text-sm text-ink-600 leading-relaxed">
                 <p>
-                  <strong className="text-ink-900">Урьдчилсан хамгаалалт.</strong> Гадаад эксперт комиссын
-                  гишүүнтэй тэгш эрхтэй үнэлнэ (сохор). Нарийн бичгийн дарга дундажийг нийтэлнэ.
+                  <strong className="text-ink-900">Урьдчилсан хамгаалалт.</strong> Зочин шүүгч комиссын
+                  гишүүнтэй тэгш эрхтэй үнэлнэ (сохор). Нарийн бичиг дундажийг нийтэлнэ.
                 </p>
                 <p>
-                  <strong className="text-ink-900">Эцсийн хамгаалалт.</strong> Гадаад эксперт нэмэлт 10 оноо
+                  <strong className="text-ink-900">Эцсийн хамгаалалт.</strong> Зочин шүүгч нэмэлт 10 оноо
                   үнэлнэ, комиссын нийт үнэлгээний дүнд оролцоно.
                 </p>
                 <p>

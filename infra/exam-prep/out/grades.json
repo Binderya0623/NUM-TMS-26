@@ -1,0 +1,1108 @@
+[
+  {
+    "studentId": "16B1SAS3418",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 23.3,
+    "reviewer": "naranbat"
+  },
+  {
+    "studentId": "16B1SEAS1788",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 22.8,
+    "reviewer": "naranbat"
+  },
+  {
+    "studentId": "17B1NUM0098",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 21.8,
+    "reviewer": "tsolmonz"
+  },
+  {
+    "studentId": "17B1NUM2078",
+    "phase1": 15.0,
+    "phase2": 16.0,
+    "pre": 20.0,
+    "reviewer": "lkhamrolom"
+  },
+  {
+    "studentId": "18B1NUM0064",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 23.0,
+    "reviewer": "nanzadragchaa"
+  },
+  {
+    "studentId": "18B1NUM1038",
+    "phase1": 15.0,
+    "phase2": 15.5,
+    "pre": 2.3,
+    "reviewer": "otgonnaran"
+  },
+  {
+    "studentId": "18B1NUM1404",
+    "phase1": 15.0,
+    "phase2": 13.0,
+    "pre": 13.0,
+    "reviewer": "uuganbayar.g"
+  },
+  {
+    "studentId": "19B1NUM0177",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 17.0,
+    "reviewer": "bilguun.o"
+  },
+  {
+    "studentId": "19B1NUM1212",
+    "phase1": 15.0,
+    "phase2": 14.25,
+    "pre": 22.6,
+    "reviewer": "enkhtuya.ts"
+  },
+  {
+    "studentId": "19B1NUM1573",
+    "phase1": 15.0,
+    "phase2": 16.0,
+    "pre": 23.0,
+    "reviewer": "amgalan.a"
+  },
+  {
+    "studentId": "19B1NUM1728",
+    "phase1": 15.0,
+    "phase2": 15.0,
+    "pre": 22.0,
+    "reviewer": "lkhamrolom"
+  },
+  {
+    "studentId": "19B1NUM2021",
+    "phase1": 14.0,
+    "phase2": 15.0,
+    "pre": 15.7,
+    "reviewer": "avirmed.e"
+  },
+  {
+    "studentId": "19B1NUM2181",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 23.0,
+    "reviewer": "lkhamrolom"
+  },
+  {
+    "studentId": "20B1NUM0291",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 22.0,
+    "reviewer": "khurel-ochir"
+  },
+  {
+    "studentId": "20B1NUM0667",
+    "phase1": 15.0,
+    "phase2": 16.6,
+    "pre": 18.0,
+    "reviewer": "bagabold.g"
+  },
+  {
+    "studentId": "20B1NUM1695",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 20.5,
+    "reviewer": "nyamlkhagva"
+  },
+  {
+    "studentId": "20B1NUM1799",
+    "phase1": 15.0,
+    "phase2": 15.0,
+    "pre": 23.75,
+    "reviewer": "nyamlkhagva"
+  },
+  {
+    "studentId": "20B1NUM2319",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 20.5,
+    "reviewer": "tsolmonz"
+  },
+  {
+    "studentId": "20B1NUM2390",
+    "phase1": 15.0,
+    "phase2": 20.0,
+    "pre": 24.3,
+    "reviewer": "tsolmonz"
+  },
+  {
+    "studentId": "20B1NUM2754",
+    "phase1": 15.0,
+    "phase2": 15.3,
+    "pre": 10.0,
+    "reviewer": "okhorloo"
+  },
+  {
+    "studentId": "20B1NUM3051",
+    "phase1": 15.0,
+    "phase2": 10.0,
+    "pre": 17.0,
+    "reviewer": "uuganbayar.g"
+  },
+  {
+    "studentId": "21B1NUM0027",
+    "phase1": 15.0,
+    "phase2": 14.0,
+    "pre": 18.0,
+    "reviewer": "khurel-ochir"
+  },
+  {
+    "studentId": "21B1NUM0104",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 23.5,
+    "reviewer": "nyamlkhagva"
+  },
+  {
+    "studentId": "21B1NUM0126",
+    "phase1": 15.0,
+    "phase2": 15.0,
+    "pre": 19.0,
+    "reviewer": "khurel-ochir"
+  },
+  {
+    "studentId": "21B1NUM0219",
+    "phase1": 15.0,
+    "phase2": 15.3,
+    "pre": 18.0,
+    "reviewer": "byambaa"
+  },
+  {
+    "studentId": "21B1NUM0367",
+    "phase1": 15.0,
+    "phase2": 15.0,
+    "pre": 18.0,
+    "reviewer": "batbayar.s"
+  },
+  {
+    "studentId": "21B1NUM0631",
+    "phase1": 15.0,
+    "phase2": 18.5,
+    "pre": 23.5,
+    "reviewer": "magsarjav"
+  },
+  {
+    "studentId": "21B1NUM0643",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 24.0,
+    "reviewer": "gantulga_g"
+  },
+  {
+    "studentId": "21B1NUM0853",
+    "phase1": 15.0,
+    "phase2": 17.7,
+    "pre": 21.3,
+    "reviewer": "tsolmonz"
+  },
+  {
+    "studentId": "21B1NUM0871",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 23.3,
+    "reviewer": "tsetsegjargal.e"
+  },
+  {
+    "studentId": "21B1NUM0908",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 24.33,
+    "reviewer": "magsarjav"
+  },
+  {
+    "studentId": "21B1NUM1036",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 20.0,
+    "reviewer": "bbatnyam"
+  },
+  {
+    "studentId": "21B1NUM1186",
+    "phase1": 15.0,
+    "phase2": 19.3,
+    "pre": 23.8,
+    "reviewer": "enkhtuul.b"
+  },
+  {
+    "studentId": "21B1NUM1197",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 24.0,
+    "reviewer": "lkhamrolom"
+  },
+  {
+    "studentId": "21B1NUM1291",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 20.0,
+    "reviewer": "altangerel"
+  },
+  {
+    "studentId": "21B1NUM1306",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 21.0,
+    "reviewer": "bilguun.o"
+  },
+  {
+    "studentId": "21B1NUM1342",
+    "phase1": 15.0,
+    "phase2": 18.5,
+    "pre": 23.6,
+    "reviewer": "avirmed.e"
+  },
+  {
+    "studentId": "21B1NUM1608",
+    "phase1": 15.0,
+    "phase2": 17.8,
+    "pre": 15.0,
+    "reviewer": "okhorloo"
+  },
+  {
+    "studentId": "21B1NUM1625",
+    "phase1": 15.0,
+    "phase2": 18.7,
+    "pre": 22.8,
+    "reviewer": "naranbat"
+  },
+  {
+    "studentId": "21B1NUM1789",
+    "phase1": 15.0,
+    "phase2": 15.0,
+    "pre": 24.0,
+    "reviewer": "munkhtsetseg_n"
+  },
+  {
+    "studentId": "21B1NUM1818",
+    "phase1": 15.0,
+    "phase2": 19.5,
+    "pre": 23.75,
+    "reviewer": "davaasuren.n"
+  },
+  {
+    "studentId": "21B1NUM1896",
+    "phase1": 15.0,
+    "phase2": 12.7,
+    "pre": 22.6,
+    "reviewer": "avirmed.e"
+  },
+  {
+    "studentId": "21B1NUM1940",
+    "phase1": 15.0,
+    "phase2": 18.5,
+    "pre": 23.0,
+    "reviewer": "avirmed.e"
+  },
+  {
+    "studentId": "21B1NUM2057",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 22.0,
+    "reviewer": "dalaijargal"
+  },
+  {
+    "studentId": "21B1NUM2366",
+    "phase1": 15.0,
+    "phase2": 17.3,
+    "pre": 20.5,
+    "reviewer": "tsetsegjargal.e"
+  },
+  {
+    "studentId": "21B1NUM2488",
+    "phase1": 15.0,
+    "phase2": 13.0,
+    "pre": 20.0,
+    "reviewer": "altangerel"
+  },
+  {
+    "studentId": "21B1NUM2495",
+    "phase1": 15.0,
+    "phase2": 16.0,
+    "pre": 24.0,
+    "reviewer": "gantulga_g"
+  },
+  {
+    "studentId": "21B1NUM2562",
+    "phase1": 15.0,
+    "phase2": 12.7,
+    "pre": 16.0,
+    "reviewer": "byambaa"
+  },
+  {
+    "studentId": "21B1NUM2633",
+    "phase1": 15.0,
+    "phase2": 19.5,
+    "pre": 23.25,
+    "reviewer": "nyamlkhagva"
+  },
+  {
+    "studentId": "21B1NUM2811",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 24.0,
+    "reviewer": "suvdaa"
+  },
+  {
+    "studentId": "21B1NUM2994",
+    "phase1": 15.0,
+    "phase2": 13.3,
+    "pre": 16.2,
+    "reviewer": "naranchimeg"
+  },
+  {
+    "studentId": "21B1NUM3109",
+    "phase1": 15.0,
+    "phase2": 17.5,
+    "pre": 20.5,
+    "reviewer": "dorjnamjirmaa"
+  },
+  {
+    "studentId": "21B1NUM3306",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 24.0,
+    "reviewer": "amgalan.a"
+  },
+  {
+    "studentId": "21B1NUM3647",
+    "phase1": 15.0,
+    "phase2": 19.3,
+    "pre": 25.0,
+    "reviewer": "naranchimeg"
+  },
+  {
+    "studentId": "21B6NUM4163",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 23.8,
+    "reviewer": "dalaijargal"
+  },
+  {
+    "studentId": "22B1NUM0002",
+    "phase1": 15.0,
+    "phase2": 19.3,
+    "pre": 25.0,
+    "reviewer": "uitumen"
+  },
+  {
+    "studentId": "22B1NUM0027",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 25.0,
+    "reviewer": "enkhtuya.ts"
+  },
+  {
+    "studentId": "22B1NUM0033",
+    "phase1": 15.0,
+    "phase2": 19.8,
+    "pre": 24.3,
+    "reviewer": "uyanga"
+  },
+  {
+    "studentId": "22B1NUM0035",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 18.0,
+    "reviewer": "uitumen"
+  },
+  {
+    "studentId": "22B1NUM0049",
+    "phase1": 15.0,
+    "phase2": 13.5,
+    "pre": 17.8,
+    "reviewer": "tserennadmid"
+  },
+  {
+    "studentId": "22B1NUM0103",
+    "phase1": 15.0,
+    "phase2": 14.0,
+    "pre": 23.0,
+    "reviewer": "uuganbayar.g"
+  },
+  {
+    "studentId": "22B1NUM0124",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 23.0,
+    "reviewer": "batbayar.s"
+  },
+  {
+    "studentId": "22B1NUM0157",
+    "phase1": 15.0,
+    "phase2": 17.5,
+    "pre": 22.33,
+    "reviewer": "davaasuren.n"
+  },
+  {
+    "studentId": "22B1NUM0166",
+    "phase1": 15.0,
+    "phase2": 18.33,
+    "pre": 23.3,
+    "reviewer": "otgonnaran"
+  },
+  {
+    "studentId": "22B1NUM0191",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 24.0,
+    "reviewer": "otgonnaran"
+  },
+  {
+    "studentId": "22B1NUM0227",
+    "phase1": 15.0,
+    "phase2": 17.7,
+    "pre": 16.0,
+    "reviewer": "tserennadmid"
+  },
+  {
+    "studentId": "22B1NUM0260",
+    "phase1": 14.0,
+    "phase2": 16.8,
+    "pre": 21.3,
+    "reviewer": "dorjnamjirmaa"
+  },
+  {
+    "studentId": "22B1NUM0287",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 21.8,
+    "reviewer": "enkhtuul.b"
+  },
+  {
+    "studentId": "22B1NUM0312",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 22.3,
+    "reviewer": "tsetsegjargal.e"
+  },
+  {
+    "studentId": "22B1NUM0331",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 23.0,
+    "reviewer": "amgalan.a"
+  },
+  {
+    "studentId": "22B1NUM0332",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 23.0,
+    "reviewer": "uuganbayar.g"
+  },
+  {
+    "studentId": "22B1NUM0510",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 22.5,
+    "reviewer": "uyanga"
+  },
+  {
+    "studentId": "22B1NUM0514",
+    "phase1": 15.0,
+    "phase2": 15.6,
+    "pre": 19.5,
+    "reviewer": "bagabold.g"
+  },
+  {
+    "studentId": "22B1NUM0592",
+    "phase1": 15.0,
+    "phase2": 17.5,
+    "pre": 23.0,
+    "reviewer": "bagabold.g"
+  },
+  {
+    "studentId": "22B1NUM0656",
+    "phase1": 15.0,
+    "phase2": 19.3,
+    "pre": 25.0,
+    "reviewer": "okhorloo"
+  },
+  {
+    "studentId": "22B1NUM0706",
+    "phase1": 15.0,
+    "phase2": 17.5,
+    "pre": 23.0,
+    "reviewer": "magsarjav"
+  },
+  {
+    "studentId": "22B1NUM0719",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 23.5,
+    "reviewer": "naranbat"
+  },
+  {
+    "studentId": "22B1NUM0735",
+    "phase1": 15.0,
+    "phase2": 20.0,
+    "pre": 24.75,
+    "reviewer": "nyamlkhagva"
+  },
+  {
+    "studentId": "22B1NUM0756",
+    "phase1": 15.0,
+    "phase2": 16.0,
+    "pre": 23.0,
+    "reviewer": "batbayar.s"
+  },
+  {
+    "studentId": "22B1NUM0764",
+    "phase1": 15.0,
+    "phase2": 13.0,
+    "pre": 24.0,
+    "reviewer": "munkhtsetseg_n"
+  },
+  {
+    "studentId": "22B1NUM0776",
+    "phase1": 15.0,
+    "phase2": 18.5,
+    "pre": 23.5,
+    "reviewer": "davaasuren.n"
+  },
+  {
+    "studentId": "22B1NUM0796",
+    "phase1": 15.0,
+    "phase2": 19.5,
+    "pre": 24.75,
+    "reviewer": "davaasuren.n"
+  },
+  {
+    "studentId": "22B1NUM0797",
+    "phase1": 15.0,
+    "phase2": 16.0,
+    "pre": 20.0,
+    "reviewer": "byambaa"
+  },
+  {
+    "studentId": "22B1NUM1034",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 23.6,
+    "reviewer": "r.javkhlan"
+  },
+  {
+    "studentId": "22B1NUM1046",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 22.3,
+    "reviewer": "uyanga"
+  },
+  {
+    "studentId": "22B1NUM1059",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 24.0,
+    "reviewer": "batbayar.s"
+  },
+  {
+    "studentId": "22B1NUM1142",
+    "phase1": 15.0,
+    "phase2": 13.0,
+    "pre": 19.0,
+    "reviewer": "gantulga_g"
+  },
+  {
+    "studentId": "22B1NUM1148",
+    "phase1": 15.0,
+    "phase2": 13.0,
+    "pre": 22.0,
+    "reviewer": "gantulga_g"
+  },
+  {
+    "studentId": "22B1NUM1256",
+    "phase1": 15.0,
+    "phase2": 16.0,
+    "pre": 23.0,
+    "reviewer": "uuganbayar.g"
+  },
+  {
+    "studentId": "22B1NUM1281",
+    "phase1": 15.0,
+    "phase2": 13.0,
+    "pre": 21.0,
+    "reviewer": "bilguun.o"
+  },
+  {
+    "studentId": "22B1NUM1282",
+    "phase1": 15.0,
+    "phase2": 18.5,
+    "pre": 24.5,
+    "reviewer": "uyanga"
+  },
+  {
+    "studentId": "22B1NUM1357",
+    "phase1": 15.0,
+    "phase2": 19.5,
+    "pre": 24.0,
+    "reviewer": "magsarjav"
+  },
+  {
+    "studentId": "22B1NUM1367",
+    "phase1": 15.0,
+    "phase2": 10.0,
+    "pre": 17.0,
+    "reviewer": "altangerel"
+  },
+  {
+    "studentId": "22B1NUM1411",
+    "phase1": 15.0,
+    "phase2": 19.7,
+    "pre": 22.3,
+    "reviewer": "tserennadmid"
+  },
+  {
+    "studentId": "22B1NUM1485",
+    "phase1": 15.0,
+    "phase2": 15.0,
+    "pre": 21.0,
+    "reviewer": "amgalan.a"
+  },
+  {
+    "studentId": "22B1NUM1637",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 24.0,
+    "reviewer": "munkhtsetseg_n"
+  },
+  {
+    "studentId": "22B1NUM1680",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 23.5,
+    "reviewer": "uitumen"
+  },
+  {
+    "studentId": "22B1NUM1796",
+    "phase1": 15.0,
+    "phase2": 18.6,
+    "pre": 24.5,
+    "reviewer": "uitumen"
+  },
+  {
+    "studentId": "22B1NUM1811",
+    "phase1": 15.0,
+    "phase2": 18.6,
+    "pre": 23.5,
+    "reviewer": "uitumen"
+  },
+  {
+    "studentId": "22B1NUM2341",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 23.0,
+    "reviewer": "amgalan.a"
+  },
+  {
+    "studentId": "22B1NUM3154",
+    "phase1": 15.0,
+    "phase2": 16.75,
+    "pre": 22.3,
+    "reviewer": "r.javkhlan"
+  },
+  {
+    "studentId": "22B1NUM3392",
+    "phase1": 15.0,
+    "phase2": 16.0,
+    "pre": 24.0,
+    "reviewer": "otgonnaran"
+  },
+  {
+    "studentId": "22B1NUM3410",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 23.0,
+    "reviewer": "lkhamrolom"
+  },
+  {
+    "studentId": "22B1NUM3435",
+    "phase1": 15.0,
+    "phase2": 15.0,
+    "pre": 20.3,
+    "reviewer": "enkhtuya.ts"
+  },
+  {
+    "studentId": "22B1NUM4400",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 22.0,
+    "reviewer": "nanzadragchaa"
+  },
+  {
+    "studentId": "22B1NUM4505",
+    "phase1": 14.0,
+    "phase2": 14.0,
+    "pre": 21.0,
+    "reviewer": "altangerel"
+  },
+  {
+    "studentId": "22B1NUM4520",
+    "phase1": 15.0,
+    "phase2": 16.5,
+    "pre": 20.5,
+    "reviewer": "dalaijargal"
+  },
+  {
+    "studentId": "22B1NUM4522",
+    "phase1": 15.0,
+    "phase2": 20.0,
+    "pre": 25.0,
+    "reviewer": "suvdaa"
+  },
+  {
+    "studentId": "22B1NUM4532",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 25.0,
+    "reviewer": "bilguun.o"
+  },
+  {
+    "studentId": "22B1NUM4640",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 23.0,
+    "reviewer": "bbatnyam"
+  },
+  {
+    "studentId": "22B1NUM4715",
+    "phase1": 15.0,
+    "phase2": 20.0,
+    "pre": 25.0,
+    "reviewer": "byambaa"
+  },
+  {
+    "studentId": "22B1NUM4716",
+    "phase1": 15.0,
+    "phase2": 16.3,
+    "pre": 19.3,
+    "reviewer": "tserennadmid"
+  },
+  {
+    "studentId": "22B1NUM4802",
+    "phase1": 15.0,
+    "phase2": 17.3,
+    "pre": 22.0,
+    "reviewer": "bbatnyam"
+  },
+  {
+    "studentId": "22B1NUM4971",
+    "phase1": 15.0,
+    "phase2": 12.0,
+    "pre": 23.0,
+    "reviewer": "munkhtsetseg_n"
+  },
+  {
+    "studentId": "22B1NUM5289",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 22.5,
+    "reviewer": "davaasuren.n"
+  },
+  {
+    "studentId": "22B1NUM5300",
+    "phase1": 15.0,
+    "phase2": 18.7,
+    "pre": 24.0,
+    "reviewer": "tsolmonz"
+  },
+  {
+    "studentId": "22B1NUM5326",
+    "phase1": 15.0,
+    "phase2": 17.3,
+    "pre": 23.0,
+    "reviewer": "bbatnyam"
+  },
+  {
+    "studentId": "22B1NUM5330",
+    "phase1": 15.0,
+    "phase2": 17.75,
+    "pre": 20.0,
+    "reviewer": "r.javkhlan"
+  },
+  {
+    "studentId": "22B1NUM5335",
+    "phase1": 15.0,
+    "phase2": 18.5,
+    "pre": 23.3,
+    "reviewer": "otgonnaran"
+  },
+  {
+    "studentId": "22B1NUM5469",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 19.8,
+    "reviewer": "okhorloo"
+  },
+  {
+    "studentId": "22B1NUM5484",
+    "phase1": 15.0,
+    "phase2": 16.5,
+    "pre": 21.3,
+    "reviewer": "okhorloo"
+  },
+  {
+    "studentId": "22B1NUM5504",
+    "phase1": 15.0,
+    "phase2": 15.67,
+    "pre": 23.3,
+    "reviewer": "enkhtuya.ts"
+  },
+  {
+    "studentId": "22B1NUM5541",
+    "phase1": 15.0,
+    "phase2": 18.5,
+    "pre": 23.6,
+    "reviewer": "otgonnaran"
+  },
+  {
+    "studentId": "22B1NUM5577",
+    "phase1": 15.0,
+    "phase2": 15.75,
+    "pre": 22.0,
+    "reviewer": "enkhtuya.ts"
+  },
+  {
+    "studentId": "22B1NUM5578",
+    "phase1": 15.0,
+    "phase2": 20.0,
+    "pre": 23.6,
+    "reviewer": "r.javkhlan"
+  },
+  {
+    "studentId": "22B1NUM5610",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 24.2,
+    "reviewer": "dorjnamjirmaa"
+  },
+  {
+    "studentId": "22B1NUM5736",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 25.0,
+    "reviewer": "uitumen"
+  },
+  {
+    "studentId": "22B1NUM5762",
+    "phase1": 15.0,
+    "phase2": 20.0,
+    "pre": 24.8,
+    "reviewer": "enkhtuul.b"
+  },
+  {
+    "studentId": "22B1NUM5769",
+    "phase1": 15.0,
+    "phase2": 19.5,
+    "pre": 25.0,
+    "reviewer": "davaasuren.n"
+  },
+  {
+    "studentId": "22B1NUM5773",
+    "phase1": 15.0,
+    "phase2": 20.0,
+    "pre": 24.0,
+    "reviewer": "enkhtuul.b"
+  },
+  {
+    "studentId": "22B1NUM5806",
+    "phase1": 15.0,
+    "phase2": 14.0,
+    "pre": 18.0,
+    "reviewer": "uuganbayar.g"
+  },
+  {
+    "studentId": "22B1NUM5914",
+    "phase1": 15.0,
+    "phase2": 15.0,
+    "pre": 21.0,
+    "reviewer": "batbayar.s"
+  },
+  {
+    "studentId": "22B1NUM5958",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 20.0,
+    "reviewer": "nanzadragchaa"
+  },
+  {
+    "studentId": "22B1NUM6150",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 24.0,
+    "reviewer": "bilguun.o"
+  },
+  {
+    "studentId": "22B1NUM6548",
+    "phase1": 15.0,
+    "phase2": 15.5,
+    "pre": 21.5,
+    "reviewer": "magsarjav"
+  },
+  {
+    "studentId": "22B1NUM6566",
+    "phase1": 15.0,
+    "phase2": 13.3,
+    "pre": 21.4,
+    "reviewer": "naranchimeg"
+  },
+  {
+    "studentId": "22B1NUM6572",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 24.0,
+    "reviewer": "magsarjav"
+  },
+  {
+    "studentId": "22B1NUM6575",
+    "phase1": 15.0,
+    "phase2": 19.0,
+    "pre": 20.0,
+    "reviewer": "uuganbayar.g"
+  },
+  {
+    "studentId": "22B1NUM6631",
+    "phase1": 15.0,
+    "phase2": 19.3,
+    "pre": 24.0,
+    "reviewer": "naranchimeg"
+  },
+  {
+    "studentId": "22B1NUM6650",
+    "phase1": 15.0,
+    "phase2": 13.0,
+    "pre": 24.0,
+    "reviewer": "munkhtsetseg_n"
+  },
+  {
+    "studentId": "22B1NUM6701",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 24.0,
+    "reviewer": "lkhamrolom"
+  },
+  {
+    "studentId": "22B1NUM6769",
+    "phase1": 15.0,
+    "phase2": 19.5,
+    "pre": 23.3,
+    "reviewer": "dalaijargal"
+  },
+  {
+    "studentId": "22B1NUM6928",
+    "phase1": 15.0,
+    "phase2": 15.6,
+    "pre": 25.0,
+    "reviewer": "bbatnyam"
+  },
+  {
+    "studentId": "22B1NUM6983",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 25.0,
+    "reviewer": "nanzadragchaa"
+  },
+  {
+    "studentId": "22B1NUM6999",
+    "phase1": 15.0,
+    "phase2": 11.0,
+    "pre": 13.0,
+    "reviewer": "byambaa"
+  },
+  {
+    "studentId": "22B1NUM7043",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 22.5,
+    "reviewer": "dalaijargal"
+  },
+  {
+    "studentId": "22B1NUM7055",
+    "phase1": 15.0,
+    "phase2": 15.8,
+    "pre": 17.8,
+    "reviewer": "tserennadmid"
+  },
+  {
+    "studentId": "22B1NUM7118",
+    "phase1": 15.0,
+    "phase2": 18.6,
+    "pre": 21.0,
+    "reviewer": "bagabold.g"
+  },
+  {
+    "studentId": "22B1NUM7158",
+    "phase1": 15.0,
+    "phase2": 15.5,
+    "pre": 21.0,
+    "reviewer": "bagabold.g"
+  },
+  {
+    "studentId": "22B1NUM7184",
+    "phase1": 15.0,
+    "phase2": 18.0,
+    "pre": 21.0,
+    "reviewer": "munkhtsetseg_n"
+  },
+  {
+    "studentId": "22B1NUM7226",
+    "phase1": 15.0,
+    "phase2": 17.0,
+    "pre": 25.0,
+    "reviewer": "suvdaa"
+  },
+  {
+    "studentId": "22B1NUM7309",
+    "phase1": 15.0,
+    "phase2": 18.7,
+    "pre": 24.3,
+    "reviewer": "enkhtuul.b"
+  },
+  {
+    "studentId": "22B1NUM7322",
+    "phase1": 15.0,
+    "phase2": 18.5,
+    "pre": 24.3,
+    "reviewer": "r.javkhlan"
+  },
+  {
+    "studentId": "22B1NUM7566",
+    "phase1": 15.0,
+    "phase2": 19.5,
+    "pre": 23.88,
+    "reviewer": "nyamlkhagva"
+  },
+  {
+    "studentId": "22B1NUM7594",
+    "phase1": 15.0,
+    "phase2": 16.0,
+    "pre": 22.0,
+    "reviewer": "khurel-ochir"
+  },
+  {
+    "studentId": "22B1NUM7885",
+    "phase1": 15.0,
+    "phase2": 13.3,
+    "pre": 12.3,
+    "reviewer": "tsetsegjargal.e"
+  },
+  {
+    "studentId": "23B1NUM1098",
+    "phase1": 15.0,
+    "phase2": 15.0,
+    "pre": 19.0,
+    "reviewer": "suvdaa"
+  },
+  {
+    "studentId": "23B1NUM2846",
+    "phase1": 15.0,
+    "phase2": 16.0,
+    "pre": 22.0,
+    "reviewer": "dorjnamjirmaa"
+  }
+]
