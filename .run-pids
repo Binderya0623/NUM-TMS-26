@@ -1,0 +1,12 @@
+218991  user_service
+218996  topic_service
+218999  committee_service
+219006  thesis_service
+219014  workflow_service
+219024  evaluation_service
+219035  notification_service
+219048  report_service
+219063  message_service
+219083  analytic_service
+219100  grading_service
+219147  auth-service
