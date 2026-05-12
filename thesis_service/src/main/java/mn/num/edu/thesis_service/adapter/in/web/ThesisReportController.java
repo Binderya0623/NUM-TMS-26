@@ -59,7 +59,7 @@ public class ThesisReportController {
                     ThesisEntity t = new ThesisEntity(
                             java.util.UUID.randomUUID().toString(),
                             studentId, null, null, null, null, null,
-                            "ACTIVE", LocalDateTime.now(), LocalDateTime.now()
+                            "EXECUTION_ACTIVE", LocalDateTime.now(), LocalDateTime.now()
                     );
                     t.markNew();
                     return thesisRepo.save(t).map(ThesisEntity::getId);

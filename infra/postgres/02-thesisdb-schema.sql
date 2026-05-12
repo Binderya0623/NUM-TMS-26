@@ -6,42 +6,44 @@ CREATE TABLE IF NOT EXISTS department (
 );
 
 CREATE TABLE IF NOT EXISTS student (
-    id        BIGSERIAL PRIMARY KEY,
-    firstname VARCHAR(255),
-    lastname  VARCHAR(255),
-    mail      VARCHAR(255),
-    program   VARCHAR(255),
-    dep_id    BIGINT REFERENCES department(id)
+    id               BIGSERIAL PRIMARY KEY,
+    sisi_id          VARCHAR(255),
+    firstname        VARCHAR(255),
+    lastname         VARCHAR(255),
+    mail             VARCHAR(255),
+    program          VARCHAR(255),
+    dep_id           BIGINT REFERENCES department(id),
+    proposed_number  INT     DEFAULT 0,
+    is_choosed       BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS teacher (
-    id        BIGSERIAL PRIMARY KEY,
-    firstname VARCHAR(255),
-    lastname  VARCHAR(255),
-    mail      VARCHAR(255),
-    dep_id    BIGINT REFERENCES department(id)
+    id                   BIGSERIAL PRIMARY KEY,
+    sisi_id              VARCHAR(255),
+    firstname            VARCHAR(255),
+    lastname             VARCHAR(255),
+    mail                 VARCHAR(255),
+    dep_id               BIGINT REFERENCES department(id),
+    num_of_choosed_stud  INT DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS topic (
-    id              BIGSERIAL PRIMARY KEY,
-    created_at      DATE,
-    created_by_id   VARCHAR(255),
-    created_by_type VARCHAR(50),
-    fields          JSON,
-    form_id         BIGINT,
-    program         VARCHAR(255),
-    status          VARCHAR(50)
-);
-
-CREATE TABLE IF NOT EXISTS topic_request (
-    id                BIGSERIAL PRIMARY KEY,
-    is_selected       BOOLEAN,
-    req_note          TEXT,
-    req_text          TEXT,
-    requested_by_id   VARCHAR(255),
-    requested_by_type VARCHAR(50),
-    selected_at       DATE,
-    topic_id          BIGINT REFERENCES topic(id)
+    id                      BIGSERIAL PRIMARY KEY,
+    created_by_id           VARCHAR(255),
+    created_by_type         VARCHAR(50),
+    proposed_to_teacher_id  VARCHAR(255),
+    program                 VARCHAR(255),
+    fields                  JSON,
+    keywords                TEXT,
+    visibility              VARCHAR(50)  DEFAULT 'PUBLIC',
+    status                  VARCHAR(50),
+    max_students            INT          DEFAULT 1,
+    created_at              DATE,
+    created_at_ts           TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+    updated_at              TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+    is_deleted              BOOLEAN      DEFAULT FALSE,
+    rejection_reason        TEXT,
+    form_id                 BIGINT
 );
 
 CREATE TABLE IF NOT EXISTS topic_selection_session (
@@ -59,30 +61,40 @@ CREATE TABLE IF NOT EXISTS topic_selection_session (
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS topic_request (
+    id                BIGSERIAL PRIMARY KEY,
+    session_id        BIGINT REFERENCES topic_selection_session(id),
+    topic_id          BIGINT REFERENCES topic(id),
+    requested_by_id   VARCHAR(255),
+    requested_by_type VARCHAR(50),
+    req_text          TEXT,
+    req_note          TEXT,
+    status            VARCHAR(50),
+    is_selected       BOOLEAN,
+    selected_at       DATE,
+    rejection_reason  TEXT,
+    responded_by_id   VARCHAR(255),
+    responded_at      TIMESTAMP,
+    created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS plan (
-    id         BIGSERIAL PRIMARY KEY,
-    created_at DATE,
-    status     VARCHAR(50),
-    student_id VARCHAR(255),
-    topic_id   BIGINT REFERENCES topic(id)
+    id               BIGSERIAL PRIMARY KEY,
+    topic_request_id BIGINT REFERENCES topic_request(id),
+    topic_id         BIGINT REFERENCES topic(id),
+    student_id       VARCHAR(255),
+    supervisor_id    VARCHAR(255),
+    status           VARCHAR(50),
+    revision_count   INT  DEFAULT 0,
+    created_at       DATE
 );
 
 CREATE TABLE IF NOT EXISTS plan_week (
     id          BIGSERIAL PRIMARY KEY,
     plan_id     BIGINT REFERENCES plan(id),
-    result      JSON,
+    week_number INT,
     task        TEXT,
-    week_number INT
-);
-
-CREATE TABLE IF NOT EXISTS plan_response (
-    id            BIGSERIAL PRIMARY KEY,
-    approver_id   BIGINT,
-    approver_type VARCHAR(50),
-    note          TEXT,
-    plan_id       BIGINT REFERENCES plan(id),
-    res           VARCHAR(50),
-    res_date      DATE
+    result      JSON
 );
 
 CREATE TABLE IF NOT EXISTS plan_file (
@@ -104,4 +116,14 @@ CREATE TABLE IF NOT EXISTS plan_review (
     decision      VARCHAR(50),
     feedback      TEXT,
     reviewed_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS plan_response (
+    id            BIGSERIAL PRIMARY KEY,
+    plan_id       BIGINT REFERENCES plan(id),
+    approver_id   BIGINT,
+    approver_type VARCHAR(50),
+    note          TEXT,
+    res           VARCHAR(50),
+    res_date      DATE
 );

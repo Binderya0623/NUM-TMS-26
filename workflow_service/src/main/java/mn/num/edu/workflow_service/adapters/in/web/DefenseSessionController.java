@@ -86,11 +86,6 @@ public class DefenseSessionController {
         if (!STAGE_MAX_POINTS.containsKey(req.stageType())) {
             return Mono.just(ResponseEntity.badRequest().<DefenseSessionEntity>build());
         }
-        boolean isProgress1 = "PROGRESS_1".equals(req.stageType());
-        if (isProgress1 && (req.supervisorId() == null || req.supervisorId().isBlank())) {
-            return Mono.just(ResponseEntity.badRequest().<DefenseSessionEntity>build());
-        }
-
         String canonicalStage = canonicalStageType(req.stageType());
         BigDecimal maxPts = req.maxPoints() != null ? req.maxPoints() : STAGE_MAX_POINTS.get(req.stageType());
 
@@ -101,12 +96,18 @@ public class DefenseSessionController {
         entity.setMaxPoints(maxPts);
         entity.setStatus("PENDING");
         entity.setCreatedAt(LocalDateTime.now());
-
-        if (isProgress1) {
+        boolean isProgress1 = "PROGRESS_1".equals(canonicalStage);
+        if (isProgress1 && req.supervisorId() != null && !req.supervisorId().isBlank()) {
+            // PROGRESS_1 is per-supervisor: use supervisorId as both supervisor and committee key
             entity.setSupervisorId(req.supervisorId());
+            entity.setCommitteeId(req.supervisorId());
+            entity.setDepartmentId(req.departmentId() != null ? req.departmentId() : "GLOBAL");
         } else {
             entity.setDepartmentId(req.departmentId() != null ? req.departmentId() : "GLOBAL");
             entity.setCommitteeId(req.committeeId() != null ? req.committeeId() : "GLOBAL");
+            if (req.supervisorId() != null && !req.supervisorId().isBlank()) {
+                entity.setSupervisorId(req.supervisorId());
+            }
         }
 
         if (req.scheduledDate() != null) entity.setScheduledDate(req.scheduledDate());
@@ -116,13 +117,11 @@ public class DefenseSessionController {
         return repository.save(entity)
                 .doOnNext(this::publishDeadlineIfApplicable)
                 .map(saved -> ResponseEntity.status(HttpStatus.CREATED).body(saved))
-                .onErrorResume(org.springframework.dao.DuplicateKeyException.class, e -> {
-                    Mono<DefenseSessionEntity> finder = isProgress1
-                            ? repository.findBySupervisorIdAndStageType(entity.getSupervisorId(), canonicalStage)
-                            : repository.findByCommitteeIdAndStageType(entity.getCommitteeId(), canonicalStage);
-                    return finder.map(ResponseEntity::ok)
-                            .defaultIfEmpty(ResponseEntity.status(HttpStatus.CONFLICT).<DefenseSessionEntity>build());
-                });
+                .onErrorResume(org.springframework.dao.DuplicateKeyException.class, e ->
+                    repository.findByCommitteeIdAndStageType(entity.getCommitteeId(), canonicalStage)
+                            .map(ResponseEntity::ok)
+                            .defaultIfEmpty(ResponseEntity.status(HttpStatus.CONFLICT).<DefenseSessionEntity>build())
+                );
     }
 
     @PatchMapping("/{id}")

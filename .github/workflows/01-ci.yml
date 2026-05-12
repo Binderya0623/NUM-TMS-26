@@ -1,0 +1,53 @@
+name: CI
+run-name: "CI | ${{ github.event_name }} | ${{ github.ref_name }}"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  # ── Spring Boot сервисүүдийг build шалгах ─────────────────────
+  build-check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: auth_service
+            path: num_auth-main/auth-service
+          - name: user_service
+            path: user_service
+          - name: topic_service
+            path: topic_service
+          - name: committee_service
+            path: committee_service
+          - name: thesis_service
+            path: thesis_service
+          - name: workflow_service
+            path: workflow_service
+          - name: evaluation_service
+            path: evaluation_service
+          - name: notification_service
+            path: notification_service
+          - name: report_service
+            path: report_service
+          - name: message_service
+            path: message_service
+          - name: analytic_service
+            path: analytic_service
+          - name: grading_service
+            path: grading_service
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Build ${{ matrix.name }}
+        working-directory: ${{ matrix.path }}
+        run: mvn -B -DskipTests package

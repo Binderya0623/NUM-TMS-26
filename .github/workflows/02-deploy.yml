@@ -1,0 +1,496 @@
+name: Build & Deploy
+run-name: "Deploy | ${{ github.ref_name }} | ${{ github.sha }}"
+
+on:
+  push:
+    branches: [main]
+
+env:
+  REGISTRY: ${{ secrets.DOCKERHUB_USERNAME }}
+  VERSION: ${{ github.sha }}
+
+jobs:
+  # JOB 1: Ямар service өөрчлөгдсөнийг тодорхойлох
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      auth_service:         ${{ steps.f.outputs.auth_service }}
+      user_service:         ${{ steps.f.outputs.user_service }}
+      topic_service:        ${{ steps.f.outputs.topic_service }}
+      committee_service:    ${{ steps.f.outputs.committee_service }}
+      thesis_service:       ${{ steps.f.outputs.thesis_service }}
+      workflow_service:     ${{ steps.f.outputs.workflow_service }}
+      evaluation_service:   ${{ steps.f.outputs.evaluation_service }}
+      notification_service: ${{ steps.f.outputs.notification_service }}
+      report_service:       ${{ steps.f.outputs.report_service }}
+      message_service:      ${{ steps.f.outputs.message_service }}
+      analytic_service:     ${{ steps.f.outputs.analytic_service }}
+      grading_service:      ${{ steps.f.outputs.grading_service }}
+      jsf_host:             ${{ steps.f.outputs.jsf_host }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: f
+        with:
+          filters: |
+            auth_service:
+              - 'num_auth-main/**'
+            user_service:
+              - 'user_service/**'
+            topic_service:
+              - 'topic_service/**'
+            committee_service:
+              - 'committee_service/**'
+            thesis_service:
+              - 'thesis_service/**'
+            workflow_service:
+              - 'workflow_service/**'
+            evaluation_service:
+              - 'evaluation_service/**'
+            notification_service:
+              - 'notification_service/**'
+            report_service:
+              - 'report_service/**'
+            message_service:
+              - 'message_service/**'
+            analytic_service:
+              - 'analytic_service/**'
+            grading_service:
+              - 'grading_service/**'
+            jsf_host:
+              - 'module-*/**'
+              - 'shared-ui-module/**'
+              - 'jsf-host/**'
+              - 'Dockerfile.jsf-host'
+              - 'Dockerfile.jsf-host.dockerignore'
+
+  # JOB 2: Backend сервисүүд build + deploy
+  deploy-auth:
+    needs: changes
+    if: needs.changes.outputs.auth_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./num_auth-main/auth-service
+          file: ./num_auth-main/auth-service/../../Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-auth_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-auth_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull auth_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps auth_service
+            docker image prune -f
+
+  deploy-user:
+    needs: changes
+    if: needs.changes.outputs.user_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./user_service
+          file: ./Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-user_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-user_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull user_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps user_service
+            docker image prune -f
+
+  deploy-topic:
+    needs: changes
+    if: needs.changes.outputs.topic_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./topic_service
+          file: ./Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-topic_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-topic_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull topic_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps topic_service
+            docker image prune -f
+
+  deploy-committee:
+    needs: changes
+    if: needs.changes.outputs.committee_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./committee_service
+          file: ./Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-committee_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-committee_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull committee_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps committee_service
+            docker image prune -f
+
+  deploy-thesis:
+    needs: changes
+    if: needs.changes.outputs.thesis_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./thesis_service
+          file: ./Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-thesis_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-thesis_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull thesis_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps thesis_service
+            docker image prune -f
+
+  deploy-workflow:
+    needs: changes
+    if: needs.changes.outputs.workflow_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./workflow_service
+          file: ./Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-workflow_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-workflow_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull workflow_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps workflow_service
+            docker image prune -f
+
+  deploy-evaluation:
+    needs: changes
+    if: needs.changes.outputs.evaluation_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./evaluation_service
+          file: ./Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-evaluation_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-evaluation_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull evaluation_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps evaluation_service
+            docker image prune -f
+
+  deploy-notification:
+    needs: changes
+    if: needs.changes.outputs.notification_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./notification_service
+          file: ./Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-notification_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-notification_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull notification_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps notification_service
+            docker image prune -f
+
+  deploy-report:
+    needs: changes
+    if: needs.changes.outputs.report_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./report_service
+          file: ./Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-report_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-report_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull report_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps report_service
+            docker image prune -f
+
+  deploy-message:
+    needs: changes
+    if: needs.changes.outputs.message_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./message_service
+          file: ./Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-message_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-message_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull message_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps message_service
+            docker image prune -f
+
+  deploy-analytic:
+    needs: changes
+    if: needs.changes.outputs.analytic_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./analytic_service
+          file: ./Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-analytic_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-analytic_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull analytic_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps analytic_service
+            docker image prune -f
+
+  deploy-grading:
+    needs: changes
+    if: needs.changes.outputs.grading_service == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ./grading_service
+          file: ./Dockerfile.spring
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-grading_service:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-grading_service:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull grading_service
+            docker compose -f docker-compose.prod.yml up -d --no-deps grading_service
+            docker image prune -f
+
+  # JOB 3: Frontend (jsf_host) — VITE_API_* build-arg шаардлагатай
+  deploy-jsf-host:
+    needs: changes
+    if: needs.changes.outputs.jsf_host == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile.jsf-host
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/diploma-jsf_host:${{ env.VERSION }}
+            ${{ env.REGISTRY }}/diploma-jsf_host:latest
+          build-args: |
+            VITE_API_AUTH=http://${{ secrets.SERVER_HOST }}
+            VITE_API_USER=http://${{ secrets.SERVER_HOST }}
+            VITE_API_TOPIC=http://${{ secrets.SERVER_HOST }}
+            VITE_API_WORKFLOW=http://${{ secrets.SERVER_HOST }}
+            VITE_API_COMMITTEE=http://${{ secrets.SERVER_HOST }}
+            VITE_API_THESIS=http://${{ secrets.SERVER_HOST }}
+            VITE_API_EVALUATION=http://${{ secrets.SERVER_HOST }}
+            VITE_API_NOTIFICATION=http://${{ secrets.SERVER_HOST }}
+            VITE_API_REPORT=http://${{ secrets.SERVER_HOST }}
+            VITE_API_MESSAGE=http://${{ secrets.SERVER_HOST }}
+            VITE_API_ANALYTIC=http://${{ secrets.SERVER_HOST }}
+            VITE_API_GRADING=http://${{ secrets.SERVER_HOST }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - uses: appleboy/ssh-action@v1
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/diplom
+            docker compose -f docker-compose.prod.yml pull jsf_host
+            docker compose -f docker-compose.prod.yml up -d --no-deps jsf_host
+            docker image prune -f
