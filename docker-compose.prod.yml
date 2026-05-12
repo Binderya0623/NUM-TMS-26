@@ -20,10 +20,10 @@ x-spring-common: &spring-common
     SPRING_R2DBC_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
     SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-    SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    SPRING_KAFKA_BOOTSTRAP_SERVERS: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:-kafka:9092}
     APP_SECURITY_JWT_ENABLED: ${APP_SECURITY_JWT_ENABLED:-false}
     APP_JWT_SECRET: ${APP_JWT_SECRET}
-    JAVA_OPTS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=60.0"
+    JAVA_OPTS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=60.0 -Dspring.kafka.bootstrap-servers=${SPRING_KAFKA_BOOTSTRAP_SERVERS:-kafka:9092}"
 
 services:
   # ───────────────────────────────────────────── infrastructure
