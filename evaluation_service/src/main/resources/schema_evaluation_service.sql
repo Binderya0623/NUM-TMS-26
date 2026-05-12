@@ -127,15 +127,6 @@ CREATE TABLE IF NOT EXISTS review_document (
 
 -- Idempotent migrations for pre-existing databases.
 ALTER TABLE review_document ADD COLUMN IF NOT EXISTS reviewer_score NUMERIC(5,2);
-DO $$ BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM pg_constraint WHERE conname = 'chk_review_doc_score'
-    ) THEN
-        ALTER TABLE review_document
-            ADD CONSTRAINT chk_review_doc_score
-            CHECK (reviewer_score IS NULL OR (reviewer_score >= 0 AND reviewer_score <= 5));
-    END IF;
-END $$;
 
 -- ─────────────────────────────────────────────────────────────────
 -- FINAL GRADE CONFIRMATION — Committee HEAD confirms final grade
