@@ -1,1 +1,1 @@
--- Production: no-op. TRUNCATE removed to prevent data loss on container restart.
+SELECT 1;
