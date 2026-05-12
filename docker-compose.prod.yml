@@ -61,8 +61,8 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1 || exit 1"]
       interval: 10s
-      timeout: 5s
-      retries: 12
+      timeout: 20s
+      retries: 15
 
   # ───────────────────────────────────────────── auth-service
   auth_service:
