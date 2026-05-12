@@ -76,6 +76,10 @@ CREATE TABLE IF NOT EXISTS defense_session (
     stage_type      VARCHAR(30)  NOT NULL,
     max_points      NUMERIC(5,2) NOT NULL,  -- 15 | 20 | 25 | 40
     status          VARCHAR(30)  NOT NULL DEFAULT 'PENDING',
+    supervisor_id   VARCHAR(255),           -- set for PROGRESS_1 (per-supervisor session)
+    scheduled_date  TIMESTAMP,              -- deadline visible to students/teachers
+    location        VARCHAR(255),
+    notes           TEXT,
     -- Admin who opened/closed this session
     started_by      VARCHAR(255),
     started_at      TIMESTAMP,

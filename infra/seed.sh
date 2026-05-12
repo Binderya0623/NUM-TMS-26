@@ -30,7 +30,7 @@ fail() { printf '\033[31m✗\033[0m %s\n' "$*" >&2; exit 1; }
 wait_for() {
     local url=$1 name=$2 max=${3:-60} i=0
     log "waiting for $name ($url)…"
-    until curl -fsS -m 2 "$url" >/dev/null 2>&1; do
+    until curl -sS -m 2 "$url" >/dev/null 2>&1; do
         i=$((i+1))
         if [ $i -ge "$max" ]; then fail "$name not reachable after ${max}s"; fi
         sleep 1
@@ -82,17 +82,17 @@ register_user "admin"        "ROLE_ADMIN"           "Системийн" "Адм
 
 # ── Teachers ─────────────────────────────────────────────────
 log "Creating teachers…"
-register_user "t.head"       "ROLE_TEACHER"         "Дарга"     "Багш"    "head@num.edu.mn"
-register_user "t.secretary"  "ROLE_TEACHER"         "Нарийн"    "Багш"    "secretary@num.edu.mn"
-register_user "t.member1"    "ROLE_TEACHER"         "Гишүүн1"   "Багш"    "m1@num.edu.mn"
-register_user "t.member2"    "ROLE_TEACHER"         "Гишүүн2"   "Багш"    "m2@num.edu.mn"
-register_user "t.member3"    "ROLE_TEACHER"         "Гишүүн3"   "Багш"    "m3@num.edu.mn"
+register_user "t.head"       "ROLE_TEACHER"         "Дарга"     "Багш"    "t.head@num.edu.mn"
+register_user "t.secretary"  "ROLE_TEACHER"         "Нарийн"    "Багш"    "t.secretary@num.edu.mn"
+register_user "t.member1"    "ROLE_TEACHER"         "Гишүүн1"   "Багш"    "t.member1@num.edu.mn"
+register_user "t.member2"    "ROLE_TEACHER"         "Гишүүн2"   "Багш"    "t.member2@num.edu.mn"
+register_user "t.member3"    "ROLE_TEACHER"         "Гишүүн3"   "Багш"    "t.member3@num.edu.mn"
 
-post_user "teachers" '{"firstName":"Дарга","lastName":"Багш","email":"head@num.edu.mn","departmentId":"AM","position":"Дэд профессор"}'      "head teacher"
-post_user "teachers" '{"firstName":"Нарийн","lastName":"Багш","email":"secretary@num.edu.mn","departmentId":"AM","position":"Багш"}'        "secretary teacher"
-post_user "teachers" '{"firstName":"Гишүүн1","lastName":"Багш","email":"m1@num.edu.mn","departmentId":"AM","position":"Багш"}'              "member1"
-post_user "teachers" '{"firstName":"Гишүүн2","lastName":"Багш","email":"m2@num.edu.mn","departmentId":"AM","position":"Багш"}'              "member2"
-post_user "teachers" '{"firstName":"Гишүүн3","lastName":"Багш","email":"m3@num.edu.mn","departmentId":"AM","position":"Багш"}'              "member3"
+post_user "teachers" '{"firstName":"Дарга","lastName":"Багш","email":"t.head@num.edu.mn","departmentId":"AM","position":"Дэд профессор"}'      "head teacher"
+post_user "teachers" '{"firstName":"Нарийн","lastName":"Багш","email":"t.secretary@num.edu.mn","departmentId":"AM","position":"Багш"}'        "secretary teacher"
+post_user "teachers" '{"firstName":"Гишүүн1","lastName":"Багш","email":"t.member1@num.edu.mn","departmentId":"AM","position":"Багш"}'        "member1"
+post_user "teachers" '{"firstName":"Гишүүн2","lastName":"Багш","email":"t.member2@num.edu.mn","departmentId":"AM","position":"Багш"}'        "member2"
+post_user "teachers" '{"firstName":"Гишүүн3","lastName":"Багш","email":"t.member3@num.edu.mn","departmentId":"AM","position":"Багш"}'        "member3"
 
 # ── External expert ──────────────────────────────────────────
 log "Creating external expert…"

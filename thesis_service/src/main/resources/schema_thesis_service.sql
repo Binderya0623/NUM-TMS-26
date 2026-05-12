@@ -21,12 +21,12 @@
 CREATE TABLE IF NOT EXISTS theses (
     id                  VARCHAR(255) PRIMARY KEY,
     student_id          VARCHAR(255) NOT NULL,   -- user_service UUID
-    supervisor_id       VARCHAR(255) NOT NULL,   -- user_service UUID (teacher)
+    supervisor_id       VARCHAR(255),            -- user_service UUID (teacher)
     committee_id        VARCHAR(255),            -- committee_service UUID (set when committee assigned)
     -- Cross-service references (no FK — microservice boundary)
     topic_request_id    BIGINT,                  -- topic_service.topic_request.id
     topic_id            BIGINT,                  -- topic_service.topic.id
-    title_mn            VARCHAR(500) NOT NULL,
+    title_mn            VARCHAR(500),
     title_en            VARCHAR(500),
     description         TEXT,
     department_id       VARCHAR(255),
@@ -78,7 +78,10 @@ CREATE TABLE IF NOT EXISTS thesis_report (
     CONSTRAINT chk_report_status CHECK (status IN (
         'SUBMITTED',           -- awaiting supervisor/committee
         'REVISION_REQUIRED',   -- supervisor requests revision
-        'ACCEPTED'             -- report accepted; grading can begin
+        'ACCEPTED',            -- report accepted; grading can begin
+        'APPROVED',
+        'REVIEWED',
+        'REJECTED'
     ))
 );
 
