@@ -8,18 +8,17 @@
 #     dockerfile: ../Dockerfile.spring
 # =============================================================
 
-# ── Stage 1: build with Maven wrapper ────────────────────────
-FROM eclipse-temurin:17-jdk-alpine AS build
+# ── Stage 1: build with Maven ────────────────────────────────
+FROM maven:3.9-eclipse-temurin-17-alpine AS build
 WORKDIR /workspace
 
-# Copy mvn wrapper + pom first to leverage layer caching: deps
-# only re-download when pom.xml changes.
-COPY mvnw pom.xml ./
-COPY .mvn .mvn
-RUN chmod +x mvnw && ./mvnw -B -q dependency:go-offline || true
+# Copy pom first to leverage layer caching: deps only re-download
+# when pom.xml changes.
+COPY pom.xml ./
+RUN mvn -B -q dependency:go-offline || true
 
 COPY src src
-RUN ./mvnw -B -q -DskipTests package && \
+RUN mvn -B -q -DskipTests package && \
     cp target/*.jar /workspace/app.jar
 
 # ── Stage 2: runtime ─────────────────────────────────────────
