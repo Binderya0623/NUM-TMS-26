@@ -4,6 +4,7 @@ run-name: "Deploy | ${{ github.ref_name }} | ${{ github.sha }}"
 on:
   push:
     branches: [main]
+  workflow_dispatch:   # гараар бүгдийг build+deploy хийх
 
 env:
   REGISTRY: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -14,20 +15,23 @@ jobs:
   changes:
     runs-on: ubuntu-latest
     outputs:
-      auth_service:         ${{ steps.f.outputs.auth_service }}
-      user_service:         ${{ steps.f.outputs.user_service }}
-      topic_service:        ${{ steps.f.outputs.topic_service }}
-      committee_service:    ${{ steps.f.outputs.committee_service }}
-      thesis_service:       ${{ steps.f.outputs.thesis_service }}
-      workflow_service:     ${{ steps.f.outputs.workflow_service }}
-      evaluation_service:   ${{ steps.f.outputs.evaluation_service }}
-      notification_service: ${{ steps.f.outputs.notification_service }}
-      report_service:       ${{ steps.f.outputs.report_service }}
-      message_service:      ${{ steps.f.outputs.message_service }}
-      analytic_service:     ${{ steps.f.outputs.analytic_service }}
-      grading_service:      ${{ steps.f.outputs.grading_service }}
-      jsf_host:             ${{ steps.f.outputs.jsf_host }}
+      auth_service:         ${{ steps.all.outputs.v || steps.f.outputs.auth_service }}
+      user_service:         ${{ steps.all.outputs.v || steps.f.outputs.user_service }}
+      topic_service:        ${{ steps.all.outputs.v || steps.f.outputs.topic_service }}
+      committee_service:    ${{ steps.all.outputs.v || steps.f.outputs.committee_service }}
+      thesis_service:       ${{ steps.all.outputs.v || steps.f.outputs.thesis_service }}
+      workflow_service:     ${{ steps.all.outputs.v || steps.f.outputs.workflow_service }}
+      evaluation_service:   ${{ steps.all.outputs.v || steps.f.outputs.evaluation_service }}
+      notification_service: ${{ steps.all.outputs.v || steps.f.outputs.notification_service }}
+      report_service:       ${{ steps.all.outputs.v || steps.f.outputs.report_service }}
+      message_service:      ${{ steps.all.outputs.v || steps.f.outputs.message_service }}
+      analytic_service:     ${{ steps.all.outputs.v || steps.f.outputs.analytic_service }}
+      grading_service:      ${{ steps.all.outputs.v || steps.f.outputs.grading_service }}
+      jsf_host:             ${{ steps.all.outputs.v || steps.f.outputs.jsf_host }}
     steps:
+      - id: all
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "v=true" >> $GITHUB_OUTPUT
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
         id: f
