@@ -4,7 +4,7 @@
     "name": "КОМИСС 1",
     "scheduledDate": "2026-04-20T09:20:00",
     "location": "8-р байр 204 тоот",
-    "status": "CLOSED",
+    "status": "ACTIVE",
     "head": "suvdaa",
     "secretary": "bilguun.o",
     "members": [
@@ -97,7 +97,7 @@
     "name": "КОМИСС 2",
     "scheduledDate": "2026-04-20T14:00:00",
     "location": "8-р байр 204 тоот",
-    "status": "CLOSED",
+    "status": "ACTIVE",
     "head": "dalaijargal",
     "secretary": "naranbat",
     "members": [
@@ -190,7 +190,7 @@
     "name": "КОМИСС 3",
     "scheduledDate": "2026-04-21T09:20:00",
     "location": "8-р байр 204 тоот",
-    "status": "CLOSED",
+    "status": "ACTIVE",
     "head": "naranchimeg",
     "secretary": "byambaa",
     "members": [
@@ -284,7 +284,7 @@
     "name": "КОМИСС 4",
     "scheduledDate": "2026-04-21T14:00:00",
     "location": "8-р байр 204 тоот",
-    "status": "CLOSED",
+    "status": "ACTIVE",
     "head": "okhorloo",
     "secretary": "lkhamrolom",
     "members": [
@@ -377,7 +377,7 @@
     "name": "КОМИСС 5",
     "scheduledDate": "2026-04-22T09:20:00",
     "location": "8-р байр 204 тоот",
-    "status": "CLOSED",
+    "status": "ACTIVE",
     "head": "nyamlkhagva",
     "secretary": "davaasuren.n",
     "members": [
@@ -470,7 +470,7 @@
     "name": "КОМИСС 6",
     "scheduledDate": "2026-04-22T14:00:00",
     "location": "8-р байр 204 тоот",
-    "status": "CLOSED",
+    "status": "ACTIVE",
     "head": "khurel-ochir",
     "secretary": "amgalan.a",
     "members": [
@@ -563,7 +563,7 @@
     "name": "КОМИСС 7",
     "scheduledDate": "2026-04-23T09:20:00",
     "location": "8-р байр 204 тоот",
-    "status": "CLOSED",
+    "status": "ACTIVE",
     "head": "otgonnaran",
     "secretary": "enkhtuya.ts",
     "members": [
@@ -656,7 +656,7 @@
     "name": "КОМИСС 8",
     "scheduledDate": "2026-04-24T09:20:00",
     "location": "8-р байр 204 тоот",
-    "status": "CLOSED",
+    "status": "ACTIVE",
     "head": "bbatnyam",
     "secretary": "bagabold.g",
     "members": [
@@ -749,7 +749,7 @@
     "name": "КОМИСС 9",
     "scheduledDate": "2026-04-24T14:00:00",
     "location": "8-р байр 204 тоот",
-    "status": "CLOSED",
+    "status": "ACTIVE",
     "head": "uuganbayar.g",
     "secretary": "lkhamrolom",
     "members": [

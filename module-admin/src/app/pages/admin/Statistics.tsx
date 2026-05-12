@@ -57,7 +57,7 @@ export default function Statistics() {
   });
   const teacherWorkload = teachers
     .map(t => ({
-      name: t.displayName || t.name || t.username,
+      name: t.displayName?.split(' ')[0] || t.id,
       plans: teacherPlanMap[t.id] || teacherPlanMap[t.username || ''] || 0,
     }))
     .filter(t => t.plans > 0)
