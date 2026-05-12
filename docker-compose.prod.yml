@@ -35,7 +35,8 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ./infra/postgres/init-databases.sh:/docker-entrypoint-initdb.d/init-databases.sh:ro
+      - ./infra/postgres/init-databases.sh:/docker-entrypoint-initdb.d/01-init-databases.sh:ro
+      - ./infra/postgres/02-thesisdb-schema.sql:/docker-entrypoint-initdb.d/02-thesisdb-schema.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
       interval: 5s
