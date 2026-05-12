@@ -161,6 +161,7 @@ function buildStageState(opts: {
       out[fallbackKey] = { ...out[fallbackKey], state: "active" };
     }
   }
+
   return out;
 }
 

@@ -430,7 +430,7 @@ export default function TeacherStudents() {
     committeeService.getMyAssignments(teacherId)
       .then(res => {
         const assignment = res.data.find(a => a.committeeId === committeeId);
-        if (assignment?.role) setTeacherRole(assignment.role);
+        if (assignment?.role) setTeacherRole(assignment.role.toUpperCase());
       })
       .catch(() => {});
 

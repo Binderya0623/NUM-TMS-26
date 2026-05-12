@@ -69,7 +69,7 @@ const SESSION_META: Record<SessionKind, SessionMeta> = {
     icon: Shield,
     description: "Комиссын гишүүд дүрэм сохроор үнэлнэ (20 оноо)",
     isDefense: true,
-    needsCommittee: false,
+    needsCommittee: true,
     hasExternalExpert: false,
     stageType: "PROGRESS_2",
   },
@@ -78,7 +78,7 @@ const SESSION_META: Record<SessionKind, SessionMeta> = {
     icon: Shield,
     description: "Комисс + Зочин шүүгч сохроор үнэлнэ (25 оноо)",
     isDefense: true,
-    needsCommittee: false,
+    needsCommittee: true,
     hasExternalExpert: true,
     stageType: "PRE_DEFENSE",
   },
@@ -87,7 +87,7 @@ const SESSION_META: Record<SessionKind, SessionMeta> = {
     icon: Shield,
     description: "Комисс + Зочин шүүгч сохроор үнэлнэ (35 + 5 оноо)",
     isDefense: true,
-    needsCommittee: false,
+    needsCommittee: true,
     hasExternalExpert: true,
     stageType: "FINAL_DEFENSE",
   },
@@ -480,17 +480,9 @@ export default function AdminEvaluationProcess() {
     const isOpen = unified.status === 'OPEN';
     const meta = SESSION_META[unified.kind];
     try {
-      if ((unified.kind === 'PRE_DEFENSE' || unified.kind === 'FINAL_DEFENSE') && !unified.id && !isOpen) {
-        const defPoints: Record<string, number> = { PRE_DEFENSE: 25, FINAL_DEFENSE: 40 };
-        const created = await workflowService.createDefenseSession({
-          committeeId: 'GLOBAL',
-          stageType: meta.stageType!,
-          maxPoints: defPoints[unified.kind],
-        });
-        const opened = await workflowService.openDefenseSession(created.data.id);
-        setDefenseSessions(prev => [...prev.filter(s => s.id !== opened.data.id), opened.data]);
-        return;
-      }
+      // Committee-based sessions (PROGRESS_2/PRE_DEFENSE/FINAL_DEFENSE) must be
+      // created via AdminCommittees — never as GLOBAL sessions here.
+      if (meta.needsCommittee && !unified.id) return;
       if (unified.kind === 'TOPIC_SELECTION' || unified.kind === 'TOPIC_CREATION') {
         if (!unified.selectionId) return;
         const res = isOpen
