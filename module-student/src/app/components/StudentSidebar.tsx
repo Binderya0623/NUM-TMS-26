@@ -8,6 +8,7 @@ import { getStoredUser } from "../../lib/authGuard";
 interface StudentSidebarProps {
   collapsed: boolean;
   onToggle: () => void;
+  onNavigate?: () => void;
 }
 
 const menuItems: { icon: typeof Home; label: string; path: string; end?: boolean }[] = [
@@ -18,7 +19,7 @@ const menuItems: { icon: typeof Home; label: string; path: string; end?: boolean
   { icon: Award,         label: "Эцсийн дүн",              path: "/student/grade" },
 ];
 
-export default function StudentSidebar({ collapsed }: StudentSidebarProps) {
+export default function StudentSidebar({ collapsed, onNavigate }: StudentSidebarProps) {
   const [unread, setUnread] = useState(0);
 
   // Pull the unread count for the badge next to "Мэдэгдэл". Refresh every
@@ -35,7 +36,7 @@ export default function StudentSidebar({ collapsed }: StudentSidebarProps) {
 
   return (
     <aside
-      className={`relative flex flex-col bg-primary-900 border-r border-white/10 transition-[width] duration-300 ${
+      className={`relative flex h-full flex-col bg-primary-900 border-r border-white/10 transition-[width] duration-300 ${
         collapsed ? "w-20" : "w-64"
       } shrink-0`}
     >
@@ -71,6 +72,7 @@ export default function StudentSidebar({ collapsed }: StudentSidebarProps) {
                 key={item.path}
                 to={item.path}
                 end={item.end}
+                onClick={onNavigate}
                 className={({ isActive }) =>
                   `group relative flex items-center gap-3 h-9 px-5 transition-colors ${
                     collapsed ? "justify-center px-0" : ""
@@ -108,6 +110,7 @@ export default function StudentSidebar({ collapsed }: StudentSidebarProps) {
       <div className="px-5 py-3 border-t border-white/10">
         <NavLink
           to="/student/notifications"
+          onClick={onNavigate}
           className={({ isActive }) =>
             `relative w-full flex items-center gap-3 h-9 transition-colors rounded-sm ${
               collapsed ? "justify-center" : ""

@@ -243,7 +243,7 @@ export default function TeacherDashboard() {
     || STAGE_DEFS[0];
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto pb-10">
+    <div className="space-y-4 md:space-y-6 max-w-7xl mx-auto pb-10">
       {/* Action row — like StudentDashboard */}
       <div className="flex flex-wrap gap-2">
         <Button onClick={() => navigate("/teacher/students")}>
@@ -260,15 +260,15 @@ export default function TeacherDashboard() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="lg:col-span-2 space-y-4 md:space-y-6">
           {/* Hero card — progress strip + headline metric */}
           <Card>
             <div className="h-0.5 w-full bg-border-strong relative overflow-hidden rounded-t-md">
               <div className="h-full bg-accent transition-all duration-700" style={{ width: `${reviewedRatio}%` }} />
             </div>
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start gap-4 mb-4">
+            <CardContent className="p-4 md:p-6">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-2 flex-wrap">
                     <span className="inline-flex items-center gap-1.5 text-xs text-ink-700 font-medium tracking-tight">
@@ -287,7 +287,7 @@ export default function TeacherDashboard() {
                     Оюутны тайлан, үнэлгээ, хуваарийн товч мэдээллийг доороос харна уу.
                   </p>
                 </div>
-                <div className="text-right shrink-0 border border-border rounded-md p-3">
+                <div className="text-left sm:text-right shrink-0 border border-border rounded-md p-3">
                   <div className="text-2xl font-semibold text-ink-900 tabular-nums tracking-tight">{reviewedRatio}%</div>
                   <p className="text-[10px] uppercase tracking-wider font-medium text-ink-500 mt-1">Хянагдсан</p>
                 </div>
@@ -303,7 +303,7 @@ export default function TeacherDashboard() {
                 Улирлын хуваарь
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent className="p-4 md:p-6">
               <TermTimeline stageState={stageState} />
             </CardContent>
           </Card>
@@ -316,8 +316,8 @@ export default function TeacherDashboard() {
                 Тойм мэдээлэл
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-5">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <CardContent className="p-4 md:p-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                 {[
                   { label: "Удирдаж буй оюутан",  value: studentCount },
                   { label: "Хүлээгдэж буй тайлан", value: pendingReports.length },
@@ -378,7 +378,7 @@ export default function TeacherDashboard() {
         </div>
 
         {/* Sidebar — Quick view */}
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           <Card>
             <CardHeader className="border-b border-border">
               <CardTitle className="flex items-center gap-2">

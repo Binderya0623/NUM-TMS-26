@@ -197,7 +197,7 @@ function ApprovedTopicState({ topicTitle, topicTitleEn, supervisorName, plan, st
     || STAGE_LABELS[0];
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto pb-10">
+    <div className="space-y-4 md:space-y-6 max-w-7xl mx-auto pb-10">
       <div className="flex flex-wrap gap-2">
         <Button onClick={() => navigate('/student/thesis?tab=weekly-plan')}>
           <Calendar className="h-4 w-4" strokeWidth={1.6} /> Долоо хоногийн төлөвлөгөө
@@ -207,11 +207,11 @@ function ApprovedTopicState({ topicTitle, topicTitleEn, supervisorName, plan, st
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="lg:col-span-2 space-y-4 md:space-y-6">
           <Card>
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start gap-4 mb-4">
+            <CardContent className="p-4 md:p-6">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-2 flex-wrap">
                     <span className="inline-flex items-center gap-1.5 text-xs text-ink-700 font-medium tracking-tight">
@@ -503,14 +503,14 @@ export default function StudentDashboard() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="lg:col-span-2 space-y-4 md:space-y-6">
           <Card>
             <div className="h-0.5 w-full bg-border-strong relative overflow-hidden">
               <div className="h-full bg-accent transition-all duration-700" style={{ width: `${progress}%` }} />
             </div>
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start gap-4 mb-4">
+            <CardContent className="p-4 md:p-6">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-2 flex-wrap">
                     <span className="inline-flex items-center gap-1.5 text-xs text-ink-700 font-medium tracking-tight">

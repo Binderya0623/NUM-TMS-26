@@ -167,10 +167,10 @@ export default function StudentMessages() {
   }
 
   return (
-    <div className="h-[calc(100vh-200px)]">
+    <div className="h-[calc(100vh-112px)] md:h-[calc(100vh-200px)]">
       <Card className="h-full">
         <CardContent className="p-0 h-full flex flex-col">
-          <div className="p-4 border-b border-border flex items-center justify-between bg-surface">
+          <div className="p-3 md:p-4 border-b border-border flex items-center justify-between bg-surface">
             <div className="flex items-center gap-3">
               <Avatar className="h-10 w-10 border border-border-strong">
                 <AvatarFallback className="text-sm font-medium">
@@ -184,7 +184,7 @@ export default function StudentMessages() {
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-surface-sunken">
+          <div className="flex-1 overflow-y-auto p-3 md:p-6 space-y-4 bg-surface-sunken">
             {messages.length === 0 ? (
               <div className="text-center text-ink-500 pt-8">
                 <p className="text-sm">Одоогоор мессеж байхгүй.</p>
@@ -195,7 +195,7 @@ export default function StudentMessages() {
                 const mine = msg.senderId === studentId;
                 return (
                   <div key={msg.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
-                    <div className="flex items-end gap-2 max-w-[70%]">
+                    <div className="flex items-end gap-2 max-w-[88%] md:max-w-[70%]">
                       {!mine && (
                         <Avatar className="h-7 w-7 border border-border-strong">
                           <AvatarFallback className="text-[10px] font-medium">
@@ -226,8 +226,8 @@ export default function StudentMessages() {
             <div ref={bottomRef} />
           </div>
 
-          <div className="p-4 border-t border-border bg-surface space-y-2">
-            <div className="flex gap-2">
+          <div className="p-3 md:p-4 border-t border-border bg-surface space-y-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <Input
                 placeholder="Мессежээ бичнэ үү..."
                 value={messageText}
@@ -236,7 +236,7 @@ export default function StudentMessages() {
                 className="flex-1"
                 disabled={sending}
               />
-              <Button className="flex-shrink-0" disabled={sending || !messageText.trim()} onClick={handleSendMessage}>
+              <Button className="flex-shrink-0 w-full sm:w-auto" disabled={sending || !messageText.trim()} onClick={handleSendMessage}>
                 <Send className="h-4 w-4 mr-2" strokeWidth={1.6} />
                 Илгээх
               </Button>

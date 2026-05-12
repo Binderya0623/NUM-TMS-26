@@ -8,6 +8,7 @@ import { notificationService } from "../../services/notificationService";
 interface TeacherSidebarProps {
   collapsed: boolean;
   onToggle: () => void;
+  onNavigate?: () => void;
 }
 
 const BASE_MENU: { icon: typeof Home; label: string; path: string; end?: boolean }[] = [
@@ -17,7 +18,7 @@ const BASE_MENU: { icon: typeof Home; label: string; path: string; end?: boolean
   { icon: CheckCircle, label: "Комисс",                 path: "/teacher/committee" },
 ];
 
-export default function TeacherSidebar({ collapsed }: TeacherSidebarProps) {
+export default function TeacherSidebar({ collapsed, onNavigate }: TeacherSidebarProps) {
   const user = getStoredUser();
   const isExpert = user?.systemRole === 'EXTERNAL_EXPERT';
 
@@ -41,7 +42,7 @@ export default function TeacherSidebar({ collapsed }: TeacherSidebarProps) {
 
   return (
     <aside
-      className={`relative flex flex-col bg-primary-900 border-r border-white/10 transition-[width] duration-300 ${
+      className={`relative flex h-full flex-col bg-primary-900 border-r border-white/10 transition-[width] duration-300 ${
         collapsed ? "w-20" : "w-64"
       } shrink-0`}
     >
@@ -77,6 +78,7 @@ export default function TeacherSidebar({ collapsed }: TeacherSidebarProps) {
                 key={item.path}
                 to={item.path}
                 end={item.end}
+                onClick={onNavigate}
                 className={({ isActive }) =>
                   `group relative flex items-center gap-3 h-9 px-5 transition-colors ${
                     collapsed ? "justify-center px-0" : ""
@@ -114,6 +116,7 @@ export default function TeacherSidebar({ collapsed }: TeacherSidebarProps) {
       <div className="px-5 py-3 border-t border-white/10">
         <NavLink
           to="/teacher/notifications"
+          onClick={onNavigate}
           className={({ isActive }) =>
             `relative w-full flex items-center gap-3 h-9 transition-colors rounded-sm ${
               collapsed ? "justify-center" : ""

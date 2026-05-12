@@ -24,6 +24,7 @@ interface TeacherLayoutProps {
 
 export default function TeacherLayout({ user }: TeacherLayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
@@ -54,7 +55,26 @@ export default function TeacherLayout({ user }: TeacherLayoutProps) {
 
   return (
     <div className="flex h-screen bg-slate-50 overflow-hidden">
-      <TeacherSidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
+      <div className="hidden md:block h-full shrink-0">
+        <TeacherSidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
+      </div>
+      {mobileNavOpen && (
+        <div className="fixed inset-0 z-40 md:hidden">
+          <button
+            type="button"
+            className="absolute inset-0 bg-ink-900/45"
+            aria-label="Цэс хаах"
+            onClick={() => setMobileNavOpen(false)}
+          />
+          <div className="relative h-full w-64 max-w-[84vw]">
+            <TeacherSidebar
+              collapsed={false}
+              onToggle={() => setCollapsed(!collapsed)}
+              onNavigate={() => setMobileNavOpen(false)}
+            />
+          </div>
+        </div>
+      )}
       <div className="flex flex-col flex-1 min-w-0">
         <TopHeader
           title={pageInfo.title}
@@ -64,8 +84,9 @@ export default function TeacherLayout({ user }: TeacherLayoutProps) {
           userInitials={initials}
           avatarColor="from-green-500 to-green-700"
           onLogout={logout}
+          onMenuClick={() => setMobileNavOpen(true)}
         />
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-4 md:p-6">
           <ErrorBoundary>
             <Outlet />
           </ErrorBoundary>

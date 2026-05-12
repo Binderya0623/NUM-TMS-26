@@ -21,6 +21,7 @@ import {
 interface AdminSidebarProps {
   collapsed: boolean;
   onToggle: () => void;
+  onNavigate?: () => void;
 }
 
 const navSections: {
@@ -59,7 +60,7 @@ const navSections: {
   },
 ];
 
-export default function AdminSidebar({ collapsed }: AdminSidebarProps) {
+export default function AdminSidebar({ collapsed, onNavigate }: AdminSidebarProps) {
   const [unread, setUnread] = useState(0);
 
   useEffect(() => {
@@ -74,7 +75,7 @@ export default function AdminSidebar({ collapsed }: AdminSidebarProps) {
 
   return (
     <aside
-      className={`relative flex flex-col bg-primary-900 border-r border-white/10 transition-[width] duration-300 ${
+      className={`relative flex h-full flex-col bg-primary-900 border-r border-white/10 transition-[width] duration-300 ${
         collapsed ? "w-20" : "w-72"
       } shrink-0`}
     >
@@ -114,6 +115,7 @@ export default function AdminSidebar({ collapsed }: AdminSidebarProps) {
                     key={item.path}
                     to={item.path}
                     end={item.end}
+                    onClick={onNavigate}
                     className={({ isActive }) =>
                       `group relative flex items-center gap-3 h-9 px-5 transition-colors ${
                         collapsed ? "justify-center px-0" : ""
@@ -154,6 +156,7 @@ export default function AdminSidebar({ collapsed }: AdminSidebarProps) {
       <div className="px-5 py-3 border-t border-white/10">
         <NavLink
           to="/admin/notifications"
+          onClick={onNavigate}
           className={({ isActive }) =>
             `relative w-full flex items-center gap-3 h-9 transition-colors rounded-sm ${
               collapsed ? "justify-center" : ""

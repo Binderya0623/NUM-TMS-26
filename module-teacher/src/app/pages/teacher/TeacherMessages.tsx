@@ -207,13 +207,13 @@ export default function TeacherMessages() {
   });
 
   return (
-    <div className="h-[calc(100vh-112px)] overflow-hidden">
+    <div className="h-[calc(100vh-96px)] md:h-[calc(100vh-112px)] overflow-hidden">
       <Card className="h-full overflow-hidden rounded-md">
         <CardContent className="p-0 h-full min-h-0">
-          <div className="flex h-full min-h-0">
+          <div className="flex flex-col md:flex-row h-full min-h-0">
             {/* Conversations List */}
-            <aside className="w-80 shrink-0 border-r border-border flex flex-col h-full min-h-0 bg-surface">
-              <div className="p-4 border-b border-border">
+            <aside className="w-full md:w-80 md:shrink-0 border-b md:border-b-0 md:border-r border-border flex flex-col h-52 md:h-full min-h-0 bg-surface">
+              <div className="p-3 md:p-4 border-b border-border">
                 <h2 className="text-sm font-semibold text-ink-900 mb-3">Чат</h2>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-ink-400 h-4 w-4" strokeWidth={1.6} />
@@ -280,14 +280,14 @@ export default function TeacherMessages() {
             </aside>
 
             {/* Chat Area */}
-            <section className="flex-1 flex flex-col h-full min-h-0 bg-surface">
+            <section className="flex-1 flex flex-col min-h-0 bg-surface">
               {!selectedPlan ? (
                 <div className="flex-1 flex items-center justify-center bg-surface-sunken">
                   <p className="text-ink-400 text-sm">Зүүн талаас оюутан сонгоно уу</p>
                 </div>
               ) : (
                 <>
-                  <div className="p-4 border-b border-border flex items-center justify-between bg-surface shrink-0">
+                  <div className="p-3 md:p-4 border-b border-border flex items-center justify-between bg-surface shrink-0">
                     <div className="flex items-center gap-3">
                       <Avatar className="h-10 w-10 border border-border-strong">
                         <AvatarFallback className="text-sm font-medium">
@@ -303,7 +303,7 @@ export default function TeacherMessages() {
                     </div>
                   </div>
 
-                  <div className="flex-1 min-h-0 overflow-y-auto p-6 space-y-4 bg-surface-sunken">
+                  <div className="flex-1 min-h-0 overflow-y-auto p-3 md:p-6 space-y-4 bg-surface-sunken">
                     {messages.length === 0 ? (
                       <div className="h-full flex flex-col items-center justify-center text-center text-ink-500">
                         <p className="text-sm">Харилцаа алга байна</p>
@@ -315,7 +315,7 @@ export default function TeacherMessages() {
                           const mine = msg.senderId === teacherId;
                           return (
                             <div key={msg.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
-                              <div className="flex items-end gap-2 max-w-[72%]">
+                              <div className="flex items-end gap-2 max-w-[88%] md:max-w-[72%]">
                                 {!mine && (
                                   <Avatar className="h-7 w-7 border border-border-strong">
                                     <AvatarFallback className="text-[10px] font-medium">
@@ -354,8 +354,8 @@ export default function TeacherMessages() {
                     <div ref={bottomRef} />
                   </div>
 
-                  <div className="p-4 border-t border-border bg-surface space-y-2 shrink-0">
-                    <div className="flex items-end gap-2">
+                  <div className="p-3 md:p-4 border-t border-border bg-surface space-y-2 shrink-0">
+                    <div className="flex flex-col sm:flex-row sm:items-end gap-2">
                       <Textarea
                         placeholder="Мессежээ бичнэ үү..."
                         value={messageText}
@@ -369,7 +369,7 @@ export default function TeacherMessages() {
                         className="min-h-11 max-h-28 flex-1 resize-none"
                         disabled={sending}
                       />
-                      <Button className="h-11 flex-shrink-0" disabled={sending || !messageText.trim()} onClick={handleSendMessage}>
+                      <Button className="h-11 flex-shrink-0 w-full sm:w-auto" disabled={sending || !messageText.trim()} onClick={handleSendMessage}>
                         <Send className="h-4 w-4 mr-2" strokeWidth={1.6} />
                         Илгээх
                       </Button>

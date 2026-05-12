@@ -2932,11 +2932,25 @@ const createLucideIcon = (iconName, iconNode) => {
  */
 
 
-const __iconNode$K = [
+const __iconNode$L = [
   ["path", { d: "m12 19-7-7 7-7", key: "1l729n" }],
   ["path", { d: "M19 12H5", key: "x3x0zl" }]
 ];
-const ArrowLeft = createLucideIcon("arrow-left", __iconNode$K);
+const ArrowLeft = createLucideIcon("arrow-left", __iconNode$L);
+
+/**
+ * @license lucide-react v0.487.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$K = [
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
+];
+const ArrowRight = createLucideIcon("arrow-right", __iconNode$K);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -2947,10 +2961,12 @@ const ArrowLeft = createLucideIcon("arrow-left", __iconNode$K);
 
 
 const __iconNode$J = [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
+  ["path", { d: "m21 16-4 4-4-4", key: "f6ql7i" }],
+  ["path", { d: "M17 20V4", key: "1ejh1v" }],
+  ["path", { d: "m3 8 4-4 4 4", key: "11wl7u" }],
+  ["path", { d: "M7 4v16", key: "1glfcx" }]
 ];
-const ArrowRight = createLucideIcon("arrow-right", __iconNode$J);
+const ArrowUpDown = createLucideIcon("arrow-up-down", __iconNode$J);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -2961,12 +2977,16 @@ const ArrowRight = createLucideIcon("arrow-right", __iconNode$J);
 
 
 const __iconNode$I = [
-  ["path", { d: "m21 16-4 4-4-4", key: "f6ql7i" }],
-  ["path", { d: "M17 20V4", key: "1ejh1v" }],
-  ["path", { d: "m3 8 4-4 4 4", key: "11wl7u" }],
-  ["path", { d: "M7 4v16", key: "1glfcx" }]
+  [
+    "path",
+    {
+      d: "m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526",
+      key: "1yiouv"
+    }
+  ],
+  ["circle", { cx: "12", cy: "8", r: "6", key: "1vp47v" }]
 ];
-const ArrowUpDown = createLucideIcon("arrow-up-down", __iconNode$I);
+const Award = createLucideIcon("award", __iconNode$I);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -2977,16 +2997,16 @@ const ArrowUpDown = createLucideIcon("arrow-up-down", __iconNode$I);
 
 
 const __iconNode$H = [
+  ["path", { d: "M10.268 21a2 2 0 0 0 3.464 0", key: "vwvbt9" }],
   [
     "path",
     {
-      d: "m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526",
-      key: "1yiouv"
+      d: "M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326",
+      key: "11g9vi"
     }
-  ],
-  ["circle", { cx: "12", cy: "8", r: "6", key: "1vp47v" }]
+  ]
 ];
-const Award = createLucideIcon("award", __iconNode$H);
+const Bell = createLucideIcon("bell", __iconNode$H);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -2997,16 +3017,12 @@ const Award = createLucideIcon("award", __iconNode$H);
 
 
 const __iconNode$G = [
-  ["path", { d: "M10.268 21a2 2 0 0 0 3.464 0", key: "vwvbt9" }],
   [
     "path",
-    {
-      d: "M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326",
-      key: "11g9vi"
-    }
+    { d: "M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8", key: "mg9rjx" }
   ]
 ];
-const Bell = createLucideIcon("bell", __iconNode$G);
+const Bold$1 = createLucideIcon("bold", __iconNode$G);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3017,12 +3033,16 @@ const Bell = createLucideIcon("bell", __iconNode$G);
 
 
 const __iconNode$F = [
+  ["path", { d: "M12 7v14", key: "1akyts" }],
   [
     "path",
-    { d: "M6 12h9a4 4 0 0 1 0 8H7a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h7a4 4 0 0 1 0 8", key: "mg9rjx" }
+    {
+      d: "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z",
+      key: "ruj8y"
+    }
   ]
 ];
-const Bold$1 = createLucideIcon("bold", __iconNode$F);
+const BookOpen = createLucideIcon("book-open", __iconNode$F);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3033,16 +3053,9 @@ const Bold$1 = createLucideIcon("bold", __iconNode$F);
 
 
 const __iconNode$E = [
-  ["path", { d: "M12 7v14", key: "1akyts" }],
-  [
-    "path",
-    {
-      d: "M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z",
-      key: "ruj8y"
-    }
-  ]
+  ["path", { d: "m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z", key: "1fy3hk" }]
 ];
-const BookOpen = createLucideIcon("book-open", __iconNode$E);
+const Bookmark = createLucideIcon("bookmark", __iconNode$E);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3053,9 +3066,18 @@ const BookOpen = createLucideIcon("book-open", __iconNode$E);
 
 
 const __iconNode$D = [
-  ["path", { d: "m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z", key: "1fy3hk" }]
+  ["path", { d: "M8 2v4", key: "1cmpym" }],
+  ["path", { d: "M16 2v4", key: "4m81vk" }],
+  ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
+  ["path", { d: "M3 10h18", key: "8toen8" }],
+  ["path", { d: "M8 14h.01", key: "6423bh" }],
+  ["path", { d: "M12 14h.01", key: "1etili" }],
+  ["path", { d: "M16 14h.01", key: "1gbofw" }],
+  ["path", { d: "M8 18h.01", key: "lrp35t" }],
+  ["path", { d: "M12 18h.01", key: "mhygvu" }],
+  ["path", { d: "M16 18h.01", key: "kzsmim" }]
 ];
-const Bookmark = createLucideIcon("bookmark", __iconNode$D);
+const CalendarDays = createLucideIcon("calendar-days", __iconNode$D);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3069,15 +3091,9 @@ const __iconNode$C = [
   ["path", { d: "M8 2v4", key: "1cmpym" }],
   ["path", { d: "M16 2v4", key: "4m81vk" }],
   ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
-  ["path", { d: "M3 10h18", key: "8toen8" }],
-  ["path", { d: "M8 14h.01", key: "6423bh" }],
-  ["path", { d: "M12 14h.01", key: "1etili" }],
-  ["path", { d: "M16 14h.01", key: "1gbofw" }],
-  ["path", { d: "M8 18h.01", key: "lrp35t" }],
-  ["path", { d: "M12 18h.01", key: "mhygvu" }],
-  ["path", { d: "M16 18h.01", key: "kzsmim" }]
+  ["path", { d: "M3 10h18", key: "8toen8" }]
 ];
-const CalendarDays = createLucideIcon("calendar-days", __iconNode$C);
+const Calendar = createLucideIcon("calendar", __iconNode$C);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3088,26 +3104,10 @@ const CalendarDays = createLucideIcon("calendar-days", __iconNode$C);
 
 
 const __iconNode$B = [
-  ["path", { d: "M8 2v4", key: "1cmpym" }],
-  ["path", { d: "M16 2v4", key: "4m81vk" }],
-  ["rect", { width: "18", height: "18", x: "3", y: "4", rx: "2", key: "1hopcy" }],
-  ["path", { d: "M3 10h18", key: "8toen8" }]
-];
-const Calendar = createLucideIcon("calendar", __iconNode$B);
-
-/**
- * @license lucide-react v0.487.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-
-
-const __iconNode$A = [
   ["path", { d: "M18 6 7 17l-5-5", key: "116fxf" }],
   ["path", { d: "m22 10-7.5 7.5L13 16", key: "ke71qq" }]
 ];
-const CheckCheck = createLucideIcon("check-check", __iconNode$A);
+const CheckCheck = createLucideIcon("check-check", __iconNode$B);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3117,8 +3117,8 @@ const CheckCheck = createLucideIcon("check-check", __iconNode$A);
  */
 
 
-const __iconNode$z = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$z);
+const __iconNode$A = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$A);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3128,8 +3128,8 @@ const ChevronDown = createLucideIcon("chevron-down", __iconNode$z);
  */
 
 
-const __iconNode$y = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
-const ChevronRight = createLucideIcon("chevron-right", __iconNode$y);
+const __iconNode$z = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
+const ChevronRight = createLucideIcon("chevron-right", __iconNode$z);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3139,8 +3139,23 @@ const ChevronRight = createLucideIcon("chevron-right", __iconNode$y);
  */
 
 
-const __iconNode$x = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
-const ChevronUp = createLucideIcon("chevron-up", __iconNode$x);
+const __iconNode$y = [["path", { d: "m18 15-6-6-6 6", key: "153udz" }]];
+const ChevronUp = createLucideIcon("chevron-up", __iconNode$y);
+
+/**
+ * @license lucide-react v0.487.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+const __iconNode$x = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
+  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+];
+const CircleAlert = createLucideIcon("circle-alert", __iconNode$x);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3151,11 +3166,10 @@ const ChevronUp = createLucideIcon("chevron-up", __iconNode$x);
 
 
 const __iconNode$w = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
-  ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
+  ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
+  ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
 ];
-const CircleAlert = createLucideIcon("circle-alert", __iconNode$w);
+const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$w);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3166,10 +3180,10 @@ const CircleAlert = createLucideIcon("circle-alert", __iconNode$w);
 
 
 const __iconNode$v = [
-  ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
-  ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$v);
+const CircleCheck = createLucideIcon("circle-check", __iconNode$v);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3181,9 +3195,10 @@ const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$v);
 
 const __iconNode$u = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
+  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
+  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
 ];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$u);
+const CircleX = createLucideIcon("circle-x", __iconNode$u);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3195,10 +3210,9 @@ const CircleCheck = createLucideIcon("circle-check", __iconNode$u);
 
 const __iconNode$t = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
-  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
+  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
 ];
-const CircleX = createLucideIcon("circle-x", __iconNode$t);
+const Clock = createLucideIcon("clock", __iconNode$t);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3209,10 +3223,16 @@ const CircleX = createLucideIcon("circle-x", __iconNode$t);
 
 
 const __iconNode$s = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
+  ["rect", { x: "2", y: "6", width: "20", height: "8", rx: "1", key: "1estib" }],
+  ["path", { d: "M17 14v7", key: "7m2elx" }],
+  ["path", { d: "M7 14v7", key: "1cm7wv" }],
+  ["path", { d: "M17 3v3", key: "1v4jwn" }],
+  ["path", { d: "M7 3v3", key: "7o6guu" }],
+  ["path", { d: "M10 14 2.3 6.3", key: "1023jk" }],
+  ["path", { d: "m14 6 7.7 7.7", key: "1s8pl2" }],
+  ["path", { d: "m8 6 8 8", key: "hl96qh" }]
 ];
-const Clock = createLucideIcon("clock", __iconNode$s);
+const Construction = createLucideIcon("construction", __iconNode$s);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3223,16 +3243,16 @@ const Clock = createLucideIcon("clock", __iconNode$s);
 
 
 const __iconNode$r = [
-  ["rect", { x: "2", y: "6", width: "20", height: "8", rx: "1", key: "1estib" }],
-  ["path", { d: "M17 14v7", key: "7m2elx" }],
-  ["path", { d: "M7 14v7", key: "1cm7wv" }],
-  ["path", { d: "M17 3v3", key: "1v4jwn" }],
-  ["path", { d: "M7 3v3", key: "7o6guu" }],
-  ["path", { d: "M10 14 2.3 6.3", key: "1023jk" }],
-  ["path", { d: "m14 6 7.7 7.7", key: "1s8pl2" }],
-  ["path", { d: "m8 6 8 8", key: "hl96qh" }]
+  [
+    "path",
+    {
+      d: "M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0",
+      key: "1nclc0"
+    }
+  ],
+  ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
 ];
-const Construction = createLucideIcon("construction", __iconNode$r);
+const Eye = createLucideIcon("eye", __iconNode$r);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3243,16 +3263,11 @@ const Construction = createLucideIcon("construction", __iconNode$r);
 
 
 const __iconNode$q = [
-  [
-    "path",
-    {
-      d: "M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0",
-      key: "1nclc0"
-    }
-  ],
-  ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
+  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  ["path", { d: "m9 15 2 2 4-4", key: "1grp1n" }]
 ];
-const Eye = createLucideIcon("eye", __iconNode$q);
+const FileCheck = createLucideIcon("file-check", __iconNode$q);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3265,9 +3280,10 @@ const Eye = createLucideIcon("eye", __iconNode$q);
 const __iconNode$p = [
   ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
   ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  ["path", { d: "m9 15 2 2 4-4", key: "1grp1n" }]
+  ["path", { d: "M12 18v-6", key: "17g6i2" }],
+  ["path", { d: "m9 15 3 3 3-3", key: "1npd3o" }]
 ];
-const FileCheck = createLucideIcon("file-check", __iconNode$p);
+const FileDown = createLucideIcon("file-down", __iconNode$p);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3278,12 +3294,15 @@ const FileCheck = createLucideIcon("file-check", __iconNode$p);
 
 
 const __iconNode$o = [
-  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
   ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  ["path", { d: "M12 18v-6", key: "17g6i2" }],
-  ["path", { d: "m9 15 3 3 3-3", key: "1npd3o" }]
+  [
+    "path",
+    { d: "M4.268 21a2 2 0 0 0 1.727 1H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3", key: "ms7g94" }
+  ],
+  ["path", { d: "m9 18-1.5-1.5", key: "1j6qii" }],
+  ["circle", { cx: "5", cy: "14", r: "3", key: "ufru5t" }]
 ];
-const FileDown = createLucideIcon("file-down", __iconNode$o);
+const FileSearch = createLucideIcon("file-search", __iconNode$o);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3294,15 +3313,13 @@ const FileDown = createLucideIcon("file-down", __iconNode$o);
 
 
 const __iconNode$n = [
+  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
   ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  [
-    "path",
-    { d: "M4.268 21a2 2 0 0 0 1.727 1H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3", key: "ms7g94" }
-  ],
-  ["path", { d: "m9 18-1.5-1.5", key: "1j6qii" }],
-  ["circle", { cx: "5", cy: "14", r: "3", key: "ufru5t" }]
+  ["path", { d: "M10 9H8", key: "b1mrlr" }],
+  ["path", { d: "M16 13H8", key: "t4e002" }],
+  ["path", { d: "M16 17H8", key: "z1uh3a" }]
 ];
-const FileSearch = createLucideIcon("file-search", __iconNode$n);
+const FileText = createLucideIcon("file-text", __iconNode$n);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3313,13 +3330,15 @@ const FileSearch = createLucideIcon("file-search", __iconNode$n);
 
 
 const __iconNode$m = [
-  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
-  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  ["path", { d: "M10 9H8", key: "b1mrlr" }],
-  ["path", { d: "M16 13H8", key: "t4e002" }],
-  ["path", { d: "M16 17H8", key: "z1uh3a" }]
+  [
+    "path",
+    {
+      d: "M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z",
+      key: "sc7q7i"
+    }
+  ]
 ];
-const FileText = createLucideIcon("file-text", __iconNode$m);
+const Funnel = createLucideIcon("funnel", __iconNode$m);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3330,15 +3349,16 @@ const FileText = createLucideIcon("file-text", __iconNode$m);
 
 
 const __iconNode$l = [
+  ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
   [
     "path",
     {
-      d: "M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z",
-      key: "sc7q7i"
+      d: "M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
+      key: "1d0kgt"
     }
   ]
 ];
-const Funnel = createLucideIcon("funnel", __iconNode$l);
+const House = createLucideIcon("house", __iconNode$l);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3349,16 +3369,11 @@ const Funnel = createLucideIcon("funnel", __iconNode$l);
 
 
 const __iconNode$k = [
-  ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
-  [
-    "path",
-    {
-      d: "M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
-      key: "1d0kgt"
-    }
-  ]
+  ["line", { x1: "19", x2: "10", y1: "4", y2: "4", key: "15jd3p" }],
+  ["line", { x1: "14", x2: "5", y1: "20", y2: "20", key: "bu0au3" }],
+  ["line", { x1: "15", x2: "9", y1: "4", y2: "20", key: "uljnxc" }]
 ];
-const House = createLucideIcon("house", __iconNode$k);
+const Italic$1 = createLucideIcon("italic", __iconNode$k);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3369,11 +3384,14 @@ const House = createLucideIcon("house", __iconNode$k);
 
 
 const __iconNode$j = [
-  ["line", { x1: "19", x2: "10", y1: "4", y2: "4", key: "15jd3p" }],
-  ["line", { x1: "14", x2: "5", y1: "20", y2: "20", key: "bu0au3" }],
-  ["line", { x1: "15", x2: "9", y1: "4", y2: "20", key: "uljnxc" }]
+  ["path", { d: "M10 12h11", key: "6m4ad9" }],
+  ["path", { d: "M10 18h11", key: "11hvi2" }],
+  ["path", { d: "M10 6h11", key: "c7qv1k" }],
+  ["path", { d: "M4 10h2", key: "16xx2s" }],
+  ["path", { d: "M4 6h1v4", key: "cnovpq" }],
+  ["path", { d: "M6 18H4c0-1 2-2 2-3s-1-1.5-2-1", key: "m9a95d" }]
 ];
-const Italic$1 = createLucideIcon("italic", __iconNode$j);
+const ListOrdered = createLucideIcon("list-ordered", __iconNode$j);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3384,14 +3402,14 @@ const Italic$1 = createLucideIcon("italic", __iconNode$j);
 
 
 const __iconNode$i = [
-  ["path", { d: "M10 12h11", key: "6m4ad9" }],
-  ["path", { d: "M10 18h11", key: "11hvi2" }],
-  ["path", { d: "M10 6h11", key: "c7qv1k" }],
-  ["path", { d: "M4 10h2", key: "16xx2s" }],
-  ["path", { d: "M4 6h1v4", key: "cnovpq" }],
-  ["path", { d: "M6 18H4c0-1 2-2 2-3s-1-1.5-2-1", key: "m9a95d" }]
+  ["path", { d: "M3 12h.01", key: "nlz23k" }],
+  ["path", { d: "M3 18h.01", key: "1tta3j" }],
+  ["path", { d: "M3 6h.01", key: "1rqtza" }],
+  ["path", { d: "M8 12h13", key: "1za7za" }],
+  ["path", { d: "M8 18h13", key: "1lx6n3" }],
+  ["path", { d: "M8 6h13", key: "ik3vkj" }]
 ];
-const ListOrdered = createLucideIcon("list-ordered", __iconNode$i);
+const List$1 = createLucideIcon("list", __iconNode$i);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3402,14 +3420,11 @@ const ListOrdered = createLucideIcon("list-ordered", __iconNode$i);
 
 
 const __iconNode$h = [
-  ["path", { d: "M3 12h.01", key: "nlz23k" }],
-  ["path", { d: "M3 18h.01", key: "1tta3j" }],
-  ["path", { d: "M3 6h.01", key: "1rqtza" }],
-  ["path", { d: "M8 12h13", key: "1za7za" }],
-  ["path", { d: "M8 18h13", key: "1lx6n3" }],
-  ["path", { d: "M8 6h13", key: "ik3vkj" }]
+  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }],
+  ["polyline", { points: "16 17 21 12 16 7", key: "1gabdz" }],
+  ["line", { x1: "21", x2: "9", y1: "12", y2: "12", key: "1uyos4" }]
 ];
-const List$1 = createLucideIcon("list", __iconNode$h);
+const LogOut = createLucideIcon("log-out", __iconNode$h);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3420,11 +3435,16 @@ const List$1 = createLucideIcon("list", __iconNode$h);
 
 
 const __iconNode$g = [
-  ["path", { d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4", key: "1uf3rs" }],
-  ["polyline", { points: "16 17 21 12 16 7", key: "1gabdz" }],
-  ["line", { x1: "21", x2: "9", y1: "12", y2: "12", key: "1uyos4" }]
+  [
+    "path",
+    {
+      d: "M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0",
+      key: "1r0f0z"
+    }
+  ],
+  ["circle", { cx: "12", cy: "10", r: "3", key: "ilqhr7" }]
 ];
-const LogOut = createLucideIcon("log-out", __iconNode$g);
+const MapPin = createLucideIcon("map-pin", __iconNode$g);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -3435,16 +3455,11 @@ const LogOut = createLucideIcon("log-out", __iconNode$g);
 
 
 const __iconNode$f = [
-  [
-    "path",
-    {
-      d: "M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0",
-      key: "1r0f0z"
-    }
-  ],
-  ["circle", { cx: "12", cy: "10", r: "3", key: "ilqhr7" }]
+  ["line", { x1: "4", x2: "20", y1: "12", y2: "12", key: "1e0a9i" }],
+  ["line", { x1: "4", x2: "20", y1: "6", y2: "6", key: "1owob3" }],
+  ["line", { x1: "4", x2: "20", y1: "18", y2: "18", key: "yk5zj1" }]
 ];
-const MapPin = createLucideIcon("map-pin", __iconNode$f);
+const Menu = createLucideIcon("menu", __iconNode$f);
 
 /**
  * @license lucide-react v0.487.0 - ISC
@@ -8098,7 +8113,7 @@ const BASE_MENU = [
   { icon: Users, label: "Оюутнууд", path: "/teacher/students" },
   { icon: CircleCheckBig, label: "Комисс", path: "/teacher/committee" }
 ];
-function TeacherSidebar({ collapsed }) {
+function TeacherSidebar({ collapsed, onNavigate }) {
   const user = getStoredUser();
   const isExpert = user?.systemRole === "EXTERNAL_EXPERT";
   const menuItems = isExpert ? [{ icon: Award, label: "Зочин шүүгчийн үнэлгээ", path: "/teacher/expert", end: true }] : BASE_MENU;
@@ -8120,7 +8135,7 @@ function TeacherSidebar({ collapsed }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "aside",
     {
-      className: `relative flex flex-col bg-primary-900 border-r border-white/10 transition-[width] duration-300 ${collapsed ? "w-20" : "w-64"} shrink-0`,
+      className: `relative flex h-full flex-col bg-primary-900 border-r border-white/10 transition-[width] duration-300 ${collapsed ? "w-20" : "w-64"} shrink-0`,
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 px-5 h-16 border-b border-white/10", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -8151,6 +8166,7 @@ function TeacherSidebar({ collapsed }) {
               {
                 to: item.path,
                 end: item.end,
+                onClick: onNavigate,
                 className: ({ isActive }) => `group relative flex items-center gap-3 h-9 px-5 transition-colors ${collapsed ? "justify-center px-0" : ""} ${isActive ? "text-white bg-white/[0.07]" : "text-white/55 hover:text-white hover:bg-white/[0.04]"}`,
                 children: ({ isActive }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
                   isActive && !collapsed && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute left-0 top-0 bottom-0 w-[2px] bg-accent" }),
@@ -8172,6 +8188,7 @@ function TeacherSidebar({ collapsed }) {
           NavLink,
           {
             to: "/teacher/notifications",
+            onClick: onNavigate,
             className: ({ isActive }) => `relative w-full flex items-center gap-3 h-9 transition-colors rounded-sm ${collapsed ? "justify-center" : ""} ${isActive ? "text-white" : "text-white/55 hover:text-white"}`,
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "relative inline-flex shrink-0", children: [
@@ -8194,13 +8211,26 @@ function TopHeader({
   userName,
   userRole,
   userInitials,
-  onLogout
+  onLogout,
+  onMenuClick
 }) {
   const [showProfile, setShowProfile] = useState$e(false);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "bg-surface border-b border-border px-6 flex items-center justify-between h-16 shrink-0 relative z-20", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-[15px] font-semibold text-ink-900 tracking-tight leading-none", children: title }),
-      subtitle && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mt-1", children: subtitle })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "bg-surface border-b border-border px-4 md:px-6 flex items-center justify-between h-16 shrink-0 relative z-20", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 min-w-0", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          onClick: onMenuClick,
+          className: "md:hidden w-9 h-9 rounded-md border border-border bg-surface flex items-center justify-center text-ink-700 hover:bg-surface-muted transition-colors shrink-0",
+          "aria-label": "Цэс нээх",
+          children: /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { className: "w-4 h-4", strokeWidth: 1.7 })
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-[15px] font-semibold text-ink-900 tracking-tight leading-none", children: title }),
+        subtitle && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mt-1 truncate", children: subtitle })
+      ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-1", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -8373,6 +8403,7 @@ const pageTitles = {
 };
 function TeacherLayout({ user }) {
   const [collapsed, setCollapsed] = useState$d(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState$d(false);
   const [unreadCount, setUnreadCount] = useState$d(0);
   const location = useLocation();
   const navigate = useNavigate();
@@ -8397,7 +8428,26 @@ function TeacherLayout({ user }) {
     };
   }, [userId, isExpertWorkspace, location.pathname]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-screen bg-slate-50 overflow-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherSidebar, { collapsed, onToggle: () => setCollapsed(!collapsed) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hidden md:block h-full shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherSidebar, { collapsed, onToggle: () => setCollapsed(!collapsed) }) }),
+    mobileNavOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed inset-0 z-40 md:hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "button",
+        {
+          type: "button",
+          className: "absolute inset-0 bg-ink-900/45",
+          "aria-label": "Цэс хаах",
+          onClick: () => setMobileNavOpen(false)
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative h-full w-64 max-w-[84vw]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        TeacherSidebar,
+        {
+          collapsed: false,
+          onToggle: () => setCollapsed(!collapsed),
+          onNavigate: () => setMobileNavOpen(false)
+        }
+      ) })
+    ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col flex-1 min-w-0", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         TopHeader,
@@ -8408,10 +8458,11 @@ function TeacherLayout({ user }) {
           userRole: "Багш",
           userInitials: initials,
           avatarColor: "from-green-500 to-green-700",
-          onLogout: logout
+          onLogout: logout,
+          onMenuClick: () => setMobileNavOpen(true)
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 overflow-y-auto p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) }) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1 overflow-y-auto p-4 md:p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) }) })
     ] }),
     !isExpertWorkspace && /* @__PURE__ */ jsxRuntimeExports.jsx(
       FloatingMessageButton,
@@ -12198,7 +12249,7 @@ function TeacherDashboard() {
     stageState[stage.key] = { state, date: sessionDate(latest) };
   });
   const heroStageEntry = STAGE_DEFS.find((s) => stageState[s.key]?.state === "active") || STAGE_DEFS.slice().reverse().find((s) => stageState[s.key]?.state === "done") || STAGE_DEFS[0];
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6 max-w-7xl mx-auto pb-10", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 md:space-y-6 max-w-7xl mx-auto pb-10", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { onClick: () => navigate("/teacher/students"), children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "h-4 w-4", strokeWidth: 1.6 }),
@@ -12217,11 +12268,11 @@ function TeacherDashboard() {
         " Хуваарь шалгах"
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-3 gap-6", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-2 space-y-6", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "lg:col-span-2 space-y-4 md:space-y-6", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-0.5 w-full bg-border-strong relative overflow-hidden rounded-t-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-full bg-accent transition-all duration-700", style: { width: `${reviewedRatio}%` } }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-start gap-4 mb-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-4 md:p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-2 flex-wrap", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-xs text-ink-700 font-medium tracking-tight", children: [
@@ -12236,7 +12287,7 @@ function TeacherDashboard() {
               /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-lg font-semibold text-ink-900 tracking-tight leading-tight", children: "Энэ улирлын удирдсан оюутнуудын явц" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500 mt-1", children: "Оюутны тайлан, үнэлгээ, хуваарийн товч мэдээллийг доороос харна уу." })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-right shrink-0 border border-border rounded-md p-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-left sm:text-right shrink-0 border border-border rounded-md p-3", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-2xl font-semibold text-ink-900 tabular-nums tracking-tight", children: [
                 reviewedRatio,
                 "%"
@@ -12250,14 +12301,14 @@ function TeacherDashboard() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(TrendingUp, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
             "Улирлын хуваарь"
           ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(TermTimeline, { stageState }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-4 md:p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(TermTimeline, { stageState }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
             "Тойм мэдээлэл"
           ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-5", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 md:grid-cols-4 gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-4 md:p-5", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3", children: [
             { label: "Удирдаж буй оюутан", value: studentCount },
             { label: "Хүлээгдэж буй тайлан", value: pendingReports.length },
             { label: "Удахгүй болох үнэлгээ", value: upcomingSchedule.length },
@@ -12291,7 +12342,7 @@ function TeacherDashboard() {
           ] }, report.id)) }) })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 md:space-y-6", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-ink-700", strokeWidth: 1.6 }),
@@ -39619,9 +39670,9 @@ function TeacherMessages() {
     const bTime = conversationSummaries[b.id]?.lastMessage?.sentAt;
     return new Date(bTime || 0).getTime() - new Date(aTime || 0).getTime();
   });
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-[calc(100vh-112px)] overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "h-full overflow-hidden rounded-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0 h-full min-h-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-full min-h-0", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "w-80 shrink-0 border-r border-border flex flex-col h-full min-h-0 bg-surface", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 border-b border-border", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-[calc(100vh-96px)] md:h-[calc(100vh-112px)] overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "h-full overflow-hidden rounded-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0 h-full min-h-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row h-full min-h-0", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "w-full md:w-80 md:shrink-0 border-b md:border-b-0 md:border-r border-border flex flex-col h-52 md:h-full min-h-0 bg-surface", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-3 md:p-4 border-b border-border", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-sm font-semibold text-ink-900 mb-3", children: "Чат" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-3 top-1/2 transform -translate-y-1/2 text-ink-400 h-4 w-4", strokeWidth: 1.6 }),
@@ -39665,21 +39716,21 @@ function TeacherMessages() {
         );
       }) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "flex-1 flex flex-col h-full min-h-0 bg-surface", children: !selectedPlan ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex items-center justify-center bg-surface-sunken", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-ink-400 text-sm", children: "Зүүн талаас оюутан сонгоно уу" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-border flex items-center justify-between bg-surface shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "flex-1 flex flex-col min-h-0 bg-surface", children: !selectedPlan ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex items-center justify-center bg-surface-sunken", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-ink-400 text-sm", children: "Зүүн талаас оюутан сонгоно уу" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-3 md:p-4 border-b border-border flex items-center justify-between bg-surface shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-10 w-10 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-sm font-medium", children: initialsFromName(studentLabel(selectedPlan.studentId)) }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-ink-900 tracking-tight", children: studentLabel(selectedPlan.studentId) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500", children: [studentCode(selectedPlan.studentId), statusLabel(selectedPlan.status)].filter(Boolean).join(" · ") })
         ] })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-h-0 overflow-y-auto p-6 space-y-4 bg-surface-sunken", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-h-0 overflow-y-auto p-3 md:p-6 space-y-4 bg-surface-sunken", children: [
         messages.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full flex flex-col items-center justify-center text-center text-ink-500", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm", children: "Харилцаа алга байна" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs mt-1 text-ink-400", children: "Оюутантайгаа харилцаагаа эхлүүлнэ үү." })
         ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-full flex flex-col justify-end gap-4", children: messages.map((msg) => {
           const mine = msg.senderId === teacherId;
-          return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `flex ${mine ? "justify-end" : "justify-start"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end gap-2 max-w-[72%]", children: [
+          return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `flex ${mine ? "justify-end" : "justify-start"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end gap-2 max-w-[88%] md:max-w-[72%]", children: [
             !mine && /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-7 w-7 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-[10px] font-medium", children: initialsFromName(studentLabel(msg.senderId)) }) }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `rounded-md px-3 py-2 ${mine ? "bg-accent text-white" : "bg-surface text-ink-900 border border-border"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-relaxed whitespace-pre-wrap break-words", children: msg.content }) }),
@@ -39693,8 +39744,8 @@ function TeacherMessages() {
         }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: bottomRef })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 border-t border-border bg-surface space-y-2 shrink-0", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end gap-2", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-3 md:p-4 border-t border-border bg-surface space-y-2 shrink-0", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row sm:items-end gap-2", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             Textarea,
             {
@@ -39711,7 +39762,7 @@ function TeacherMessages() {
               disabled: sending
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { className: "h-11 flex-shrink-0", disabled: sending || !messageText.trim(), onClick: handleSendMessage, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { className: "h-11 flex-shrink-0 w-full sm:w-auto", disabled: sending || !messageText.trim(), onClick: handleSendMessage, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "h-4 w-4 mr-2", strokeWidth: 1.6 }),
             "Илгээх"
           ] })

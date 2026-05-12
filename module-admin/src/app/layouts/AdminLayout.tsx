@@ -26,6 +26,7 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ user }: AdminLayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const location = useLocation();
   const pageInfo = pageTitles[location.pathname] || pageTitles["/admin"];
 
@@ -38,7 +39,26 @@ export default function AdminLayout({ user }: AdminLayoutProps) {
 
   return (
     <div className="flex h-screen bg-surface overflow-hidden">
-      <AdminSidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
+      <div className="hidden md:block h-full shrink-0">
+        <AdminSidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
+      </div>
+      {mobileNavOpen && (
+        <div className="fixed inset-0 z-40 md:hidden">
+          <button
+            type="button"
+            className="absolute inset-0 bg-ink-900/45"
+            aria-label="Цэс хаах"
+            onClick={() => setMobileNavOpen(false)}
+          />
+          <div className="relative h-full w-72 max-w-[84vw]">
+            <AdminSidebar
+              collapsed={false}
+              onToggle={() => setCollapsed(!collapsed)}
+              onNavigate={() => setMobileNavOpen(false)}
+            />
+          </div>
+        </div>
+      )}
       <div className="flex flex-col flex-1 min-w-0">
         <TopHeader
           title={pageInfo.title}
@@ -47,9 +67,10 @@ export default function AdminLayout({ user }: AdminLayoutProps) {
           userRole="Администратор"
           userInitials={initials}
           onLogout={logout}
+          onMenuClick={() => setMobileNavOpen(true)}
         />
         <main className="flex-1 overflow-y-auto bg-surface-muted">
-          <div className="max-w-[1400px] mx-auto px-8 py-8">
+          <div className="max-w-[1400px] mx-auto px-4 py-5 md:px-8 md:py-8">
             <ErrorBoundary>
               <Outlet />
             </ErrorBoundary>

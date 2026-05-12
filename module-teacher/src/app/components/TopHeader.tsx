@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, LogOut } from "lucide-react";
+import { ChevronDown, LogOut, Menu } from "lucide-react";
 
 interface TopHeaderProps {
   title: string;
@@ -10,6 +10,7 @@ interface TopHeaderProps {
   /** Deprecated — kept for API compatibility, no longer applied. */
   avatarColor?: string;
   onLogout?: () => void;
+  onMenuClick?: () => void;
 }
 
 export default function TopHeader({
@@ -19,14 +20,25 @@ export default function TopHeader({
   userRole,
   userInitials,
   onLogout,
+  onMenuClick,
 }: TopHeaderProps) {
   const [showProfile, setShowProfile] = useState(false);
 
   return (
-    <header className="bg-surface border-b border-border px-6 flex items-center justify-between h-16 shrink-0 relative z-20">
-      <div className="min-w-0">
-        <h1 className="text-[15px] font-semibold text-ink-900 tracking-tight leading-none">{title}</h1>
-        {subtitle && <p className="text-xs text-ink-500 mt-1">{subtitle}</p>}
+    <header className="bg-surface border-b border-border px-4 md:px-6 flex items-center justify-between h-16 shrink-0 relative z-20">
+      <div className="flex items-center gap-3 min-w-0">
+        <button
+          type="button"
+          onClick={onMenuClick}
+          className="md:hidden w-9 h-9 rounded-md border border-border bg-surface flex items-center justify-center text-ink-700 hover:bg-surface-muted transition-colors shrink-0"
+          aria-label="Цэс нээх"
+        >
+          <Menu className="w-4 h-4" strokeWidth={1.7} />
+        </button>
+        <div className="min-w-0">
+          <h1 className="text-[15px] font-semibold text-ink-900 tracking-tight leading-none">{title}</h1>
+          {subtitle && <p className="text-xs text-ink-500 mt-1 truncate">{subtitle}</p>}
+        </div>
       </div>
 
       <div className="flex items-center gap-1">

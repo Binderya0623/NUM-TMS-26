@@ -107,7 +107,7 @@ export default function StudentThesis() {
     <div className="space-y-6 max-w-[1400px] mx-auto pb-10">
       <Card>
         <div className="h-0.5 w-full bg-accent" />
-        <CardContent className="p-6">
+        <CardContent className="p-4 md:p-6">
           <div className="flex flex-col md:flex-row gap-6 items-start justify-between">
             <div className="flex-1 space-y-4">
               <div>
@@ -123,7 +123,7 @@ export default function StudentThesis() {
                   Та тайлангаа илгээж, багштайгаа харилцаж, явцаа хянах боломжтой.
                 </p>
               </div>
-              <div className="grid grid-cols-3 gap-4 pt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 pt-2">
                 <StatTile label="Илгээсэн тайлан" value={String(reports.length)} />
                 <StatTile label="Сүүлийн тайлан" value={reports[reports.length - 1]?.reportType ?? "—"} />
                 <StatTile label="Төлөв" value={reports[reports.length - 1]?.status ?? "—"} />
