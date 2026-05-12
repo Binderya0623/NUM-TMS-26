@@ -53,7 +53,7 @@ export function RichTextEditor({
     editorProps: {
       attributes: {
         class:
-          "rte-content focus:outline-none px-3 py-2 text-sm text-ink-900 leading-relaxed",
+          "rte-content focus:outline-none px-3 py-2 text-sm font-normal text-ink-800 leading-relaxed",
         ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
       },
     },
@@ -84,7 +84,7 @@ export function RichTextEditor({
 
   return (
     <div
-      className={`rte-shell border border-border rounded-md bg-surface focus-within:border-ink-900 focus-within:ring-1 focus-within:ring-ink-900 transition-colors ${
+      className={`rte-shell border border-border rounded-md bg-surface focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15 transition-colors ${
         disabled ? "opacity-60 pointer-events-none" : ""
       }`}
     >
@@ -118,7 +118,7 @@ function Toolbar({ editor }: { editor: Editor }) {
       onClick={onClick}
       className={`flex items-center justify-center w-7 h-7 rounded-sm transition-colors ${
         active
-          ? "bg-ink-900 text-white"
+          ? "bg-accent-softer text-accent"
           : "text-ink-700 hover:bg-surface-muted hover:text-ink-900"
       }`}
     >

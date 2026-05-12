@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
-import { Award, Lock } from "lucide-react";
+import { Button } from "../../components/ui/button";
+import { Award, Lock, Printer } from "lucide-react";
 import {
   evaluationService,
   type FinalGradeConfirmation,
@@ -144,18 +145,24 @@ export default function StudentFinalGrade() {
             Хамгаалалтын шатуудаар нээгдсэн оноо болон эцсийн үнэлгээ
           </p>
         </div>
-        {hasAnyScore && !isConfirmed && (
-          <span className="inline-flex items-center gap-2 text-xs text-ink-700 border border-border-strong rounded-md px-3 h-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-warning)]" />
-            Хянагдаж байна
-          </span>
-        )}
-        {isPublished && (
-          <span className="inline-flex items-center gap-2 text-xs text-ink-700 border border-ink-900 rounded-md px-3 h-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-positive)]" />
-            Албан ёсоор нийтлэгдсэн
-          </span>
-        )}
+        <div className="flex flex-wrap items-center gap-2">
+          {hasAnyScore && !isConfirmed && (
+            <span className="inline-flex items-center gap-2 text-xs text-ink-700 border border-border-strong rounded-md px-3 h-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-warning)]" />
+              Хянагдаж байна
+            </span>
+          )}
+          {isPublished && (
+            <span className="inline-flex items-center gap-2 text-xs text-ink-700 border border-ink-900 rounded-md px-3 h-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-positive)]" />
+              Албан ёсоор нийтлэгдсэн
+            </span>
+          )}
+          <Button variant="outline" onClick={() => window.print()}>
+            <Printer className="w-4 h-4 mr-2" strokeWidth={1.6} />
+            Хэвлэх
+          </Button>
+        </div>
       </div>
 
       {isConfirmed && (

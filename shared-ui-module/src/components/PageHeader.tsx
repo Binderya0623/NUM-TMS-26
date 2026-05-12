@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Typography, Space, Divider } from 'antd';
+import { BORDER_NAVY, BRAND_PRIMARY, BRAND_PRIMARY_HOVER, BRAND_PRIMARY_SOFT, TEXT_NAVY } from '../theme/portalTheme';
 
 const { Title, Text } = Typography;
 
@@ -37,7 +38,7 @@ export interface PageHeaderProps {
  *   title="Удирдсан дипломын ажлууд"
  *   description="Оюутнуудын судалгааны ажлыг нэг дороос удирдах самбар."
  *   stats={[
- *     { label: 'Удирдаж буй', value: '4 оюутан', icon: <TeamOutlined />, accentColor: '#1455BD' },
+ *     { label: 'Удирдаж буй', value: '4 оюутан', icon: <TeamOutlined />, accentColor: '#1f4f82' },
  *     { label: 'Хүлээгдэж буй', value: '3 хүсэлт', icon: <BellOutlined />, accentColor: '#d97706' },
  *   ]}
  *   actions={<Button type="primary">…</Button>}
@@ -55,8 +56,8 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       style={{
         borderRadius: 12,
         overflow: 'hidden',
-        boxShadow: '0 1px 3px rgba(0,0,0,.07)',
-        border: '1px solid #e2e8f0',
+        boxShadow: '0 1px 3px rgba(16,32,51,.06)',
+        border: `1px solid ${BORDER_NAVY}`,
       }}
       styles={{
         body: { padding: 0 },
@@ -66,7 +67,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       <div
         style={{
           height: 4,
-          background: 'linear-gradient(90deg, #1455BD 0%, #3b82f6 100%)',
+          background: `linear-gradient(90deg, ${BRAND_PRIMARY} 0%, ${BRAND_PRIMARY_HOVER} 100%)`,
         }}
       />
 
@@ -82,7 +83,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       >
         {/* Left: text block */}
         <div style={{ flex: 1, minWidth: 240 }}>
-          <Title level={4} style={{ margin: 0, color: '#0f172a' }}>
+          <Title level={4} style={{ margin: 0, color: TEXT_NAVY }}>
             {title}
           </Title>
           {description && (
@@ -110,8 +111,8 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                   gap: 12,
                   padding: '10px 16px',
                   borderRadius: 10,
-                  border: '1px solid #f1f5f9',
-                  background: '#fafbff',
+                  border: `1px solid ${BORDER_NAVY}`,
+                  background: '#f6f9fc',
                   minWidth: 140,
                 }}
               >
@@ -125,8 +126,8 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                     justifyContent: 'center',
                     background: stat.accentColor
                       ? `${stat.accentColor}18`
-                      : '#e0e7ff',
-                    color: stat.accentColor ?? '#1455BD',
+                      : BRAND_PRIMARY_SOFT,
+                    color: stat.accentColor ?? BRAND_PRIMARY,
                     fontSize: 18,
                   }}
                 >
@@ -139,7 +140,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                       fontWeight: 600,
                       textTransform: 'uppercase',
                       letterSpacing: '0.05em',
-                      color: '#94a3b8',
+                      color: '#6f8195',
                       marginBottom: 2,
                     }}
                   >
@@ -149,7 +150,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                     style={{
                       fontSize: 18,
                       fontWeight: 700,
-                      color: '#0f172a',
+                      color: TEXT_NAVY,
                       lineHeight: 1.2,
                     }}
                   >

@@ -83,7 +83,7 @@ export const PortalTabs: React.FC<PortalTabsProps> = ({
       activeKey={activeKey}
       onChange={onChange}
       animated={{ inkBar: true, tabPane: true }}
-      style={{ background: '#fff', borderRadius: 12 }}
+      style={{ background: '#fff', borderRadius: 8 }}
     />
   );
 };

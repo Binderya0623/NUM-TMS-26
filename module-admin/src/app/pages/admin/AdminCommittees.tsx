@@ -302,7 +302,12 @@ export default function AdminCommittees() {
         const t = teachers.find(x => x.id === id) || externalExperts.find(x => x.id === id);
         return t?.displayName || id;
       };
-      const studentNameOf = (id: string) => students.find(x => x.id === id)?.displayName || id;
+      const studentInfoOf = (id: string) => students.find(x => x.id === id);
+      const studentNameOf = (id: string) => studentInfoOf(id)?.displayName || 'Тодорхойгүй оюутан';
+      const studentCodeOf = (id: string) => {
+        const student = studentInfoOf(id);
+        return student?.sisId || student?.studentId || (isUuid(id) ? '' : id);
+      };
 
       const headers = [
         'Оюутан', 'Оюутны ID',
@@ -310,7 +315,7 @@ export default function AdminCommittees() {
         'Дундаж', 'Хамгийн их', 'Төлөв', 'Илгээсэн огноо',
       ];
       const rows = cStudents.map(cs => {
-        const cells: string[] = [studentNameOf(cs.studentId), cs.studentId];
+        const cells: string[] = [studentNameOf(cs.studentId), studentCodeOf(cs.studentId)];
         let sum = 0, count = 0, maxTotal = 0;
         graders.forEach(m => {
           const g = grades.find(x => x.studentId === cs.studentId && x.evaluatorId === m.teacherId && x.isSubmitted);
@@ -377,7 +382,8 @@ export default function AdminCommittees() {
     !form.selectedStudents.find(x => x.id === s.id) &&
     !assignedStudentIds.has(s.id) &&
     (s.displayName.toLowerCase().includes(studentSearch.toLowerCase()) ||
-     s.id.toLowerCase().includes(studentSearch.toLowerCase()))
+     s.studentId?.toLowerCase().includes(studentSearch.toLowerCase()) ||
+     s.sisId?.toLowerCase().includes(studentSearch.toLowerCase()))
   );
 
   const stageLabel = (s: string | undefined | null) => {
@@ -839,7 +845,12 @@ export default function AdminCommittees() {
                       >
                         <div className="min-w-0">
                           <p className="text-sm text-ink-900 truncate">{s.displayName}</p>
-                          <p className="text-xs text-ink-400 truncate">{s.id} {s.departmentId ? `· ${s.departmentId}` : ''}</p>
+                          {(s.sisId || s.studentId || (s.departmentId && !isUuid(s.departmentId))) && (
+                            <p className="text-xs text-ink-400 truncate">
+                              {s.sisId || s.studentId}
+                              {s.departmentId && !isUuid(s.departmentId) ? ` · ${s.departmentId}` : ''}
+                            </p>
+                          )}
                         </div>
                         <Plus className="w-4 h-4 text-ink-400 shrink-0" strokeWidth={1.6} />
                       </div>
@@ -1093,7 +1104,8 @@ export default function AdminCommittees() {
                           const candidates = students.filter(s =>
                             !assignedIds.has(s.id) &&
                             (s.displayName.toLowerCase().includes(drawerStudentSearch.toLowerCase()) ||
-                             s.id.toLowerCase().includes(drawerStudentSearch.toLowerCase()))
+                             s.studentId?.toLowerCase().includes(drawerStudentSearch.toLowerCase()) ||
+                             s.sisId?.toLowerCase().includes(drawerStudentSearch.toLowerCase()))
                           );
                           if (candidates.length === 0) {
                             return (

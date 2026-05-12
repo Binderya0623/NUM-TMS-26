@@ -30,7 +30,7 @@ export default function App({ user }: AppProps) {
           <Route path="reports"     element={<TeacherThesis />} />
           <Route path="evaluations" element={<TeacherCommittee />} />
           <Route path="feedback"    element={<TeacherMessages />} />
-          <Route path="progress"    element={<TeacherProgress />} />
+          <Route path="progress"    element={<Navigate to="/teacher/students" replace />} />
           <Route path="committee"   element={<TeacherCommittee />} />
           <Route path="scores"      element={<TeacherProgress />} />
           <Route path="expert"        element={<ExternalExpertGrading />} />

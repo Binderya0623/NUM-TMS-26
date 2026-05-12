@@ -101,26 +101,32 @@ var RefIcon = /* @__PURE__ */ React.forwardRef(TeamOutlined);
 
 const {useState,useCallback} = await importShared('react');
 
-const {Card,Progress,Steps,Avatar,Tag,Typography,Flex,Statistic,Button,Tabs,Table,Input,Space,Tooltip} = await importShared('antd');
+const {Card,Progress,Steps,Avatar,Tag,Typography,Flex,Statistic,Button,Tabs,Table,Input,Space,Tooltip,ConfigProvider} = await importShared('antd');
 const { Title, Text, Paragraph } = Typography;
+const BRAND_PRIMARY = "#1f4f82";
+const BRAND_PRIMARY_HOVER = "#183f68";
+const BRAND_PRIMARY_SOFT = "#e8f0f8";
+const BORDER_NAVY = "#d9e3ee";
+const TEXT_NAVY = "#102033";
+const TEXT_MUTED = "#6f8195";
 const PageHeader = ({ title, description, stats = [], actions }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
   Card,
   {
-    style: { borderRadius: 12, overflow: "hidden", boxShadow: "0 1px 3px rgba(0,0,0,.07)", border: "1px solid #e2e8f0" },
+    style: { borderRadius: 8, overflow: "hidden", boxShadow: "0 1px 3px rgba(16,32,51,.06)", border: `1px solid ${BORDER_NAVY}` },
     styles: { body: { padding: 0 } },
     children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { height: 4, background: "linear-gradient(90deg, #1455BD 0%, #3b82f6 100%)" } }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { height: 4, background: `linear-gradient(90deg, ${BRAND_PRIMARY} 0%, ${BRAND_PRIMARY_HOVER} 100%)` } }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { padding: "20px 24px", display: "flex", flexWrap: "wrap", gap: 24, alignItems: "center", justifyContent: "space-between" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { flex: 1, minWidth: 240 }, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { level: 4, style: { margin: 0, color: "#0f172a" }, children: title }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { level: 4, style: { margin: 0, color: TEXT_NAVY }, children: title }),
           description && /* @__PURE__ */ jsxRuntimeExports.jsx(Text, { type: "secondary", style: { marginTop: 6, display: "block", fontSize: 13, lineHeight: 1.6 }, children: description }),
           actions && /* @__PURE__ */ jsxRuntimeExports.jsx(Space, { style: { marginTop: 12 }, children: actions })
         ] }),
-        stats.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Space, { split: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: 1, height: 48, background: "#e2e8f0" } }), children: stats.map((stat, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: 12, padding: "10px 16px", borderRadius: 10, border: "1px solid #f1f5f9", background: "#fafbff", minWidth: 140 }, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: 40, height: 40, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", background: stat.accentColor ? `${stat.accentColor}18` : "#e0e7ff", color: stat.accentColor ?? "#1455BD", fontSize: 18 }, children: stat.icon }),
+        stats.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(Space, { split: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: 1, height: 48, background: BORDER_NAVY } }), children: stats.map((stat, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: 12, padding: "10px 16px", borderRadius: 8, border: `1px solid ${BORDER_NAVY}`, background: "#f6f9fc", minWidth: 140 }, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { width: 40, height: 40, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", background: stat.accentColor ? `${stat.accentColor}18` : BRAND_PRIMARY_SOFT, color: stat.accentColor ?? BRAND_PRIMARY, fontSize: 18 }, children: stat.icon }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", color: "#94a3b8", marginBottom: 2 }, children: stat.label }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 18, fontWeight: 700, color: "#0f172a", lineHeight: 1.2 }, children: stat.value })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", color: TEXT_MUTED, marginBottom: 2 }, children: stat.label }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { fontSize: 18, fontWeight: 700, color: TEXT_NAVY, lineHeight: 1.2 }, children: stat.value })
           ] })
         ] }, i)) })
       ] })
@@ -144,7 +150,7 @@ const PortalTabs = ({ items, defaultActiveKey }) => {
       items: antdItems,
       defaultActiveKey: defaultActiveKey ?? items[0]?.key,
       animated: { inkBar: true, tabPane: true },
-      style: { background: "#fff", borderRadius: 12 }
+      style: { background: "#fff", borderRadius: 8 }
     }
   );
 };
@@ -209,7 +215,7 @@ function DataTable({
           e.stopPropagation();
           action.onClick(record);
         },
-        style: { color: action.danger ? void 0 : "#1455BD" }
+        style: { color: action.danger ? void 0 : BRAND_PRIMARY }
       }
     ) }, i)) })
   } : null;
@@ -218,7 +224,7 @@ function DataTable({
     searchable && /* @__PURE__ */ jsxRuntimeExports.jsx(Flex, { justify: "flex-end", style: { marginBottom: 16 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
       Input,
       {
-        prefix: /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$8, { style: { color: "#94a3b8" } }),
+        prefix: /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$8, { style: { color: "#9aabba" } }),
         placeholder: searchPlaceholder,
         value: searchText,
         onChange: (e) => setSearchText(e.target.value),
@@ -271,7 +277,7 @@ function TeacherStudentTable({ students, onReview }) {
       dataIndex: "name",
       key: "name",
       render: (name) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Flex, { align: "center", gap: 8, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { size: 32, style: { background: "#e0e7ff", color: "#1455BD", fontWeight: 700 }, children: (name || "").split(".").map((s) => s[0]).join("") }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { size: 32, style: { background: BRAND_PRIMARY_SOFT, color: BRAND_PRIMARY, fontWeight: 700 }, children: (name || "").split(".").map((s) => s[0]).join("") }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Text, { strong: true, style: { fontSize: 13 }, children: name })
       ] })
     },
@@ -298,7 +304,7 @@ function TeacherStudentTable({ students, onReview }) {
     }
   ];
   if (students.length === 0) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { textAlign: "center", padding: "48px 24px", color: "#94a3b8" }, children: [
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { textAlign: "center", padding: "48px 24px", color: "#9aabba" }, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon, { style: { fontSize: 40, marginBottom: 12, display: "block" } }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Text, { type: "secondary", children: "Одоогоор удирдаж буй оюутан байхгүй байна." })
     ] });
@@ -321,7 +327,7 @@ function StudentOverviewTab({ thesis }) {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 16 }, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { level: 5, style: { marginBottom: 16 }, children: "Нийт дэвшил" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Progress, { percent: thesis.progress, strokeColor: { "0%": "#1455BD", "100%": "#3b82f6" }, style: { marginBottom: 24 } }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Progress, { percent: thesis.progress, strokeColor: { "0%": BRAND_PRIMARY, "100%": BRAND_PRIMARY_HOVER }, style: { marginBottom: 24 } }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Steps,
           {
@@ -330,16 +336,16 @@ function StudentOverviewTab({ thesis }) {
             items: STAGES.map((s) => ({
               title: s.title,
               status: s.status,
-              icon: s.status === "finish" ? /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$3, { style: { color: "#1455BD" } }) : s.status === "process" ? /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$6, { style: { color: "#1455BD" } }) : /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$1, { style: { color: "#94a3b8" } })
+              icon: s.status === "finish" ? /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$3, { style: { color: BRAND_PRIMARY } }) : s.status === "process" ? /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$6, { style: { color: BRAND_PRIMARY } }) : /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$1, { style: { color: "#9aabba" } })
             }))
           }
         )
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { title: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon, { style: { color: "#1455BD", marginRight: 8 } }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon, { style: { color: BRAND_PRIMARY, marginRight: 8 } }),
         "Комисс"
-      ] }), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Flex, { wrap: "wrap", gap: 12, children: thesis.committee.map((member, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Flex, { align: "center", gap: 8, style: { padding: "8px 12px", border: "1px solid #f1f5f9", borderRadius: 8, background: "#fafafa" }, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { size: 36, style: { background: "#e0e7ff", color: "#1455BD", fontWeight: 700 }, children: member.split(" ").map((n) => n[0]).join("") }),
+      ] }), children: /* @__PURE__ */ jsxRuntimeExports.jsx(Flex, { wrap: "wrap", gap: 12, children: thesis.committee.map((member, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Flex, { align: "center", gap: 8, style: { padding: "8px 12px", border: `1px solid ${BORDER_NAVY}`, borderRadius: 8, background: "#f6f9fc" }, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { size: 36, style: { background: BRAND_PRIMARY_SOFT, color: BRAND_PRIMARY, fontWeight: 700 }, children: member.split(" ").map((n) => n[0]).join("") }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Text, { strong: true, style: { fontSize: 13 }, children: member }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Text, { type: "secondary", style: { fontSize: 12 }, children: "Хянагч" }) })
@@ -359,7 +365,7 @@ function StudentOverviewTab({ thesis }) {
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: item.label })
         ] }),
         value: item.value,
-        valueStyle: { fontSize: 13, color: "#0f172a" }
+        valueStyle: { fontSize: 13, color: TEXT_NAVY }
       }
     ) }, i)) })
   ] });
@@ -373,11 +379,11 @@ function ThesisView({
 }) {
   const isTeacher = role === "teacher";
   const headerStats = isTeacher ? [
-    { label: "Удирдаж буй", value: `${students.length} оюутан`, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon, {}), accentColor: "#1455BD" },
+    { label: "Удирдаж буй", value: `${students.length} оюутан`, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon, {}), accentColor: BRAND_PRIMARY },
     { label: "Хүлээгдэж буй", value: `${students.filter((s) => s.status === "Submitted").length} тайлан`, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$5, {}), accentColor: "#d97706" }
   ] : [
-    { label: "Дэвшил", value: `${thesis.progress}%`, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$3, {}), accentColor: "#1455BD" },
-    { label: "Удирдагч", value: thesis.supervisor, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon, {}), accentColor: "#7c3aed" }
+    { label: "Дэвшил", value: `${thesis.progress}%`, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$3, {}), accentColor: BRAND_PRIMARY },
+    { label: "Удирдагч", value: thesis.supervisor, icon: /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon, {}), accentColor: "#4f759c" }
   ];
   const tabItems = isTeacher ? [{
     key: "students",
@@ -397,18 +403,66 @@ function ThesisView({
       ] })
     }
   ];
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { maxWidth: 1400, margin: "0 auto", paddingBottom: 40 }, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      PageHeader,
-      {
-        title: isTeacher ? "Удирдсан дипломын ажлууд" : thesis.title,
-        description: isTeacher ? "Өөрийн удирдаж буй оюутнуудын судалгааны ажлыг нэг дороос удирдах самбар." : thesis.description,
-        stats: headerStats,
-        actions: !isTeacher ? /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: thesis.status, localized: true }) : void 0
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { marginTop: 24 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(PortalTabs, { items: tabItems }) })
-  ] });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ConfigProvider,
+    {
+      theme: {
+        token: {
+          colorPrimary: BRAND_PRIMARY,
+          colorPrimaryHover: BRAND_PRIMARY_HOVER,
+          colorBgLayout: "#f6f9fc",
+          colorBgContainer: "#ffffff",
+          colorBorder: BORDER_NAVY,
+          colorBorderSecondary: "#edf3f8",
+          colorTextBase: TEXT_NAVY,
+          colorTextSecondary: TEXT_MUTED,
+          colorTextTertiary: "#9aabba",
+          borderRadius: 8,
+          boxShadow: "0 1px 3px rgba(16,32,51,.06)",
+          fontFamily: "'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif"
+        },
+        components: {
+          Button: {
+            primaryShadow: "0 1px 2px rgba(16,32,51,0.12)",
+            defaultShadow: "0 1px 2px rgba(16,32,51,0.06)",
+            defaultBorderColor: BORDER_NAVY
+          },
+          Table: {
+            headerBg: "#f3f7fb",
+            headerColor: "#30465f",
+            rowHoverBg: "#f6f9fc",
+            borderColor: BORDER_NAVY
+          },
+          Tabs: {
+            inkBarColor: BRAND_PRIMARY,
+            itemActiveColor: BRAND_PRIMARY,
+            itemSelectedColor: BRAND_PRIMARY,
+            itemHoverColor: BRAND_PRIMARY_HOVER
+          },
+          Input: {
+            activeBorderColor: BRAND_PRIMARY,
+            hoverBorderColor: BRAND_PRIMARY
+          },
+          Select: {
+            activeBorderColor: BRAND_PRIMARY,
+            hoverBorderColor: BRAND_PRIMARY
+          }
+        }
+      },
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { maxWidth: 1400, margin: "0 auto", paddingBottom: 40 }, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          PageHeader,
+          {
+            title: isTeacher ? "Удирдсан дипломын ажлууд" : thesis.title,
+            description: isTeacher ? "Өөрийн удирдаж буй оюутнуудын судалгааны ажлыг нэг дороос удирдах самбар." : thesis.description,
+            stats: headerStats,
+            actions: !isTeacher ? /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { status: thesis.status, localized: true }) : void 0
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { marginTop: 24 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(PortalTabs, { items: tabItems }) })
+      ] })
+    }
+  );
 }
 
 export { ThesisView as default };

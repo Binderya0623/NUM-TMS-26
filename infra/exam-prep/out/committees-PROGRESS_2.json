@@ -2,16 +2,15 @@
   {
     "stageType": "PROGRESS_2",
     "name": "КОМИСС 1",
-    "scheduledDate": "2026-04-20T09:20:00",
+    "scheduledDate": "2026-03-23T09:20:00",
     "location": "8-р байр 204 тоот",
     "status": "ACTIVE",
     "head": "suvdaa",
     "secretary": "bilguun.o",
     "members": [
-      "gantulga_g"
-    ],
-    "externalExperts": [
-      "gantulga.n@num.edu.mn"
+      "gantulga_g",
+      "altangerel",
+      "uuganbayar.g"
     ],
     "students": [
       {
@@ -95,16 +94,14 @@
   {
     "stageType": "PROGRESS_2",
     "name": "КОМИСС 2",
-    "scheduledDate": "2026-04-20T14:00:00",
+    "scheduledDate": "2026-03-23T14:00:00",
     "location": "8-р байр 204 тоот",
     "status": "ACTIVE",
     "head": "dalaijargal",
     "secretary": "naranbat",
     "members": [
-      "tsolmonz"
-    ],
-    "externalExperts": [
-      "delgermaa.n@num.edu.mn"
+      "tsolmonz",
+      "enkhtuul.b"
     ],
     "students": [
       {
@@ -188,7 +185,7 @@
   {
     "stageType": "PROGRESS_2",
     "name": "КОМИСС 3",
-    "scheduledDate": "2026-04-21T09:20:00",
+    "scheduledDate": "2026-03-24T09:20:00",
     "location": "8-р байр 204 тоот",
     "status": "ACTIVE",
     "head": "naranchimeg",
@@ -196,9 +193,6 @@
     "members": [
       "dorjnamjirmaa",
       "avirmed.e"
-    ],
-    "externalExperts": [
-      "bolorkhuu.n@num.edu.mn"
     ],
     "students": [
       {
@@ -282,16 +276,15 @@
   {
     "stageType": "PROGRESS_2",
     "name": "КОМИСС 4",
-    "scheduledDate": "2026-04-21T14:00:00",
+    "scheduledDate": "2026-03-24T14:00:00",
     "location": "8-р байр 204 тоот",
     "status": "ACTIVE",
     "head": "okhorloo",
     "secretary": "lkhamrolom",
     "members": [
-      "tserennadmid"
-    ],
-    "externalExperts": [
-      "chuluuntulga.s@num.edu.mn"
+      "tserennadmid",
+      "tsetsegjargal.e",
+      "amarsanaa.g"
     ],
     "students": [
       {
@@ -375,16 +368,13 @@
   {
     "stageType": "PROGRESS_2",
     "name": "КОМИСС 5",
-    "scheduledDate": "2026-04-22T09:20:00",
+    "scheduledDate": "2026-03-25T09:20:00",
     "location": "8-р байр 204 тоот",
     "status": "ACTIVE",
     "head": "nyamlkhagva",
     "secretary": "davaasuren.n",
     "members": [
       "magsarjav"
-    ],
-    "externalExperts": [
-      "altansukh.e@num.edu.mn"
     ],
     "students": [
       {
@@ -468,16 +458,14 @@
   {
     "stageType": "PROGRESS_2",
     "name": "КОМИСС 6",
-    "scheduledDate": "2026-04-22T14:00:00",
+    "scheduledDate": "2026-03-25T14:00:00",
     "location": "8-р байр 204 тоот",
     "status": "ACTIVE",
     "head": "khurel-ochir",
     "secretary": "amgalan.a",
     "members": [
-      "nanzadragchaa"
-    ],
-    "externalExperts": [
-      "gerelchuluun.n@num.edu.mn"
+      "nanzadragchaa",
+      "batbayar.s"
     ],
     "students": [
       {
@@ -561,16 +549,14 @@
   {
     "stageType": "PROGRESS_2",
     "name": "КОМИСС 7",
-    "scheduledDate": "2026-04-23T09:20:00",
+    "scheduledDate": "2026-03-26T09:20:00",
     "location": "8-р байр 204 тоот",
     "status": "ACTIVE",
     "head": "otgonnaran",
     "secretary": "enkhtuya.ts",
     "members": [
-      "r.javkhlan"
-    ],
-    "externalExperts": [
-      "tsog-erdene.e@num.edu.mn"
+      "r.javkhlan",
+      ""
     ],
     "students": [
       {
@@ -654,16 +640,13 @@
   {
     "stageType": "PROGRESS_2",
     "name": "КОМИСС 8",
-    "scheduledDate": "2026-04-24T09:20:00",
+    "scheduledDate": "2026-03-27T09:20:00",
     "location": "8-р байр 204 тоот",
     "status": "ACTIVE",
     "head": "bbatnyam",
     "secretary": "bagabold.g",
     "members": [
       "uitumen"
-    ],
-    "externalExperts": [
-      "gundegmaa.ts@num.edu.mn"
     ],
     "students": [
       {
@@ -747,16 +730,13 @@
   {
     "stageType": "PROGRESS_2",
     "name": "КОМИСС 9",
-    "scheduledDate": "2026-04-24T14:00:00",
+    "scheduledDate": "2026-03-27T14:00:00",
     "location": "8-р байр 204 тоот",
     "status": "ACTIVE",
     "head": "uuganbayar.g",
     "secretary": "lkhamrolom",
     "members": [
       "munkhtsetseg_n"
-    ],
-    "externalExperts": [
-      "bilguun.j@num.edu.mn"
     ],
     "students": [
       {

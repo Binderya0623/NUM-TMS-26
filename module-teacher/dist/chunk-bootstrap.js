@@ -716,41 +716,41 @@ var validRequestMethodsArr = [
   ...validMutationMethodsArr
 ];
 new Set(validRequestMethodsArr);
-const React$l = await importShared('react');
+const React$m = await importShared('react');
 
-var DataRouterContext = React$l.createContext(null);
+var DataRouterContext = React$m.createContext(null);
 DataRouterContext.displayName = "DataRouter";
-var DataRouterStateContext = React$l.createContext(null);
+var DataRouterStateContext = React$m.createContext(null);
 DataRouterStateContext.displayName = "DataRouterState";
-var RSCRouterContext = React$l.createContext(false);
+var RSCRouterContext = React$m.createContext(false);
 function useIsRSCRouterContext() {
-  return React$l.useContext(RSCRouterContext);
+  return React$m.useContext(RSCRouterContext);
 }
-var ViewTransitionContext = React$l.createContext({
+var ViewTransitionContext = React$m.createContext({
   isTransitioning: false
 });
 ViewTransitionContext.displayName = "ViewTransition";
-var FetchersContext = React$l.createContext(
+var FetchersContext = React$m.createContext(
   /* @__PURE__ */ new Map()
 );
 FetchersContext.displayName = "Fetchers";
-var AwaitContext = React$l.createContext(null);
+var AwaitContext = React$m.createContext(null);
 AwaitContext.displayName = "Await";
-var NavigationContext = React$l.createContext(
+var NavigationContext = React$m.createContext(
   null
 );
 NavigationContext.displayName = "Navigation";
-var LocationContext = React$l.createContext(
+var LocationContext = React$m.createContext(
   null
 );
 LocationContext.displayName = "Location";
-var RouteContext = React$l.createContext({
+var RouteContext = React$m.createContext({
   outlet: null,
   matches: [],
   isDataRoute: false
 });
 RouteContext.displayName = "Route";
-var RouteErrorContext = React$l.createContext(null);
+var RouteErrorContext = React$m.createContext(null);
 RouteErrorContext.displayName = "RouteError";
 const React2$1 = await importShared('react');
 
@@ -8096,7 +8096,6 @@ const BASE_MENU = [
   { icon: House, label: "Хянах самбар", path: "/teacher", end: true },
   { icon: FileSearch, label: "Судалгааны удирдлага", path: "/teacher/thesis" },
   { icon: Users, label: "Оюутнууд", path: "/teacher/students" },
-  { icon: TrendingUp, label: "Явцын хяналт", path: "/teacher/progress" },
   { icon: CircleCheckBig, label: "Комисс", path: "/teacher/committee" }
 ];
 function TeacherSidebar({ collapsed }) {
@@ -8121,7 +8120,7 @@ function TeacherSidebar({ collapsed }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "aside",
     {
-      className: `relative flex flex-col bg-ink-900 border-r border-black/20 transition-[width] duration-300 ${collapsed ? "w-20" : "w-64"} shrink-0`,
+      className: `relative flex flex-col bg-primary-900 border-r border-white/10 transition-[width] duration-300 ${collapsed ? "w-20" : "w-64"} shrink-0`,
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 px-5 h-16 border-b border-white/10", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -11385,6 +11384,9 @@ function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+function isUuid(s) {
+  return !!s && UUID_RE.test(s);
+}
 function resolveName$1(id, map = {}, fallback = "Тодорхойгүй") {
   if (!id) return fallback;
   const name = map[id];
@@ -11403,20 +11405,20 @@ function fmtDateTime(value) {
   return value.replace("T", " ").split(".")[0];
 }
 
-const React$k = await importShared('react');
-const Card = React$k.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const React$l = await importShared('react');
+const Card = React$l.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
   "div",
   {
     ref,
     className: cn(
-      "rounded-md border border-border bg-surface text-ink-800",
+      "rounded-md border border-border bg-surface text-ink-800 shadow-[0_1px_3px_rgba(16,32,51,0.06)]",
       className
     ),
     ...props
   }
 ));
 Card.displayName = "Card";
-const CardHeader = React$k.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const CardHeader = React$l.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
   "div",
   {
     ref,
@@ -11425,7 +11427,7 @@ const CardHeader = React$k.forwardRef(({ className, ...props }, ref) => /* @__PU
   }
 ));
 CardHeader.displayName = "CardHeader";
-const CardTitle = React$k.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const CardTitle = React$l.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
   "h3",
   {
     ref,
@@ -11437,7 +11439,7 @@ const CardTitle = React$k.forwardRef(({ className, ...props }, ref) => /* @__PUR
   }
 ));
 CardTitle.displayName = "CardTitle";
-const CardDescription = React$k.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const CardDescription = React$l.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
   "p",
   {
     ref,
@@ -11446,9 +11448,9 @@ const CardDescription = React$k.forwardRef(({ className, ...props }, ref) => /* 
   }
 ));
 CardDescription.displayName = "CardDescription";
-const CardContent = React$k.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref, className: cn("px-6 pb-6 pt-0", className), ...props }));
+const CardContent = React$l.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref, className: cn("px-6 pb-6 pt-0", className), ...props }));
 CardContent.displayName = "CardContent";
-const CardFooter = React$k.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const CardFooter = React$l.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
   "div",
   {
     ref,
@@ -11462,7 +11464,7 @@ const CardFooter = React$k.forwardRef(({ className, ...props }, ref) => /* @__PU
 CardFooter.displayName = "CardFooter";
 
 // packages/react/compose-refs/src/composeRefs.tsx
-const React$j = await importShared('react');
+const React$k = await importShared('react');
 
 function setRef(ref, value) {
   if (typeof ref === "function") {
@@ -11496,48 +11498,48 @@ function composeRefs(...refs) {
   };
 }
 function useComposedRefs(...refs) {
-  return React$j.useCallback(composeRefs(...refs), refs);
+  return React$k.useCallback(composeRefs(...refs), refs);
 }
 
 // packages/react/slot/src/slot.tsx
-const React$i = await importShared('react');
-var Slot = React$i.forwardRef((props, forwardedRef) => {
+const React$j = await importShared('react');
+var Slot = React$j.forwardRef((props, forwardedRef) => {
   const { children, ...slotProps } = props;
-  const childrenArray = React$i.Children.toArray(children);
+  const childrenArray = React$j.Children.toArray(children);
   const slottable = childrenArray.find(isSlottable);
   if (slottable) {
     const newElement = slottable.props.children;
     const newChildren = childrenArray.map((child) => {
       if (child === slottable) {
-        if (React$i.Children.count(newElement) > 1) return React$i.Children.only(null);
-        return React$i.isValidElement(newElement) ? newElement.props.children : null;
+        if (React$j.Children.count(newElement) > 1) return React$j.Children.only(null);
+        return React$j.isValidElement(newElement) ? newElement.props.children : null;
       } else {
         return child;
       }
     });
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: React$i.isValidElement(newElement) ? React$i.cloneElement(newElement, void 0, newChildren) : null });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: React$j.isValidElement(newElement) ? React$j.cloneElement(newElement, void 0, newChildren) : null });
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
 });
 Slot.displayName = "Slot";
-var SlotClone = React$i.forwardRef((props, forwardedRef) => {
+var SlotClone = React$j.forwardRef((props, forwardedRef) => {
   const { children, ...slotProps } = props;
-  if (React$i.isValidElement(children)) {
+  if (React$j.isValidElement(children)) {
     const childrenRef = getElementRef$1(children);
     const props2 = mergeProps(slotProps, children.props);
-    if (children.type !== React$i.Fragment) {
+    if (children.type !== React$j.Fragment) {
       props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
     }
-    return React$i.cloneElement(children, props2);
+    return React$j.cloneElement(children, props2);
   }
-  return React$i.Children.count(children) > 1 ? React$i.Children.only(null) : null;
+  return React$j.Children.count(children) > 1 ? React$j.Children.only(null) : null;
 });
 SlotClone.displayName = "SlotClone";
 var Slottable = ({ children }) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children });
 };
 function isSlottable(child) {
-  return React$i.isValidElement(child) && child.type === Slottable;
+  return React$j.isValidElement(child) && child.type === Slottable;
 }
 function mergeProps(slotProps, childProps) {
   const overrideProps = { ...childProps };
@@ -11617,28 +11619,28 @@ const cva = (base, config)=>(props)=>{
         return cx(base, getVariantClassNames, getCompoundVariantClassNames, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
     };
 
-const React$h = await importShared('react');
+const React$i = await importShared('react');
 const buttonVariants = cva(
   [
     "inline-flex items-center justify-center gap-2 whitespace-nowrap",
-    "text-sm font-medium tracking-tight",
-    "transition-[background-color,border-color,color] duration-150",
-    "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ink-900 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
+    "text-sm font-medium tracking-normal rounded-md",
+    "transition-[background-color,border-color,color,box-shadow,transform] duration-200",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/25 focus-visible:ring-offset-2 focus-visible:ring-offset-surface",
     "disabled:pointer-events-none disabled:opacity-40"
   ].join(" "),
   {
     variants: {
       variant: {
         // Solid accent — the single primary action
-        default: "bg-accent text-white hover:bg-accent-hover rounded-md",
+        default: "bg-linear-to-b from-[#2a5f95] to-accent text-white shadow-[0_1px_2px_rgba(16,32,51,0.12)] hover:from-[#326ba4] hover:to-accent-hover hover:shadow-[0_3px_8px_rgba(16,32,51,0.14)]",
         // Outline — neutral, secondary actions
-        outline: "border border-border-strong bg-surface text-ink-800 hover:border-ink-900 hover:text-ink-900 rounded-md",
+        outline: "border border-border-strong bg-linear-to-b from-surface to-accent-softer text-ink-800 shadow-[0_1px_2px_rgba(16,32,51,0.06)] hover:border-accent hover:text-ink-900 hover:shadow-[0_2px_6px_rgba(16,32,51,0.08)]",
         // Ghost — tertiary / icon buttons
-        ghost: "text-ink-700 hover:bg-accent-softer hover:text-ink-900 rounded-md",
+        ghost: "text-ink-700 hover:bg-accent-softer hover:text-ink-900",
         // Secondary — subtle filled
-        secondary: "bg-accent-softer text-ink-900 hover:bg-ink-100 rounded-md",
+        secondary: "bg-linear-to-b from-accent-softer to-ink-100 text-ink-900 border border-border shadow-[0_1px_2px_rgba(16,32,51,0.06)] hover:border-border-strong hover:bg-accent-soft",
         // Destructive — still monochrome; escalated via border weight
-        destructive: "border border-ink-900 bg-surface text-ink-900 hover:bg-ink-900 hover:text-white rounded-md",
+        destructive: "border border-border-strong bg-surface text-ink-900 shadow-[0_1px_2px_rgba(16,32,51,0.06)] hover:border-[var(--color-dot-negative)] hover:text-[var(--color-dot-negative)]",
         // Link — inline text
         link: "text-ink-900 underline-offset-4 hover:underline px-0"
       },
@@ -11655,7 +11657,7 @@ const buttonVariants = cva(
     }
   }
 );
-const Button = React$h.forwardRef(
+const Button = React$i.forwardRef(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -11671,23 +11673,23 @@ const Button = React$h.forwardRef(
 Button.displayName = "Button";
 
 // packages/react/context/src/createContext.tsx
-const React$g = await importShared('react');
+const React$h = await importShared('react');
 function createContextScope(scopeName, createContextScopeDeps = []) {
   let defaultContexts = [];
   function createContext3(rootComponentName, defaultContext) {
-    const BaseContext = React$g.createContext(defaultContext);
+    const BaseContext = React$h.createContext(defaultContext);
     const index = defaultContexts.length;
     defaultContexts = [...defaultContexts, defaultContext];
     const Provider = (props) => {
       const { scope, children, ...context } = props;
       const Context = scope?.[scopeName]?.[index] || BaseContext;
-      const value = React$g.useMemo(() => context, Object.values(context));
+      const value = React$h.useMemo(() => context, Object.values(context));
       return /* @__PURE__ */ jsxRuntimeExports.jsx(Context.Provider, { value, children });
     };
     Provider.displayName = rootComponentName + "Provider";
     function useContext2(consumerName, scope) {
       const Context = scope?.[scopeName]?.[index] || BaseContext;
-      const context = React$g.useContext(Context);
+      const context = React$h.useContext(Context);
       if (context) return context;
       if (defaultContext !== void 0) return defaultContext;
       throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
@@ -11696,11 +11698,11 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
   }
   const createScope = () => {
     const scopeContexts = defaultContexts.map((defaultContext) => {
-      return React$g.createContext(defaultContext);
+      return React$h.createContext(defaultContext);
     });
     return function useScope(scope) {
       const contexts = scope?.[scopeName] || scopeContexts;
-      return React$g.useMemo(
+      return React$h.useMemo(
         () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
         [scope, contexts]
       );
@@ -11723,7 +11725,7 @@ function composeContextScopes(...scopes) {
         const currentScope = scopeProps[`__scope${scopeName}`];
         return { ...nextScopes2, ...currentScope };
       }, {});
-      return React$g.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
+      return React$h.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
     };
   };
   createScope.scopeName = baseScope.scopeName;
@@ -11731,24 +11733,24 @@ function composeContextScopes(...scopes) {
 }
 
 // packages/react/use-callback-ref/src/useCallbackRef.tsx
-const React$f = await importShared('react');
+const React$g = await importShared('react');
 
 function useCallbackRef(callback) {
-  const callbackRef = React$f.useRef(callback);
-  React$f.useEffect(() => {
+  const callbackRef = React$g.useRef(callback);
+  React$g.useEffect(() => {
     callbackRef.current = callback;
   });
-  return React$f.useMemo(() => (...args) => callbackRef.current?.(...args), []);
+  return React$g.useMemo(() => (...args) => callbackRef.current?.(...args), []);
 }
 
 // packages/react/use-layout-effect/src/useLayoutEffect.tsx
-const React$e = await importShared('react');
+const React$f = await importShared('react');
 
-var useLayoutEffect2 = Boolean(globalThis?.document) ? React$e.useLayoutEffect : () => {
+var useLayoutEffect2 = Boolean(globalThis?.document) ? React$f.useLayoutEffect : () => {
 };
 
 // packages/react/primitive/src/primitive.tsx
-const React$d = await importShared('react');
+const React$e = await importShared('react');
 
 await importShared('react-dom');
 var NODES = [
@@ -11770,7 +11772,7 @@ var NODES = [
   "ul"
 ];
 var Primitive = NODES.reduce((primitive, node) => {
-  const Node = React$d.forwardRef((props, forwardedRef) => {
+  const Node = React$e.forwardRef((props, forwardedRef) => {
     const { asChild, ...primitiveProps } = props;
     const Comp = asChild ? Slot : node;
     if (typeof window !== "undefined") {
@@ -11783,14 +11785,14 @@ var Primitive = NODES.reduce((primitive, node) => {
 }, {});
 
 // packages/react/avatar/src/avatar.tsx
-const React$c = await importShared('react');
+const React$d = await importShared('react');
 var AVATAR_NAME = "Avatar";
 var [createAvatarContext] = createContextScope(AVATAR_NAME);
 var [AvatarProvider, useAvatarContext] = createAvatarContext(AVATAR_NAME);
-var Avatar$1 = React$c.forwardRef(
+var Avatar$1 = React$d.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAvatar, ...avatarProps } = props;
-    const [imageLoadingStatus, setImageLoadingStatus] = React$c.useState("idle");
+    const [imageLoadingStatus, setImageLoadingStatus] = React$d.useState("idle");
     return /* @__PURE__ */ jsxRuntimeExports.jsx(
       AvatarProvider,
       {
@@ -11804,7 +11806,7 @@ var Avatar$1 = React$c.forwardRef(
 );
 Avatar$1.displayName = AVATAR_NAME;
 var IMAGE_NAME = "AvatarImage";
-var AvatarImage$1 = React$c.forwardRef(
+var AvatarImage$1 = React$d.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAvatar, src, onLoadingStatusChange = () => {
     }, ...imageProps } = props;
@@ -11824,12 +11826,12 @@ var AvatarImage$1 = React$c.forwardRef(
 );
 AvatarImage$1.displayName = IMAGE_NAME;
 var FALLBACK_NAME = "AvatarFallback";
-var AvatarFallback$1 = React$c.forwardRef(
+var AvatarFallback$1 = React$d.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAvatar, delayMs, ...fallbackProps } = props;
     const context = useAvatarContext(FALLBACK_NAME, __scopeAvatar);
-    const [canRender, setCanRender] = React$c.useState(delayMs === void 0);
-    React$c.useEffect(() => {
+    const [canRender, setCanRender] = React$d.useState(delayMs === void 0);
+    React$d.useEffect(() => {
       if (delayMs !== void 0) {
         const timerId = window.setTimeout(() => setCanRender(true), delayMs);
         return () => window.clearTimeout(timerId);
@@ -11840,7 +11842,7 @@ var AvatarFallback$1 = React$c.forwardRef(
 );
 AvatarFallback$1.displayName = FALLBACK_NAME;
 function useImageLoadingStatus(src, referrerPolicy) {
-  const [loadingStatus, setLoadingStatus] = React$c.useState("idle");
+  const [loadingStatus, setLoadingStatus] = React$d.useState("idle");
   useLayoutEffect2(() => {
     if (!src) {
       setLoadingStatus("error");
@@ -11869,8 +11871,8 @@ var Root$1 = Avatar$1;
 var Image = AvatarImage$1;
 var Fallback = AvatarFallback$1;
 
-const React$b = await importShared('react');
-const Avatar = React$b.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const React$c = await importShared('react');
+const Avatar = React$c.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
   Root$1,
   {
     ref,
@@ -11882,7 +11884,7 @@ const Avatar = React$b.forwardRef(({ className, ...props }, ref) => /* @__PURE__
   }
 ));
 Avatar.displayName = Root$1.displayName;
-const AvatarImage = React$b.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const AvatarImage = React$c.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
   Image,
   {
     ref,
@@ -11891,7 +11893,7 @@ const AvatarImage = React$b.forwardRef(({ className, ...props }, ref) => /* @__P
   }
 ));
 AvatarImage.displayName = Image.displayName;
-const AvatarFallback = React$b.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const AvatarFallback = React$c.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
   Fallback,
   {
     ref,
@@ -11992,18 +11994,27 @@ const committeeService = {
   deleteReviewerAssignment: (id) => committeeApi.delete(`/api/reviewer-assignments/${id}`)
 };
 
+function firstHumanId(...values) {
+  const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  for (const value of values) {
+    const text = String(value || "").trim();
+    if (text && !uuidPattern.test(text) && !text.includes("@")) return text;
+  }
+  return "";
+}
 function normalize$1(raw) {
   const firstName = raw.firstName || "";
   const lastName = raw.lastName || "";
   const full = [firstName, lastName].filter(Boolean).join(" ") || raw.email || raw.id;
-  const emailPrefix = raw.email?.split("@")[0] || "";
+  const sisId = firstHumanId(raw.sisiId, raw.sisId, raw.sisiID, raw.sisID, raw.studentId, raw.username);
   return {
     ...raw,
     displayName: full,
     name: full,
     department: raw.departmentId,
-    username: emailPrefix || raw.username || raw.id,
-    studentId: emailPrefix || raw.studentId || "",
+    username: sisId || raw.username || raw.id,
+    studentId: sisId,
+    sisId,
     programId: raw.programId || raw.major || ""
   };
 }
@@ -12369,7 +12380,7 @@ function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForD
 }
 
 // packages/react/collection/src/collection.tsx
-const React$a = await importShared('react');
+const React$b = await importShared('react');
 function createCollection(name) {
   const PROVIDER_NAME = name + "CollectionProvider";
   const [createCollectionContext, createCollectionScope] = createContextScope(PROVIDER_NAME);
@@ -12379,13 +12390,13 @@ function createCollection(name) {
   );
   const CollectionProvider = (props) => {
     const { scope, children } = props;
-    const ref = React$a.useRef(null);
-    const itemMap = React$a.useRef(/* @__PURE__ */ new Map()).current;
+    const ref = React$b.useRef(null);
+    const itemMap = React$b.useRef(/* @__PURE__ */ new Map()).current;
     return /* @__PURE__ */ jsxRuntimeExports.jsx(CollectionProviderImpl, { scope, itemMap, collectionRef: ref, children });
   };
   CollectionProvider.displayName = PROVIDER_NAME;
   const COLLECTION_SLOT_NAME = name + "CollectionSlot";
-  const CollectionSlot = React$a.forwardRef(
+  const CollectionSlot = React$b.forwardRef(
     (props, forwardedRef) => {
       const { scope, children } = props;
       const context = useCollectionContext(COLLECTION_SLOT_NAME, scope);
@@ -12396,13 +12407,13 @@ function createCollection(name) {
   CollectionSlot.displayName = COLLECTION_SLOT_NAME;
   const ITEM_SLOT_NAME = name + "CollectionItemSlot";
   const ITEM_DATA_ATTR = "data-radix-collection-item";
-  const CollectionItemSlot = React$a.forwardRef(
+  const CollectionItemSlot = React$b.forwardRef(
     (props, forwardedRef) => {
       const { scope, children, ...itemData } = props;
-      const ref = React$a.useRef(null);
+      const ref = React$b.useRef(null);
       const composedRefs = useComposedRefs(forwardedRef, ref);
       const context = useCollectionContext(ITEM_SLOT_NAME, scope);
-      React$a.useEffect(() => {
+      React$b.useEffect(() => {
         context.itemMap.set(ref, { ref, ...itemData });
         return () => void context.itemMap.delete(ref);
       });
@@ -12412,7 +12423,7 @@ function createCollection(name) {
   CollectionItemSlot.displayName = ITEM_SLOT_NAME;
   function useCollection(scope) {
     const context = useCollectionContext(name + "CollectionConsumer", scope);
-    const getItems = React$a.useCallback(() => {
+    const getItems = React$b.useCallback(() => {
       const collectionNode = context.collectionRef.current;
       if (!collectionNode) return [];
       const orderedNodes = Array.from(collectionNode.querySelectorAll(`[${ITEM_DATA_ATTR}]`));
@@ -12432,11 +12443,11 @@ function createCollection(name) {
 }
 
 // packages/react/id/src/id.tsx
-const React$9 = await importShared('react');
-var useReactId = React$9["useId".toString()] || (() => void 0);
+const React$a = await importShared('react');
+var useReactId = React$a["useId".toString()] || (() => void 0);
 var count = 0;
 function useId(deterministicId) {
-  const [id, setId] = React$9.useState(useReactId());
+  const [id, setId] = React$a.useState(useReactId());
   useLayoutEffect2(() => {
     setId((reactId) => reactId ?? String(count++));
   }, [deterministicId]);
@@ -12444,7 +12455,7 @@ function useId(deterministicId) {
 }
 
 // packages/react/use-controllable-state/src/useControllableState.tsx
-const React$8 = await importShared('react');
+const React$9 = await importShared('react');
 function useControllableState({
   prop,
   defaultProp,
@@ -12455,7 +12466,7 @@ function useControllableState({
   const isControlled = prop !== void 0;
   const value = isControlled ? prop : uncontrolledProp;
   const handleChange = useCallbackRef(onChange);
-  const setValue = React$8.useCallback(
+  const setValue = React$9.useCallback(
     (nextValue) => {
       if (isControlled) {
         const setter = nextValue;
@@ -12473,11 +12484,11 @@ function useUncontrolledState({
   defaultProp,
   onChange
 }) {
-  const uncontrolledState = React$8.useState(defaultProp);
+  const uncontrolledState = React$9.useState(defaultProp);
   const [value] = uncontrolledState;
-  const prevValueRef = React$8.useRef(value);
+  const prevValueRef = React$9.useRef(value);
   const handleChange = useCallbackRef(onChange);
-  React$8.useEffect(() => {
+  React$9.useEffect(() => {
     if (prevValueRef.current !== value) {
       handleChange(value);
       prevValueRef.current = value;
@@ -12487,15 +12498,15 @@ function useUncontrolledState({
 }
 
 // packages/react/direction/src/Direction.tsx
-const React$7 = await importShared('react');
-var DirectionContext = React$7.createContext(void 0);
+const React$8 = await importShared('react');
+var DirectionContext = React$8.createContext(void 0);
 function useDirection(localDir) {
-  const globalDir = React$7.useContext(DirectionContext);
+  const globalDir = React$8.useContext(DirectionContext);
   return localDir || globalDir || "ltr";
 }
 
 // packages/react/roving-focus/src/roving-focus-group.tsx
-const React$6 = await importShared('react');
+const React$7 = await importShared('react');
 var ENTRY_FOCUS = "rovingFocusGroup.onEntryFocus";
 var EVENT_OPTIONS = { bubbles: false, cancelable: true };
 var GROUP_NAME = "RovingFocusGroup";
@@ -12505,13 +12516,13 @@ var [createRovingFocusGroupContext, createRovingFocusGroupScope] = createContext
   [createCollectionScope]
 );
 var [RovingFocusProvider, useRovingFocusContext] = createRovingFocusGroupContext(GROUP_NAME);
-var RovingFocusGroup = React$6.forwardRef(
+var RovingFocusGroup = React$7.forwardRef(
   (props, forwardedRef) => {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(Collection.Provider, { scope: props.__scopeRovingFocusGroup, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Collection.Slot, { scope: props.__scopeRovingFocusGroup, children: /* @__PURE__ */ jsxRuntimeExports.jsx(RovingFocusGroupImpl, { ...props, ref: forwardedRef }) }) });
   }
 );
 RovingFocusGroup.displayName = GROUP_NAME;
-var RovingFocusGroupImpl = React$6.forwardRef((props, forwardedRef) => {
+var RovingFocusGroupImpl = React$7.forwardRef((props, forwardedRef) => {
   const {
     __scopeRovingFocusGroup,
     orientation,
@@ -12524,7 +12535,7 @@ var RovingFocusGroupImpl = React$6.forwardRef((props, forwardedRef) => {
     preventScrollOnEntryFocus = false,
     ...groupProps
   } = props;
-  const ref = React$6.useRef(null);
+  const ref = React$7.useRef(null);
   const composedRefs = useComposedRefs(forwardedRef, ref);
   const direction = useDirection(dir);
   const [currentTabStopId = null, setCurrentTabStopId] = useControllableState({
@@ -12532,12 +12543,12 @@ var RovingFocusGroupImpl = React$6.forwardRef((props, forwardedRef) => {
     defaultProp: defaultCurrentTabStopId,
     onChange: onCurrentTabStopIdChange
   });
-  const [isTabbingBackOut, setIsTabbingBackOut] = React$6.useState(false);
+  const [isTabbingBackOut, setIsTabbingBackOut] = React$7.useState(false);
   const handleEntryFocus = useCallbackRef(onEntryFocus);
   const getItems = useCollection(__scopeRovingFocusGroup);
-  const isClickFocusRef = React$6.useRef(false);
-  const [focusableItemsCount, setFocusableItemsCount] = React$6.useState(0);
-  React$6.useEffect(() => {
+  const isClickFocusRef = React$7.useRef(false);
+  const [focusableItemsCount, setFocusableItemsCount] = React$7.useState(0);
+  React$7.useEffect(() => {
     const node = ref.current;
     if (node) {
       node.addEventListener(ENTRY_FOCUS, handleEntryFocus);
@@ -12552,16 +12563,16 @@ var RovingFocusGroupImpl = React$6.forwardRef((props, forwardedRef) => {
       dir: direction,
       loop,
       currentTabStopId,
-      onItemFocus: React$6.useCallback(
+      onItemFocus: React$7.useCallback(
         (tabStopId) => setCurrentTabStopId(tabStopId),
         [setCurrentTabStopId]
       ),
-      onItemShiftTab: React$6.useCallback(() => setIsTabbingBackOut(true), []),
-      onFocusableItemAdd: React$6.useCallback(
+      onItemShiftTab: React$7.useCallback(() => setIsTabbingBackOut(true), []),
+      onFocusableItemAdd: React$7.useCallback(
         () => setFocusableItemsCount((prevCount) => prevCount + 1),
         []
       ),
-      onFocusableItemRemove: React$6.useCallback(
+      onFocusableItemRemove: React$7.useCallback(
         () => setFocusableItemsCount((prevCount) => prevCount - 1),
         []
       ),
@@ -12601,7 +12612,7 @@ var RovingFocusGroupImpl = React$6.forwardRef((props, forwardedRef) => {
   );
 });
 var ITEM_NAME = "RovingFocusGroupItem";
-var RovingFocusGroupItem = React$6.forwardRef(
+var RovingFocusGroupItem = React$7.forwardRef(
   (props, forwardedRef) => {
     const {
       __scopeRovingFocusGroup,
@@ -12616,7 +12627,7 @@ var RovingFocusGroupItem = React$6.forwardRef(
     const isCurrentTabStop = context.currentTabStopId === id;
     const getItems = useCollection(__scopeRovingFocusGroup);
     const { onFocusableItemAdd, onFocusableItemRemove } = context;
-    React$6.useEffect(() => {
+    React$7.useEffect(() => {
       if (focusable) {
         onFocusableItemAdd();
         return () => onFocusableItemRemove();
@@ -12707,10 +12718,10 @@ var Item$1 = RovingFocusGroupItem;
 const React2 = await importShared('react');
 
 // packages/react/presence/src/useStateMachine.tsx
-const React$5 = await importShared('react');
+const React$6 = await importShared('react');
 
 function useStateMachine(initialState, machine) {
-  return React$5.useReducer((state, event) => {
+  return React$6.useReducer((state, event) => {
     const nextState = machine[state][event];
     return nextState ?? state;
   }, initialState);
@@ -12835,14 +12846,14 @@ function getElementRef(element) {
 }
 
 // packages/react/tabs/src/tabs.tsx
-const React$4 = await importShared('react');
+const React$5 = await importShared('react');
 var TABS_NAME = "Tabs";
 var [createTabsContext] = createContextScope(TABS_NAME, [
   createRovingFocusGroupScope
 ]);
 var useRovingFocusGroupScope = createRovingFocusGroupScope();
 var [TabsProvider, useTabsContext] = createTabsContext(TABS_NAME);
-var Tabs$1 = React$4.forwardRef(
+var Tabs$1 = React$5.forwardRef(
   (props, forwardedRef) => {
     const {
       __scopeTabs,
@@ -12885,7 +12896,7 @@ var Tabs$1 = React$4.forwardRef(
 );
 Tabs$1.displayName = TABS_NAME;
 var TAB_LIST_NAME = "TabsList";
-var TabsList$1 = React$4.forwardRef(
+var TabsList$1 = React$5.forwardRef(
   (props, forwardedRef) => {
     const { __scopeTabs, loop = true, ...listProps } = props;
     const context = useTabsContext(TAB_LIST_NAME, __scopeTabs);
@@ -12913,7 +12924,7 @@ var TabsList$1 = React$4.forwardRef(
 );
 TabsList$1.displayName = TAB_LIST_NAME;
 var TRIGGER_NAME = "TabsTrigger";
-var TabsTrigger$1 = React$4.forwardRef(
+var TabsTrigger$1 = React$5.forwardRef(
   (props, forwardedRef) => {
     const { __scopeTabs, value, disabled = false, ...triggerProps } = props;
     const context = useTabsContext(TRIGGER_NAME, __scopeTabs);
@@ -12965,15 +12976,15 @@ var TabsTrigger$1 = React$4.forwardRef(
 );
 TabsTrigger$1.displayName = TRIGGER_NAME;
 var CONTENT_NAME = "TabsContent";
-var TabsContent$1 = React$4.forwardRef(
+var TabsContent$1 = React$5.forwardRef(
   (props, forwardedRef) => {
     const { __scopeTabs, value, forceMount, children, ...contentProps } = props;
     const context = useTabsContext(CONTENT_NAME, __scopeTabs);
     const triggerId = makeTriggerId(context.baseId, value);
     const contentId = makeContentId(context.baseId, value);
     const isSelected = value === context.value;
-    const isMountAnimationPreventedRef = React$4.useRef(isSelected);
-    React$4.useEffect(() => {
+    const isMountAnimationPreventedRef = React$5.useRef(isSelected);
+    React$5.useEffect(() => {
       const rAF = requestAnimationFrame(() => isMountAnimationPreventedRef.current = false);
       return () => cancelAnimationFrame(rAF);
     }, []);
@@ -13010,9 +13021,9 @@ var List = TabsList$1;
 var Trigger = TabsTrigger$1;
 var Content = TabsContent$1;
 
-const React$3 = await importShared('react');
+const React$4 = await importShared('react');
 const Tabs = Root2;
-const TabsList = React$3.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const TabsList = React$4.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
   List,
   {
     ref,
@@ -13025,7 +13036,7 @@ const TabsList = React$3.forwardRef(({ className, ...props }, ref) => /* @__PURE
   }
 ));
 TabsList.displayName = List.displayName;
-const TabsTrigger = React$3.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const TabsTrigger = React$4.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
   Trigger,
   {
     ref,
@@ -13045,7 +13056,7 @@ const TabsTrigger = React$3.forwardRef(({ className, ...props }, ref) => /* @__P
   }
 ));
 TabsTrigger.displayName = Trigger.displayName;
-const TabsContent = React$3.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const TabsContent = React$4.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
   Content,
   {
     ref,
@@ -31671,8 +31682,8 @@ function canInsertNode(state, nodeType) {
     return false;
 }
 
-const React$2 = await importShared('react');
-const {forwardRef,useState: useState$b,useDebugValue,useLayoutEffect,useEffect: useEffect$d,useRef: useRef$2,createContext,useContext,version,createRef,memo,createElement} = React$2;
+const React$3 = await importShared('react');
+const {forwardRef,useState: useState$b,useDebugValue,useLayoutEffect,useEffect: useEffect$d,useRef: useRef$2,createContext,useContext,version,createRef,memo,createElement} = React$3;
 
 const ReactDOM = await importShared('react-dom');
 const {flushSync} = ReactDOM;
@@ -31694,7 +31705,7 @@ var hasRequiredUseSyncExternalStoreShim_production_min;
 function requireUseSyncExternalStoreShim_production_min() {
   if (hasRequiredUseSyncExternalStoreShim_production_min) return useSyncExternalStoreShim_production_min;
   hasRequiredUseSyncExternalStoreShim_production_min = 1;
-  var e = React$2;
+  var e = React$3;
   function h(a, b) {
     return a === b && (0 !== a || 1 / a === 1 / b) || a !== a && b !== b;
   }
@@ -31749,7 +31760,7 @@ const mergeRefs = (...refs) => {
 };
 const Portals = ({ contentComponent }) => {
   const renderers = shimExports.useSyncExternalStore(contentComponent.subscribe, contentComponent.getSnapshot, contentComponent.getServerSnapshot);
-  return React$2.createElement(React$2.Fragment, null, Object.values(renderers));
+  return React$3.createElement(React$3.Fragment, null, Object.values(renderers));
 };
 function getInstance() {
   const subscribers = /* @__PURE__ */ new Set();
@@ -31791,11 +31802,11 @@ function getInstance() {
     }
   };
 }
-class PureEditorContent extends React$2.Component {
+class PureEditorContent extends React$3.Component {
   constructor(props) {
     var _a;
     super(props);
-    this.editorContentRef = React$2.createRef();
+    this.editorContentRef = React$3.createRef();
     this.initialized = false;
     this.state = {
       hasContentComponentInitialized: Boolean((_a = props.editor) === null || _a === void 0 ? void 0 : _a.contentComponent)
@@ -31864,25 +31875,25 @@ class PureEditorContent extends React$2.Component {
   }
   render() {
     const { editor, innerRef, ...rest } = this.props;
-    return React$2.createElement(
-      React$2.Fragment,
+    return React$3.createElement(
+      React$3.Fragment,
       null,
-      React$2.createElement("div", { ref: mergeRefs(innerRef, this.editorContentRef), ...rest }),
-      (editor === null || editor === void 0 ? void 0 : editor.contentComponent) && React$2.createElement(Portals, { contentComponent: editor.contentComponent })
+      React$3.createElement("div", { ref: mergeRefs(innerRef, this.editorContentRef), ...rest }),
+      (editor === null || editor === void 0 ? void 0 : editor.contentComponent) && React$3.createElement(Portals, { contentComponent: editor.contentComponent })
     );
   }
 }
 const EditorContentWithKey = forwardRef((props, ref) => {
-  const key = React$2.useMemo(() => {
+  const key = React$3.useMemo(() => {
     return Math.floor(Math.random() * 4294967295).toString();
   }, [props.editor]);
-  return React$2.createElement(PureEditorContent, {
+  return React$3.createElement(PureEditorContent, {
     key,
     innerRef: ref,
     ...props
   });
 });
-const EditorContent = React$2.memo(EditorContentWithKey);
+const EditorContent = React$3.memo(EditorContentWithKey);
 var react = function equal(a, b) {
   if (a === b) return true;
   if (a && b && typeof a == "object" && typeof b == "object") {
@@ -31951,7 +31962,7 @@ var hasRequiredWithSelector_production_min;
 function requireWithSelector_production_min() {
   if (hasRequiredWithSelector_production_min) return withSelector_production_min;
   hasRequiredWithSelector_production_min = 1;
-  var h = React$2, n = shimExports;
+  var h = React$3, n = shimExports;
   function p(a, b) {
     return a === b && (0 !== a || 1 / a === 1 / b) || a !== a && b !== b;
   }
@@ -32307,12 +32318,12 @@ const ReactNodeViewContext = createContext({
   onDragStart: void 0
 });
 const useReactNodeView = () => useContext(ReactNodeViewContext);
-React$2.forwardRef((props, ref) => {
+React$3.forwardRef((props, ref) => {
   const { onDragStart } = useReactNodeView();
   const Tag = props.as || "div";
   return (
     // @ts-ignore
-    React$2.createElement(Tag, { ...props, ref, "data-node-view-wrapper": "", onDragStart, style: {
+    React$3.createElement(Tag, { ...props, ref, "data-node-view-wrapper": "", onDragStart, style: {
       whiteSpace: "normal",
       ...props.style
     } })
@@ -36164,7 +36175,7 @@ function RichTextEditor({
     editable: !disabled,
     editorProps: {
       attributes: {
-        class: "rte-content focus:outline-none px-3 py-2 text-sm text-ink-900 leading-relaxed",
+        class: "rte-content focus:outline-none px-3 py-2 text-sm font-normal text-ink-800 leading-relaxed",
         ...ariaLabel ? { "aria-label": ariaLabel } : {}
       }
     },
@@ -36191,7 +36202,7 @@ function RichTextEditor({
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {
-      className: `rte-shell border border-border rounded-md bg-surface focus-within:border-ink-900 focus-within:ring-1 focus-within:ring-ink-900 transition-colors ${disabled ? "opacity-60 pointer-events-none" : ""}`,
+      className: `rte-shell border border-border rounded-md bg-surface focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/15 transition-colors ${disabled ? "opacity-60 pointer-events-none" : ""}`,
       children: [
         toolbar === "top" && bar,
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { minHeight }, className: "rte-scroll", children: /* @__PURE__ */ jsxRuntimeExports.jsx(EditorContent, { editor }) }),
@@ -36215,7 +36226,7 @@ function Toolbar({ editor }) {
       "aria-pressed": active,
       onMouseDown: (e) => e.preventDefault(),
       onClick,
-      className: `flex items-center justify-center w-7 h-7 rounded-sm transition-colors ${active ? "bg-ink-900 text-white" : "text-ink-700 hover:bg-surface-muted hover:text-ink-900"}`,
+      className: `flex items-center justify-center w-7 h-7 rounded-sm transition-colors ${active ? "bg-accent-softer text-accent" : "text-ink-700 hover:bg-surface-muted hover:text-ink-900"}`,
       children
     }
   );
@@ -36304,6 +36315,11 @@ const toneDot$5 = {
   neutral: "bg-[var(--color-dot-neutral)]",
   info: "bg-[var(--color-dot-info)]"
 };
+const COMMITTEE_GRADER_ROLES = /* @__PURE__ */ new Set(["HEAD", "SECRETARY", "MEMBER", "EXTERNAL_EXPERT"]);
+const isClosedStatus$1 = (status) => {
+  const normalized = (status || "").trim().toUpperCase();
+  return normalized === "CLOSED" || normalized === "ХААГДСАН" || normalized === "ДУУССАН";
+};
 const GRADING_SCHEMES$1 = {
   PROGRESS_1: {
     label: "Явц 1-ийн үнэлгээ",
@@ -36373,7 +36389,7 @@ function TeacherStudents() {
   const stageType = searchParams.get("stageType") || "";
   const navigate = useNavigate();
   const search = searchParams.get("q") ?? "";
-  const [activeTab, setActiveTab] = useState$a(committeeId ? "evaluations" : "roster");
+  const [activeTab, setActiveTab] = useState$a("roster");
   const [assignedStudents, setAssignedStudents] = useState$a([]);
   const [committeeStudents, setCommitteeStudents] = useState$a([]);
   const [submittedReports, setSubmittedReports] = useState$a([]);
@@ -36428,6 +36444,20 @@ function TeacherStudents() {
   const [sessionSubmissions, setSessionSubmissions] = useState$a([]);
   const [sendAvgStatus, setSendAvgStatus] = useState$a({});
   const [sendAvgError, setSendAvgError] = useState$a({});
+  const getCommitteeGraders = () => {
+    const byEvaluator = /* @__PURE__ */ new Map();
+    committeeMembers.filter((m) => COMMITTEE_GRADER_ROLES.has(m.role)).forEach((m) => byEvaluator.set(m.teacherId, m));
+    sessionGrades.filter((g) => g.isSubmitted && COMMITTEE_GRADER_ROLES.has(g.evaluatorRole)).forEach((g) => {
+      if (!byEvaluator.has(g.evaluatorId)) {
+        byEvaluator.set(g.evaluatorId, {
+          id: `grade-${g.evaluatorId}`,
+          teacherId: g.evaluatorId,
+          role: g.evaluatorRole
+        });
+      }
+    });
+    return Array.from(byEvaluator.values());
+  };
   const openStudentReports = async (student) => {
     setViewReportsStudent(student);
     setViewReportsLoading(true);
@@ -36469,6 +36499,11 @@ function TeacherStudents() {
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || "";
   useEffect$b(() => {
+    if (committeeId && activeTab === "evaluations" && evalStudentId === null) {
+      setActiveTab("roster");
+    }
+  }, [committeeId, activeTab, evalStudentId]);
+  useEffect$b(() => {
     const load = async () => {
       try {
         const [plansRes, usersRes, reportsRes, reqRes, finalGradesRes] = await Promise.all([
@@ -36481,10 +36516,17 @@ function TeacherStudents() {
         const plans = plansRes.data;
         const users = usersRes.data;
         const userMap = {};
+        const userCodeMap = {};
         users.forEach((u) => {
           if (u.username) userMap[u.username] = u.displayName;
           userMap[u.id] = u.displayName;
+          const code = u.sisId || u.studentId || u.username || "";
+          if (code) {
+            userCodeMap[u.id] = code;
+            if (u.username) userCodeMap[u.username] = code;
+          }
         });
+        const codeFor = (id) => userCodeMap[id] || (isUuid(id) ? "" : id);
         setStudentNameMap(userMap);
         const gradedStudentIds = new Set(
           (finalGradesRes.data || []).map((g) => g.studentId).filter(Boolean)
@@ -36500,7 +36542,8 @@ function TeacherStudents() {
           stage: gradedStudentIds.has(r.requestedById) ? "Дүн гарсан" : "Сэдэв батлагдсан",
           status: "APPROVED",
           progress: gradedStudentIds.has(r.requestedById) ? 100 : 5,
-          studentId: r.requestedById
+          studentId: r.requestedById,
+          sisId: codeFor(r.requestedById)
         }));
         const students = [
           ...plans.map((p) => ({
@@ -36510,7 +36553,8 @@ function TeacherStudents() {
             stage: gradedStudentIds.has(p.studentId) ? "Дүн гарсан" : stageFromStatus(p.status),
             status: p.status,
             progress: gradedStudentIds.has(p.studentId) ? 100 : progressFromStatus$1(p.status),
-            studentId: p.studentId
+            studentId: p.studentId,
+            sisId: codeFor(p.studentId)
           })),
           ...fromRequests
         ];
@@ -36541,23 +36585,32 @@ function TeacherStudents() {
           const cmtRes = await committeeService.getStudents(committeeId).catch(() => ({ data: [] }));
           const cmtStudentIds = cmtRes.data.map((s) => s.studentId || s.id);
           const thesisMap = {};
+          const committeePlanTitleMap = {};
           await Promise.all(cmtStudentIds.map(async (sid) => {
             try {
-              const t = await thesisService.getThesisByStudent(sid);
-              const thesis = t.data;
-              if (thesis?.id) thesisMap[sid] = thesis.id;
+              const [thesisRes, planRes] = await Promise.all([
+                thesisService.getThesisByStudent(sid),
+                planService.getPlans({ studentId: sid }).catch(() => ({ data: [] }))
+              ]);
+              const thesis = thesisRes.data;
+              if (thesis?.id || thesis?.title) {
+                thesisMap[sid] = { id: thesis?.id, title: thesis?.title };
+              }
+              const ownPlan = (planRes.data || [])[0];
+              if (ownPlan?.title) committeePlanTitleMap[sid] = ownPlan.title;
             } catch {
             }
           }));
           const cmtDisplayStudents = cmtStudentIds.map((sid) => ({
             id: sid,
             name: resolveName$1(sid, userMap, "Тодорхойгүй оюутан"),
-            thesis: students.find((s) => s.studentId === sid)?.thesis || "Гарчиггүй",
-            thesisId: thesisMap[sid],
+            thesis: thesisMap[sid]?.title || committeePlanTitleMap[sid] || "Гарчиггүй",
+            thesisId: thesisMap[sid]?.id,
             stage: students.find((s) => s.studentId === sid)?.stage || "",
             status: students.find((s) => s.studentId === sid)?.status || "",
             progress: students.find((s) => s.studentId === sid)?.progress || 0,
-            studentId: sid
+            studentId: sid,
+            sisId: students.find((s) => s.studentId === sid)?.sisId || codeFor(sid)
           }));
           setCommitteeStudents(cmtDisplayStudents);
         }
@@ -36580,8 +36633,8 @@ function TeacherStudents() {
     if (stageType) {
       workflowService.getDefenseSessions({ stageType }).then((res) => {
         setAllSessions(res.data);
-        const open = res.data.filter((s) => s.status === "OPEN" || s.status === "ACTIVE");
-        const session = open.find((s) => s.committeeId === committeeId) || open[0];
+        const live = res.data.filter((s) => !isClosedStatus$1(s.status));
+        const session = live.find((s) => s.committeeId === committeeId) || live.find((s) => s.committeeId === "GLOBAL") || live.find((s) => s.status === "OPEN" || s.status === "ACTIVE") || live[0];
         if (session) {
           setDefenseSessionId(session.id);
           committeeService.getReviewerAssignments({ committeeId }).then((r) => setReviewerAssignments(r.data)).catch(() => {
@@ -36749,9 +36802,7 @@ function TeacherStudents() {
     setSecretarySubmitting(true);
     setSecretaryError(null);
     try {
-      const graders = committeeMembers.filter(
-        (m) => m.role === "HEAD" || m.role === "SECRETARY" || m.role === "MEMBER" || m.role === "EXTERNAL_EXPERT"
-      );
+      const graders = getCommitteeGraders();
       const already = new Set(sessionSubmissions.map((s) => s.studentId));
       const toSend = graders.length === 0 ? [] : committeeStudents.filter((stu) => {
         if (already.has(stu.studentId)) return false;
@@ -36788,9 +36839,7 @@ function TeacherStudents() {
     }
   };
   const handleExportCommitteeGrades = () => {
-    const graders = committeeMembers.filter(
-      (m) => m.role === "HEAD" || m.role === "SECRETARY" || m.role === "MEMBER" || m.role === "EXTERNAL_EXPERT"
-    );
+    const graders = getCommitteeGraders();
     const roleLabel = (r) => r === "HEAD" ? "Ахлах" : r === "SECRETARY" ? "Нарийн бичиг" : r === "EXTERNAL_EXPERT" ? "Зочин шүүгч" : "Гишүүн";
     const headers = [
       "Оюутан",
@@ -36802,7 +36851,8 @@ function TeacherStudents() {
       "Илгээсэн огноо"
     ];
     const rows = committeeStudents.map((stu) => {
-      const cells = [stu.name || "", stu.studentId];
+      const displayStudentId = stu.sisId || (isUuid(stu.studentId) ? "" : stu.studentId);
+      const cells = [stu.name || "", displayStudentId];
       let sum = 0, count = 0, maxTotal = 0;
       graders.forEach((m) => {
         const g = sessionGrades.find((x) => x.studentId === stu.studentId && x.evaluatorId === m.teacherId && x.isSubmitted);
@@ -36926,6 +36976,7 @@ function TeacherStudents() {
     ] });
   };
   const rosterStudents = committeeId ? committeeStudents : assignedStudents;
+  const studentCode = (student) => student.sisId || (isUuid(student.studentId) ? "" : student.studentId);
   const filteredStudents = rosterStudents.filter(
     (s) => (s.name || "").toLowerCase().includes(search.toLowerCase())
   );
@@ -37059,7 +37110,10 @@ function TeacherStudents() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-10 w-10 border border-border-strong shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-sm font-medium", children: (student.name || "??").substring(0, 2).toUpperCase() }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-start gap-2 mb-1", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-semibold text-ink-900 tracking-tight truncate", children: student.name }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-semibold text-ink-900 tracking-tight truncate", children: student.name }),
+                studentCode(student) && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] text-ink-400 truncate mt-0.5", children: studentCode(student) })
+              ] }),
               getStatusBadge(student.status)
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 line-clamp-2 mb-3 min-h-[2.5rem]", children: student.thesis }),
@@ -37102,14 +37156,28 @@ function TeacherStudents() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { className: "w-3.5 h-3.5 mr-1.5", strokeWidth: 1.6 }),
                 " Хянах"
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { size: "sm", className: "flex-1 text-xs", onClick: () => {
-                setActiveTab("evaluations");
-                setEvalStudentId(student.id);
-              }, children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "w-3.5 h-3.5 mr-1.5", strokeWidth: 1.6 }),
-                " ",
-                committeeGrades[student.studentId] !== void 0 ? "Засах" : "Үнэлэх"
-              ] })
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                Button,
+                {
+                  size: "sm",
+                  className: "flex-1 text-xs",
+                  onClick: () => {
+                    if (committeeId) {
+                      setActiveTab("evaluations");
+                      setEvalStudentId(student.id);
+                    } else {
+                      setActiveTab("evaluations");
+                      setP1GradeStudentId(student.id);
+                      setP1Scores({});
+                      setP1GradeError(null);
+                    }
+                  },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "w-3.5 h-3.5 mr-1.5", strokeWidth: 1.6 }),
+                    committeeId ? committeeGrades[student.studentId] !== void 0 ? "Засах" : "Үнэлэх" : p1ExistingGrades[student.studentId] !== void 0 ? "Засах" : "Үнэлэх"
+                  ]
+                }
+              )
             ] })
           ] })
         ] }) })
@@ -37268,10 +37336,196 @@ function TeacherStudents() {
           ] })
         ] })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "evaluations", className: "mt-6", children: !gradingScheme ? /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "text-center py-16", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "evaluations", className: "mt-6", children: !committeeId ? p1GradeStudentId ? (() => {
+        const selectedStudent = assignedStudents.find((s) => s.id === p1GradeStudentId);
+        const p1Total = Object.values(p1Scores).reduce((a, b) => a + b, 0);
+        const completedCriteria = P1_CRITERIA.filter((_, idx) => p1Scores[idx] !== void 0 && p1Scores[idx] !== null).length;
+        const scorePct = Math.min(100, Math.round(p1Total / 15 * 100));
+        const setCriterionScore = (idx, value) => {
+          const max = P1_CRITERIA[idx].max;
+          setP1Scores({ ...p1Scores, [idx]: Math.max(0, Math.min(max, value)) });
+        };
+        const submitP1Grade = async () => {
+          if (!progress1Session) return;
+          const thesisId = selectedStudent?.thesisId || p1GradeStudentId || "";
+          setP1GradeStatus("loading");
+          setP1GradeError(null);
+          try {
+            const res = await evaluationService.saveGrade({
+              defenseSessionId: progress1Session.id,
+              thesisId,
+              studentId: p1GradeStudentId,
+              evaluatorId: teacherId,
+              evaluatorRole: "SUPERVISOR",
+              points: p1Total,
+              maxPoints: 15
+            });
+            if (!res.data?.id) throw new Error("Серверийн хариу дээр id олдсонгүй.");
+            await evaluationService.submitGrade(res.data.id);
+            setP1ExistingGrades((prev) => ({ ...prev, [p1GradeStudentId]: p1Total }));
+            setP1GradeStatus("success");
+            setTimeout(() => {
+              setP1GradeStudentId(null);
+              setP1Scores({});
+              setP1GradeStatus("idle");
+            }, 2e3);
+          } catch (err) {
+            const status = err?.response?.status;
+            const raw = err?.response?.data;
+            const msg = raw?.message || raw?.error || (typeof raw === "string" ? raw : "") || err?.message || "";
+            setP1GradeError(status ? `HTTP ${status}${msg ? ` — ${msg}` : ""}` : msg || "Алдаа гарлаа.");
+            setP1GradeStatus("error");
+            setTimeout(() => setP1GradeStatus("idle"), 5e3);
+          }
+        };
+        return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 xl:grid-cols-[320px_minmax(0,1fr)] gap-5 items-start", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "xl:sticky xl:top-4 overflow-hidden", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-1 bg-accent" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5 space-y-5", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                Button,
+                {
+                  variant: "ghost",
+                  size: "sm",
+                  className: "px-0",
+                  onClick: () => {
+                    setP1GradeStudentId(null);
+                    setP1Scores({});
+                    setP1GradeError(null);
+                  },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { className: "w-4 h-4 mr-2", strokeWidth: 1.6 }),
+                    "Оюутны жагсаалт"
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-12 w-12 border border-border-strong shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-sm font-medium", children: (selectedStudent?.name || "??").substring(0, 2).toUpperCase() }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-semibold text-ink-900 tracking-tight truncate", children: selectedStudent?.name || "Оюутан" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 line-clamp-2 mt-1", children: selectedStudent?.thesis || "Дипломын сэдэв" })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 flex-wrap", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] uppercase tracking-wider font-medium text-accent bg-accent-softer rounded-sm px-2 py-0.5", children: "PROGRESS_1" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-600 bg-surface-muted border border-border rounded-sm px-2 py-0.5", children: "Үүрэг: SUPERVISOR" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900", children: "Явц 1-ийн үнэлгээ" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-500", children: [
+                  completedCriteria,
+                  "/",
+                  P1_CRITERIA.length,
+                  " шалгуур бөглөгдсөн"
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-surface-muted p-4", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between gap-3", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 font-medium", children: "Нийт оноо" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-baseline gap-1.5 tabular-nums mt-1", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-4xl font-semibold text-accent", children: p1Total }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-ink-500 text-sm", children: "/ 15" })
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xs text-ink-500 tabular-nums", children: [
+                    scorePct,
+                    "%"
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-2 rounded-full bg-border overflow-hidden mt-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-full bg-accent transition-all", style: { width: `${scorePct}%` } }) })
+              ] }),
+              p1GradeError && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-3 rounded-md text-sm inline-flex items-center gap-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.negative}` }),
+                p1GradeError
+              ] }),
+              p1GradeStatus === "success" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-4 rounded-md flex items-center justify-center gap-2 text-sm font-medium", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.positive}` }),
+                "Үнэлгээ амжилттай хадгалагдлаа!"
+              ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Button,
+                {
+                  className: "w-full",
+                  size: "lg",
+                  onClick: submitP1Grade,
+                  disabled: !progress1Session || p1GradeStatus === "loading" || p1Total === 0,
+                  children: p1GradeStatus === "loading" ? "Илгээж байна..." : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "w-4 h-4 mr-2", strokeWidth: 1.6 }),
+                    "Үнэлгээ илгээх"
+                  ] })
+                }
+              ),
+              !progress1Session && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-400", children: 'Эхлээд "Явц 1 хуваарь" таб дээр хуваарь үүсгэнэ үү.' })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "border-b border-border pb-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-base", children: "Явц 1-ийн үнэлгээ" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(CardDescription, { children: "Шалгуур бүрийн оноог оруулаад нийт оноогоо шалгана уу." })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-5 space-y-3", children: P1_CRITERIA.map((criterion, idx) => {
+              const value = p1Scores[idx];
+              const half = Math.floor(criterion.max / 2);
+              return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-surface p-4 hover:border-border-strong transition-colors", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row md:items-center gap-4", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex h-6 w-6 items-center justify-center rounded-md bg-accent-softer text-xs font-semibold text-accent tabular-nums", children: idx + 1 }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-ink-900 tracking-tight", children: criterion.name })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-500 mt-1 ml-8 tabular-nums", children: [
+                      "Дээд оноо: ",
+                      criterion.max
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 md:justify-end", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "input",
+                      {
+                        type: "number",
+                        min: 0,
+                        max: criterion.max,
+                        step: 1,
+                        className: "h-11 w-24 border border-border-strong rounded-md px-3 text-center text-base font-semibold focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 bg-surface tabular-nums",
+                        value: value ?? "",
+                        onChange: (e) => setCriterionScore(idx, Number(e.target.value) || 0)
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-sm text-ink-500 tabular-nums", children: [
+                      "/ ",
+                      criterion.max
+                    ] })
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 flex flex-wrap gap-2 pl-0 md:pl-8", children: [0, half, criterion.max].map((v) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => setCriterionScore(idx, v),
+                    className: `h-7 rounded-md border px-2.5 text-xs font-medium transition-colors tabular-nums ${value === v ? "border-accent bg-accent-softer text-accent" : "border-border text-ink-600 hover:border-accent hover:text-accent"}`,
+                    children: [
+                      v,
+                      " оноо"
+                    ]
+                  },
+                  v
+                )) })
+              ] }, idx);
+            }) })
+          ] })
+        ] });
+      })() : /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "text-center py-16", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-full border border-border-strong flex items-center justify-center mx-auto mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "w-5 h-5 text-ink-400", strokeWidth: 1.6 }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-semibold text-ink-900 tracking-tight", children: "Үнэлэх оюутан сонгоно уу" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500 mt-1.5 max-w-sm mx-auto", children: '"Оюутны жагсаалт" хэсгээс оюутнаа сонгоод "Үнэлэх" товчийг дарна уу.' })
+      ] }) }) : !gradingScheme ? /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "text-center py-16", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-full border border-border-strong flex items-center justify-center mx-auto mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "w-5 h-5 text-ink-400", strokeWidth: 1.6 }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-semibold text-ink-900 tracking-tight", children: "Комиссоор нэвтрэнэ үү" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500 mt-1.5 max-w-sm mx-auto", children: 'Үнэлгээний маягтыг ашиглахын тулд "Комисс" хуудаснаас "Үнэлэх" товчийг дарна уу.' })
+      ] }) }) : evalStudentId === null && committeeId ? /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "text-center py-16", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-full border border-border-strong flex items-center justify-center mx-auto mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "w-5 h-5 text-ink-400", strokeWidth: 1.6 }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-semibold text-ink-900 tracking-tight", children: "Үнэлэх оюутан сонгоно уу" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500 mt-1.5 max-w-sm mx-auto", children: '"Оюутны жагсаалт" табаас оюутнаа сонгоод "Үнэлэх" товчийг дарна уу.' })
       ] }) }) : evalStudentId === null ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 mb-3 flex-wrap", children: [
@@ -37307,75 +37561,87 @@ function TeacherStudents() {
         ] }) }, student.id)) })
       ] }) : (() => {
         const evalScheme = getEffectiveScheme() || gradingScheme;
-        return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "max-w-3xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "border-b border-border pb-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-start gap-3 mb-1", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: evalScheme.label }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mt-2 flex-wrap", children: [
+        const selectedStudent = rosterStudents.find((s) => s.id === evalStudentId);
+        const completedCriteria = evalScheme.criteria.filter((_, idx) => scores[idx] !== void 0 && scores[idx] !== null).length;
+        const scorePct = Math.min(100, Math.round(totalScore / evalScheme.total * 100));
+        const setCriterionScore = (idx, value) => {
+          const max = evalScheme.criteria[idx].max;
+          setScores({ ...scores, [idx]: Math.max(0, Math.min(max, value)) });
+        };
+        return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 xl:grid-cols-[320px_minmax(0,1fr)] gap-5 items-start", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "xl:sticky xl:top-4 overflow-hidden", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-1 bg-accent" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5 space-y-5", children: [
+              !committeeId && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                Button,
+                {
+                  variant: "ghost",
+                  size: "sm",
+                  className: "px-0",
+                  onClick: () => {
+                    setEvalStudentId(null);
+                    setScores({});
+                    setEvalError(null);
+                  },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { className: "w-4 h-4 mr-2", strokeWidth: 1.6 }),
+                    "Оюутны жагсаалт"
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-12 w-12 border border-border-strong shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-sm font-medium", children: (selectedStudent?.name || "??").substring(0, 2).toUpperCase() }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-semibold text-ink-900 tracking-tight truncate", children: selectedStudent?.name || "Оюутан" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 line-clamp-2 mt-1", children: selectedStudent?.thesis || "Дипломын сэдэв" })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 flex-wrap", children: [
                   stageType && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] uppercase tracking-wider font-medium text-accent bg-accent-softer rounded-sm px-2 py-0.5", children: stageType }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-600 bg-surface-muted border border-border rounded-sm px-2 py-0.5 tabular-nums", children: [
-                    "Нийт: ",
-                    evalScheme.total,
-                    " оноо"
-                  ] }),
                   /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-600 bg-surface-muted border border-border rounded-sm px-2 py-0.5", children: [
                     "Үүрэг: ",
                     teacherRole
                   ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900", children: evalScheme.label }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-500", children: [
+                  completedCriteria,
+                  "/",
+                  evalScheme.criteria.length,
+                  " шалгуур бөглөгдсөн"
                 ] })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "ghost", size: "sm", onClick: () => {
-                setEvalStudentId(null);
-                setScores({});
-                setEvalError(null);
-              }, children: "Хаах" })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardDescription, { children: [
-              "Үнэлж байгаа: ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-ink-900", children: rosterStudents.find((s) => s.id === evalStudentId)?.name || evalStudentId })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "divide-y divide-border", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-12 gap-4 px-4 py-3 bg-surface-muted text-[11px] font-medium uppercase tracking-wider text-ink-500", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "col-span-6", children: "Үнэлгээний шалгуур" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "col-span-3 text-center", children: "Оноо" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "col-span-3 text-center", children: "Дээд" })
-            ] }),
-            evalScheme.criteria.map((criterion, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-12 gap-4 px-4 py-3 items-center hover:bg-surface-muted transition-colors", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "col-span-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-900 font-medium", children: criterion.name }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "col-span-3 flex justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "input",
-                {
-                  type: "number",
-                  min: 0,
-                  max: criterion.max,
-                  className: "w-16 border border-border rounded-md py-1.5 px-2 text-center text-[13px] focus:outline-none focus:border-accent bg-surface tabular-nums",
-                  value: scores[idx] || "",
-                  onChange: (e) => setScores({ ...scores, [idx]: Math.min(criterion.max, parseInt(e.target.value) || 0) })
-                }
-              ) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-3 text-center text-ink-500 text-sm tabular-nums", children: [
-                "/ ",
-                criterion.max
-              ] })
-            ] }, idx)),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 bg-surface-muted border-t border-border", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center mb-5", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-sm font-semibold text-ink-900 tracking-tight", children: "Нийт оноо" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-baseline gap-1.5 tabular-nums", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-3xl font-semibold ${totalScore > evalScheme.total ? "text-[var(--color-dot-negative)]" : "text-accent"}`, children: totalScore }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-ink-500 text-sm", children: [
-                    "/ ",
-                    evalScheme.total
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-surface-muted p-4", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between gap-3", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 font-medium", children: "Нийт оноо" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-baseline gap-1.5 tabular-nums mt-1", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-4xl font-semibold ${totalScore > evalScheme.total ? "text-[var(--color-dot-negative)]" : "text-accent"}`, children: totalScore }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-ink-500 text-sm", children: [
+                        "/ ",
+                        evalScheme.total
+                      ] })
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xs text-ink-500 tabular-nums", children: [
+                    scorePct,
+                    "%"
                   ] })
-                ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-2 rounded-full bg-border overflow-hidden mt-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: `h-full ${totalScore > evalScheme.total ? "bg-[var(--color-dot-negative)]" : "bg-accent"} transition-all`,
+                    style: { width: `${scorePct}%` }
+                  }
+                ) })
               ] }),
-              totalScore > evalScheme.total && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-[var(--color-dot-negative)] mb-3 inline-flex items-center gap-1.5", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.negative}` }),
-                "Нийт оноо хэтэрсэн байна."
+              selectedStudent && /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { variant: "outline", className: "w-full", onClick: () => openStudentReports(selectedStudent), children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "w-4 h-4 mr-2", strokeWidth: 1.6 }),
+                "Тайлан харах"
               ] }),
-              evalError && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-3 rounded-md text-sm mb-3 inline-flex items-center gap-2", children: [
+              evalError && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-3 rounded-md text-sm inline-flex items-center gap-2", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.negative}` }),
                 evalError
               ] }),
@@ -37391,7 +37657,7 @@ function TeacherStudents() {
                   disabled: evalStatus === "loading" || totalScore > evalScheme.total || totalScore === 0,
                   children: evalStatus === "loading" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-2", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" }),
-                    "Илгааж байна..."
+                    "Илгээж байна..."
                   ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "w-4 h-4 mr-2", strokeWidth: 1.6 }),
                     "Үнэлгээ илгээх"
@@ -37399,7 +37665,62 @@ function TeacherStudents() {
                 }
               )
             ] })
-          ] }) })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "border-b border-border pb-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-base", children: evalScheme.label }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(CardDescription, { children: "Шалгуур бүрийн оноог оруулаад нийт оноогоо шалгана уу." })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-5 space-y-3", children: evalScheme.criteria.map((criterion, idx) => {
+              const value = scores[idx];
+              const half = Math.floor(criterion.max / 2);
+              return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-surface p-4 hover:border-border-strong transition-colors", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row md:items-center gap-4", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex h-6 w-6 items-center justify-center rounded-md bg-accent-softer text-xs font-semibold text-accent tabular-nums", children: idx + 1 }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-ink-900 tracking-tight", children: criterion.name })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-500 mt-1 ml-8 tabular-nums", children: [
+                      "Дээд оноо: ",
+                      criterion.max
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 md:justify-end", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "input",
+                      {
+                        type: "number",
+                        min: 0,
+                        max: criterion.max,
+                        step: 1,
+                        className: "h-11 w-24 border border-border-strong rounded-md px-3 text-center text-base font-semibold focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 bg-surface tabular-nums",
+                        value: value ?? "",
+                        onChange: (e) => setCriterionScore(idx, Number(e.target.value) || 0)
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-sm text-ink-500 tabular-nums", children: [
+                      "/ ",
+                      criterion.max
+                    ] })
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 flex flex-wrap gap-2 pl-0 md:pl-8", children: [0, half, criterion.max].map((v) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "button",
+                  {
+                    type: "button",
+                    onClick: () => setCriterionScore(idx, v),
+                    className: `h-7 rounded-md border px-2.5 text-xs font-medium transition-colors tabular-nums ${value === v ? "border-accent bg-accent-softer text-accent" : "border-border text-ink-600 hover:border-accent hover:text-accent"}`,
+                    children: [
+                      v,
+                      " оноо"
+                    ]
+                  },
+                  v
+                )) })
+              ] }, idx);
+            }) })
+          ] })
         ] });
       })() }),
       isSecretary && committeeId && /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "secretary", className: "mt-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
@@ -37420,9 +37741,7 @@ function TeacherStudents() {
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-4", children: [
           (() => {
-            const committeeGraders = committeeMembers.filter(
-              (m) => m.role === "HEAD" || m.role === "SECRETARY" || m.role === "MEMBER" || m.role === "EXTERNAL_EXPERT"
-            );
+            const committeeGraders = getCommitteeGraders();
             const roleLabel = (r) => r === "HEAD" ? "Ахлах" : r === "SECRETARY" ? "Нарийн бичиг" : r === "EXTERNAL_EXPERT" ? "Зочин шүүгч" : "Гишүүн";
             const submissionFor = (sid) => sessionSubmissions.find((s) => s.studentId === sid);
             if (committeeStudents.length === 0) {
@@ -37459,7 +37778,7 @@ function TeacherStudents() {
                     /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-8 w-8 shrink-0 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-[11px] font-medium", children: (student.name || "??").substring(0, 2).toUpperCase() }) }),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900 tracking-tight truncate", children: student.name }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] text-ink-400 truncate", children: student.studentId })
+                      studentCode(student) && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] text-ink-400 truncate", children: studentCode(student) })
                     ] })
                   ] }) }),
                   gradesForStudent.map((g, i) => /* @__PURE__ */ jsxRuntimeExports.jsx("td", { className: "text-center px-3 py-2 border-b border-border tabular-nums", children: g ? /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-sm font-medium text-ink-900", children: [
@@ -37884,226 +38203,92 @@ function TeacherStudents() {
           ] }) }, sid);
         }) })
       ] }) }),
-      !committeeId && /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "schedule", className: "mt-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
-            progress1Session ? "Явц 1 хуваарийг засах" : "Явц 1 хуваарь үүсгэх"
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5 space-y-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5", children: "Огноо, цаг" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "input",
-                {
-                  type: "datetime-local",
-                  className: "w-full border border-border rounded-md px-3 py-2 text-[13px] focus:outline-none focus:border-accent bg-surface",
-                  value: scheduleForm.scheduledDate,
-                  onChange: (e) => setScheduleForm((f) => ({ ...f, scheduledDate: e.target.value }))
-                }
-              )
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5", children: "Байршил / Өрөө" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "input",
-                {
-                  type: "text",
-                  placeholder: "Жнь: 305 тоот, A байр",
-                  className: "w-full border border-border rounded-md px-3 py-2 text-[13px] focus:outline-none focus:border-accent bg-surface",
-                  value: scheduleForm.location,
-                  onChange: (e) => setScheduleForm((f) => ({ ...f, location: e.target.value }))
-                }
-              )
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5", children: "Нэмэлт тэмдэглэл" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                RichTextEditor,
-                {
-                  value: scheduleForm.notes,
-                  onChange: (html) => setScheduleForm((f) => ({ ...f, notes: html })),
-                  placeholder: "Оюутнуудад мэдэгдэх мэдээлэл...",
-                  minHeight: 110,
-                  ariaLabel: "Хуваарийн нэмэлт тэмдэглэл"
-                }
-              )
-            ] }),
-            scheduleStatus === "success" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-3 rounded-md text-sm flex items-center gap-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.positive}` }),
-              "Хуваарь амжилттай хадгалагдлаа!"
-            ] }),
-            scheduleStatus === "error" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-3 rounded-md text-sm flex items-center gap-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.negative}` }),
-              "Алдаа гарлаа. Дахин оролдоно уу."
-            ] }),
+      !committeeId && /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "schedule", className: "mt-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-3xl", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Calendar, { className: "w-4 h-4 text-accent", strokeWidth: 1.6 }),
+          progress1Session ? "Явц 1 хуваарийг засах" : "Явц 1 хуваарь үүсгэх"
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5 space-y-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5", children: "Огноо, цаг" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Button,
+              "input",
               {
-                className: "w-full",
-                disabled: !scheduleForm.scheduledDate || scheduleStatus === "saving",
-                onClick: async () => {
-                  setScheduleStatus("saving");
-                  try {
-                    const payload = {
-                      scheduledDate: scheduleForm.scheduledDate ? new Date(scheduleForm.scheduledDate).toISOString().replace("Z", "") : void 0,
-                      location: scheduleForm.location || void 0,
-                      notes: scheduleForm.notes || void 0
-                    };
-                    let session;
-                    if (progress1Session) {
-                      const r = await workflowService.updateDefenseSession(progress1Session.id, payload);
-                      session = r.data;
-                    } else {
-                      const r = await workflowService.createDefenseSession({ stageType: "PROGRESS_1", supervisorId: teacherId, ...payload });
-                      session = r.data;
-                    }
-                    setProgress1Session(session);
-                    setScheduleStatus("success");
-                    setTimeout(() => setScheduleStatus("idle"), 3e3);
-                  } catch {
-                    setScheduleStatus("error");
-                    setTimeout(() => setScheduleStatus("idle"), 3e3);
-                  }
-                },
-                children: scheduleStatus === "saving" ? "Хадгалж байна..." : progress1Session ? "Шинэчлэх" : "Хуваарь үүсгэх"
+                type: "datetime-local",
+                className: "w-full border border-border rounded-md px-3 py-2 text-[13px] focus:outline-none focus:border-accent bg-surface",
+                value: scheduleForm.scheduledDate,
+                onChange: (e) => setScheduleForm((f) => ({ ...f, scheduledDate: e.target.value }))
               }
             )
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "w-4 h-4 text-ink-500", strokeWidth: 1.6 }),
-            p1GradeStudentId ? "Явц 1 · Үнэлгээ" : `Оюутнууд (${assignedStudents.length})`
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0", children: p1GradeStudentId ? (
-            /* ── Grading form ── */
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-5 space-y-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-ink-600", children: [
-                "Үнэлж байгаа: ",
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-ink-900", children: assignedStudents.find((s) => s.id === p1GradeStudentId)?.name || p1GradeStudentId })
-              ] }),
-              P1_CRITERIA.map((c, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-ink-700 flex-1", children: c.name }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "input",
-                  {
-                    type: "number",
-                    min: 0,
-                    max: c.max,
-                    className: "w-16 border border-border rounded-md py-1.5 px-2 text-center text-[13px] focus:outline-none focus:border-accent bg-surface tabular-nums",
-                    value: p1Scores[i] ?? "",
-                    onChange: (e) => setP1Scores((s) => ({ ...s, [i]: Math.min(c.max, parseInt(e.target.value) || 0) }))
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5", children: "Байршил / Өрөө" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                type: "text",
+                placeholder: "Жнь: 305 тоот, A байр",
+                className: "w-full border border-border rounded-md px-3 py-2 text-[13px] focus:outline-none focus:border-accent bg-surface",
+                value: scheduleForm.location,
+                onChange: (e) => setScheduleForm((f) => ({ ...f, location: e.target.value }))
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "block text-[11px] uppercase tracking-wider font-medium text-ink-500 mb-1.5", children: "Нэмэлт тэмдэглэл" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              RichTextEditor,
+              {
+                value: scheduleForm.notes,
+                onChange: (html) => setScheduleForm((f) => ({ ...f, notes: html })),
+                placeholder: "Оюутнуудад мэдэгдэх мэдээлэл...",
+                minHeight: 110,
+                ariaLabel: "Хуваарийн нэмэлт тэмдэглэл"
+              }
+            )
+          ] }),
+          scheduleStatus === "success" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-3 rounded-md text-sm flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.positive}` }),
+            "Хуваарь амжилттай хадгалагдлаа!"
+          ] }),
+          scheduleStatus === "error" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-3 rounded-md text-sm flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.negative}` }),
+            "Алдаа гарлаа. Дахин оролдоно уу."
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Button,
+            {
+              className: "w-full",
+              disabled: !scheduleForm.scheduledDate || scheduleStatus === "saving",
+              onClick: async () => {
+                setScheduleStatus("saving");
+                try {
+                  const payload = {
+                    scheduledDate: scheduleForm.scheduledDate ? new Date(scheduleForm.scheduledDate).toISOString().replace("Z", "") : void 0,
+                    location: scheduleForm.location || void 0,
+                    notes: scheduleForm.notes || void 0
+                  };
+                  let session;
+                  if (progress1Session) {
+                    const r = await workflowService.updateDefenseSession(progress1Session.id, payload);
+                    session = r.data;
+                  } else {
+                    const r = await workflowService.createDefenseSession({ stageType: "PROGRESS_1", supervisorId: teacherId, ...payload });
+                    session = r.data;
                   }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xs text-ink-400 w-10 text-right tabular-nums", children: [
-                  "/ ",
-                  c.max
-                ] })
-              ] }, i)),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex justify-between items-center pt-3 border-t border-border tabular-nums", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-500", children: "Нийт" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xl font-semibold text-accent", children: [
-                  Object.values(p1Scores).reduce((a, b) => a + b, 0),
-                  " / 15"
-                ] })
-              ] }),
-              p1GradeError && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-700 border border-border bg-surface rounded-md px-3 py-2 inline-flex items-center gap-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.negative}` }),
-                p1GradeError
-              ] }),
-              p1GradeStatus === "success" && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-3 rounded-md text-sm flex items-center gap-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.positive}` }),
-                "Үнэлгээ амжилттай хадгалагдлаа!"
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "outline", size: "sm", className: "flex-1", onClick: () => {
-                  setP1GradeStudentId(null);
-                  setP1Scores({});
-                  setP1GradeError(null);
-                }, children: "Буцах" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Button,
-                  {
-                    size: "sm",
-                    className: "flex-1",
-                    disabled: !progress1Session || p1GradeStatus === "loading" || Object.values(p1Scores).reduce((a, b) => a + b, 0) === 0,
-                    onClick: async () => {
-                      if (!progress1Session) return;
-                      const student = assignedStudents.find((s) => s.id === p1GradeStudentId);
-                      const thesisId = student?.thesisId || p1GradeStudentId || "";
-                      const total = Object.values(p1Scores).reduce((a, b) => a + b, 0);
-                      setP1GradeStatus("loading");
-                      setP1GradeError(null);
-                      try {
-                        const res = await evaluationService.saveGrade({
-                          defenseSessionId: progress1Session.id,
-                          thesisId,
-                          studentId: p1GradeStudentId,
-                          evaluatorId: teacherId,
-                          evaluatorRole: "SUPERVISOR",
-                          points: total,
-                          maxPoints: 15
-                        });
-                        if (!res.data?.id) throw new Error("Серверийн хариу дээр id олдсонгүй.");
-                        await evaluationService.submitGrade(res.data.id);
-                        setP1ExistingGrades((prev) => ({ ...prev, [p1GradeStudentId]: total }));
-                        setP1GradeStatus("success");
-                        setTimeout(() => {
-                          setP1GradeStudentId(null);
-                          setP1Scores({});
-                          setP1GradeStatus("idle");
-                        }, 2e3);
-                      } catch (err) {
-                        console.error("[p1 saveGrade]", err?.response?.status, err?.response?.data, err);
-                        const status = err?.response?.status;
-                        const raw = err?.response?.data;
-                        const msg = raw?.message || raw?.error || (typeof raw === "string" ? raw : "") || err?.message || "";
-                        setP1GradeError(status ? `HTTP ${status}${msg ? ` — ${msg}` : ""}` : msg || "Алдаа гарлаа.");
-                        setP1GradeStatus("error");
-                        setTimeout(() => setP1GradeStatus("idle"), 5e3);
-                      }
-                    },
-                    children: p1GradeStatus === "loading" ? "Илгээж байна..." : "Үнэлгээ илгээх"
-                  }
-                )
-              ] })
-            ] })
-          ) : (
-            /* ── Student list ── */
-            assignedStudents.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center py-8 text-ink-400 text-sm", children: "Оюутан байхгүй байна." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "divide-y divide-border", children: assignedStudents.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 py-3 flex items-center gap-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-8 w-8 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-[11px] font-medium", children: (s.name || "??").substring(0, 2).toUpperCase() }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900 tracking-tight truncate", children: s.name || "Тодорхойгүй оюутан" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-400 truncate", children: s.thesis && s.thesis !== "—" ? s.thesis : "Гарчиггүй ажил" })
-              ] }),
-              p1ExistingGrades[s.studentId] !== void 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-xs text-ink-700 shrink-0 tabular-nums", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot$5.positive}` }),
-                p1ExistingGrades[s.studentId],
-                "/15"
-              ] }),
-              progress1Session ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                Button,
-                {
-                  size: "sm",
-                  variant: "outline",
-                  className: "text-xs shrink-0",
-                  onClick: () => {
-                    setP1GradeStudentId(s.id);
-                    setP1Scores({});
-                    setP1GradeError(null);
-                  },
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "w-3 h-3 mr-1", strokeWidth: 1.6 }),
-                    " ",
-                    p1ExistingGrades[s.studentId] !== void 0 ? "Засах" : "Үнэлэх"
-                  ]
+                  setProgress1Session(session);
+                  setScheduleStatus("success");
+                  setTimeout(() => setScheduleStatus("idle"), 3e3);
+                } catch {
+                  setScheduleStatus("error");
+                  setTimeout(() => setScheduleStatus("idle"), 3e3);
                 }
-              ) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-400 shrink-0", children: "Хуваарь үүсгэнэ үү" })
-            ] }, s.id)) })
-          ) })
+              },
+              children: scheduleStatus === "saving" ? "Хадгалж байна..." : progress1Session ? "Шинэчлэх" : "Хуваарь үүсгэх"
+            }
+          )
         ] })
-      ] }) })
+      ] }) }) })
     ] }),
     viewReportsStudent && (viewReportsLoading || viewReportsError) && /* @__PURE__ */ jsxRuntimeExports.jsx(
       "div",
@@ -38117,7 +38302,7 @@ function TeacherStudents() {
             onClick: (e) => e.stopPropagation(),
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-semibold text-ink-900 tracking-tight mb-1", children: viewReportsStudent.name }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mb-4", children: viewReportsStudent.studentId }),
+              studentCode(viewReportsStudent) && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 mb-4", children: studentCode(viewReportsStudent) }),
               viewReportsLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center gap-3 py-4 text-ink-500 text-sm", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "animate-spin w-6 h-6 border-2 border-accent border-t-transparent rounded-full" }),
                 "Тайланг ачаалж байна..."
@@ -38145,8 +38330,8 @@ function TeacherStudents() {
   ] });
 }
 
-const React$1 = await importShared('react');
-const Input = React$1.forwardRef(
+const React$2 = await importShared('react');
+const Input = React$2.forwardRef(
   ({ className, type, ...props }, ref) => {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(
       "input",
@@ -38155,9 +38340,9 @@ const Input = React$1.forwardRef(
         className: cn(
           "flex h-9 w-full rounded-md border border-border-strong bg-surface",
           "px-3 py-1.5 text-sm text-ink-900 placeholder:text-ink-400",
-          "transition-colors duration-150",
-          "hover:border-ink-400",
-          "focus:outline-none focus:border-ink-900 focus:ring-0",
+          "shadow-[0_1px_2px_rgba(16,32,51,0.04)] transition-[border-color,box-shadow,background-color,color] duration-200",
+          "hover:border-accent/60",
+          "focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-ink-700",
           className
@@ -38457,12 +38642,12 @@ function Dialog({
     "div",
     {
       className: "fixed inset-0 z-50 flex items-center justify-center p-4",
-      style: { backgroundColor: "rgba(10,10,10,0.32)" },
+      style: { backgroundColor: "rgba(8,17,28,0.36)" },
       onClick: closeOnOverlayClick ? onClose : void 0,
       children: /* @__PURE__ */ jsxRuntimeExports.jsx(
         "div",
         {
-          className: `relative w-full ${maxWidth} bg-surface border border-border-strong rounded-md ${scrollable ? "max-h-[90vh] overflow-hidden flex flex-col" : ""}`,
+          className: `relative w-full ${maxWidth} bg-surface border border-border-strong rounded-md shadow-[0_18px_48px_rgba(16,32,51,0.18)] ${scrollable ? "max-h-[90vh] overflow-hidden flex flex-col" : ""}`,
           onClick: (e) => e.stopPropagation(),
           children
         }
@@ -39243,6 +39428,29 @@ function TeacherThesis() {
   ] });
 }
 
+const React$1 = await importShared('react');
+const Textarea = React$1.forwardRef(
+  ({ className, ...props }, ref) => {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      "textarea",
+      {
+        className: cn(
+          "flex min-h-[80px] w-full rounded-md border border-border-strong bg-surface",
+          "px-3 py-2 text-sm text-ink-900 placeholder:text-ink-400 leading-relaxed",
+          "shadow-[0_1px_2px_rgba(16,32,51,0.04)] transition-[border-color,box-shadow,background-color,color] duration-200 resize-y",
+          "hover:border-accent/60",
+          "focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15",
+          "disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        ),
+        ref,
+        ...props
+      }
+    );
+  }
+);
+Textarea.displayName = "Textarea";
+
 const {useState: useState$4,useEffect: useEffect$4,useRef,useMemo} = await importShared('react');
 const PLAN_STATUS_LABEL = {
   DRAFT: "Ноорог",
@@ -39263,6 +39471,8 @@ function TeacherMessages() {
   const [sending, setSending] = useState$4(false);
   const [sendError, setSendError] = useState$4(null);
   const [userMap, setUserMap] = useState$4({});
+  const [studentCodeMap, setStudentCodeMap] = useState$4({});
+  const [conversationSummaries, setConversationSummaries] = useState$4({});
   const bottomRef = useRef(null);
   useEffect$4(() => {
     if (!teacherId) return;
@@ -39272,19 +39482,55 @@ function TeacherMessages() {
     ]).then(([planRes, studentsRes]) => {
       setPlans(planRes.data || []);
       const map = {};
+      const codeMap = {};
       (studentsRes.data || []).forEach((s) => {
         if (s.id) map[s.id] = s.displayName || s.name || s.id;
         if (s.studentId) map[s.studentId] = s.displayName || s.name || s.id;
+        const code = s.sisId || s.studentId || s.username || "";
+        if (code) {
+          if (s.id) codeMap[s.id] = code;
+          if (s.username) codeMap[s.username] = code;
+        }
       });
       setUserMap(map);
+      setStudentCodeMap(codeMap);
     });
   }, [teacherId]);
   const studentLabel = (sid) => resolveName$1(sid, userMap, "Оюутан");
+  const studentCode = (sid) => sid ? studentCodeMap[sid] || "" : "";
   const statusLabel = (s) => s && PLAN_STATUS_LABEL[s] || s || "";
+  const planConversationId = (plan) => chatService.conversationId(plan.studentId, teacherId, plan.thesisId ?? null);
+  const sortMessages = (items) => [...items].sort((a, b) => new Date(a.sentAt || 0).getTime() - new Date(b.sentAt || 0).getTime());
+  const latestMessage = (items) => {
+    const sorted = sortMessages(items);
+    return sorted[sorted.length - 1];
+  };
+  const timeLabel = (iso) => iso ? new Date(iso).toLocaleTimeString("mn-MN", { hour: "2-digit", minute: "2-digit" }) : "";
   const conversationId = useMemo(() => {
     if (!selectedPlan) return null;
-    return chatService.conversationId(selectedPlan.studentId, teacherId, selectedPlan.thesisId ?? null);
+    return planConversationId(selectedPlan);
   }, [selectedPlan, teacherId]);
+  useEffect$4(() => {
+    if (!teacherId || plans.length === 0) {
+      setConversationSummaries({});
+      return;
+    }
+    let cancelled = false;
+    const refreshSummaries = () => Promise.all(plans.map(async (plan) => {
+      const res = await chatService.getMessages(planConversationId(plan));
+      const lastMessage = latestMessage(res.data);
+      const unread = res.data.filter((m) => m.receiverId === teacherId && m.status !== "SEEN").length;
+      return [plan.id, { lastMessage, unread }];
+    })).then((entries) => {
+      if (!cancelled) setConversationSummaries(Object.fromEntries(entries));
+    });
+    refreshSummaries();
+    const interval = setInterval(refreshSummaries, 15e3);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [plans, teacherId]);
   useEffect$4(() => {
     if (!conversationId || !teacherId) {
       setMessages([]);
@@ -39302,7 +39548,7 @@ function TeacherMessages() {
     const loadBacklog = async () => {
       const res = await chatService.getMessages(conversationId);
       if (cancelled) return;
-      setMessages(res.data);
+      setMessages(sortMessages(res.data));
       scrollToBottom();
       reconcileSeen(res.data);
     };
@@ -39310,7 +39556,7 @@ function TeacherMessages() {
     stop = chatService.openStream(conversationId, {
       onMessage: (m) => {
         if (cancelled) return;
-        setMessages((prev) => prev.some((x) => x.id === m.id) ? prev : [...prev, m]);
+        setMessages((prev) => sortMessages(prev.some((x) => x.id === m.id) ? prev : [...prev, m]));
         scrollToBottom();
         if (m.receiverId === teacherId && m.status !== "SEEN") {
           chatService.markRead(conversationId, teacherId);
@@ -39333,6 +39579,17 @@ function TeacherMessages() {
       if (pollInterval) clearInterval(pollInterval);
     };
   }, [conversationId, teacherId]);
+  useEffect$4(() => {
+    if (!selectedPlan || !conversationId) return;
+    const lastMessage = latestMessage(messages);
+    setConversationSummaries((prev) => ({
+      ...prev,
+      [selectedPlan.id]: {
+        lastMessage,
+        unread: 0
+      }
+    }));
+  }, [messages, selectedPlan, conversationId, teacherId]);
   const handleSendMessage = async () => {
     if (!messageText.trim() || !conversationId || !selectedPlan) return;
     setSending(true);
@@ -39344,7 +39601,7 @@ function TeacherMessages() {
         receiverId: selectedPlan.studentId,
         content: messageText.trim()
       });
-      setMessages((prev) => prev.some((x) => x.id === res.data.id) ? prev : [...prev, res.data]);
+      setMessages((prev) => sortMessages(prev.some((x) => x.id === res.data.id) ? prev : [...prev, res.data]));
       setMessageText("");
       setTimeout(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }), 50);
     } catch (err) {
@@ -39356,24 +39613,34 @@ function TeacherMessages() {
   };
   const filteredPlans = plans.filter((p) => {
     const q = searchQuery.toLowerCase();
-    return p.studentId.toLowerCase().includes(q) || studentLabel(p.studentId).toLowerCase().includes(q);
+    return studentCode(p.studentId).toLowerCase().includes(q) || studentLabel(p.studentId).toLowerCase().includes(q);
+  }).sort((a, b) => {
+    const aTime = conversationSummaries[a.id]?.lastMessage?.sentAt;
+    const bTime = conversationSummaries[b.id]?.lastMessage?.sentAt;
+    return new Date(bTime || 0).getTime() - new Date(aTime || 0).getTime();
   });
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-[calc(100vh-200px)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0 h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-12 h-full", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "col-span-4 border-r border-border flex flex-col h-full bg-surface", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-3 top-1/2 transform -translate-y-1/2 text-ink-400 h-4 w-4", strokeWidth: 1.6 }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Input,
-          {
-            placeholder: "Оюутан хайх...",
-            value: searchQuery,
-            onChange: (e) => setSearchQuery(e.target.value),
-            className: "pl-10"
-          }
-        )
-      ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-y-auto", children: filteredPlans.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 text-center text-ink-400 text-sm mt-4", children: "Оюутан олдсонгүй" }) : filteredPlans.map((plan) => {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-[calc(100vh-112px)] overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "h-full overflow-hidden rounded-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-0 h-full min-h-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-full min-h-0", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "w-80 shrink-0 border-r border-border flex flex-col h-full min-h-0 bg-surface", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 border-b border-border", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-sm font-semibold text-ink-900 mb-3", children: "Чат" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Search, { className: "absolute left-3 top-1/2 transform -translate-y-1/2 text-ink-400 h-4 w-4", strokeWidth: 1.6 }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Input,
+            {
+              placeholder: "Оюутан хайх...",
+              value: searchQuery,
+              onChange: (e) => setSearchQuery(e.target.value),
+              className: "pl-10"
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 min-h-0 overflow-y-auto", children: filteredPlans.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 text-center text-ink-400 text-sm mt-4", children: "Оюутан олдсонгүй" }) : filteredPlans.map((plan) => {
         const active = selectedPlan?.id === plan.id;
+        const summary = conversationSummaries[plan.id];
+        const last = summary?.lastMessage;
+        const lastMine = last?.senderId === teacherId;
         return /* @__PURE__ */ jsxRuntimeExports.jsx(
           "button",
           {
@@ -39382,8 +39649,15 @@ function TeacherMessages() {
             children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-9 w-9 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-xs font-medium", children: initialsFromName(studentLabel(plan.studentId)) }) }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900 truncate tracking-tight", children: studentLabel(plan.studentId) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 truncate", children: statusLabel(plan.status) })
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900 truncate tracking-tight", children: studentLabel(plan.studentId) }),
+                  last?.sentAt && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[10px] text-ink-400 tabular-nums shrink-0", children: timeLabel(last.sentAt) })
+                ] }),
+                studentCode(plan.studentId) && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] text-ink-400 truncate mt-0.5", children: studentCode(plan.studentId) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-0.5 flex items-center gap-2 min-w-0", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: `text-xs truncate ${summary?.unread ? "text-ink-900 font-medium" : "text-ink-500"}`, children: last ? `${lastMine ? "Та: " : "Оюутан: "}${last.content}` : statusLabel(plan.status) }),
+                  !!summary?.unread && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ml-auto inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-semibold leading-none text-white tabular-nums shrink-0", children: summary.unread > 9 ? "9+" : summary.unread })
+                ] })
               ] })
             ] })
           },
@@ -39391,48 +39665,53 @@ function TeacherMessages() {
         );
       }) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "col-span-8 flex flex-col h-full", children: !selectedPlan ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex items-center justify-center bg-surface-sunken", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-ink-400 text-sm", children: "Зүүн талаас оюутан сонгоно уу" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-border flex items-center justify-between bg-surface", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "flex-1 flex flex-col h-full min-h-0 bg-surface", children: !selectedPlan ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 flex items-center justify-center bg-surface-sunken", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-ink-400 text-sm", children: "Зүүн талаас оюутан сонгоно уу" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4 border-b border-border flex items-center justify-between bg-surface shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-10 w-10 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-sm font-medium", children: initialsFromName(studentLabel(selectedPlan.studentId)) }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-ink-900 tracking-tight", children: studentLabel(selectedPlan.studentId) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500", children: statusLabel(selectedPlan.status) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500", children: [studentCode(selectedPlan.studentId), statusLabel(selectedPlan.status)].filter(Boolean).join(" · ") })
         ] })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 overflow-y-auto p-6 space-y-4 bg-surface-sunken", children: [
-        messages.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center text-ink-500 pt-8", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-h-0 overflow-y-auto p-6 space-y-4 bg-surface-sunken", children: [
+        messages.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "h-full flex flex-col items-center justify-center text-center text-ink-500", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm", children: "Харилцаа алга байна" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs mt-1 text-ink-400", children: "Оюутантайгаа харилцаагаа эхлүүлнэ үү." })
-        ] }) : messages.map((msg) => {
+        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "min-h-full flex flex-col justify-end gap-4", children: messages.map((msg) => {
           const mine = msg.senderId === teacherId;
-          return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `flex ${mine ? "justify-end" : "justify-start"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end gap-2 max-w-[70%]", children: [
+          return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `flex ${mine ? "justify-end" : "justify-start"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end gap-2 max-w-[72%]", children: [
             !mine && /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-7 w-7 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-[10px] font-medium", children: initialsFromName(studentLabel(msg.senderId)) }) }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `rounded-md px-3 py-2 ${mine ? "bg-ink-900 text-white" : "bg-surface text-ink-900 border border-border"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-relaxed whitespace-pre-wrap break-words", children: msg.content }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `rounded-md px-3 py-2 ${mine ? "bg-accent text-white" : "bg-surface text-ink-900 border border-border"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-relaxed whitespace-pre-wrap break-words", children: msg.content }) }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: `text-[10px] mt-1 text-ink-400 tabular-nums ${mine ? "text-right" : ""}`, children: [
-                msg.sentAt ? new Date(msg.sentAt).toLocaleTimeString("mn-MN", { hour: "2-digit", minute: "2-digit" }) : "",
+                msg.sentAt ? timeLabel(msg.sentAt) : "",
                 mine && msg.status === "SEEN" ? " · Уншсан" : ""
               ] })
             ] }),
             mine && /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-7 w-7 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-[10px] font-medium", children: initialsFromName(teacherName) }) })
           ] }) }, msg.id);
-        }),
+        }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: bottomRef })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 border-t border-border bg-surface space-y-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 border-t border-border bg-surface space-y-2 shrink-0", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end gap-2", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Input,
+            Textarea,
             {
               placeholder: "Мессежээ бичнэ үү...",
               value: messageText,
               onChange: (e) => setMessageText(e.target.value),
-              onKeyDown: (e) => e.key === "Enter" && !e.shiftKey && handleSendMessage(),
-              className: "flex-1",
+              onKeyDown: (e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSendMessage();
+                }
+              },
+              className: "min-h-11 max-h-28 flex-1 resize-none",
               disabled: sending
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { className: "flex-shrink-0", disabled: sending || !messageText.trim(), onClick: handleSendMessage, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { className: "h-11 flex-shrink-0", disabled: sending || !messageText.trim(), onClick: handleSendMessage, children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "h-4 w-4 mr-2", strokeWidth: 1.6 }),
             "Илгээх"
           ] })
@@ -39441,8 +39720,7 @@ function TeacherMessages() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)]" }),
           " ",
           sendError
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-400", children: "Enter — илгээх" })
+        ] })
       ] })
     ] }) })
   ] }) }) }) });
@@ -39734,8 +40012,10 @@ function TeacherCommittee() {
   const [myCommittees, setMyCommittees] = useState$2([]);
   const [loading, setLoading] = useState$2(true);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || "";
+  const activeCommitteeId = searchParams.get("committeeId");
   useEffect$2(() => {
     const load = async () => {
       try {
@@ -39757,6 +40037,9 @@ function TeacherCommittee() {
     };
     load();
   }, [teacherId]);
+  if (activeCommitteeId) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherStudents, {});
+  }
   const pending = myCommittees.filter((c) => c.status === "ACTIVE" || c.status === "Идэвхтэй");
   const completed = myCommittees.filter((c) => c.status !== "ACTIVE" && c.status !== "Идэвхтэй");
   const completionRatio = pending.length + completed.length > 0 ? Math.round(completed.length / (pending.length + completed.length) * 100) : 0;
@@ -39832,7 +40115,7 @@ function TeacherCommittee() {
               className: "w-full",
               onClick: (e) => {
                 e.stopPropagation();
-                navigate(`/teacher/students?committeeId=${c.id}&stageType=${c.stageType || ""}`);
+                navigate(`/teacher/committee?committeeId=${c.id}&stageType=${c.stageType || ""}`);
               },
               children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-3.5 h-3.5 mr-1.5", strokeWidth: 1.6 }),
@@ -39896,9 +40179,14 @@ function TeacherCommittee() {
 
 const {useState: useState$1,useEffect: useEffect$1} = await importShared('react');
 const toneDot = {
+  positive: "bg-[var(--color-dot-positive)]",
   warning: "bg-[var(--color-dot-warning)]",
   negative: "bg-[var(--color-dot-negative)]",
   neutral: "bg-[var(--color-dot-neutral)]"
+};
+const isClosedStatus = (status) => {
+  const normalized = (status || "").trim().toUpperCase();
+  return normalized === "CLOSED" || normalized === "ХААГДСАН" || normalized === "ДУУССАН";
 };
 const GRADING_SCHEMES = {
   PRE_DEFENSE: {
@@ -39929,6 +40217,7 @@ function ExternalExpertGrading() {
   const teacherId = user?.userId || user?.username || "";
   const [committees, setCommittees] = useState$1([]);
   const [loading, setLoading] = useState$1(true);
+  const [activeTabs, setActiveTabs] = useState$1({});
   const [gradingStudent, setGradingStudent] = useState$1(null);
   const [scores, setScores] = useState$1({});
   const [comment, setComment] = useState$1("");
@@ -39981,10 +40270,17 @@ function ExternalExpertGrading() {
           return;
         }
         const userMap = {};
+        const userCodeMap = {};
         usersRes.data.forEach((u) => {
           userMap[u.id] = u.displayName;
           if (u.username) userMap[u.username] = u.displayName;
+          const code = u.sisId || u.studentId || u.username || "";
+          if (code) {
+            userCodeMap[u.id] = code;
+            if (u.username) userCodeMap[u.username] = code;
+          }
         });
+        const codeFor = (id) => userCodeMap[id] || (isUuid(id) ? "" : id);
         const allPlansRes = await planService.getPlans().catch(() => ({ data: [] }));
         const planMap = {};
         allPlansRes.data.forEach((p) => {
@@ -39998,7 +40294,7 @@ function ExternalExpertGrading() {
               committeeService.getStudents(assignment.committeeId)
             ]);
             const committee = committeeRes.data;
-            if (committee.status !== "ACTIVE" && committee.status !== "Идэвхтэй") return;
+            if (isClosedStatus(committee.status)) return;
             const stageType = committee.stageType || "";
             const sessionsRes = await workflowService.getDefenseSessions({ stageType }).catch(() => ({ data: [] }));
             const all = sessionsRes.data;
@@ -40008,7 +40304,8 @@ function ExternalExpertGrading() {
               studentId: cs.studentId,
               name: resolveName$1(cs.studentId, userMap, "Тодорхойгүй оюутан"),
               thesisTitle: planMap[cs.studentId]?.title || "Гарчиггүй",
-              thesisId: planMap[cs.studentId]?.thesisId
+              thesisId: planMap[cs.studentId]?.thesisId,
+              sisId: codeFor(cs.studentId)
             }));
             const myGrades = {};
             if (session) {
@@ -40057,7 +40354,10 @@ function ExternalExpertGrading() {
     try {
       const res = await evaluationService.saveGrade({
         defenseSessionId: cmt.session.id,
-        thesisId: student.thesisId || "",
+        // Backend uniqueness still includes thesis_id, so never send blank:
+        // external experts may grade committee students whose thesis lookup is
+        // unavailable in this frontend context.
+        thesisId: student.thesisId || student.studentId,
         studentId: student.studentId,
         evaluatorId: teacherId,
         evaluatorRole: "EXTERNAL_EXPERT",
@@ -40073,6 +40373,7 @@ function ExternalExpertGrading() {
         }
       ));
       setGradeStatus("success");
+      setActiveTabs((prev) => ({ ...prev, [cmt.committeeId]: "roster" }));
       setTimeout(() => {
         setGradingStudent(null);
         setScores({});
@@ -40097,17 +40398,19 @@ function ExternalExpertGrading() {
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm mt-1 text-ink-400", children: "Танд хуваарилагдсан комиссийн үнэлгээ олдсонгүй." })
     ] });
   }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6 max-w-4xl mx-auto pb-10", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-semibold text-ink-900 tracking-tight", children: "Зочин шүүгчийн үнэлгээ" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500 mt-1", children: "Томилогдсон комиссын оюутнуудад үнэлгээ өгнө үү." })
-    ] }),
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6 max-w-7xl mx-auto pb-10", children: [
     committees.map((cmt) => {
       const scheme = getSchemeFor(cmt.stageType);
-      const sessionOpen = cmt.session?.status === "OPEN" || cmt.session?.status === "ACTIVE";
-      const sessionClosed = cmt.session?.status === "CLOSED";
+      const sessionClosed = isClosedStatus(cmt.session?.status);
+      const canGrade = !!cmt.session && !sessionClosed;
       const stageLabel = cmt.stageType === "PRE_DEFENSE" ? "Урьдчилсан хамгаалалт" : "Эцсийн хамгаалалт";
       const gradedCount = cmt.students.filter((s) => cmt.myGrades[s.studentId]?.isSubmitted).length;
+      const activeTab = activeTabs[cmt.committeeId] || "roster";
+      const selectedStudent = gradingStudent?.committeeId === cmt.committeeId ? cmt.students.find((s) => s.studentId === gradingStudent.studentId) : void 0;
+      const selectedExisting = selectedStudent ? cmt.myGrades[selectedStudent.studentId] : void 0;
+      const totalScore = Object.values(scores).reduce((a, b) => a + (b || 0), 0);
+      const scorePct = scheme ? Math.min(100, Math.round(totalScore / scheme.total * 100)) : 0;
+      const completedCriteria = scheme ? scheme.criteria.filter((_, idx) => scores[idx] !== void 0 && scores[idx] !== null).length : 0;
       return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border border-border", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "pb-3 border-b border-border", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
@@ -40122,17 +40425,13 @@ function ExternalExpertGrading() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-3 h-3", strokeWidth: 1.6 }),
                 cmt.session.location
               ] }),
-              sessionOpen && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-ink-700", children: [
+              canGrade && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-ink-700", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot.warning}` }),
                 "Явцад байна"
               ] }),
               sessionClosed && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-ink-500", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot.neutral}` }),
                 "Дууссан"
-              ] }),
-              cmt.session && !sessionOpen && !sessionClosed && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-ink-500", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot.neutral}` }),
-                "Хуваарьт"
               ] }),
               !cmt.session && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-ink-400", children: "Хуваарь тогтоогдоогүй" })
             ] })
@@ -40152,137 +40451,267 @@ function ExternalExpertGrading() {
             ] })
           ] })
         ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-0", children: [
-          !cmt.session && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-8 text-center text-ink-400 text-sm", children: "Хамгаалалтын сесс эхлээгүй байна." }),
-          cmt.session && cmt.students.length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-8 text-center text-ink-400 text-sm", children: "Комисст оюутан байхгүй байна." }),
-          cmt.session && !sessionOpen && !sessionClosed && cmt.students.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 py-2.5 bg-surface-muted border-b border-border text-xs text-ink-600", children: "Хамгаалалт хараахан эхлээгүй. Үнэлгээг сесс эхэлсний дараа өгнө үү." }),
-          cmt.session && cmt.students.map((student) => {
-            const existing = cmt.myGrades[student.studentId];
-            const isGrading = gradingStudent?.committeeId === cmt.committeeId && gradingStudent?.studentId === student.studentId;
-            const totalScore = Object.values(scores).reduce((a, b) => a + (b || 0), 0);
-            return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border-b border-border last:border-0", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "div",
-                {
-                  className: `p-4 flex items-center justify-between transition-colors select-none ${sessionOpen ? "hover:bg-surface-muted cursor-pointer" : "cursor-default"}`,
-                  onClick: () => {
-                    if (!sessionOpen) return;
-                    if (isGrading) {
-                      setGradingStudent(null);
-                      return;
-                    }
-                    openGrading(cmt.committeeId, student.studentId, existing);
-                  },
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 min-w-0", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-9 w-9 shrink-0 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-xs font-medium", children: student.name.substring(0, 2).toUpperCase() }) }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900 tracking-tight", children: student.name }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 truncate max-w-[280px]", children: student.thesisTitle })
-                      ] })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 shrink-0 ml-3", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "button",
-                        {
-                          type: "button",
-                          onClick: (e) => {
-                            e.stopPropagation();
-                            openManuscript(student.studentId);
-                          },
-                          className: "inline-flex items-center gap-1 text-xs text-ink-700 hover:text-ink-900 border border-border-strong hover:border-ink-900 rounded-sm px-2 h-6 transition-colors",
-                          disabled: manuscriptLoadingFor === student.studentId,
-                          title: "Дипломын ажил үзэх",
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { className: "w-3 h-3", strokeWidth: 1.6 }),
-                            manuscriptLoadingFor === student.studentId ? "Нээж байна..." : "Дипломын ажил"
-                          ]
-                        }
-                      ),
-                      existing?.isSubmitted ? /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-xs text-ink-700 tabular-nums", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { className: "w-3.5 h-3.5 text-[var(--color-dot-positive)]", strokeWidth: 1.6 }),
-                        existing.points,
-                        "/",
-                        scheme?.total
-                      ] }) : sessionClosed ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-400", children: "Дууссан" }) : !sessionOpen ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-ink-400", children: "Хүлээгдэж буй" }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1 text-xs text-ink-600", children: [
-                        isGrading ? /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronUp, { className: "w-3 h-3", strokeWidth: 1.6 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "w-3 h-3", strokeWidth: 1.6 }),
-                        existing ? "Засах" : "Үнэлэх"
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          Tabs,
+          {
+            value: activeTab,
+            onValueChange: (value) => setActiveTabs((prev) => ({ ...prev, [cmt.committeeId]: value })),
+            className: "w-full",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsList, { className: "w-full", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(TabsTrigger, { value: "roster", children: "Оюутны жагсаалт" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(TabsTrigger, { value: "evaluations", children: [
+                  "Үнэлгээний маягт ",
+                  scheme && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "ml-1 text-[10px] text-ink-400 tabular-nums", children: [
+                    "(",
+                    scheme.total,
+                    " оноо)"
+                  ] })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "roster", className: "mt-6", children: !cmt.session ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-8 text-center text-ink-400 text-sm bg-surface-muted rounded-md border border-border", children: "Хамгаалалтын сесс олдсонгүй." }) : cmt.students.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-8 text-center text-ink-400 text-sm bg-surface-muted rounded-md border border-border", children: "Комисст оюутан байхгүй байна." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4", children: cmt.students.map((student) => {
+                const existing = cmt.myGrades[student.studentId];
+                return /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "hover:border-accent transition-colors overflow-hidden", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `h-0.5 w-full ${existing?.isSubmitted ? "bg-accent" : "bg-border-strong"}` }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-5", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-10 w-10 shrink-0 border border-border-strong", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-sm font-medium", children: student.name.substring(0, 2).toUpperCase() }) }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-2", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-semibold text-ink-900 tracking-tight truncate", children: student.name }),
+                          student.sisId && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] text-ink-400 truncate mt-0.5", children: student.sisId })
+                        ] }),
+                        existing?.isSubmitted && scheme && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-1.5 text-xs text-ink-700 tabular-nums shrink-0", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { className: "w-3.5 h-3.5 text-[var(--color-dot-positive)]", strokeWidth: 1.6 }),
+                          existing.points,
+                          "/",
+                          scheme.total
+                        ] })
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 line-clamp-2 mt-2 mb-4 min-h-[2.5rem]", children: student.thesisTitle }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 flex-wrap", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          Button,
+                          {
+                            variant: "outline",
+                            size: "sm",
+                            className: "flex-1 text-xs",
+                            onClick: () => openManuscript(student.studentId),
+                            disabled: manuscriptLoadingFor === student.studentId,
+                            children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { className: "w-3.5 h-3.5 mr-1.5", strokeWidth: 1.6 }),
+                              manuscriptLoadingFor === student.studentId ? "Нээж байна..." : "Дипломын ажил"
+                            ]
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          Button,
+                          {
+                            size: "sm",
+                            className: "flex-1 text-xs",
+                            disabled: !canGrade,
+                            onClick: () => {
+                              openGrading(cmt.committeeId, student.studentId, existing);
+                              setActiveTabs((prev) => ({ ...prev, [cmt.committeeId]: "evaluations" }));
+                            },
+                            children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "w-3.5 h-3.5 mr-1.5", strokeWidth: 1.6 }),
+                              existing ? "Засах" : "Үнэлэх"
+                            ]
+                          }
+                        )
                       ] })
                     ] })
-                  ]
-                }
-              ),
-              isGrading && scheme && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-5 pb-5 pt-4 bg-surface-muted border-t border-border space-y-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-ink-900 tracking-tight", children: scheme.label }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: scheme.criteria.map((c, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-ink-700 flex-1", children: c.name }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "input",
-                    {
-                      type: "number",
-                      min: 0,
-                      max: c.max,
-                      value: scores[idx] ?? "",
-                      onChange: (e) => {
-                        const v = Math.min(c.max, Math.max(0, Number(e.target.value)));
-                        setScores((prev) => ({ ...prev, [idx]: v }));
-                      },
-                      className: "w-16 border border-border rounded-md px-2 py-1.5 text-sm text-center bg-surface focus:outline-none focus:border-ink-900 tabular-nums"
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xs text-ink-400 w-10 tabular-nums", children: [
-                    "/ ",
-                    c.max
-                  ] })
-                ] }, idx)) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between pt-2 border-t border-border", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-500", children: "Нийт оноо" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: `text-lg font-semibold tabular-nums ${totalScore > scheme.total ? "text-[var(--color-dot-negative)]" : "text-ink-900"}`, children: [
-                    totalScore,
-                    " / ",
-                    scheme.total
-                  ] })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  RichTextEditor,
-                  {
-                    value: comment,
-                    onChange: setComment,
-                    placeholder: "Тайлбар (заавал биш)...",
-                    minHeight: 88,
-                    ariaLabel: "Үнэлгээний тайлбар"
-                  }
-                ),
-                gradeError && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-[var(--color-dot-negative)] flex items-center gap-1.5", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot.negative}` }),
-                  gradeError
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Button, { variant: "outline", size: "sm", onClick: () => setGradingStudent(null), children: "Болих" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    Button,
-                    {
-                      size: "sm",
-                      className: "flex-1",
-                      disabled: gradeStatus === "loading" || totalScore === 0 || totalScore > scheme.total,
-                      onClick: () => handleSubmit(cmt, student),
-                      children: gradeStatus === "loading" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-2 justify-center", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "animate-spin w-3 h-3 border-2 border-white border-t-transparent rounded-full" }),
-                        "Хадгалж байна..."
-                      ] }) : gradeStatus === "success" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-2 justify-center", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { className: "w-4 h-4", strokeWidth: 1.6 }),
-                        " Амжилттай"
-                      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-2 justify-center", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "w-4 h-4", strokeWidth: 1.6 }),
-                        " Үнэлгээ илгээх"
+                  ] }) })
+                ] }, student.studentId);
+              }) }) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(TabsContent, { value: "evaluations", className: "mt-6", children: !scheme ? /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "text-center py-16", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "w-8 h-8 text-ink-300 mx-auto mb-3", strokeWidth: 1.5 }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-semibold text-ink-900 tracking-tight", children: "Үнэлгээний маягт олдсонгүй" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500 mt-1.5", children: "Энэ шатанд тохирох үнэлгээний тохиргоо байхгүй байна." })
+              ] }) }) : !selectedStudent ? /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "text-center py-16", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-full border border-border-strong flex items-center justify-center mx-auto mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "w-5 h-5 text-ink-400", strokeWidth: 1.6 }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-semibold text-ink-900 tracking-tight", children: "Үнэлэх оюутан сонгоно уу" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500 mt-1.5 max-w-sm mx-auto", children: '"Оюутны жагсаалт" табаас оюутнаа сонгоод "Үнэлэх" товчийг дарна уу.' })
+              ] }) }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 xl:grid-cols-[320px_minmax(0,1fr)] gap-5 items-start", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "xl:sticky xl:top-4 overflow-hidden", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-1 bg-accent" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5 space-y-5", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      Button,
+                      {
+                        variant: "ghost",
+                        size: "sm",
+                        className: "px-0",
+                        onClick: () => {
+                          setActiveTabs((prev) => ({ ...prev, [cmt.committeeId]: "roster" }));
+                        },
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronUp, { className: "w-4 h-4 mr-2 -rotate-90", strokeWidth: 1.6 }),
+                          "Оюутны жагсаалт"
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { className: "h-12 w-12 border border-border-strong shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFallback, { className: "text-sm font-medium", children: selectedStudent.name.substring(0, 2).toUpperCase() }) }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-w-0", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-base font-semibold text-ink-900 tracking-tight truncate", children: selectedStudent.name }),
+                        selectedStudent.sisId && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-[10px] text-ink-400 truncate mt-0.5", children: selectedStudent.sisId }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 line-clamp-2 mt-1", children: selectedStudent.thesisTitle })
                       ] })
-                    }
-                  )
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 flex-wrap", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] uppercase tracking-wider font-medium text-accent bg-accent-softer rounded-sm px-2 py-0.5", children: cmt.stageType }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-[11px] uppercase tracking-wider font-medium text-ink-600 bg-surface-muted border border-border rounded-sm px-2 py-0.5", children: "Үүрэг: EXTERNAL_EXPERT" })
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-ink-900", children: scheme.label }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-500", children: [
+                        completedCriteria,
+                        "/",
+                        scheme.criteria.length,
+                        " шалгуур бөглөгдсөн"
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-surface-muted p-4", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-end justify-between gap-3", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 font-medium", children: "Нийт оноо" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-baseline gap-1.5 tabular-nums mt-1", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-4xl font-semibold ${totalScore > scheme.total ? "text-[var(--color-dot-negative)]" : "text-accent"}`, children: totalScore }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-ink-500 text-sm", children: [
+                              "/ ",
+                              scheme.total
+                            ] })
+                          ] })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xs text-ink-500 tabular-nums", children: [
+                          scorePct,
+                          "%"
+                        ] })
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-2 rounded-full bg-border overflow-hidden mt-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "div",
+                        {
+                          className: `h-full ${totalScore > scheme.total ? "bg-[var(--color-dot-negative)]" : "bg-accent"} transition-all`,
+                          style: { width: `${scorePct}%` }
+                        }
+                      ) })
+                    ] }),
+                    selectedExisting?.isSubmitted && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-3 rounded-md text-sm inline-flex items-center gap-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot.positive}` }),
+                      "Өмнөх үнэлгээ: ",
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold tabular-nums", children: [
+                        selectedExisting.points,
+                        "/",
+                        scheme.total
+                      ] })
+                    ] }),
+                    gradeError && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-3 rounded-md text-sm inline-flex items-center gap-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot.negative}` }),
+                      gradeError
+                    ] }),
+                    gradeStatus === "success" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-border bg-surface text-ink-900 p-4 rounded-md flex items-center justify-center gap-2 text-sm font-medium", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `w-1.5 h-1.5 rounded-full ${toneDot.positive}` }),
+                      "Үнэлгээ амжилттай хадгалагдлаа!"
+                    ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      Button,
+                      {
+                        className: "w-full",
+                        size: "lg",
+                        disabled: gradeStatus === "loading" || totalScore === 0 || totalScore > scheme.total,
+                        onClick: () => handleSubmit(cmt, selectedStudent),
+                        children: gradeStatus === "loading" ? /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-2", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" }),
+                          "Илгээж байна..."
+                        ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "w-4 h-4 mr-2", strokeWidth: 1.6 }),
+                          "Үнэлгээ илгээх"
+                        ] })
+                      }
+                    )
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "border-b border-border pb-4", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-base", children: scheme.label }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500 mt-1", children: "Шалгуур бүрийн оноог оруулаад нийт оноогоо шалгана уу." })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-5 space-y-3", children: scheme.criteria.map((criterion, idx) => {
+                      const value = scores[idx];
+                      const half = Math.floor(criterion.max / 2);
+                      return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-surface p-4 hover:border-border-strong transition-colors", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col md:flex-row md:items-center gap-4", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex h-6 w-6 items-center justify-center rounded-md bg-accent-softer text-xs font-semibold text-accent tabular-nums", children: idx + 1 }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold text-ink-900 tracking-tight", children: criterion.name })
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-ink-500 mt-1 ml-8 tabular-nums", children: [
+                              "Дээд оноо: ",
+                              criterion.max
+                            ] })
+                          ] }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 md:justify-end", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "input",
+                              {
+                                type: "number",
+                                min: 0,
+                                max: criterion.max,
+                                step: 1,
+                                className: "h-11 w-24 border border-border-strong rounded-md px-3 text-center text-base font-semibold focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 bg-surface tabular-nums",
+                                value: value ?? "",
+                                onChange: (e) => {
+                                  const v = Number(e.target.value) || 0;
+                                  setScores((prev) => ({ ...prev, [idx]: Math.max(0, Math.min(criterion.max, v)) }));
+                                }
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-sm text-ink-500 tabular-nums", children: [
+                              "/ ",
+                              criterion.max
+                            ] })
+                          ] })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 flex flex-wrap gap-2 pl-0 md:pl-8", children: [0, half, criterion.max].map((v) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          "button",
+                          {
+                            type: "button",
+                            onClick: () => setScores((prev) => ({ ...prev, [idx]: v })),
+                            className: `h-7 rounded-md border px-2.5 text-xs font-medium transition-colors tabular-nums ${value === v ? "border-accent bg-accent-softer text-accent" : "border-border text-ink-600 hover:border-accent hover:text-accent"}`,
+                            children: [
+                              v,
+                              " оноо"
+                            ]
+                          },
+                          v
+                        )) })
+                      ] }, idx);
+                    }) })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "border-b border-border pb-4", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-base", children: "Тайлбар" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-ink-500 mt-1", children: "Зочин шүүгчийн тэмдэглэл, зөвлөмжийг энд бичнэ үү." })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      RichTextEditor,
+                      {
+                        value: comment,
+                        onChange: setComment,
+                        placeholder: "Тайлбар (заавал биш)...",
+                        minHeight: 120,
+                        ariaLabel: "Үнэлгээний тайлбар"
+                      }
+                    ) })
+                  ] })
                 ] })
-              ] })
-            ] }, student.studentId);
-          })
-        ] })
+              ] }) })
+            ]
+          }
+        ) })
       ] }, cmt.committeeId);
     }),
     manuscriptError && !manuscriptActiveId && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "fixed bottom-4 right-4 z-50 max-w-sm bg-surface border border-border rounded-md p-3 shadow-lg flex items-start gap-2", children: [
@@ -40323,31 +40752,31 @@ function ComingSoon() {
   const navigate = useNavigate();
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center min-h-[75vh] text-center px-6 py-12", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mb-8", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-24 h-24 bg-blue-50 border border-slate-200 rounded-3xl flex items-center justify-center shadow-sm", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Construction, { className: "w-12 h-12 text-[#1455BD]" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-24 h-24 bg-accent-softer border border-border rounded-3xl flex items-center justify-center shadow-sm", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Construction, { className: "w-12 h-12 text-accent" }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -top-2 -right-2 w-7 h-7 bg-orange-100 border border-orange-200 rounded-full flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { className: "w-4 h-4 text-orange-500" }) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl font-extrabold text-slate-900 mb-2 tracking-tight", children: "Тун удахгүй" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-block bg-blue-50 border border-blue-100 text-[#1455BD] text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-5", children: "In Active Development" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-slate-500 text-sm max-w-md mb-10 leading-relaxed", children: "Энэ хэсэг одоо идэвхтэй боловсруулагдаж байна. Гүйцэтгэлийн чанарын хамт тун удахгүй гарна." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl w-full mb-10", children: features.map((f, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-white border border-slate-200 rounded-xl p-4 text-left hover:border-blue-200 hover:shadow-sm transition-all group", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center mb-3 group-hover:bg-blue-100 transition-colors", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-4 h-4 text-[#1455BD]" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-semibold text-slate-900 mb-1", children: f.label }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-slate-500 leading-snug", children: f.desc })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-3xl font-extrabold text-ink-900 mb-2 tracking-normal", children: "Тун удахгүй" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-block bg-accent-softer border border-border text-accent text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-5", children: "In Active Development" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-ink-500 text-sm max-w-md mb-10 leading-relaxed", children: "Энэ хэсэг одоо идэвхтэй боловсруулагдаж байна. Гүйцэтгэлийн чанарын хамт тун удахгүй гарна." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl w-full mb-10", children: features.map((f, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-surface border border-border rounded-xl p-4 text-left hover:border-accent hover:shadow-sm transition-all group", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 bg-accent-softer rounded-lg flex items-center justify-center mb-3 group-hover:bg-accent-soft transition-colors", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "w-4 h-4 text-accent" }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "text-sm font-semibold text-ink-900 mb-1", children: f.label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-ink-500 leading-snug", children: f.desc })
     ] }, i)) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col sm:flex-row items-center gap-3", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(
         "button",
         {
           onClick: () => navigate(-1),
-          className: "flex items-center gap-2 px-5 py-2.5 bg-[#1455BD] text-white text-sm font-medium rounded-xl hover:bg-blue-700 transition-colors shadow-sm",
+          className: "flex items-center gap-2 px-5 py-2.5 bg-linear-to-b from-[#2a5f95] to-accent text-white text-sm font-medium rounded-xl hover:from-[#326ba4] hover:to-accent-hover transition-all shadow-sm",
           children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { className: "w-4 h-4" }),
             "Буцах"
           ]
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 text-slate-700 text-sm font-medium rounded-xl hover:bg-slate-50 hover:border-slate-300 transition-colors shadow-sm", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Bell, { className: "w-4 h-4 text-slate-400" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { className: "flex items-center gap-2 px-5 py-2.5 bg-surface border border-border text-ink-700 text-sm font-medium rounded-xl hover:bg-accent-softer hover:border-border-strong transition-colors shadow-sm", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Bell, { className: "w-4 h-4 text-ink-400" }),
         "Мэдэгдэл авах"
       ] })
     ] })
@@ -40480,7 +40909,7 @@ function App({ user }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "reports", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherThesis, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "evaluations", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherCommittee, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "feedback", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherMessages, {}) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "progress", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherProgress, {}) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "progress", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Navigate, { to: "/teacher/students", replace: true }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "committee", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherCommittee, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "scores", element: /* @__PURE__ */ jsxRuntimeExports.jsx(TeacherProgress, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "expert", element: /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalExpertGrading, {}) }),

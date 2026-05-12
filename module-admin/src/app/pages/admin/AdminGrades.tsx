@@ -272,7 +272,7 @@ export default function AdminGrades() {
         <div className="border-l-2 border-[var(--color-dot-warning)] pl-4 py-2 flex items-center gap-3">
           <AlertTriangle className="w-4 h-4 text-ink-500 shrink-0" strokeWidth={1.6} />
           <p className="text-sm text-ink-700">
-            <strong className="text-ink-900 font-medium">{draftCount} дүн</strong> ноорог байдалтай бөгөөд оюутанд харагдахгүй байна.
+            <strong className="text-ink-900 font-medium">{draftCount} дүн</strong> ноорог байдалтай байна.
           </p>
         </div>
       )}

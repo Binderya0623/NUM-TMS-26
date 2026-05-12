@@ -7,11 +7,11 @@ import { planService, type Plan } from "../../../services/planService";
 import { evaluationService, type FinalGrade, type ReviewDocument } from "../../../services/evaluationService";
 import { thesisReportService, type ThesisReport } from "../../../services/thesisReportService";
 
-// Navy-rooted brand ramp (deep → light) — matches student/teacher accent #1455bd
-const MONO_SHADES = ["#1455bd", "#1d4ed8", "#3b82f6", "#60a5fa", "#93c5fd", "#bfdbfe"];
-const BAR_FILL = "#1455bd";
-const GRID_STROKE = "#e5e5e5";
-const AXIS_TICK = { fontSize: 11, fill: "#737373" } as const;
+// Navy-rooted brand ramp (deep to light).
+const MONO_SHADES = ["#1f4f82", "#4f759c", "#86a4c2", "#c5d3e2", "#d9e3ee", "#e8f0f8"];
+const BAR_FILL = "#1f4f82";
+const GRID_STROKE = "#d9e3ee";
+const AXIS_TICK = { fontSize: 11, fill: "#6f8195" } as const;
 
 export default function Statistics() {
   const [teachers, setTeachers] = useState<UserRecord[]>([]);

@@ -74,7 +74,7 @@ export default function AdminSidebar({ collapsed }: AdminSidebarProps) {
 
   return (
     <aside
-      className={`relative flex flex-col bg-ink-900 border-r border-black/20 transition-[width] duration-300 ${
+      className={`relative flex flex-col bg-primary-900 border-r border-white/10 transition-[width] duration-300 ${
         collapsed ? "w-20" : "w-72"
       } shrink-0`}
     >

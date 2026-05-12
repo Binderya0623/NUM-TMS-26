@@ -291,8 +291,8 @@ export default function StudentWeeklyPlanTab() {
               return (
                 <div
                   key={week}
-                  className={`border rounded-md transition-colors bg-surface ${
-                    isExpanded ? "border-ink-900" : "border-border hover:border-border-strong"
+                  className={`border rounded-md overflow-hidden transition-[border-color,box-shadow,background-color] bg-surface ${
+                    isExpanded ? "border-accent shadow-[0_2px_8px_rgba(16,32,51,0.08)]" : "border-border hover:border-border-strong"
                   }`}
                 >
                   <div
@@ -336,7 +336,11 @@ export default function StudentWeeklyPlanTab() {
                           {weekEntry ? "Засах" : "Ажил нэмэх"}
                         </Button>
                       )}
-                      <button className="w-8 h-8 flex items-center justify-center text-ink-400 hover:text-ink-900 transition-colors" aria-label="Дэлгэрэнгүй">
+                      <button
+                        type="button"
+                        className="w-8 h-8 flex items-center justify-center rounded-md text-ink-400 hover:text-ink-900 hover:bg-accent-softer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/15"
+                        aria-label="Дэлгэрэнгүй"
+                      >
                         {isExpanded ? <ChevronUp className="w-4 h-4" strokeWidth={1.6} /> : <ChevronDown className="w-4 h-4" strokeWidth={1.6} />}
                       </button>
                     </div>

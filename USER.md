@@ -149,6 +149,7 @@ done
   # ── 6) Per-stage phase scores (progress1 / phase2 / pre) ─
   infra/exam-prep/import-grades.sh
   # ── 7) Committees + students + sessions + grades + closure, per stage ─
+  
   infra/exam-prep/import-committees.sh PROGRESS_2     # closes after seeding phase2 score
   infra/exam-prep/import-committees.sh PRE_DEFENSE    # closes after seeding pre score
   infra/exam-prep/import-committees.sh FINAL_DEFENSE  # stays ACTIVE (live event) 

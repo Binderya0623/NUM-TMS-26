@@ -4,8 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "../..
 import { Button } from "../../components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import {
-  Upload, CheckCircle2, AlertCircle, FileUp, FileArchive,
-  File, MonitorPlay,
+  Upload, CheckCircle2, AlertCircle, FileUp,
+  File,
 } from "lucide-react";
 
 import StudentTopicTab from "./tabs/StudentTopicTab";
@@ -34,12 +34,17 @@ export default function StudentThesis() {
   const [reportType, setReportType] = useState("PROGRESS_1");
   const [description, setDescription] = useState("");
   const [studentName, setStudentName] = useState<string>("");
+  const [studentCode, setStudentCode] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!studentId) return;
     userService.getById(studentId)
-      .then(res => { if (res.data?.displayName) setStudentName(res.data.displayName); })
+      .then(res => {
+        if (res.data?.displayName && !isUuid(res.data.displayName)) setStudentName(res.data.displayName);
+        const code = res.data?.sisId || res.data?.studentId || res.data?.username || '';
+        setStudentCode(code && !isUuid(code) ? code : (isUuid(studentId) ? "" : studentId));
+      })
       .catch(() => {});
     thesisService.getMyThesis(studentId)
       .then(res => { if (res.data) setThesisId((res.data as any).id || null); })
@@ -111,7 +116,7 @@ export default function StudentThesis() {
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                     Хийгдэж байна
                   </span>
-                  <span className="text-xs text-ink-500">Оюутан: {studentName || (isUuid(studentId) ? "" : studentId)}</span>
+                  <span className="text-xs text-ink-500">Оюутан: {[studentName, studentCode].filter(Boolean).join(" · ")}</span>
                 </div>
                 <h1 className="text-2xl font-semibold text-ink-900 tracking-tight">Дипломын ажил</h1>
                 <p className="text-sm text-ink-500 mt-2 max-w-3xl leading-relaxed">
@@ -133,7 +138,6 @@ export default function StudentThesis() {
           <TabsTrigger value="topic">Сэдэв</TabsTrigger>
           <TabsTrigger value="weekly-plan">Үечилсэн төлөвлөгөө</TabsTrigger>
           <TabsTrigger value="reports">Тайлан илгээх</TabsTrigger>
-          <TabsTrigger value="presentation">Танилцуулга</TabsTrigger>
         </TabsList>
 
         <TabsContent value="topic" className="mt-6">
@@ -235,24 +239,6 @@ export default function StudentThesis() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="presentation" className="space-y-6 mt-6">
-          <Card>
-            <CardHeader className="border-b border-border pb-4">
-              <CardTitle className="text-sm font-semibold text-ink-900 tracking-tight flex items-center gap-2">
-                <MonitorPlay className="w-4 h-4 text-ink-700" strokeWidth={1.6} />
-                Танилцуулгын материалууд
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-6">
-              <div className="text-center py-8">
-                <div className="w-12 h-12 rounded-full border border-border-strong flex items-center justify-center mx-auto mb-3">
-                  <FileArchive className="w-5 h-5 text-ink-400" strokeWidth={1.4} />
-                </div>
-                <p className="text-sm font-medium text-ink-700 tracking-tight">Материал оруулаагүй байна</p>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
       </Tabs>
 
       {previewActiveId && previewFiles.length > 0 && (
@@ -275,4 +261,3 @@ function StatTile({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
-

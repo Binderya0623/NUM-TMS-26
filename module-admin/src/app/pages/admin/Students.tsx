@@ -125,7 +125,7 @@ export default function Students() {
         const graded = gradedStudentIds.has(s.id) || gradedStudentIds.has(s.username || '');
         return {
           id: s.id,
-          displayName: s.displayName || s.username || s.id,
+          displayName: s.displayName || s.username || 'Тодорхойгүй оюутан',
           username: s.username || '',
           email: s.email || '',
           departmentId: s.departmentId,
@@ -201,7 +201,7 @@ export default function Students() {
   // CSV with UTF-8 BOM so Excel opens it directly with Cyrillic intact.
   const handleExport = () => {
     const headers = [
-      "Оюутан", "И-мэйл", "Тэнхим", "Хөтөлбөр", "Оюутны ID",
+      "Оюутан", "Sisi ID", "Тэнхим", "Хөтөлбөр",
       "Гарчиг", "Удирдагч", "Комисс", "Дэвшил (%)", "Илгээсэн огноо",
     ];
     const escape = (v: unknown) => {
@@ -209,10 +209,10 @@ export default function Students() {
       return /[",\n;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
     };
     const lines = sorted.map(r => [
-      r.displayName, r.email,
+      r.displayName,
+      r.studentNumber && !isUuid(r.studentNumber) ? r.studentNumber : "",
       deptLabel(r.departmentId) || "",
       r.programId && !isUuid(r.programId) ? r.programId : "",
-      r.studentNumber && !isUuid(r.studentNumber) ? r.studentNumber : "",
       r.hasPlan ? r.thesisTitle : "",
       r.hasPlan ? r.supervisor : "",
       r.committeeName,
@@ -335,7 +335,6 @@ export default function Students() {
                   <th className="pb-3 text-[11px] uppercase tracking-wider font-medium text-ink-500">Оюутан</th>
                   <th className="pb-3 text-[11px] uppercase tracking-wider font-medium text-ink-500">Тэнхим</th>
                   <th className="pb-3 text-[11px] uppercase tracking-wider font-medium text-ink-500">Хөтөлбөр</th>
-                  <th className="pb-3 text-[11px] uppercase tracking-wider font-medium text-ink-500">Оюутны ID</th>
                   <th className="pb-3 text-[11px] uppercase tracking-wider font-medium text-ink-500">
                     <button
                       type="button"
@@ -348,7 +347,7 @@ export default function Students() {
                   </th>
                   <th className="pb-3 text-[11px] uppercase tracking-wider font-medium text-ink-500">Удирдагч</th>
                   <th className="pb-3 text-[11px] uppercase tracking-wider font-medium text-ink-500">Комисс</th>
-                  <th className="pb-3 text-[11px] uppercase tracking-wider font-medium text-ink-500 w-16 whitespace-nowrap">
+                  <th className="pb-3 text-[11px] uppercase tracking-wider font-medium text-ink-500 w-20 whitespace-nowrap">
                     <button
                       type="button"
                       onClick={() => handleSort("progress")}
@@ -358,7 +357,7 @@ export default function Students() {
                       Дэвшил <SortIcon k="progress" />
                     </button>
                   </th>
-                  <th className="pb-3 text-[11px] uppercase tracking-wider font-medium text-ink-500 text-right">Үйлдэл</th>
+                  <th className="pb-3 text-right"></th>
                 </tr>
               </thead>
               <tbody>
@@ -373,13 +372,14 @@ export default function Students() {
                         </Avatar>
                         <div>
                           <p className="font-medium text-sm text-ink-900 tracking-tight">{r.displayName}</p>
-                          <p className="text-xs text-ink-500">{r.email}</p>
+                          <p className="text-xs text-ink-500">
+                            {r.studentNumber && !isUuid(r.studentNumber) ? r.studentNumber : "Sisi ID байхгүй"}
+                          </p>
                         </div>
                       </div>
                     </td>
                     <td className="py-4 text-sm">{deptLabel(r.departmentId) || "—"}</td>
                     <td className="py-4 text-sm">{r.programId && !isUuid(r.programId) ? r.programId : "—"}</td>
-                    <td className="py-4 text-sm">{r.studentNumber && !isUuid(r.studentNumber) ? r.studentNumber : "—"}</td>
                     <td className="py-4 text-sm">
                       {r.hasPlan ? (
                         <p className="text-ink-900 max-w-xs truncate tracking-tight">{r.thesisTitle || "Гарчиггүй"}</p>
@@ -387,9 +387,9 @@ export default function Students() {
                     </td>
                     <td className="py-4 text-sm">{r.hasPlan ? r.supervisor : <span className="text-ink-400">—</span>}</td>
                     <td className="py-4 text-sm">{r.committeeName || <span className="text-ink-400">—</span>}</td>
-                    <td className="py-4 w-16 whitespace-nowrap">
+                    <td className="py-4 w-20 whitespace-nowrap">
                       {r.hasPlan
-                        ? <span className="text-xs font-medium text-ink-700 tabular-nums">{r.progress}%</span>
+                        ? <span className="text-sm font-semibold text-ink-900 tabular-nums">{r.progress}%</span>
                         : <span className="text-ink-400 text-sm">—</span>}
                     </td>
                     <td className="py-4 text-right">

@@ -63,6 +63,94 @@ var FilterOutlined = function FilterOutlined2(props, ref) {
 };
 var RefIcon = /* @__PURE__ */ React.forwardRef(FilterOutlined);
 
+const BRAND_PRIMARY = "#1f4f82";
+const BRAND_PRIMARY_HOVER = "#183f68";
+const BRAND_PRIMARY_SOFT = "#e8f0f8";
+const BORDER_NAVY = "#d9e3ee";
+const TEXT_NAVY = "#102033";
+const portalTheme = {
+  token: {
+    // ── Brand palette ──────────────────────────────────────────────
+    colorPrimary: BRAND_PRIMARY,
+    colorPrimaryHover: BRAND_PRIMARY_HOVER,
+    colorLink: BRAND_PRIMARY,
+    colorLinkHover: BRAND_PRIMARY_HOVER,
+    // ── Typography ────────────────────────────────────────────────
+    fontFamily: "'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif",
+    fontSize: 14,
+    fontSizeLG: 16,
+    fontSizeHeading1: 28,
+    fontSizeHeading2: 22,
+    fontSizeHeading3: 18,
+    // ── Shape ─────────────────────────────────────────────────────
+    borderRadius: 8,
+    borderRadiusLG: 12,
+    borderRadiusSM: 6,
+    // ── Elevation ─────────────────────────────────────────────────
+    boxShadow: "0 1px 3px 0 rgba(0,0,0,.07), 0 1px 2px -1px rgba(0,0,0,.07)",
+    boxShadowSecondary: "0 4px 6px -1px rgba(0,0,0,.08), 0 2px 4px -2px rgba(0,0,0,.06)",
+    // ── Neutral greys (slate scale) ───────────────────────────────
+    colorBgLayout: "#f6f9fc",
+    // page background
+    colorBgContainer: "#ffffff",
+    colorBorder: BORDER_NAVY,
+    colorBorderSecondary: "#edf3f8",
+    colorTextBase: TEXT_NAVY,
+    colorTextSecondary: "#6f8195",
+    colorTextTertiary: "#9aabba",
+    // ── Motion ────────────────────────────────────────────────────
+    motionDurationMid: "0.15s",
+    motionDurationSlow: "0.25s"
+  },
+  components: {
+    // ── Table ─────────────────────────────────────────────────────
+    Table: {
+      headerBg: "#f3f7fb",
+      headerColor: "#30465f",
+      headerSortActiveBg: "#edf3f8",
+      rowHoverBg: "#f6f9fc",
+      borderColor: BORDER_NAVY,
+      cellPaddingBlock: 12,
+      cellPaddingInline: 16
+    },
+    // ── Button ────────────────────────────────────────────────────
+    Button: {
+      primaryShadow: "0 1px 2px rgba(16,32,51,0.12)",
+      defaultShadow: "0 1px 2px rgba(16,32,51,0.06)",
+      defaultBorderColor: BORDER_NAVY,
+      defaultHoverBorderColor: BRAND_PRIMARY,
+      defaultHoverColor: TEXT_NAVY
+    },
+    // ── Card ──────────────────────────────────────────────────────
+    Card: {
+      paddingLG: 24
+    },
+    // ── Tabs ──────────────────────────────────────────────────────
+    Tabs: {
+      inkBarColor: BRAND_PRIMARY,
+      itemActiveColor: BRAND_PRIMARY,
+      itemSelectedColor: BRAND_PRIMARY,
+      itemHoverColor: BRAND_PRIMARY_HOVER,
+      cardBg: "#f6f9fc"
+    },
+    // ── Tag / Badge ───────────────────────────────────────────────
+    Tag: {
+      borderRadiusSM: 20
+    },
+    // ── Select / Input ────────────────────────────────────────────
+    Select: {
+      borderRadius: 8,
+      activeBorderColor: BRAND_PRIMARY,
+      hoverBorderColor: BRAND_PRIMARY
+    },
+    Input: {
+      borderRadius: 8,
+      activeBorderColor: BRAND_PRIMARY,
+      hoverBorderColor: BRAND_PRIMARY
+    }
+  }
+};
+
 const {useState,useCallback} = await importShared('react');
 
 const {Table,Input,Button,Space: Space$1,Tooltip,Typography: Typography$1,Flex} = await importShared('antd');
@@ -112,7 +200,7 @@ function buildColumnSearchFilter(dataIndex) {
         )
       ] })
     ] }),
-    filterIcon: (filtered) => /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon, { style: { color: filtered ? "#1455BD" : void 0 } }),
+    filterIcon: (filtered) => /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon, { style: { color: filtered ? BRAND_PRIMARY : void 0 } }),
     onFilter: (value, record) => {
       const cell = record[dataIndex];
       return String(cell ?? "").toLowerCase().includes(String(value).toLowerCase());
@@ -166,7 +254,7 @@ function DataTable({
             e.stopPropagation();
             action.onClick(record);
           },
-          style: { color: action.danger ? void 0 : "#1455BD" }
+          style: { color: action.danger ? void 0 : BRAND_PRIMARY }
         }
       ) }, i);
     }) })
@@ -182,14 +270,14 @@ function DataTable({
       style: { marginBottom: 16 },
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          title && /* @__PURE__ */ jsxRuntimeExports.jsx(Text$1, { strong: true, style: { fontSize: 16, color: "#0f172a" }, children: title }),
+          title && /* @__PURE__ */ jsxRuntimeExports.jsx(Text$1, { strong: true, style: { fontSize: 16, color: TEXT_NAVY }, children: title }),
           subtitle && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Text$1, { type: "secondary", style: { fontSize: 13 }, children: subtitle }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Space$1, { wrap: true, children: [
           searchable && /* @__PURE__ */ jsxRuntimeExports.jsx(
             Input,
             {
-              prefix: /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$2, { style: { color: "#94a3b8" } }),
+              prefix: /* @__PURE__ */ jsxRuntimeExports.jsx(RefIcon$2, { style: { color: "#9aabba" } }),
               placeholder: searchPlaceholder,
               value: searchText,
               onChange: (e) => setSearchText(e.target.value),
@@ -259,7 +347,6 @@ const StatusBadge = ({
 };
 
 const {Card,Typography,Space,Divider} = await importShared('antd');
-
 const { Title, Text } = Typography;
 const PageHeader = ({
   title,
@@ -273,8 +360,8 @@ const PageHeader = ({
       style: {
         borderRadius: 12,
         overflow: "hidden",
-        boxShadow: "0 1px 3px rgba(0,0,0,.07)",
-        border: "1px solid #e2e8f0"
+        boxShadow: "0 1px 3px rgba(16,32,51,.06)",
+        border: `1px solid ${BORDER_NAVY}`
       },
       styles: {
         body: { padding: 0 }
@@ -285,7 +372,7 @@ const PageHeader = ({
           {
             style: {
               height: 4,
-              background: "linear-gradient(90deg, #1455BD 0%, #3b82f6 100%)"
+              background: `linear-gradient(90deg, ${BRAND_PRIMARY} 0%, ${BRAND_PRIMARY_HOVER} 100%)`
             }
           }
         ),
@@ -302,7 +389,7 @@ const PageHeader = ({
             },
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { flex: 1, minWidth: 240 }, children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { level: 4, style: { margin: 0, color: "#0f172a" }, children: title }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { level: 4, style: { margin: 0, color: TEXT_NAVY }, children: title }),
                 description && /* @__PURE__ */ jsxRuntimeExports.jsx(
                   Text,
                   {
@@ -322,8 +409,8 @@ const PageHeader = ({
                     gap: 12,
                     padding: "10px 16px",
                     borderRadius: 10,
-                    border: "1px solid #f1f5f9",
-                    background: "#fafbff",
+                    border: `1px solid ${BORDER_NAVY}`,
+                    background: "#f6f9fc",
                     minWidth: 140
                   },
                   children: [
@@ -337,8 +424,8 @@ const PageHeader = ({
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          background: stat.accentColor ? `${stat.accentColor}18` : "#e0e7ff",
-                          color: stat.accentColor ?? "#1455BD",
+                          background: stat.accentColor ? `${stat.accentColor}18` : BRAND_PRIMARY_SOFT,
+                          color: stat.accentColor ?? BRAND_PRIMARY,
                           fontSize: 18
                         },
                         children: stat.icon
@@ -353,7 +440,7 @@ const PageHeader = ({
                             fontWeight: 600,
                             textTransform: "uppercase",
                             letterSpacing: "0.05em",
-                            color: "#94a3b8",
+                            color: "#6f8195",
                             marginBottom: 2
                           },
                           children: stat.label
@@ -365,7 +452,7 @@ const PageHeader = ({
                           style: {
                             fontSize: 18,
                             fontWeight: 700,
-                            color: "#0f172a",
+                            color: TEXT_NAVY,
                             lineHeight: 1.2
                           },
                           children: stat.value
@@ -420,84 +507,9 @@ const PortalTabs = ({
       activeKey,
       onChange,
       animated: { inkBar: true, tabPane: true },
-      style: { background: "#fff", borderRadius: 12 }
+      style: { background: "#fff", borderRadius: 8 }
     }
   );
 };
 
-const BRAND_PRIMARY = "#1455BD";
-const BRAND_PRIMARY_HOVER = "#0d3a8a";
-const portalTheme = {
-  token: {
-    // ── Brand palette ──────────────────────────────────────────────
-    colorPrimary: BRAND_PRIMARY,
-    colorPrimaryHover: BRAND_PRIMARY_HOVER,
-    colorLink: BRAND_PRIMARY,
-    colorLinkHover: BRAND_PRIMARY_HOVER,
-    // ── Typography ────────────────────────────────────────────────
-    fontFamily: "'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif",
-    fontSize: 14,
-    fontSizeLG: 16,
-    fontSizeHeading1: 28,
-    fontSizeHeading2: 22,
-    fontSizeHeading3: 18,
-    // ── Shape ─────────────────────────────────────────────────────
-    borderRadius: 8,
-    borderRadiusLG: 12,
-    borderRadiusSM: 6,
-    // ── Elevation ─────────────────────────────────────────────────
-    boxShadow: "0 1px 3px 0 rgba(0,0,0,.07), 0 1px 2px -1px rgba(0,0,0,.07)",
-    boxShadowSecondary: "0 4px 6px -1px rgba(0,0,0,.08), 0 2px 4px -2px rgba(0,0,0,.06)",
-    // ── Neutral greys (slate scale) ───────────────────────────────
-    colorBgLayout: "#f8fafc",
-    // page background
-    colorBgContainer: "#ffffff",
-    colorBorder: "#e2e8f0",
-    colorBorderSecondary: "#f1f5f9",
-    colorTextBase: "#0f172a",
-    colorTextSecondary: "#64748b",
-    colorTextTertiary: "#94a3b8",
-    // ── Motion ────────────────────────────────────────────────────
-    motionDurationMid: "0.15s",
-    motionDurationSlow: "0.25s"
-  },
-  components: {
-    // ── Table ─────────────────────────────────────────────────────
-    Table: {
-      headerBg: "#f8fafc",
-      headerColor: "#475569",
-      headerSortActiveBg: "#f1f5f9",
-      rowHoverBg: "#f8fafc",
-      borderColor: "#e2e8f0",
-      cellPaddingBlock: 12,
-      cellPaddingInline: 16
-    },
-    // ── Button ────────────────────────────────────────────────────
-    Button: {
-      primaryShadow: "none",
-      defaultShadow: "none",
-      defaultBorderColor: "#e2e8f0"
-    },
-    // ── Card ──────────────────────────────────────────────────────
-    Card: {
-      paddingLG: 24
-    },
-    // ── Tabs ──────────────────────────────────────────────────────
-    Tabs: {
-      inkBarColor: BRAND_PRIMARY,
-      itemActiveColor: BRAND_PRIMARY,
-      itemSelectedColor: BRAND_PRIMARY,
-      itemHoverColor: BRAND_PRIMARY_HOVER,
-      cardBg: "#f8fafc"
-    },
-    // ── Tag / Badge ───────────────────────────────────────────────
-    Tag: {
-      borderRadiusSM: 20
-    },
-    // ── Select / Input ────────────────────────────────────────────
-    Select: { borderRadius: 8 },
-    Input: { borderRadius: 8 }
-  }
-};
-
-export { BRAND_PRIMARY, BRAND_PRIMARY_HOVER, DataTable, PageHeader, PortalTabs, StatusBadge, buildColumnSearchFilter, portalTheme };
+export { BORDER_NAVY, BRAND_PRIMARY, BRAND_PRIMARY_HOVER, BRAND_PRIMARY_SOFT, DataTable, PageHeader, PortalTabs, StatusBadge, TEXT_NAVY, buildColumnSearchFilter, portalTheme };

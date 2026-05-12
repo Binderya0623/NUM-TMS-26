@@ -57,7 +57,7 @@ export function FileUpload({
 
   return (
     <div className="space-y-4">
-      <label className="block text-sm font-medium text-slate-700">
+      <label className="block text-sm font-medium text-ink-700">
         {label}
       </label>
       
@@ -67,18 +67,18 @@ export function FileUpload({
         onDrop={handleDrop}
         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
           isDragging
-            ? "border-[#1455BD] bg-blue-50"
-            : "border-slate-200 hover:border-[#1455BD]"
+            ? "border-accent bg-accent-softer"
+            : "border-border hover:border-accent"
         }`}
       >
         {!selectedFile ? (
           <div className="space-y-4">
             <div className="flex justify-center">
-              <Upload className="h-12 w-12 text-slate-400" />
+              <Upload className="h-12 w-12 text-ink-400" />
             </div>
             <div>
-              <p className="text-slate-600">{description}</p>
-              <p className="text-sm text-slate-400 mt-1">
+              <p className="text-ink-600">{description}</p>
+              <p className="text-sm text-ink-400 mt-1">
                 Accepted formats: {acceptedFormats} (Max {maxSize}MB)
               </p>
             </div>
@@ -100,14 +100,14 @@ export function FileUpload({
             </div>
           </div>
         ) : (
-          <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
+          <div className="flex items-center justify-between p-4 bg-surface-muted rounded-lg border border-border">
             <div className="flex items-center gap-3">
               <CheckCircle2 className="h-5 w-5 text-green-600" />
               <div className="flex items-center gap-2">
-                <File className="h-5 w-5 text-slate-600" />
+                <File className="h-5 w-5 text-ink-600" />
                 <div className="text-left">
-                  <p className="text-sm font-medium text-slate-900">{selectedFile.name}</p>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-sm font-medium text-ink-900">{selectedFile.name}</p>
+                  <p className="text-xs text-ink-500">
                     {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
                   </p>
                 </div>

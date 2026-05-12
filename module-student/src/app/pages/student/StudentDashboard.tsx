@@ -470,7 +470,7 @@ export default function StudentDashboard() {
 
   if (!thesis) {
     if (hasApprovedRequest || myPlan) {
-      return <ApprovedTopicState topicTitle={approvedTopicTitle} topicTitleEn={approvedTopicTitleEn} supervisorName={supervisorName} plan={myPlan} stageState={stageState} />;
+      return <ApprovedTopicState topicTitle={approvedTopicTitle || myPlan?.title} topicTitleEn={approvedTopicTitleEn} supervisorName={supervisorName} plan={myPlan} stageState={stageState} />;
     }
     return <NoThesisState />;
   }
@@ -523,8 +523,11 @@ export default function StudentDashboard() {
                     </span>
                   </div>
                   <h2 className="text-lg font-semibold text-ink-900 tracking-tight leading-tight">
-                    {thesis.title || "Дипломын ажил"}
+                    {thesis.title || myPlan?.title || approvedTopicTitle || "Дипломын ажил"}
                   </h2>
+                  {approvedTopicTitleEn && (
+                    <p className="text-sm italic text-ink-500 mt-1">{approvedTopicTitleEn}</p>
+                  )}
                 </div>
                 <div className="text-right shrink-0 border border-border rounded-md p-3">
                   <div className="text-2xl font-semibold text-ink-900 tabular-nums tracking-tight">{progress}%</div>

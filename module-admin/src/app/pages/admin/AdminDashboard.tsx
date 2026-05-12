@@ -7,10 +7,10 @@ import { topicService, type Topic } from "../../../services/topicService";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 import { isUuid, initialsFromName, resolveName, fmtDateTime} from "../../../lib/utils";
 
-// Navy-rooted brand ramp (deep → light) — matches student/teacher accent #1455bd
-const MONO_SHADES = ["#1455bd", "#1d4ed8", "#3b82f6", "#60a5fa", "#93c5fd"];
-const ACCENT = "#1455bd";
-const ACCENT_LIGHT = "#60a5fa";
+// Navy-rooted brand ramp (deep to light).
+const MONO_SHADES = ["#1f4f82", "#4f759c", "#86a4c2", "#c5d3e2", "#e8f0f8"];
+const ACCENT = "#1f4f82";
+const ACCENT_LIGHT = "#86a4c2";
 // 2025–2026 academic year: September → May (summer 6/7/8 excluded).
 // Index 0 = September of the start year, index 8 = May of the end year.
 const ACADEMIC_YEAR_START = 2025;
@@ -26,8 +26,8 @@ function academicMonthIndex(year: number, month: number): number {
   if (year === ACADEMIC_YEAR_END   && month >= 1 && month <= 5)  return month + 3;       // 4..8
   return -1;
 }
-const AXIS_TICK = { fontSize: 11, fill: "#737373" } as const;
-const GRID_STROKE = "#e5e5e5";
+const AXIS_TICK = { fontSize: 11, fill: "#6f8195" } as const;
+const GRID_STROKE = "#d9e3ee";
 
 const STATUS_LABEL: Record<string, string> = {
   DRAFT: "Ноорог",

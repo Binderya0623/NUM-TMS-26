@@ -42,11 +42,11 @@ export function Dialog({
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ backgroundColor: "rgba(10,10,10,0.32)" }}
+      style={{ backgroundColor: "rgba(8,17,28,0.36)" }}
       onClick={closeOnOverlayClick ? onClose : undefined}
     >
       <div
-        className={`relative w-full ${maxWidth} bg-surface border border-border-strong rounded-md ${scrollable ? "max-h-[90vh] overflow-hidden flex flex-col" : ""}`}
+        className={`relative w-full ${maxWidth} bg-surface border border-border-strong rounded-md shadow-[0_18px_48px_rgba(16,32,51,0.18)] ${scrollable ? "max-h-[90vh] overflow-hidden flex flex-col" : ""}`}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
@@ -137,13 +137,13 @@ export function ConfirmDialog({
       <DialogFooter>
         <button
           onClick={onClose}
-          className="px-4 h-9 border border-border-strong rounded-md text-sm font-medium text-ink-700 hover:border-ink-900 hover:text-ink-900 transition-colors"
+          className="px-4 h-9 border border-border-strong rounded-md text-sm font-medium text-ink-700 bg-surface hover:border-accent hover:text-ink-900 transition-colors"
         >
           {cancelLabel}
         </button>
         <button
           onClick={() => { onConfirm(); onClose(); }}
-          className="px-4 h-9 rounded-md text-sm font-medium bg-ink-900 text-white hover:bg-black transition-colors"
+          className="px-4 h-9 rounded-md text-sm font-medium bg-linear-to-b from-[#2a5f95] to-accent text-white hover:from-[#326ba4] hover:to-accent-hover transition-colors shadow-[0_1px_2px_rgba(16,32,51,0.12)]"
         >
           {confirmLabel}
         </button>
@@ -179,10 +179,10 @@ export function Drawer({ open, onClose, children, width = "max-w-md" }: DrawerPr
     <>
       <div
         className="fixed inset-0 z-40"
-        style={{ backgroundColor: "rgba(10,10,10,0.28)" }}
+        style={{ backgroundColor: "rgba(8,17,28,0.32)" }}
         onClick={onClose}
       />
-      <div className={`fixed right-0 top-0 h-full w-full ${width} bg-surface border-l border-border-strong z-50 flex flex-col`}>
+      <div className={`fixed right-0 top-0 h-full w-full ${width} bg-surface border-l border-border-strong z-50 flex flex-col shadow-[0_18px_48px_rgba(16,32,51,0.18)]`}>
         {children}
       </div>
     </>

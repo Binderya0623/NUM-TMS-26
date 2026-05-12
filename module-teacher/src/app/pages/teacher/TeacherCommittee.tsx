@@ -6,8 +6,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/ta
 import { ChevronRight, Star } from "lucide-react";
 import { committeeService, type Committee, type CommitteeAssignment } from "../../../services/committeeService";
 import { getStoredUser } from "../../../lib/authGuard";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { RichText } from "../../components/RichTextEditor";
+import TeacherStudents from "./TeacherStudents";
 
 interface CommitteeWithRole extends Committee {
   role: string;
@@ -38,8 +39,10 @@ export default function TeacherCommittee() {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const user = getStoredUser();
   const teacherId = user?.userId || user?.username || '';
+  const activeCommitteeId = searchParams.get("committeeId");
 
   useEffect(() => {
     const load = async () => {
@@ -67,6 +70,10 @@ export default function TeacherCommittee() {
     };
     load();
   }, [teacherId]);
+
+  if (activeCommitteeId) {
+    return <TeacherStudents />;
+  }
 
   const pending = myCommittees.filter(c => c.status === 'ACTIVE' || c.status === 'Идэвхтэй');
   const completed = myCommittees.filter(c => c.status !== 'ACTIVE' && c.status !== 'Идэвхтэй');
@@ -165,7 +172,7 @@ export default function TeacherCommittee() {
                         <Button
                           size="sm"
                           className="w-full"
-                          onClick={(e) => { e.stopPropagation(); navigate(`/teacher/students?committeeId=${c.id}&stageType=${c.stageType || ''}`); }}
+                          onClick={(e) => { e.stopPropagation(); navigate(`/teacher/committee?committeeId=${c.id}&stageType=${c.stageType || ''}`); }}
                         >
                           <Star className="w-3.5 h-3.5 mr-1.5" strokeWidth={1.6} /> Үнэлэх
                         </Button>

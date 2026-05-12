@@ -20,7 +20,7 @@ export type { PageHeaderProps, StatCard }                        from './compone
 export type { PortalTabsProps, PortalTabItem }                   from './components/PortalTabs';
 
 // ── Theme ─────────────────────────────────────────────────────────────────────
-export { portalTheme, BRAND_PRIMARY, BRAND_PRIMARY_HOVER } from './theme/portalTheme';
+export { portalTheme, BRAND_PRIMARY, BRAND_PRIMARY_HOVER, BRAND_PRIMARY_SOFT, BORDER_NAVY, TEXT_NAVY } from './theme/portalTheme';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 export { buildColumnSearchFilter } from './components/DataTable';

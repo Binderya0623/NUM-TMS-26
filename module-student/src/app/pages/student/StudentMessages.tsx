@@ -246,7 +246,6 @@ export default function StudentMessages() {
                 <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-dot-negative)]" /> {sendError}
               </p>
             )}
-            <p className="text-xs text-ink-400">Enter — илгээх</p>
           </div>
         </CardContent>
       </Card>

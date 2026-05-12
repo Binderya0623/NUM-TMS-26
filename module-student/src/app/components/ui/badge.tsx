@@ -14,16 +14,16 @@ const badgeVariants = cva(
       variant: {
         // Solid accent for emphasis (use sparingly)
         default:
-          "border-ink-900 bg-ink-900 text-white",
+          "border-accent bg-accent text-white",
         // Outline accent — high emphasis but neutral
         outline:
-          "border-ink-900 text-ink-900 bg-transparent",
+          "border-accent text-accent bg-transparent",
         // Secondary — low emphasis, subtle
         secondary:
           "border-border-strong text-ink-600 bg-transparent",
         // Destructive kept monochrome
         destructive:
-          "border-ink-900 text-ink-900 bg-transparent",
+          "border-[var(--color-dot-negative)] text-[var(--color-dot-negative)] bg-transparent",
         // Soft — background-only subtle fill
         soft:
           "border-transparent bg-ink-100 text-ink-700",

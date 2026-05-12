@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import numLogo from "../../assets/image/num_logo.png";
-import { Home, Users, FileSearch, TrendingUp, CheckCircle, Award, Bell } from "lucide-react";
+import { Home, Users, FileSearch, CheckCircle, Award, Bell } from "lucide-react";
 import { getStoredUser } from "../../lib/authGuard";
 import { notificationService } from "../../services/notificationService";
 
@@ -14,7 +14,6 @@ const BASE_MENU: { icon: typeof Home; label: string; path: string; end?: boolean
   { icon: Home,        label: "Хянах самбар",           path: "/teacher", end: true },
   { icon: FileSearch,  label: "Судалгааны удирдлага",  path: "/teacher/thesis" },
   { icon: Users,       label: "Оюутнууд",               path: "/teacher/students" },
-  { icon: TrendingUp,  label: "Явцын хяналт",           path: "/teacher/progress" },
   { icon: CheckCircle, label: "Комисс",                 path: "/teacher/committee" },
 ];
 
@@ -42,7 +41,7 @@ export default function TeacherSidebar({ collapsed }: TeacherSidebarProps) {
 
   return (
     <aside
-      className={`relative flex flex-col bg-ink-900 border-r border-black/20 transition-[width] duration-300 ${
+      className={`relative flex flex-col bg-primary-900 border-r border-white/10 transition-[width] duration-300 ${
         collapsed ? "w-20" : "w-64"
       } shrink-0`}
     >

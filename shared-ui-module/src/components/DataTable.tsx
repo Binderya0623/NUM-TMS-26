@@ -18,6 +18,7 @@ import {
   ExportOutlined,
 } from '@ant-design/icons';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
+import { BRAND_PRIMARY, TEXT_NAVY } from '../theme/portalTheme';
 
 const { Text } = Typography;
 
@@ -115,7 +116,7 @@ function buildColumnSearchFilter<T>(dataIndex: keyof T): Partial<TableColumnType
       </div>
     ),
     filterIcon: (filtered: boolean) => (
-      <FilterOutlined style={{ color: filtered ? '#1455BD' : undefined }} />
+      <FilterOutlined style={{ color: filtered ? BRAND_PRIMARY : undefined }} />
     ),
     onFilter: (value, record) => {
       const cell = record[dataIndex];
@@ -212,7 +213,7 @@ export function DataTable<T extends object>({
                         e.stopPropagation();
                         action.onClick(record);
                       }}
-                      style={{ color: action.danger ? undefined : '#1455BD' }}
+                      style={{ color: action.danger ? undefined : BRAND_PRIMARY }}
                     />
                   </Tooltip>
                 );
@@ -238,7 +239,7 @@ export function DataTable<T extends object>({
       {/* Left: title block */}
       <div>
         {title && (
-          <Text strong style={{ fontSize: 16, color: '#0f172a' }}>
+          <Text strong style={{ fontSize: 16, color: TEXT_NAVY }}>
             {title}
           </Text>
         )}
@@ -255,7 +256,7 @@ export function DataTable<T extends object>({
       <Space wrap>
         {searchable && (
           <Input
-            prefix={<SearchOutlined style={{ color: '#94a3b8' }} />}
+            prefix={<SearchOutlined style={{ color: '#9aabba' }} />}
             placeholder={searchPlaceholder}
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
