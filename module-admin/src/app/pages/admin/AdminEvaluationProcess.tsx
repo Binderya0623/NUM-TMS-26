@@ -480,9 +480,10 @@ export default function AdminEvaluationProcess() {
     const isOpen = unified.status === 'OPEN';
     const meta = SESSION_META[unified.kind];
     try {
-      // Committee-based sessions (PROGRESS_2/PRE_DEFENSE/FINAL_DEFENSE) must be
-      // created via AdminCommittees — never as GLOBAL sessions here.
-      if (meta.needsCommittee && !unified.id) return;
+      if (meta.isDefense && !unified.id) {
+        await handleCreate(unified.kind);
+        return;
+      }
       if (unified.kind === 'TOPIC_SELECTION' || unified.kind === 'TOPIC_CREATION') {
         if (!unified.selectionId) return;
         const res = isOpen
