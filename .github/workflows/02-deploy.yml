@@ -88,7 +88,8 @@ jobs:
             if [ ! -d "$DIR/.git" ]; then
               git clone --depth 1 "$REPO" "$DIR"
             else
-              git -C "$DIR" pull --ff-only
+              git -C "$DIR" fetch origin
+              git -C "$DIR" reset --hard origin/main
             fi
             # .env байхгүй бол .env.example-с үүсгэх
             if [ ! -f "$DIR/.env" ]; then
