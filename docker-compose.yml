@@ -136,6 +136,7 @@ services:
     environment:
       <<: *spring-env
       SPRING_R2DBC_URL: r2dbc:postgresql://postgres:5432/thesis_service
+      SPRING_CODEC_MAX_IN_MEMORY_SIZE: 30MB
 
   workflow_service:
     <<: *spring-common
