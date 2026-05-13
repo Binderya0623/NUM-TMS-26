@@ -576,7 +576,7 @@ export default function TeacherStudents() {
 
   const handleReviewAction = (action: "revision" | "approve") => {
     if (!reviewReportId) return;
-    const decision = action === "approve" ? "REVIEWED" : "REVISION_REQUIRED";
+    const decision = action === "approve" ? "ACCEPTED" : "REVISION_REQUIRED";
     thesisService.reviewReport(reviewReportId, teacherId, decision, commentInput || undefined)
       .then(() => {
         setReviewStatus("success");
