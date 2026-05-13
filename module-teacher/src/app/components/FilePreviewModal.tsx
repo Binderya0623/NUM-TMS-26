@@ -1,6 +1,6 @@
 import { X, FileDown, FileText } from "lucide-react";
 
-const VIEW_BASE = "http://localhost:8083/api/thesis-reports/files";
+const VIEW_BASE = "/api/thesis-reports/files";
 
 function canPreview(filename?: string, mimeType?: string) {
   const mt = mimeType?.toLowerCase() ?? "";
