@@ -72,30 +72,28 @@ jobs:
               - 'Dockerfile.jsf-host'
               - 'Dockerfile.jsf-host.dockerignore'
 
-  # JOB 2: Server дээр config файлуудыг бэлдэх (git clone эсвэл pull)
+  # JOB 2: Server дээр config файлуудыг scp-ээр хуулах
   setup-server:
     needs: changes
     runs-on: ubuntu-latest
     steps:
-      - uses: appleboy/ssh-action@v1
+      - uses: actions/checkout@v4
+      - name: Copy docker-compose to server
+        uses: appleboy/scp-action@v0.1.7
         with:
           host:     ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_SSH_PASSWORD }}
-          script: |
-            REPO="https://github.com/Binderya0623/NUM-TMS-26.git"
-            DIR="/home/${{ secrets.SERVER_USER }}/diplom"
-            if [ ! -d "$DIR/.git" ]; then
-              git clone --depth 1 "$REPO" "$DIR"
-            else
-              git -C "$DIR" fetch origin
-              git -C "$DIR" reset --hard origin/main
-            fi
-            # .env байхгүй бол .env.example-с үүсгэх
-            if [ ! -f "$DIR/.env" ]; then
-              cp "$DIR/.env.example" "$DIR/.env"
-              sed -i 's|http://localhost|http://${{ secrets.SERVER_HOST }}|g' "$DIR/.env"
-            fi
+          source: "docker-compose.prod.yml"
+          target: "/home/${{ secrets.SERVER_USER }}/diplom"
+      - name: Copy nginx config to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host:     ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_SSH_PASSWORD }}
+          source: "infra/nginx/nginx.conf"
+          target: "/home/${{ secrets.SERVER_USER }}/diplom"
 
   # JOB 3: Backend сервисүүд build + deploy
   deploy-auth:
