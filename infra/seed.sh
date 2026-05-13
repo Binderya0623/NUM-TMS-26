@@ -124,5 +124,5 @@ Login credentials (default password: ${DEFAULT_PASSWORD})
   teacher     t.head, t.secretary, t.member1, t.member2, t.member3, expert.1
   student     22b1num0027, 22b1num1811, 22b1num5541, 22b1num5330, 22b1num5773
 
-Open the host UI at: http://localhost:${JSF_HOST_PORT:-8080}/
+Open the host UI at: http://localhost:${NGINX_PORT:-9090}/
 EOF
