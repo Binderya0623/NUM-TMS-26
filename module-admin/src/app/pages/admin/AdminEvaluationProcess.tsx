@@ -489,14 +489,17 @@ export default function AdminEvaluationProcess() {
           ? await selectionSessionService.closeSession(unified.selectionId)
           : await selectionSessionService.openSession(unified.selectionId);
         if (res.data) setSelectionSessions(prev => prev.map(s => s.id === unified.selectionId ? res.data as SelectionSession : s));
+        else await loadAll();
       } else if (meta.isDefense) {
         if (!unified.id) return;
         const res = await (isOpen ? workflowService.closeDefenseSession(unified.id) : workflowService.openDefenseSession(unified.id));
-        setDefenseSessions(prev => prev.map(s => s.id === unified.id ? res.data : s));
+        if (res.data) setDefenseSessions(prev => prev.map(s => s.id === unified.id ? res.data : s));
+        else await loadAll();
       } else {
         if (!unified.id) return;
         const res = await (isOpen ? workflowService.closeExecutionSession(unified.id) : workflowService.openExecutionSession(unified.id));
-        setExecutionSessions(prev => prev.map(s => s.id === unified.id ? res.data : s));
+        if (res.data) setExecutionSessions(prev => prev.map(s => s.id === unified.id ? res.data : s));
+        else await loadAll();
       }
     } catch (err: unknown) {
       const e = err as { response?: { data?: { error?: string; message?: string } } };

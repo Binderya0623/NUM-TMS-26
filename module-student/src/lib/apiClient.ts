@@ -16,18 +16,32 @@ import { getStoredUser } from './authGuard';
  */
 const env = import.meta.env;
 
+const servicePort = {
+  user: 8086, topic: 8081, workflow: 8084, committee: 8082,
+  thesis: 8083, evaluation: 8085, notification: 8087,
+  report: 8088, message: 8089, analytic: 8090, grading: 8091,
+} as const;
+
+function defaultBaseUrl(port: number) {
+  if (typeof window !== 'undefined') {
+    const { protocol, hostname } = window.location;
+    return `${protocol}//${hostname}:${port}`;
+  }
+  return `http://localhost:${port}`;
+}
+
 const BASE_URLS = {
-  user:         env.VITE_API_USER         ?? 'http://localhost:8086',
-  topic:        env.VITE_API_TOPIC        ?? 'http://localhost:8081',
-  workflow:     env.VITE_API_WORKFLOW     ?? 'http://localhost:8084',
-  committee:    env.VITE_API_COMMITTEE    ?? 'http://localhost:8082',
-  thesis:       env.VITE_API_THESIS       ?? 'http://localhost:8083',
-  evaluation:   env.VITE_API_EVALUATION   ?? 'http://localhost:8085',
-  notification: env.VITE_API_NOTIFICATION ?? 'http://localhost:8087',
-  report:       env.VITE_API_REPORT       ?? 'http://localhost:8088',
-  message:      env.VITE_API_MESSAGE      ?? 'http://localhost:8089',
-  analytic:     env.VITE_API_ANALYTIC     ?? 'http://localhost:8090',
-  grading:      env.VITE_API_GRADING      ?? 'http://localhost:8091',
+  user:         env.VITE_API_USER         ?? defaultBaseUrl(servicePort.user),
+  topic:        env.VITE_API_TOPIC        ?? defaultBaseUrl(servicePort.topic),
+  workflow:     env.VITE_API_WORKFLOW     ?? defaultBaseUrl(servicePort.workflow),
+  committee:    env.VITE_API_COMMITTEE    ?? defaultBaseUrl(servicePort.committee),
+  thesis:       env.VITE_API_THESIS       ?? defaultBaseUrl(servicePort.thesis),
+  evaluation:   env.VITE_API_EVALUATION   ?? defaultBaseUrl(servicePort.evaluation),
+  notification: env.VITE_API_NOTIFICATION ?? defaultBaseUrl(servicePort.notification),
+  report:       env.VITE_API_REPORT       ?? defaultBaseUrl(servicePort.report),
+  message:      env.VITE_API_MESSAGE      ?? defaultBaseUrl(servicePort.message),
+  analytic:     env.VITE_API_ANALYTIC     ?? defaultBaseUrl(servicePort.analytic),
+  grading:      env.VITE_API_GRADING      ?? defaultBaseUrl(servicePort.grading),
 };
 
 const TOKEN_STORAGE_KEY = 'mauth_token';
