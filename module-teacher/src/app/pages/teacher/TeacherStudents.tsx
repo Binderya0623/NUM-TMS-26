@@ -1192,7 +1192,7 @@ export default function TeacherStudents() {
                       ))}
                       {activeFileId && (
                         <a
-                          href={`http://localhost:8083/api/thesis-reports/files/${activeFileId}/download`}
+                          href={`/api/thesis-reports/files/${activeFileId}/download`}
                           className="ml-auto shrink-0 flex items-center gap-1 text-xs text-ink-500 hover:text-accent px-2 py-1.5"
                         >
                           <FileDown className="w-3.5 h-3.5" strokeWidth={1.6} /> Татах
@@ -1215,7 +1215,7 @@ export default function TeacherStudents() {
                       return previewable ? (
                         <iframe
                           key={activeFileId}
-                          src={`http://localhost:8083/api/thesis-reports/files/${activeFileId}/view`}
+                          src={`/api/thesis-reports/files/${activeFileId}/view`}
                           className="w-full h-full border-0"
                           title={af?.originalFilename}
                         />
@@ -1223,7 +1223,7 @@ export default function TeacherStudents() {
                         <div className="flex flex-col items-center justify-center h-full gap-4 text-ink-500">
                           <FileText className="w-14 h-14 text-ink-200" strokeWidth={1.4} />
                           <p className="text-sm font-medium">Энэ файлыг шууд харах боломжгүй</p>
-                          <a href={`http://localhost:8083/api/thesis-reports/files/${activeFileId}/download`}
+                          <a href={`/api/thesis-reports/files/${activeFileId}/download`}
                             className="flex items-center gap-2 bg-accent text-white text-[13px] px-4 py-1.5 rounded-md hover:bg-accent-hover">
                             <FileDown className="w-4 h-4" strokeWidth={1.6} /> Татаж авах
                           </a>
