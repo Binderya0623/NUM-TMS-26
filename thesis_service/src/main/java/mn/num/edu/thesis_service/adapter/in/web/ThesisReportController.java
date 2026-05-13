@@ -55,15 +55,7 @@ public class ThesisReportController {
         if (studentId == null || studentId.isBlank()) return Mono.error(new IllegalArgumentException("studentId is required"));
         return thesisRepo.findByStudentId(studentId)
                 .map(ThesisEntity::getId)
-                .switchIfEmpty(Mono.defer(() -> {
-                    ThesisEntity t = new ThesisEntity(
-                            java.util.UUID.randomUUID().toString(),
-                            studentId, null, null, null, null, null,
-                            "EXECUTION_ACTIVE", LocalDateTime.now(), LocalDateTime.now()
-                    );
-                    t.markNew();
-                    return thesisRepo.save(t).map(ThesisEntity::getId);
-                }));
+                .switchIfEmpty(Mono.error(new IllegalArgumentException("No thesis found for student: " + studentId)));
     }
 
     @GetMapping
