@@ -92,7 +92,7 @@ services:
     environment:
       <<: *spring-env
       SPRING_R2DBC_URL: r2dbc:postgresql://postgres:5432/user_service
-      APP_AUTH_URL: http://auth_service:8887
+      APP_AUTH_URL: http://auth-service:8887
   topic_service:
     <<: *spring-common
     image: numthesis/diploma-topic_service:${VERSION:-latest}
