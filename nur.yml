@@ -1,0 +1,30 @@
+# Бүх YAML-ийг нэг Helm chart болгон багцална:
+#
+# charts/hospital-backend/
+# ├── Chart.yaml
+# ├── values.yaml
+# └── templates/
+#     ├── deployment.yaml
+#     ├── service.yaml
+#     └── secret.yaml
+
+image:
+  repository: nurlannn/hospital-backend 
+  tag: v1.2.3
+
+replicaCount: 2
+
+# image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+# replicas: {{ .Values.replicaCount }}
+
+
+
+
+
+
+
+
+
+
+
+

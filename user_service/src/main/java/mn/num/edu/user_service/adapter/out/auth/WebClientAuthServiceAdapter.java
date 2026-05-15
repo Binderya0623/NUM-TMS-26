@@ -18,9 +18,14 @@ public class WebClientAuthServiceAdapter implements AuthServicePort {
     private static final Logger log = LoggerFactory.getLogger(WebClientAuthServiceAdapter.class);
 
     private final WebClient webClient;
+    private final String authBaseUrl;
 
     public WebClientAuthServiceAdapter(@Value("${app.auth.url:http://localhost:8887}") String authBaseUrl) {
-        this.webClient = WebClient.builder().baseUrl(authBaseUrl).build();
+        // Avoid WebClient.baseUrl() — Java's URI parser rejects underscores in hostnames
+        // (e.g. "auth_service"), which causes "Host is not specified" at request time.
+        // Building the full URI per-request sidesteps that restriction.
+        this.webClient = WebClient.builder().build();
+        this.authBaseUrl = authBaseUrl;
     }
 
     @Override
@@ -31,7 +36,7 @@ public class WebClientAuthServiceAdapter implements AuthServicePort {
                 "roles", List.of(role)
         );
         return webClient.post()
-                .uri("/auth/register")
+                .uri(authBaseUrl + "/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(body)
                 .retrieve()
