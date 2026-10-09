@@ -87,6 +87,7 @@ jobs:
           source: "docker-compose.prod.yml"
           target: "/home/${{ secrets.SERVER_USER }}/diplom"
       - name: Copy nginx config to server
+        if: needs.changes.outputs.nginx == 'true'
         uses: appleboy/scp-action@v0.1.7
         with:
           host:     ${{ secrets.SERVER_HOST }}
