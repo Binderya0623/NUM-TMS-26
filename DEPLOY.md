@@ -29,6 +29,59 @@ rsync -avzP --delete \
 `--exclude` is important — `node_modules` and `target` blow up the rsync.
 The Docker build re-creates them inside the build containers anyway.
 
+## EJ ingress configuration sync
+
+The `infra/nginx/nginx.conf` source includes the EJ managed ACME and legacy
+`/ej` redirect block. It intentionally does not contain the
+`learn.electronjaalschool.org` HTTPS redirect. The provisioning script adds
+that redirect only after the trusted domain certificate and HTTPS vhost exist.
+Keep the `BEGIN/END` markers unchanged; provisioning replaces its managed block
+by marker.
+
+The production config is a read-only file bind mount inside Docker. Stage the
+reviewed source file, compare it with the live file, and make a backup first.
+Test the candidate with the running gateway image. Apply it by writing bytes
+into the existing host file in place (seek, write, truncate, flush and fsync).
+Do not use `mv`, `install`, or atomic rename; those can replace the inode held
+by the running container's individual file bind mount. Then run `nginx -t` and
+`nginx -s reload` inside `diploma-system-nginx-1`. If validation fails, restore
+the backup in place, validate it, and do not reload the invalid config. This
+updates only Nginx and does not require a full-stack deployment.
+
+After EJ certificate issuance, the provisioner adds a domain-specific redirect
+to the live managed block. Before any later TMS sync, update the TMS source to
+include that exact redirect; otherwise syncing this pre-certificate source
+would remove it. Do not deploy a TMS source containing the active redirect
+before the trusted domain certificate exists. Until the post-certificate
+source update is reviewed and deployed, pause TMS main-branch pushes because
+the workflow copies `nginx.conf` on every push to `main`.
+
+The GitHub Actions workflow force-recreates only Nginx when `infra/nginx/**`
+changes; it does not need a full-stack restart. It also copies the Nginx file
+on every `main` push, including unrelated changes. Review the workflow before
+merging this source change; its automatic deployment is not run during local
+preparation.
+
+For a manual config-only sync, stage the candidate at
+`/home/num-thesis/ej-nginx.conf.candidate`, inspect `diff -u` against
+`/home/num-thesis/diplom/infra/nginx/nginx.conf`, and save a timestamped backup.
+Use the running container's image and network for candidate validation:
+
+```bash
+image=$(docker inspect --format '{{.Config.Image}}' diploma-system-nginx-1)
+docker run --rm --network none \
+  -v /home/num-thesis/ej-nginx.conf.candidate:/etc/nginx/nginx.conf:ro \
+  "$image" nginx -t
+```
+
+After reviewing the diff, copy the staged bytes into the existing file in
+place with Python `open(live, 'r+b')`, `seek(0)`, `write`, `truncate`, `flush`,
+and `os.fsync`. Then run `docker exec diploma-system-nginx-1 nginx -t` followed
+by `docker exec diploma-system-nginx-1 nginx -s reload`. If the live test fails,
+restore the timestamped backup using the same in-place write method and test
+again. Never overwrite the bind-mounted path with `scp`, `rsync`, `mv`, or
+`install` directly.
+
 ## 2. Configure environment
 ```bash
 ssh user@host
