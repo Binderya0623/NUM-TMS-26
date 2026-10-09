@@ -53,14 +53,17 @@ to the live managed block. Before any later TMS sync, update the TMS source to
 include that exact redirect; otherwise syncing this pre-certificate source
 would remove it. Do not deploy a TMS source containing the active redirect
 before the trusted domain certificate exists. Until the post-certificate
-source update is reviewed and deployed, pause TMS main-branch pushes because
-the workflow copies `nginx.conf` on every push to `main`.
+source update is reviewed and deployed, avoid TMS changes to `infra/nginx/**`
+and `docker-compose.prod.yml`: either path causes the workflow to copy the
+Nginx config, and the pre-certificate source would remove the live redirect.
+Unrelated main-branch changes do not copy Nginx config.
 
-The GitHub Actions workflow force-recreates only Nginx when `infra/nginx/**`
-changes; it does not need a full-stack restart. It also copies the Nginx file
-on every `main` push, including unrelated changes. Review the workflow before
-merging this source change; its automatic deployment is not run during local
-preparation.
+The current GitHub Actions workflow copies `nginx.conf` and force-recreates
+only Nginx when `infra/nginx/**` or `docker-compose.prod.yml` changes. On other
+main pushes it copies the Compose file during setup, but skips the Nginx config
+copy and Nginx deployment. The Nginx container restart can briefly interrupt
+HTTP traffic; backend and frontend service jobs are skipped unless their own
+paths changed. Review the workflow before merging Nginx or Compose changes.
 
 For a manual config-only sync, stage the candidate at
 `/home/num-thesis/ej-nginx.conf.candidate`, inspect `diff -u` against
@@ -79,8 +82,12 @@ place with Python `open(live, 'r+b')`, `seek(0)`, `write`, `truncate`, `flush`,
 and `os.fsync`. Then run `docker exec diploma-system-nginx-1 nginx -t` followed
 by `docker exec diploma-system-nginx-1 nginx -s reload`. If the live test fails,
 restore the timestamped backup using the same in-place write method and test
-again. Never overwrite the bind-mounted path with `scp`, `rsync`, `mv`, or
-`install` directly.
+again. These in-place steps apply to a manual config-only sync. A manual
+`scp`, `rsync`, `mv`, or `install` that replaces the live path can leave an
+individual-file bind mount attached to the previous inode. The automated
+workflow copies Nginx config only for matching Nginx or Compose changes, then
+force-recreates Nginx; monitor both steps, because a failed recreation after a
+successful copy needs rollback before another Nginx restart.
 
 ## 2. Configure environment
 ```bash
