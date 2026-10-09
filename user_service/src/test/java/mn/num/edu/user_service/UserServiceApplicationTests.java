@@ -8,7 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 @SpringBootTest
 class UserServiceApplicationTests {
 
-	@MockBean
+	@MockBean(name = "kafkaUserEventPublisherAdapter")
 	private mn.num.edu.user_service.application.port.out.UserEventPublisherPort userEventPublisherPort;
 
 	@Test
