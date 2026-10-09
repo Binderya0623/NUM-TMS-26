@@ -30,6 +30,24 @@ jobs:
     name: user_service Maven tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: user_service
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U test_user -d user_service"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      SPRING_R2DBC_URL: r2dbc:postgresql://localhost:5432/user_service
+      SPRING_R2DBC_USERNAME: test_user
+      SPRING_R2DBC_PASSWORD: test_password
     steps:
       - uses: actions/checkout@v4
 
