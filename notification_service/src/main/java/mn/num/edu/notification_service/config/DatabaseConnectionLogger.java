@@ -22,7 +22,7 @@ public class DatabaseConnectionLogger implements CommandLineRunner {
     public void run(String... args) {
         Mono.from(connectionFactory.create())
                 .flatMap(connection -> {
-                    log.info("✅ PostgreSQL DB-тэй амжилттай холбогдлоо.");
+                    log.info("✅ PostgreSQL DB-тэй амжилттай холбогдлоо. [CI/CD demo v1]");
                     return Mono.from(connection.close());
                 })
                 .doOnError(error ->
